@@ -1,6 +1,7 @@
 const express = require('express');
-const router = express.Router();
 const db = require('../mockData/dummyDB');
+
+const router = express.Router();
 
 router.get('/:id', (req, res) => {
   const transaction = db.transactions.filter(
@@ -20,7 +21,7 @@ router.delete('/:id', (req, res) => {
   res.status(204).end();
 });
 
-router.patch('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   const id = req.params.id;
   db.transactions = db.transactions.map((transaction) =>
     transaction.id === id ? (transaction = req.body) : ''

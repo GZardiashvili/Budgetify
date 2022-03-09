@@ -8,6 +8,7 @@ const obligatoryPaymentRouter = require('./routes/obligatoryPayment');
 const subscriptionRouter = require('./routes/subscription');
 const transactionRouter = require('./routes/transaction');
 const usersRouter = require('./routes/user');
+
 const app = express();
 
 app.use(express.json());
