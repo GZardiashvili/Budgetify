@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const accounts = [
   {
     id: '1',
@@ -247,7 +249,7 @@ const users = [
   {
     id: '1',
     email: 'nullam.velit@aol.net',
-    password: 'Seth123',
+    password: bcrypt.hashSync('Seth123', 10),
     role: 'user',
     firstName: 'Seth',
     lastName: 'Kennedy',
@@ -258,7 +260,7 @@ const users = [
   {
     id: '2',
     email: 'varius.orci.in@icloud.edu',
-    password: 'Jakeem123',
+    password: bcrypt.hashSync('Jakeem123', 10),
     role: 'user',
     firstName: 'Jakeem',
     lastName: 'Patel',
@@ -269,7 +271,7 @@ const users = [
   {
     id: '3',
     email: 'diam.sed.diam@yahoo.ca',
-    password: 'Judith123',
+    password: bcrypt.hashSync('Judith123', 10),
     role: 'user',
     firstName: 'Judith',
     lastName: ' Adkins',
@@ -280,7 +282,7 @@ const users = [
   {
     id: '4',
     email: 'sollicitudin.commodo@outlook.edu',
-    password: 'Nicholas123',
+    password: bcrypt.hashSync('Nicholas123', 10),
     role: 'user',
     firstName: 'Nicholas',
     lastName: 'Lester',
@@ -291,7 +293,7 @@ const users = [
   {
     id: '5',
     email: 'vitae.odio.sagittis@hotmail.org',
-    password: 'Kylie123',
+    password: bcrypt.hashSync('Kylie123', 10),
     role: 'admin',
     firstName: 'Kylie',
     lastName: 'Boone',

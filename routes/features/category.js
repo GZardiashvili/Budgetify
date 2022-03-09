@@ -1,5 +1,5 @@
 const express = require('express');
-const db = require('../mockData/dummyDB');
+const db = require('../../mockData/dummyDB');
 
 const router = express.Router();
 
