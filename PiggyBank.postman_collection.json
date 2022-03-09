@@ -1,0 +1,1010 @@
+{
+	"info": {
+		"_postman_id": "d267d2da-3288-419f-83e6-fea8d2c65fca",
+		"name": "PiggyBank",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "account",
+			"item": [
+				{
+					"name": "accountC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Added from account POST\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/account/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accountR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/account/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accountU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from account PATCH\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/account/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/account/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "accountD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/account/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/account/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"account",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "categories",
+			"item": [
+				{
+					"name": "categoryC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Added from category POST\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categoryR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categoryU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"title\": \"Updated from category PATCH\",\r\n    \"type\": \"type1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/category/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "categoryD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/category/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"category",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "currencies",
+			"item": [
+				{
+					"name": "CurrencyC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"name\": \"Added from currencies POST\",\r\n    \"sign\": \"usd.svg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/currency/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CurrencyR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/currency/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CurrencyU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"name\": \"Updated from currencies PATCH\",\r\n    \"sign\": \"usd.svg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/currency/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/currency/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "CurrencyD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/currency/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/currency/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"currency",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "obligatoryPayments",
+			"item": [
+				{
+					"name": "obligatoryPaymentC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"userId\": \"2\",\r\n    \"title\": \"Added from obligatoryPayment POST\",\r\n    \"description\": \"desc1\",\r\n    \"amount\": 500,\r\n    \"currency\": \"gel\",\r\n    \"dayOfPayment\": \"new Date().toString()\",\r\n    \"frequency\": \"high\",\r\n    \"dateOfTheFirstPayment\": \"new Date().toString()\",\r\n    \"dateOfThelastPayment\": \"new Date().toString()\",\r\n    \"createdOn\": \"new Date().toString()\",\r\n    \"updatedOn\": \"new Date().toString()\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/obligatoryPayment/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"obligatoryPayment",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obligatoryPaymentR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/obligatoryPayment/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"obligatoryPayment",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obligatoryPaymentU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"userId\": \"2\",\r\n    \"title\": \"Updated from obligatoryPayment PATCH\",\r\n    \"description\": \"desc1\",\r\n    \"amount\": 500,\r\n    \"currency\": \"gel\",\r\n    \"dayOfPayment\": \"new Date().toString()\",\r\n    \"frequency\": \"high\",\r\n    \"dateOfTheFirstPayment\": \"new Date().toString()\",\r\n    \"dateOfThelastPayment\": \"new Date().toString()\",\r\n    \"createdOn\": \"new Date().toString()\",\r\n    \"updatedOn\": \"new Date().toString()\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"obligatoryPayment",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"obligatoryPayment",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "obligatoryPaymentD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"obligatoryPayment",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"obligatoryPayment",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "subscriptions",
+			"item": [
+				{
+					"name": "subscriptionC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"accountId\": \"1\",\r\n    \"firstDayOfPayment\": \"new Date().toString()\",\r\n    \"LastDayOfPayment\": \"new Date().toString()\",\r\n    \"DayOfPayment\": \"new Date().toString()\",\r\n    \"category\": \"Added from subscriptions POST\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": 2000,\r\n    \"dateOfCreation\": \"new Date().toString()\",\r\n    \"dateOfUpdate\": \"new Date().toString()\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/subscription/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subscription",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriptionR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/subscription/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subscription",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriptionU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from subscription PATCH\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 2000000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/subscription/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subscription",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/subscription/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subscription",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "subscriptionD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/subscription/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subscription",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/subscription/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"subscription",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "transactions",
+			"item": [
+				{
+					"name": "transactionC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"type\": \"sales\",\r\n    \"accountId\": \"2\",\r\n    \"title\": \"Added from transaction POST\",\r\n    \"description\": \"admin\",\r\n    \"dateOfOperation\": \"new Date().toString()\",\r\n    \"category\": \"asd\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"linkToFile\": \"http://example.com\",\r\n    \"dateOfCreation\": \"new Date().toString()\",\r\n    \"dateOfUpdate\": \"new Date().toString()\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/transaction/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactionR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transaction/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactionU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from transaction PATCH\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/transaction/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transaction/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "transactionD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transaction/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transaction/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "userC",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"email\": \"example@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"role\": \"user\",\r\n    \"firstName\": \"Giorgi\",\r\n    \"lastName\": \"Zardiashvili\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\": \"Georgia\",\r\n    \"countryOfResidence\": \"Georgia\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userR",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userU",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"9\",\r\n    \"email\": \"nullam.velit@aol.net\",\r\n    \"password\": \"Seth123\",\r\n    \"role\": \"user\",\r\n    \"firstName\": \"Updated from users PATCH\",\r\n    \"lastName\": \"Kennedy\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\": \"United States\",\r\n    \"countryOfResidence\": \"United States\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/user/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkU",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "userD",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"9"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "checkD",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/9",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
