@@ -1,5 +1,5 @@
 const bcrypt = require('bcrypt');
-const db = require('../../../mockData/dummyDB');
+const db = require('../../mockData/dummyDB');
 
 function getUserByEmail(email) {
   return db.users.find((user) => user.email === email);

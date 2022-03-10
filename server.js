@@ -2,7 +2,8 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const passport = require('passport');
-const { jwtCallack } = require('./routes/auth/passport');
+const { jwtCallack } = require('./auth/passport');
+const { adminGuard } = require('./guards/adminGuard');
 
 const accountRouter = require('./routes/features/account');
 const categoryRouter = require('./routes/features/category');
@@ -11,7 +12,7 @@ const obligatoryPaymentRouter = require('./routes/features/obligatoryPayment');
 const subscriptionRouter = require('./routes/features/subscription');
 const transactionRouter = require('./routes/features/transaction');
 const usersRouter = require('./routes/features/user');
-const loginRouter = require('./routes/auth/login');
+const loginRouter = require('./auth/login');
 
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -38,7 +39,7 @@ app.use('/currency', auth, currencyRouter);
 app.use('/obligatoryPayment', auth, obligatoryPaymentRouter);
 app.use('/subscription', auth, subscriptionRouter);
 app.use('/transaction', auth, transactionRouter);
-app.use('/user', auth, usersRouter);
+app.use('/user', auth, adminGuard, usersRouter);
 app.use('/login', loginRouter);
 
 app.listen(process.env.PORT);
