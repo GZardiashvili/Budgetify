@@ -24,6 +24,8 @@ router.post('/', (req, res) => {
       role: user.role,
       token: `Bearer ${token}`,
     });
+  } else {
+    res.status(401).json({ message: 'Invalid credentials' });
   }
 });
 
