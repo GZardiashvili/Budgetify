@@ -1,14 +1,15 @@
 const bcrypt = require('bcrypt');
-const db = require('../../mockData/dummyDB');
+const User = require('../../models/user');
 
-function getUserByEmail(email) {
-  return db.users.find((user) => user.email === email);
+async function getUserByEmail(email) {
+  const user = await User.where({ email: new RegExp(email, 'i') }).exec();
+  return user;
 }
 
-function loginUser(email, password) {
-  const user = getUserByEmail(email);
+async function loginUser(email, password) {
+  const user = await getUserByEmail(email);
 
-  if (user && bcrypt.compareSync(password, user.password)) {
+  if (user[0] && bcrypt.compareSync(password, user[0].password)) {
     return user;
   }
 

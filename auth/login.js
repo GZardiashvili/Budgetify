@@ -5,13 +5,13 @@ const helper = require('./helpers/helper');
 
 const router = express.Router();
 
-router.post('/', (req, res) => {
-  const user = helper.loginUser(req.body.email, req.body.password);
-  if (user) {
+router.post('/', async (req, res) => {
+  const user = await helper.loginUser(req.body.email, req.body.password);
+  if (user[0]) {
     const payload = {
-      id: user.id,
-      email: user.email,
-      role: user.role,
+      id: user[0].id,
+      email: user[0].email,
+      role: user[0].role,
     };
 
     const token = jwt.sign(payload, process.env.JWT_SECRET, {
@@ -19,9 +19,9 @@ router.post('/', (req, res) => {
     });
 
     res.status(200).json({
-      id: user.id,
-      email: user.email,
-      role: user.role,
+      id: user[0].id,
+      email: user[0].email,
+      role: user[0].role,
       token: `Bearer ${token}`,
     });
   } else {

@@ -1,4 +1,5 @@
 const express = require('express');
+const bcrypt = require('bcrypt');
 const User = require('../models/user');
 
 const router = express.Router();
@@ -18,7 +19,7 @@ router.post('/', (req, res) => {
 
   const user = new User({
     email: body.email,
-    password: body.password,
+    password: bcrypt.hashSync(body.password, 10),
     role: body.role,
     firstName: body.firstName,
     lastName: body.lastName,
@@ -42,7 +43,7 @@ router.put('/:id', (req, res) => {
 
   const user = {
     email: body.email,
-    password: body.password,
+    password: bcrypt.hashSync(body.password, 10),
     role: body.role,
     firstName: body.firstName,
     lastName: body.lastName,
