@@ -1,32 +1,48 @@
 const express = require('express');
-const db = require('../mockData/dummyDB');
+const Category = require('../models/category');
 
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  const category = db.categories.filter(
-    (category) => category.id === req.params.id
-  );
-  res.json({ category });
+  Category.findById(req.params.id).then((category) => {
+    if (category) {
+      res.json(category);
+    } else {
+      res.status(404).end();
+    }
+  });
 });
 
 router.post('/', (req, res) => {
-  db.categories.push(req.body);
-  res.send('POST from categories');
+  const body = req.body;
+
+  const category = new Category({
+    title: body.title,
+    type: body.type,
+  });
+  category.save().then((savedCategory) => {
+    res.json(savedCategory);
+  });
 });
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  db.categories = db.categories.filter((cat) => cat.id !== id);
-  res.status(204).end();
+  Category.findByIdAndRemove(req.params.id).then(() => {
+    res.status(204).end();
+  });
 });
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  db.categories = db.categories.map((cat) =>
-    cat.id === id ? (cat = req.body) : ''
-  );
-  res.send('update from category');
+  const body = req.body;
+
+  const category = {
+    title: body.title,
+    type: body.type,
+  };
+  category
+    .findByIdAndUpdate(req.params.id, category, { new: true })
+    .then((updatedCategory) => {
+      res.json(updatedCategory);
+    });
 });
 
 module.exports = router;

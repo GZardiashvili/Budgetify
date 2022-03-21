@@ -1,32 +1,62 @@
 const express = require('express');
-const db = require('../mockData/dummyDB');
+const Subscription = require('../models/subscription');
 
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  const subscription = db.subscriptions.filter(
-    (subscription) => subscription.id === req.params.id
-  );
-  res.json({ subscription });
+  Subscription.findById(req.params.id).then((subscription) => {
+    if (subscription) {
+      res.json(subscription);
+    } else {
+      res.status(404).end();
+    }
+  });
 });
 
 router.post('/', (req, res) => {
-  db.subscriptions.push(req.body);
-  res.send('POST from subscription');
+  const body = req.body;
+
+  const subscription = new Subscription({
+    accountId: body.accountId,
+    firstDayOfPayment: body.firstDayOfPayment,
+    lastDayOfPayment: body.lastDayOfPayment,
+    dayOfPayment: body.dayOfPayment,
+    category: body.category,
+    currency: body.currency,
+    amount: body.amount,
+    dateOfCreation: body.dateOfCreation,
+    dateOfUpdate: body.dateOfUpdate,
+  });
+  subscription.save().then((savedSubscription) => {
+    res.json(savedSubscription);
+  });
 });
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  db.subscriptions = db.subscriptions.filter((sub) => sub.id !== id);
-  res.status(204).end();
+  Subscription.findByIdAndRemove(req.params.id).then(() => {
+    res.status(204).end();
+  });
 });
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  db.subscriptions = db.subscriptions.map((subscription) =>
-    subscription.id === id ? (subscription = req.body) : ''
-  );
-  res.send('update from subscription');
+  const body = req.body;
+
+  const subscription = {
+    accountId: body.accountId,
+    firstDayOfPayment: body.firstDayOfPayment,
+    lastDayOfPayment: body.lastDayOfPayment,
+    dayOfPayment: body.dayOfPayment,
+    category: body.category,
+    currency: body.currency,
+    amount: body.amount,
+    dateOfCreation: body.dateOfCreation,
+    dateOfUpdate: body.dateOfUpdate,
+  };
+  Subscription.findByIdAndUpdate(req.params.id, subscription, {
+    new: true,
+  }).then((updatedSubscription) => {
+    res.json(updatedSubscription);
+  });
 });
 
 module.exports = router;

@@ -3,8 +3,8 @@ const mongoose = require('mongoose');
 const subscriptionSchema = new mongoose.Schema({
   accountId: String,
   firstDayOfPayment: Date,
-  LastDayOfPayment: Date,
-  DayOfPayment: Date,
+  lastDayOfPayment: Date,
+  dayOfPayment: Date,
   category: String,
   currency: String,
   amount: Number,

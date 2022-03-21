@@ -1,32 +1,66 @@
 const express = require('express');
-const db = require('../mockData/dummyDB');
+const ObligatoryPayment = require('../models/obligatoryPayment');
 
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  const obligatoryPayment = db.obligatoryPayments.filter(
-    (obligatoryPayment) => obligatoryPayment.id === req.params.id
-  );
-  res.json({ obligatoryPayment });
+  ObligatoryPayment.findById(req.params.id).then((obligatoryPayment) => {
+    if (obligatoryPayment) {
+      res.json(obligatoryPayment);
+    } else {
+      res.status(404).end();
+    }
+  });
 });
 
 router.post('/', (req, res) => {
-  db.obligatoryPayments.push(req.body);
-  res.send('POST from obligatoryPayment');
+  const body = req.body;
+
+  const obligatoryPayment = new ObligatoryPayment({
+    userId: body.userId,
+    title: body.title,
+    description: body.description,
+    amount: body.amount,
+    currency: body.currency,
+    dayOfPayment: body.dayOfPayment,
+    frequency: body.frequency,
+    dateOfTheFirstPayment: body.dateOfTheFirstPayment,
+    dateOfThelastPayment: body.dateOfThelastPayment,
+    createdOn: body.createdOn,
+    updatedOn: body.updatedOn,
+  });
+  obligatoryPayment.save().then((savedObligatoryPayment) => {
+    res.json(savedObligatoryPayment);
+  });
 });
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  db.obligatoryPayments = db.obligatoryPayments.filter((op) => op.id !== id);
-  res.status(204).end();
+  ObligatoryPayment.findByIdAndRemove(req.params.id).then(() => {
+    res.status(204).end();
+  });
 });
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  db.obligatoryPayments = db.obligatoryPayments.map((obligatoryPayment) =>
-    obligatoryPayment.id === id ? (obligatoryPayment = req.body) : ''
-  );
-  res.send('update from obligatoryPayment');
+  const body = req.body;
+
+  const obligatoryPayment = {
+    userId: body.userId,
+    title: body.title,
+    description: body.description,
+    amount: body.amount,
+    currency: body.currency,
+    dayOfPayment: body.dayOfPayment,
+    frequency: body.frequency,
+    dateOfTheFirstPayment: body.dateOfTheFirstPayment,
+    dateOfThelastPayment: body.dateOfThelastPayment,
+    createdOn: body.createdOn,
+    updatedOn: body.updatedOn,
+  };
+  ObligatoryPayment.findByIdAndUpdate(req.params.id, obligatoryPayment, {
+    new: true,
+  }).then((updatedUser) => {
+    res.json(updatedUser);
+  });
 });
 
 module.exports = router;

@@ -35,13 +35,13 @@ passport.use(new JwtStrategy(opts, jwtCallback));
 
 const auth = passport.authenticate('jwt', { session: false });
 
-app.use('/account', auth, accountRouter);
-app.use('/category', auth, categoryRouter);
-app.use('/currency', auth, currencyRouter);
-app.use('/obligatoryPayment', auth, obligatoryPaymentRouter);
-app.use('/subscription', auth, subscriptionRouter);
-app.use('/transaction', auth, transactionRouter);
-app.use('/user', auth, adminGuard, usersRouter);
+app.use('/accounts', auth, accountRouter);
+app.use('/categories', auth, categoryRouter);
+app.use('/currencies', auth, currencyRouter);
+app.use('/obligatoryPayments', auth, obligatoryPaymentRouter);
+app.use('/subscriptions', auth, subscriptionRouter);
+app.use('/transactions', auth, transactionRouter);
+app.use('/users', auth, adminGuard, usersRouter);
 app.use('/login', loginRouter);
 
 const url = process.env.MONGODB_URI;

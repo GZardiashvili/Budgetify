@@ -1,28 +1,61 @@
 const express = require('express');
-const db = require('../mockData/dummyDB');
+const User = require('../models/user');
 
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  const user = db.users.filter((user) => user.id === req.params.id);
-  res.json({ user });
+  User.findById(req.params.id).then((user) => {
+    if (user) {
+      res.json(user);
+    } else {
+      res.status(404).end();
+    }
+  });
 });
 
 router.post('/', (req, res) => {
-  db.users.push(req.body);
-  res.send('POST from user');
+  const body = req.body;
+
+  const user = new User({
+    email: body.email,
+    password: body.password,
+    role: body.role,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    gender: body.gender,
+    dateOfBirth: body.dateOfBirth,
+    countryOfResidence: body.countryOfResidence,
+  });
+  user.save().then((savedUser) => {
+    res.json(savedUser);
+  });
 });
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  db.users = db.users.filter((user) => user.id !== id);
-  res.status(204).end();
+  User.findByIdAndRemove(req.params.id).then(() => {
+    res.status(204).end();
+  });
 });
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  db.users = db.users.map((user) => (user.id === id ? (user = req.body) : ''));
-  res.send('update from user');
+  const body = req.body;
+
+  const user = {
+    email: body.email,
+    password: body.password,
+    role: body.role,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    gender: body.gender,
+    dateOfBirth: body.dateOfBirth,
+    countryOfResidence: body.countryOfResidence,
+  };
+
+  User.findByIdAndUpdate(req.params.id, user, { new: true }).then(
+    (updatedUser) => {
+      res.json(updatedUser);
+    }
+  );
 });
 
 module.exports = router;

@@ -1,30 +1,60 @@
 const express = require('express');
-const db = require('../mockData/dummyDB');
+const Account = require('../models/account');
 
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  const account = db.accounts.filter((account) => account.id === req.params.id);
-  res.json({ account });
+  Account.findById(req.params.id).then((account) => {
+    if (account) {
+      res.json(account);
+    } else {
+      res.status(404).end();
+    }
+  });
 });
 
 router.post('/', (req, res) => {
-  db.accounts.push(req.body);
-  res.send('POST from account');
+  const body = req.body;
+
+  const account = new Account({
+    userId: body.userId,
+    title: body.title,
+    description: body.description,
+    category: body.category,
+    currency: body.currency,
+    availableAmount: body.availableAmount,
+    dateOfCreation: body.dateOfCreation,
+    dateOfUpdate: body.dateOfUpdate,
+  });
+  account.save().then((savedAccount) => {
+    res.json(savedAccount);
+  });
 });
 
 router.delete('/:id', (req, res) => {
-  const id = req.params.id;
-  db.accounts = db.accounts.filter((acc) => acc.id !== id);
-  res.status(204).end();
+  Account.findByIdAndRemove(req.params.id).then(() => {
+    res.status(204).end();
+  });
 });
 
 router.put('/:id', (req, res) => {
-  const id = req.params.id;
-  db.accounts = db.accounts.map((acc) =>
-    acc.id === id ? (acc = req.body) : ''
+  const body = req.body;
+
+  const account = {
+    userId: body.userId,
+    title: body.title,
+    description: body.description,
+    category: body.category,
+    currency: body.currency,
+    availableAmount: body.availableAmount,
+    dateOfCreation: body.dateOfCreation,
+    dateOfUpdate: body.dateOfUpdate,
+  };
+  Account.findByIdAndUpdate(req.params.id, account, { new: true }).then(
+    (updatedAccount) => {
+      res.json(updatedAccount);
+    }
   );
-  res.send('update from account');
 });
 
 module.exports = router;

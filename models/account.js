@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const accountSchema = new mongoose.Schema({
-  UserId: String,
+  userId: String,
   title: String,
   description: String,
   category: String,
@@ -11,7 +11,7 @@ const accountSchema = new mongoose.Schema({
   dateOfUpdate: Date,
 });
 
-userSchema.set('toJSON', {
+accountSchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;

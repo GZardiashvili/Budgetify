@@ -5,7 +5,7 @@ const categorySchema = new mongoose.Schema({
   type: String,
 });
 
-userSchema.set('toJSON', {
+categorySchema.set('toJSON', {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;

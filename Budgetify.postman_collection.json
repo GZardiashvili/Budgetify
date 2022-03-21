@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Added from account POST\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"raw": "{\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Added from account POST\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,14 +23,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/account/",
+							"raw": "http://localhost:3000/accounts/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"account",
+								"accounts",
 								""
 							]
 						}
@@ -43,14 +43,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/account/1",
+							"raw": "http://localhost:3000/accounts/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"account",
+								"accounts",
 								"1"
 							]
 						}
@@ -60,11 +60,11 @@
 				{
 					"name": "accountU",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from account PATCH\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"raw": "{\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from account PUT\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -72,14 +72,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/account/9",
+							"raw": "http://localhost:3000/accounts/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"account",
+								"accounts",
 								"9"
 							]
 						}
@@ -92,14 +92,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/account/9",
+							"raw": "http://localhost:3000/accounts/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"account",
+								"accounts",
 								"9"
 							]
 						}
@@ -112,14 +112,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/account/9",
+							"raw": "http://localhost:3000/accounts/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"account",
+								"accounts",
 								"9"
 							]
 						}
@@ -132,14 +132,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/account/9",
+							"raw": "http://localhost:3000/accounts/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"account",
+								"accounts",
 								"9"
 							]
 						}
@@ -158,7 +158,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Added from category POST\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"raw": "{\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Added from category POST\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -166,14 +166,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/category/",
+							"raw": "http://localhost:3000/categories/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"category",
+								"categories",
 								""
 							]
 						}
@@ -186,14 +186,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/1",
+							"raw": "http://localhost:3000/categories/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"category",
+								"categories",
 								"1"
 							]
 						}
@@ -203,11 +203,11 @@
 				{
 					"name": "categoryU",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"title\": \"Updated from category PATCH\",\r\n    \"type\": \"type1\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"1\",\r\n    \"title\": \"Updated from category PUT\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -215,14 +215,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/category/9",
+							"raw": "http://localhost:3000/categories/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"category",
+								"categories",
 								"9"
 							]
 						}
@@ -235,14 +235,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/9",
+							"raw": "http://localhost:3000/categories/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"category",
+								"categories",
 								"9"
 							]
 						}
@@ -255,14 +255,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/9",
+							"raw": "http://localhost:3000/categories/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"category",
+								"categories",
 								"9"
 							]
 						}
@@ -275,14 +275,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/category/9",
+							"raw": "http://localhost:3000/categories/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"category",
+								"categories",
 								"9"
 							]
 						}
@@ -301,7 +301,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"name\": \"Added from currencies POST\",\r\n    \"sign\": \"usd.svg\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Added from currencies POST\",\r\n    \"sign\": \"usd.svg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -309,14 +309,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/currency/",
+							"raw": "http://localhost:3000/currencies/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"currency",
+								"currencies",
 								""
 							]
 						}
@@ -329,14 +329,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/currency/1",
+							"raw": "http://localhost:3000/currencies/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"currency",
+								"currencies",
 								"1"
 							]
 						}
@@ -346,11 +346,11 @@
 				{
 					"name": "CurrencyU",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"name\": \"Updated from currencies PATCH\",\r\n    \"sign\": \"usd.svg\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Updated from currencies PUT\",\r\n    \"sign\": \"usd.svg\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -358,14 +358,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/currency/9",
+							"raw": "http://localhost:3000/currencies/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"currency",
+								"currencies",
 								"9"
 							]
 						}
@@ -378,14 +378,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/currency/9",
+							"raw": "http://localhost:3000/currencies/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"currency",
+								"currencies",
 								"9"
 							]
 						}
@@ -398,15 +398,15 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/currency/9",
+							"raw": "http://localhost:3000/currencies/62384aa3e3d293ef300658dc",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"currency",
-								"9"
+								"currencies",
+								"62384aa3e3d293ef300658dc"
 							]
 						}
 					},
@@ -418,14 +418,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/currency/9",
+							"raw": "http://localhost:3000/currencies/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"currency",
+								"currencies",
 								"9"
 							]
 						}
@@ -444,7 +444,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"userId\": \"2\",\r\n    \"title\": \"Added from obligatoryPayment POST\",\r\n    \"description\": \"desc1\",\r\n    \"amount\": 500,\r\n    \"currency\": \"gel\",\r\n    \"dayOfPayment\": \"new Date().toString()\",\r\n    \"frequency\": \"high\",\r\n    \"dateOfTheFirstPayment\": \"new Date().toString()\",\r\n    \"dateOfThelastPayment\": \"new Date().toString()\",\r\n    \"createdOn\": \"new Date().toString()\",\r\n    \"updatedOn\": \"new Date().toString()\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"2\",\r\n    \"title\": \"Added from obligatoryPayment POST\",\r\n    \"description\": \"desc1\",\r\n    \"amount\": 500,\r\n    \"currency\": \"gel\",\r\n    \"dayOfPayment\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"frequency\": \"high\",\r\n    \"dateOfTheFirstPayment\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfThelastPayment\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"createdOn\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"updatedOn\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -452,14 +452,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/obligatoryPayment/",
+							"raw": "http://localhost:3000/obligatoryPayments/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"obligatoryPayment",
+								"obligatoryPayments",
 								""
 							]
 						}
@@ -472,14 +472,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/obligatoryPayment/1",
+							"raw": "http://localhost:3000/obligatoryPayments/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"obligatoryPayment",
+								"obligatoryPayments",
 								"1"
 							]
 						}
@@ -489,11 +489,11 @@
 				{
 					"name": "obligatoryPaymentU",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"userId\": \"2\",\r\n    \"title\": \"Updated from obligatoryPayment PATCH\",\r\n    \"description\": \"desc1\",\r\n    \"amount\": 500,\r\n    \"currency\": \"gel\",\r\n    \"dayOfPayment\": \"new Date().toString()\",\r\n    \"frequency\": \"high\",\r\n    \"dateOfTheFirstPayment\": \"new Date().toString()\",\r\n    \"dateOfThelastPayment\": \"new Date().toString()\",\r\n    \"createdOn\": \"new Date().toString()\",\r\n    \"updatedOn\": \"new Date().toString()\"\r\n}",
+							"raw": "{\r\n    \"userId\": \"2\",\r\n    \"title\": \"Updated from obligatoryPayment PUT\",\r\n    \"description\": \"desc1\",\r\n    \"amount\": 500,\r\n    \"currency\": \"gel\",\r\n    \"dayOfPayment\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"frequency\": \"high\",\r\n    \"dateOfTheFirstPayment\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfThelastPayment\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"createdOn\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"updatedOn\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -501,14 +501,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"raw": "http://localhost:3000/obligatoryPayments/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"obligatoryPayment",
+								"obligatoryPayments",
 								"9"
 							]
 						}
@@ -521,14 +521,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"raw": "http://localhost:3000/obligatoryPayments/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"obligatoryPayment",
+								"obligatoryPayments",
 								"9"
 							]
 						}
@@ -541,14 +541,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"raw": "http://localhost:3000/obligatoryPayments/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"obligatoryPayment",
+								"obligatoryPayments",
 								"9"
 							]
 						}
@@ -561,14 +561,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/obligatoryPayment/9",
+							"raw": "http://localhost:3000/obligatoryPayments/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"obligatoryPayment",
+								"obligatoryPayments",
 								"9"
 							]
 						}
@@ -587,7 +587,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"accountId\": \"1\",\r\n    \"firstDayOfPayment\": \"new Date().toString()\",\r\n    \"LastDayOfPayment\": \"new Date().toString()\",\r\n    \"DayOfPayment\": \"new Date().toString()\",\r\n    \"category\": \"Added from subscriptions POST\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": 2000,\r\n    \"dateOfCreation\": \"new Date().toString()\",\r\n    \"dateOfUpdate\": \"new Date().toString()\"\r\n}",
+							"raw": "{\r\n    \"accountId\": \"1\",\r\n    \"firstDayOfPayment\": \"new Date().toString()\",\r\n    \"LastDayOfPayment\": \"new Date().toString()\",\r\n    \"DayOfPayment\": \"new Date().toString()\",\r\n    \"category\": \"Added from subscriptions POST\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": 2000,\r\n    \"dateOfCreation\": \"new Date().toString()\",\r\n    \"dateOfUpdate\": \"new Date().toString()\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -595,14 +595,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/subscription/",
+							"raw": "http://localhost:3000/subscriptions/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"subscription",
+								"subscriptions",
 								""
 							]
 						}
@@ -612,17 +612,27 @@
 				{
 					"name": "subscriptionR",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDc4NTUzNzksImV4cCI6MTY0Nzg1ODk3OX0.xSZA-y67sZ-ER8-41PvpU-pqUAtKq2iEJJoS4WBWA40",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/subscription/1",
+							"raw": "http://localhost:3000/subscriptions/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"subscription",
+								"subscriptions",
 								"1"
 							]
 						}
@@ -632,11 +642,11 @@
 				{
 					"name": "subscriptionU",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from subscription PATCH\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 2000000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"raw": "{\r\n    \"accountId\": \"1\",\r\n    \"firstDayOfPayment\": \"new Date().toString()\",\r\n    \"LastDayOfPayment\": \"new Date().toString()\",\r\n    \"DayOfPayment\": \"new Date().toString()\",\r\n    \"category\": \"Updated from subscriptions PUT\",\r\n    \"currency\": \"EUR\",\r\n    \"amount\": 2000,\r\n    \"dateOfCreation\": \"new Date().toString()\",\r\n    \"dateOfUpdate\": \"new Date().toString()\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -644,14 +654,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/subscription/9",
+							"raw": "http://localhost:3000/subscriptions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"subscription",
+								"subscriptions",
 								"9"
 							]
 						}
@@ -664,14 +674,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/subscription/9",
+							"raw": "http://localhost:3000/subscriptions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"subscription",
+								"subscriptions",
 								"9"
 							]
 						}
@@ -684,14 +694,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/subscription/9",
+							"raw": "http://localhost:3000/subscriptions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"subscription",
+								"subscriptions",
 								"9"
 							]
 						}
@@ -704,14 +714,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/subscription/9",
+							"raw": "http://localhost:3000/subscriptions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"subscription",
+								"subscriptions",
 								"9"
 							]
 						}
@@ -730,7 +740,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"type\": \"sales\",\r\n    \"accountId\": \"2\",\r\n    \"title\": \"Added from transaction POST\",\r\n    \"description\": \"admin\",\r\n    \"dateOfOperation\": \"new Date().toString()\",\r\n    \"category\": \"asd\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"linkToFile\": \"http://example.com\",\r\n    \"dateOfCreation\": \"new Date().toString()\",\r\n    \"dateOfUpdate\": \"new Date().toString()\"\r\n}",
+							"raw": "{\r\n    \"type\": \"sales\",\r\n    \"accountId\": \"2\",\r\n    \"title\": \"Added from transaction POST\",\r\n    \"description\": \"admin\",\r\n    \"dateOfOperation\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"category\": \"asd\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"linkToFile\": \"http://example.com\",\r\n    \"dateOfCreation\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -738,14 +748,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/transaction/",
+							"raw": "http://localhost:3000/transactions/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"transaction",
+								"transactions",
 								""
 							]
 						}
@@ -758,14 +768,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transaction/1",
+							"raw": "http://localhost:3000/transactions/1",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"transaction",
+								"transactions",
 								"1"
 							]
 						}
@@ -775,11 +785,11 @@
 				{
 					"name": "transactionU",
 					"request": {
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"UserId\": \"1\",\r\n    \"title\": \"Updated from transaction PATCH\",\r\n    \"description\": \"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.\",\r\n    \"category\": \"category\",\r\n    \"currency\": \"USD\",\r\n    \"availableAmount\": 20000,\r\n    \"dateOfCreation\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)\"\r\n}",
+							"raw": "{\r\n    \"type\": \"sales\",\r\n    \"accountId\": \"2\",\r\n    \"title\": \"Updated from transaction PUT\",\r\n    \"description\": \"admin\",\r\n    \"dateOfOperation\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"category\": \"asd\",\r\n    \"currency\": \"USD\",\r\n    \"amount\": 1000,\r\n    \"linkToFile\": \"http://example.com\",\r\n    \"dateOfCreation\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"dateOfUpdate\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -787,14 +797,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/transaction/9",
+							"raw": "http://localhost:3000/transactions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"transaction",
+								"transactions",
 								"9"
 							]
 						}
@@ -807,14 +817,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transaction/9",
+							"raw": "http://localhost:3000/transactions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"transaction",
+								"transactions",
 								"9"
 							]
 						}
@@ -827,14 +837,14 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transaction/9",
+							"raw": "http://localhost:3000/transactions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"transaction",
+								"transactions",
 								"9"
 							]
 						}
@@ -847,14 +857,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/transaction/9",
+							"raw": "http://localhost:3000/transactions/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"transaction",
+								"transactions",
 								"9"
 							]
 						}
@@ -869,11 +879,21 @@
 				{
 					"name": "userC",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDc4NDY0NjgsImV4cCI6MTY0Nzg1MDA2OH0.ACQimrNJottR_IRGXWsU5awGGHrxgxlyHb-D1lvLHxQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"email\": \"example@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"role\": \"user\",\r\n    \"firstName\": \"Giorgi\",\r\n    \"lastName\": \"Zardiashvili\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\": \"Georgia\",\r\n    \"countryOfResidence\": \"Georgia\"\r\n}",
+							"raw": "{\r\n    \"email\": \"example@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"role\": \"user\",\r\n    \"firstName\": \"Giorgi\",\r\n    \"lastName\": \"Zardiashvili\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"countryOfResidence\": \"Georgia\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -881,14 +901,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/user/",
+							"raw": "http://localhost:3000/users/",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"user",
+								"users",
 								""
 							]
 						}
@@ -898,18 +918,28 @@
 				{
 					"name": "userR",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDc4NDU2MTAsImV4cCI6MTY0Nzg0OTIxMH0.UJLx2fQzLHitcCFBVhlVGB5IQ7YvNTlEgTxIPH3Lwr0",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/user/1",
+							"raw": "http://localhost:3000/users/623824b164bf6d6d04a7d9c0",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"user",
-								"1"
+								"users",
+								"623824b164bf6d6d04a7d9c0"
 							]
 						}
 					},
@@ -918,11 +948,21 @@
 				{
 					"name": "userU",
 					"request": {
-						"method": "PATCH",
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDc4NDkyODQsImV4cCI6MTY0Nzg1Mjg4NH0.-_BV9Ov6jiRKqJi6vkSTayqlwhI6f9kxuftW5pufoq8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id\": \"9\",\r\n    \"email\": \"nullam.velit@aol.net\",\r\n    \"password\": \"Seth123\",\r\n    \"role\": \"user\",\r\n    \"firstName\": \"Updated from users PATCH\",\r\n    \"lastName\": \"Kennedy\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\": \"United States\",\r\n    \"countryOfResidence\": \"United States\"\r\n}",
+							"raw": "{\r\n    \"email\": \"zardiashviligiorgi17@gmail.com\",\r\n    \"password\": \"123\",\r\n    \"role\": \"user\",\r\n    \"firstName\": \"Giorgi\",\r\n    \"lastName\": \"Zardiashvili\",\r\n    \"gender\": \"male\",\r\n    \"dateOfBirth\": \"Mon Mar 21 2022 11:09:29 GMT+0400 (Georgia Standard Time)\",\r\n    \"countryOfResidence\": \"Georgia\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -930,15 +970,15 @@
 							}
 						},
 						"url": {
-							"raw": "http://localhost:3000/user/9",
+							"raw": "http://localhost:3000/users/62382f3b3b9ff3bc933ae636",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"user",
-								"9"
+								"users",
+								"62382f3b3b9ff3bc933ae636"
 							]
 						}
 					},
@@ -950,14 +990,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/user/9",
+							"raw": "http://localhost:3000/users/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"user",
+								"users",
 								"9"
 							]
 						}
@@ -967,18 +1007,28 @@
 				{
 					"name": "userD",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDc4NDY0NjgsImV4cCI6MTY0Nzg1MDA2OH0.ACQimrNJottR_IRGXWsU5awGGHrxgxlyHb-D1lvLHxQ",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/user/9",
+							"raw": "http://localhost:3000/users/62382d6495ea15f3a7863417",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"user",
-								"9"
+								"users",
+								"62382d6495ea15f3a7863417"
 							]
 						}
 					},
@@ -990,14 +1040,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3000/user/9",
+							"raw": "http://localhost:3000/users/9",
 							"protocol": "http",
 							"host": [
 								"localhost"
 							],
 							"port": "3000",
 							"path": [
-								"user",
+								"users",
 								"9"
 							]
 						}
@@ -1016,7 +1066,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"email\": \"nullam.velit@aol.net\",\r\n    \"password\": \"seth123\"\r\n}",
+							"raw": "{\r\n    \"email\": \"nullam.velit@aol.net\",\r\n    \"password\": \"Seth123\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
