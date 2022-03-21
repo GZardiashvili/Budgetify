@@ -7,13 +7,13 @@ const mongoose = require('mongoose');
 const { jwtCallback } = require('./auth/passport');
 const { adminGuard } = require('./guards/adminGuard');
 
-const accountRouter = require('./routes/features/account');
-const categoryRouter = require('./routes/features/category');
-const currencyRouter = require('./routes/features/currency');
-const obligatoryPaymentRouter = require('./routes/features/obligatoryPayment');
-const subscriptionRouter = require('./routes/features/subscription');
-const transactionRouter = require('./routes/features/transaction');
-const usersRouter = require('./routes/features/user');
+const accountRouter = require('./controllers/accounts');
+const categoryRouter = require('./controllers/categories');
+const currencyRouter = require('./controllers/currencies');
+const obligatoryPaymentRouter = require('./controllers/obligatoryPayments');
+const subscriptionRouter = require('./controllers/subscriptions');
+const transactionRouter = require('./controllers/transactions');
+const usersRouter = require('./controllers/users');
 const loginRouter = require('./auth/login');
 
 const JwtStrategy = require('passport-jwt').Strategy;
@@ -46,21 +46,5 @@ app.use('/login', loginRouter);
 
 const url = process.env.MONGODB_URI;
 mongoose.connect(url);
-const userSchema = new mongoose.Schema({
-  name: String,
-});
-const User = mongoose.model('User', userSchema);
-const user = new User({ name: 'mariami' });
-user.save().then((result) => {
-  console.log('user saved!');
-  console.log(result.id);
-  mongoose.connection.close();
-});
 
-User.find({}).then((result) => {
-  result.forEach((note) => {
-    console.log(note);
-  });
-  mongoose.connection.close();
-});
 app.listen(process.env.PORT);
