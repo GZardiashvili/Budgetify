@@ -1,6 +1,6 @@
 const helper = require('./helpers/helper');
 
-const jwtCallack = (jwt_payload, done) => {
+const jwtCallback = (jwt_payload, done) => {
   const user = helper.getUserByEmail(jwt_payload.email);
   if (user) {
     return done(null, user);
@@ -9,5 +9,5 @@ const jwtCallack = (jwt_payload, done) => {
 };
 
 module.exports = {
-  jwtCallack,
+  jwtCallback,
 };

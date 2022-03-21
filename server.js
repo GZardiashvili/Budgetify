@@ -2,7 +2,9 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const passport = require('passport');
-const { jwtCallack } = require('./auth/passport');
+const mongoose = require('mongoose');
+
+const { jwtCallback } = require('./auth/passport');
 const { adminGuard } = require('./guards/adminGuard');
 
 const accountRouter = require('./routes/features/account');
@@ -29,7 +31,7 @@ const opts = {
   secretOrKey: process.env.JWT_SECRET,
 };
 
-passport.use(new JwtStrategy(opts, jwtCallack));
+passport.use(new JwtStrategy(opts, jwtCallback));
 
 const auth = passport.authenticate('jwt', { session: false });
 
@@ -42,4 +44,23 @@ app.use('/transaction', auth, transactionRouter);
 app.use('/user', auth, adminGuard, usersRouter);
 app.use('/login', loginRouter);
 
+const url = process.env.MONGODB_URI;
+mongoose.connect(url);
+const userSchema = new mongoose.Schema({
+  name: String,
+});
+const User = mongoose.model('User', userSchema);
+const user = new User({ name: 'mariami' });
+user.save().then((result) => {
+  console.log('user saved!');
+  console.log(result.id);
+  mongoose.connection.close();
+});
+
+User.find({}).then((result) => {
+  result.forEach((note) => {
+    console.log(note);
+  });
+  mongoose.connection.close();
+});
 app.listen(process.env.PORT);
