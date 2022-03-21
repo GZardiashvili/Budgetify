@@ -1,24 +1,45 @@
 const express = require('express');
 require('dotenv').config();
+const cors = require('cors');
+const passport = require('passport');
+const { jwtCallack } = require('./auth/passport');
+const { adminGuard } = require('./guards/adminGuard');
 
-const accountRouter = require('./routes/account');
-const categoryRouter = require('./routes/category');
-const currencyRouter = require('./routes/currency');
-const obligatoryPaymentRouter = require('./routes/obligatoryPayment');
-const subscriptionRouter = require('./routes/subscription');
-const transactionRouter = require('./routes/transaction');
-const usersRouter = require('./routes/user');
+const accountRouter = require('./routes/features/account');
+const categoryRouter = require('./routes/features/category');
+const currencyRouter = require('./routes/features/currency');
+const obligatoryPaymentRouter = require('./routes/features/obligatoryPayment');
+const subscriptionRouter = require('./routes/features/subscription');
+const transactionRouter = require('./routes/features/transaction');
+const usersRouter = require('./routes/features/user');
+const loginRouter = require('./auth/login');
+
+const JwtStrategy = require('passport-jwt').Strategy;
+const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const app = express();
 
 app.use(express.json());
+app.use(cors());
+app.use(express.urlencoded({ extended: false }));
+app.use(passport.initialize());
 
-app.use('/account', accountRouter);
-app.use('/category', categoryRouter);
-app.use('/currency', currencyRouter);
-app.use('/obligatoryPayment', obligatoryPaymentRouter);
-app.use('/subscription', subscriptionRouter);
-app.use('/transaction', transactionRouter);
-app.use('/user', usersRouter);
+const opts = {
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
+};
 
-app.listen(process.env.PORT || 3000);
+passport.use(new JwtStrategy(opts, jwtCallack));
+
+const auth = passport.authenticate('jwt', { session: false });
+
+app.use('/account', auth, accountRouter);
+app.use('/category', auth, categoryRouter);
+app.use('/currency', auth, currencyRouter);
+app.use('/obligatoryPayment', auth, obligatoryPaymentRouter);
+app.use('/subscription', auth, subscriptionRouter);
+app.use('/transaction', auth, transactionRouter);
+app.use('/user', auth, adminGuard, usersRouter);
+app.use('/login', loginRouter);
+
+app.listen(process.env.PORT);

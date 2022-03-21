@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "d267d2da-3288-419f-83e6-fea8d2c65fca",
-		"name": "PiggyBank",
+		"name": "Budgetify",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -999,6 +999,157 @@
 							"path": [
 								"user",
 								"9"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "login",
+			"item": [
+				{
+					"name": "loginUser",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"nullam.velit@aol.net\",\r\n    \"password\": \"seth123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Unauthorized",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjIiLCJlbWFpbCI6InZhcml1cy5vcmNpLmluQGljbG91ZC5lZHUiLCJyb2xlIjoidXNlciIsImlhdCI6MTY0Njg3NTY3MywiZXhwIjoxNjQ2ODc5MjczfQ.Bg2BIPzCF8cn8bL39QWunBgnNOE11wok3ADEQPm3nK8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorized",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY4NzU4MDUsImV4cCI6MTY0Njg3OTQwNX0.A2ws7S5herTY872qJp7759eYQ4tb3pQFxzVW8Hf-2YQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/transaction/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"transaction",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "loginAdmin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"vitae.odio.sagittis@hotmail.org\",\r\n    \"password\": \"Kylie123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:3000/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Authorized",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjUiLCJlbWFpbCI6InZpdGFlLm9kaW8uc2FnaXR0aXNAaG90bWFpbC5vcmciLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE2NDY4NzU4MDUsImV4cCI6MTY0Njg3OTQwNX0.A2ws7S5herTY872qJp7759eYQ4tb3pQFxzVW8Hf-2YQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3000/user/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3000",
+							"path": [
+								"user",
+								"1"
 							]
 						}
 					},
