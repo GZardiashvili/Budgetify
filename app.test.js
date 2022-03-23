@@ -8,22 +8,43 @@ const accountsRouter = require('./controllers/accounts');
 
 const loginRouter = require('./auth/login');
 
+const accForTest = {
+  UserId: '1',
+  title: 'Added while testing account POST',
+  description: 'Will delete after test finishs.',
+  category: 'for testing',
+  currency: 'USD',
+  availableAmount: 1000,
+  dateOfCreation: 'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
+  dateOfUpdate: 'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
+};
+const updatedAcc = {
+  UserId: '2',
+  title: 'Updated while testing account PUT',
+  description: 'Updated successfully.',
+  category: 'new',
+  currency: 'USD',
+  availableAmount: 20000,
+  dateOfCreation: 'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
+  dateOfUpdate: 'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
+};
+
 let loginToken;
+let testUrl =
+  'mongodb+srv://gzardiashvili:AzHPq4mWG2Sn3d0O@cluster0.tpboq.mongodb.net/TestBudgetify?retryWrites=true&w=majority';
+
 describe('app', () => {
   beforeAll(async () => {
     await mongoose.disconnect();
-    await mongoose.connect(
-      'mongodb+srv://gzardiashvili:AzHPq4mWG2Sn3d0O@cluster0.tpboq.mongodb.net/budgetify?retryWrites=true&w=majority'
-    );
+    await mongoose.connect(testUrl);
 
     await axios
       .post('http://localhost:3000/login', {
-        email: 'example@gmail.com',
-        password: '12345678',
+        email: 'root@gmail.com',
+        password: 'toor',
       })
       .then(function (response) {
         loginToken = response.data.token;
-        console.log(`1111111111111111111- ${loginToken}`);
       });
   });
 
@@ -33,13 +54,11 @@ describe('app', () => {
 
   describe('login', () => {
     it('login user', async () => {
-      console.log(`2222222222222- ${loginToken}`);
-
       const response = await supertest(app.use('/login', loginRouter))
         .post('/login')
         .send({
-          email: 'example@gmail.com',
-          password: '12345678',
+          email: 'root@gmail.com',
+          password: 'toor',
         });
       expect(response.status).toBe(200);
       expect(response.body.role).toBe('admin');
@@ -49,67 +68,63 @@ describe('app', () => {
   describe('users', () => {
     it('GET user', async () => {
       const response = await supertest(app.use('/users', usersRouter))
-        .get('/users/6238ad6549a03610de6fdccc')
+        .get('/users/623ae9167fd84eca70ca8566')
         .set('Authorization', `${loginToken}`);
       expect(response.status).toBe(200);
-      expect(response.body.firstName).toEqual('Mariam');
+      expect(response.body.firstName).toEqual('root');
     });
   });
 
   describe('accounts', () => {
-    it('GET account', async () => {
+    it('GET account with invalid id', async () => {
       const response = await supertest(app.use('/accounts', accountsRouter))
         .get('/accounts/6239c2f1850f32169565f5fe')
         .set('Authorization', `${loginToken}`);
-      expect(response.status).toBe(200);
-      expect(response.body.title).toEqual('Added from account POST');
+      expect(response.status).toBe(404);
     });
 
     it('POST account', async () => {
       const response = await supertest(app.use('/accounts', accountsRouter))
         .post('/accounts')
         .set('Authorization', `${loginToken}`)
-        .send({
-          UserId: '2',
-          title: 'Added while testing account POST',
-          description:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.',
-          category: 'category',
-          currency: 'USD',
-          availableAmount: 20000,
-          dateOfCreation:
-            'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
-          dateOfUpdate:
-            'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
-        });
+        .send(accForTest);
       expect(response.status).toBe(200);
       expect(response.body.title).toEqual('Added while testing account POST');
     });
 
-    it('PUT account', async () => {
+    it('GET all accounts', async () => {
       const response = await supertest(app.use('/accounts', accountsRouter))
-        .put('/accounts/6239c2f1850f32169565f5fe')
+        .get('/accounts')
+        .set('Authorization', `${loginToken}`);
+      expect(response.status).toBe(200);
+      expect(response.body[0].title).toBe('Added while testing account POST');
+      expect(response.body.length).toBe(1);
+    });
+
+    it('PUT account', async () => {
+      const id = await supertest(app.use('/accounts', accountsRouter))
+        .get('/accounts/')
+        .set('Authorization', `${loginToken}`);
+
+      const accId = id.body[0].id;
+
+      const response = await supertest(app.use('/accounts', accountsRouter))
+        .put(`/accounts/${accId}`)
         .set('Authorization', `${loginToken}`)
-        .send({
-          UserId: '2',
-          title: 'Updated while testing account PUT',
-          description:
-            'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been.',
-          category: 'category',
-          currency: 'USD',
-          availableAmount: 20000,
-          dateOfCreation:
-            'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
-          dateOfUpdate:
-            'Sun Mar 06 2022 17:04:52 GMT+0400 (Georgia Standard Time)',
-        });
+        .send(updatedAcc);
       expect(response.status).toBe(200);
       expect(response.body.title).toEqual('Updated while testing account PUT');
     });
 
     it('DELETE account', async () => {
+      const id = await supertest(app.use('/accounts', accountsRouter))
+        .get('/accounts/')
+        .set('Authorization', `${loginToken}`);
+
+      const accId = id.body[0].id;
+
       const response = await supertest(app.use('/accounts', accountsRouter))
-        .delete('/accounts/6239c116a4b0de25e042221f')
+        .delete(`/accounts/${accId}`)
         .set('Authorization', `${loginToken}`);
 
       expect(response.status).toBe(204);
