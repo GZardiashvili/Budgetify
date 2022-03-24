@@ -4,13 +4,17 @@ const ObligatoryPayment = require('../models/obligatoryPayment');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  ObligatoryPayment.findById(req.params.id).then((obligatoryPayment) => {
-    if (obligatoryPayment) {
-      res.json(obligatoryPayment);
-    } else {
-      res.status(404).end();
-    }
-  });
+  ObligatoryPayment.findById(req.params.id)
+    .then((obligatoryPayment) => {
+      if (obligatoryPayment) {
+        res.json(obligatoryPayment);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -35,9 +39,13 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  ObligatoryPayment.findByIdAndRemove(req.params.id).then(() => {
-    res.status(204).end();
-  });
+  ObligatoryPayment.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -58,9 +66,13 @@ router.put('/:id', (req, res) => {
   };
   ObligatoryPayment.findByIdAndUpdate(req.params.id, obligatoryPayment, {
     new: true,
-  }).then((updatedUser) => {
-    res.json(updatedUser);
-  });
+  })
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;
