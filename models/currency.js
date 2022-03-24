@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
 const currencySchema = new mongoose.Schema({
-  name: String,
-  sign: String,
+  name: { type: String, required: true },
+  sign: { type: String, required: true },
 });
 
 currencySchema.set('toJSON', {

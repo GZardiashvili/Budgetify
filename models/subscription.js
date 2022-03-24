@@ -2,7 +2,8 @@ const mongoose = require('mongoose');
 
 const subscriptionSchema = new mongoose.Schema({
   accountId: String,
-  firstDayOfPayment: Date,
+  title: { type: String, required: true, unique: true },
+  firstDayOfPayment: { type: Date, required: true },
   lastDayOfPayment: Date,
   dayOfPayment: Date,
   category: String,
