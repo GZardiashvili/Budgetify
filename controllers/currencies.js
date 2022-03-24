@@ -4,13 +4,17 @@ const Currency = require('../models/currency');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  Currency.findById(req.params.id).then((currency) => {
-    if (currency) {
-      res.json(currency);
-    } else {
-      res.status(404).end();
-    }
-  });
+  Currency.findById(req.params.id)
+    .then((currency) => {
+      if (currency) {
+        res.json(currency);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -26,9 +30,13 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-  Currency.findByIdAndRemove(req.params.id).then(() => {
-    res.status(204).end();
-  });
+  Currency.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -38,11 +46,13 @@ router.put('/:id', (req, res) => {
     name: body.name,
     sign: body.sign,
   };
-  Currency.findByIdAndUpdate(req.params.id, currency, { new: true }).then(
-    (updatedCurrency) => {
+  Currency.findByIdAndUpdate(req.params.id, currency, { new: true })
+    .then((updatedCurrency) => {
       res.json(updatedCurrency);
-    }
-  );
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;

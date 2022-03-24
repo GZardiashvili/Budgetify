@@ -6,13 +6,17 @@ const { body, validationResult } = require('express-validator');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  User.findById(req.params.id).then((user) => {
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404).end();
-    }
-  });
+  User.findById(req.params.id)
+    .then((user) => {
+      if (user) {
+        res.json(user);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post(
@@ -57,9 +61,14 @@ router.post(
       dateOfBirth: body.dateOfBirth,
       countryOfResidence: body.countryOfResidence,
     });
-    user.save().then((savedUser) => {
-      res.json(savedUser);
-    });
+    user
+      .save()
+      .then((savedUser) => {
+        res.json(savedUser);
+      })
+      .catch((error) => {
+        console.error('The Promise is rejected!', error);
+      });
   }
 );
 
@@ -83,11 +92,13 @@ router.put('/:id', (req, res) => {
     countryOfResidence: body.countryOfResidence,
   };
 
-  User.findByIdAndUpdate(req.params.id, user, { new: true }).then(
-    (updatedUser) => {
+  User.findByIdAndUpdate(req.params.id, user, { new: true })
+    .then((updatedUser) => {
       res.json(updatedUser);
-    }
-  );
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;

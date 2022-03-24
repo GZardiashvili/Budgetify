@@ -4,13 +4,17 @@ const Subscription = require('../models/subscription');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  Subscription.findById(req.params.id).then((subscription) => {
-    if (subscription) {
-      res.json(subscription);
-    } else {
-      res.status(404).end();
-    }
-  });
+  Subscription.findById(req.params.id)
+    .then((subscription) => {
+      if (subscription) {
+        res.json(subscription);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -27,9 +31,14 @@ router.post('/', (req, res) => {
     dateOfCreation: body.dateOfCreation,
     dateOfUpdate: body.dateOfUpdate,
   });
-  subscription.save().then((savedSubscription) => {
-    res.json(savedSubscription);
-  });
+  subscription
+    .save()
+    .then((savedSubscription) => {
+      res.json(savedSubscription);
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.delete('/:id', (req, res) => {
@@ -54,9 +63,13 @@ router.put('/:id', (req, res) => {
   };
   Subscription.findByIdAndUpdate(req.params.id, subscription, {
     new: true,
-  }).then((updatedSubscription) => {
-    res.json(updatedSubscription);
-  });
+  })
+    .then((updatedSubscription) => {
+      res.json(updatedSubscription);
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;

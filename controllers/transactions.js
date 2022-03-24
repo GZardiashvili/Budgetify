@@ -4,13 +4,17 @@ const Transaction = require('../models/transaction');
 const router = express.Router();
 
 router.get('/:id', (req, res) => {
-  Transaction.findById(req.params.id).then((transaction) => {
-    if (transaction) {
-      res.json(transaction);
-    } else {
-      res.status(404).end();
-    }
-  });
+  Transaction.findById(req.params.id)
+    .then((transaction) => {
+      if (transaction) {
+        res.json(transaction);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -29,15 +33,24 @@ router.post('/', (req, res) => {
     dateOfCreation: body.dateOfCreation,
     dateOfUpdate: body.dateOfUpdate,
   });
-  transaction.save().then((savedTransaction) => {
-    res.json(savedTransaction);
-  });
+  transaction
+    .save()
+    .then((savedTransaction) => {
+      res.json(savedTransaction);
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.delete('/:id', (req, res) => {
-  Transaction.findByIdAndRemove(req.params.id).then(() => {
-    res.status(204).end();
-  });
+  Transaction.findByIdAndRemove(req.params.id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 router.put('/:id', (req, res) => {
@@ -57,11 +70,13 @@ router.put('/:id', (req, res) => {
     dateOfUpdate: body.dateOfUpdate,
   };
 
-  Transaction.findByIdAndUpdate(req.params.id, transaction, { new: true }).then(
-    (updatedTransaction) => {
+  Transaction.findByIdAndUpdate(req.params.id, transaction, { new: true })
+    .then((updatedTransaction) => {
       res.json(updatedTransaction);
-    }
-  );
+    })
+    .catch((error) => {
+      console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;
