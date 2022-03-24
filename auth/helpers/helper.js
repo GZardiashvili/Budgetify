@@ -2,8 +2,7 @@ const bcrypt = require('bcrypt');
 const User = require('../../models/user');
 
 async function getUserByEmail(email) {
-  // const user = await User.findOne({ email: new RegExp(email, 'i') }).exec();
-  const user = await User.findOne({ email: 'root@gmail.com' }).exec();
+  const user = await User.findOne({ email: new RegExp(email, 'i') }).exec();
 
   return user;
 }
