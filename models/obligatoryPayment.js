@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 
 const obligatoryPaymentSchema = new mongoose.Schema({
   userId: String,
-  title: String,
+  title: { type: String, required: true },
   description: String,
-  amount: Number,
+  amount: { type: Number, required: true },
   currency: String,
   dayOfPayment: Date,
   frequency: String,
