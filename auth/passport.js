@@ -4,7 +4,7 @@ const User = require('../models/user');
 const jwtCallback = async (jwt_payload, done) => {
   const user = await helper.getUserByEmail(jwt_payload.email);
 
-  if (user[0]) {
+  if (user) {
     return done(null, user);
   }
 
