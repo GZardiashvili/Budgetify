@@ -2,11 +2,7 @@ const supertest = require('supertest');
 const mongoose = require('mongoose');
 const axios = require('axios');
 const app = require('./app');
-
-const usersRouter = require('./controllers/users');
-const accountsRouter = require('./controllers/accounts');
-
-const loginRouter = require('./auth/login');
+require('dotenv').config();
 
 const accForTest = {
   UserId: '1',
@@ -30,8 +26,7 @@ const updatedAcc = {
 };
 
 let loginToken;
-let testUrl =
-  'mongodb+srv://gzardiashvili:AzHPq4mWG2Sn3d0O@cluster0.tpboq.mongodb.net/TestBudgetify?retryWrites=true&w=majority';
+let testUrl = process.env.TEST_URI;
 
 describe('app', () => {
   beforeAll(async () => {
@@ -54,12 +49,10 @@ describe('app', () => {
 
   describe('login', () => {
     it('login user', async () => {
-      const response = await supertest(app.use('/login', loginRouter))
-        .post('/login')
-        .send({
-          email: 'root@gmail.com',
-          password: 'toor',
-        });
+      const response = await supertest(app).post('/login').send({
+        email: 'root@gmail.com',
+        password: 'toor',
+      });
       expect(response.status).toBe(200);
       expect(response.body.role).toBe('admin');
     });
@@ -67,7 +60,7 @@ describe('app', () => {
 
   describe('users', () => {
     it('GET user', async () => {
-      const response = await supertest(app.use('/users', usersRouter))
+      const response = await supertest(app)
         .get('/users/623ae9167fd84eca70ca8566')
         .set('Authorization', `${loginToken}`);
       expect(response.status).toBe(200);
@@ -77,14 +70,14 @@ describe('app', () => {
 
   describe('accounts', () => {
     it('GET account with invalid id', async () => {
-      const response = await supertest(app.use('/accounts', accountsRouter))
+      const response = await supertest(app)
         .get('/accounts/6239c2f1850f32169565f5fe')
         .set('Authorization', `${loginToken}`);
       expect(response.status).toBe(404);
     });
 
     it('POST account', async () => {
-      const response = await supertest(app.use('/accounts', accountsRouter))
+      const response = await supertest(app)
         .post('/accounts')
         .set('Authorization', `${loginToken}`)
         .send(accForTest);
@@ -93,7 +86,7 @@ describe('app', () => {
     });
 
     it('GET all accounts', async () => {
-      const response = await supertest(app.use('/accounts', accountsRouter))
+      const response = await supertest(app)
         .get('/accounts')
         .set('Authorization', `${loginToken}`);
       expect(response.status).toBe(200);
@@ -102,13 +95,13 @@ describe('app', () => {
     });
 
     it('PUT account', async () => {
-      const id = await supertest(app.use('/accounts', accountsRouter))
+      const id = await supertest(app)
         .get('/accounts/')
         .set('Authorization', `${loginToken}`);
 
       const accId = id.body[0].id;
 
-      const response = await supertest(app.use('/accounts', accountsRouter))
+      const response = await supertest(app)
         .put(`/accounts/${accId}`)
         .set('Authorization', `${loginToken}`)
         .send(updatedAcc);
@@ -117,13 +110,13 @@ describe('app', () => {
     });
 
     it('DELETE account', async () => {
-      const id = await supertest(app.use('/accounts', accountsRouter))
+      const id = await supertest(app)
         .get('/accounts/')
         .set('Authorization', `${loginToken}`);
 
       const accId = id.body[0].id;
 
-      const response = await supertest(app.use('/accounts', accountsRouter))
+      const response = await supertest(app)
         .delete(`/accounts/${accId}`)
         .set('Authorization', `${loginToken}`);
 
