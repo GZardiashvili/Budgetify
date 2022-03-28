@@ -3,18 +3,32 @@ const Account = require('../models/account');
 
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
-  Account.findById(req.params.id)
-    .then((account) => {
-      if (account) {
-        res.json(account);
-      } else {
-        res.status(404).end();
-      }
-    })
-    .catch((error) => {
-      console.error('The Promise is rejected!', error);
-    });
+router.get('/:id?', (req, res) => {
+  if (req.params.id) {
+    Account.findById(req.params.id)
+      .then((account) => {
+        if (account) {
+          res.json(account);
+        } else {
+          res.status(404).end();
+        }
+      })
+      .catch((error) => {
+        console.error('The Promise is rejected!', error);
+      });
+  } else {
+    Account.find()
+      .then((account) => {
+        if (account) {
+          res.json(account);
+        } else {
+          res.status(404).end();
+        }
+      })
+      .catch((error) => {
+        console.error('The Promise is rejected!', error);
+      });
+  }
 });
 
 router.post('/', (req, res) => {
