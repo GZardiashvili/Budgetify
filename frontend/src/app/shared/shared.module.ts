@@ -8,9 +8,11 @@ import {HttpClientModule} from "@angular/common/http";
 import {AuthModule} from "../auth/auth.module";
 import {FeaturesModule} from "../features/features.module";
 import {LoginComponent} from "../auth/login/login.component";
+import {RegisterComponent} from "../register/register.component";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
-  declarations: [LoginComponent],
+  declarations: [LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -21,6 +23,7 @@ import {LoginComponent} from "../auth/login/login.component";
     HttpClientModule,
     AuthModule,
     FeaturesModule,
+    RouterModule,
   ],
   exports: [
     MatFormFieldModule,
