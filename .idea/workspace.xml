@@ -1,7 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="" />
+    <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Budgetify.postman_collection.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/helpers/helper.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/login.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/auth/passport.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/accounts.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/categories.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/currencies.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/obligatoryPayments.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/subscriptions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/transactions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/controllers/users.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/guards/adminGuard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mockData/dummyDB.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/account.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/category.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/currency.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/obligatoryPayment.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/subscription.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/transaction.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,7 +37,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="frontend" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -30,7 +57,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../client" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -46,6 +73,7 @@
       <workItem from="1648143321537" duration="538000" />
       <workItem from="1648144043141" duration="99000" />
       <workItem from="1648145541301" duration="41000" />
+      <workItem from="1648664054802" duration="301000" />
     </task>
     <servers />
   </component>
