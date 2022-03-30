@@ -2,32 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Budgetify.postman_collection.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.test.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth/helpers/helper.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/auth/passport.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/accounts.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/categories.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/currencies.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/obligatoryPayments.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/subscriptions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/transactions.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/controllers/users.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/guards/adminGuard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mockData/dummyDB.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/account.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/category.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/currency.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/obligatoryPayment.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/subscription.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/transaction.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/models/user.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/environments/environment.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +38,14 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Users\GZard\Desktop\Budgetify\frontend\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\auth" />
+      <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\auth\guards" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -73,7 +59,7 @@
       <workItem from="1648143321537" duration="538000" />
       <workItem from="1648144043141" duration="99000" />
       <workItem from="1648145541301" duration="41000" />
-      <workItem from="1648664054802" duration="301000" />
+      <workItem from="1648664054802" duration="6005000" />
     </task>
     <servers />
   </component>
@@ -90,5 +76,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/frontend/src/app/auth/guards/auth.guard.ts</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
