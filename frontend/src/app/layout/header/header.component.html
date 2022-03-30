@@ -1,0 +1,11 @@
+<header class="header">
+  <button *ngIf="isLoggedIn" class="header__icon-button" (click)="menuButtonClicked.emit()">
+
+  </button>
+  <div class="header__logo">
+    TodoApp
+  </div>
+  <div *ngIf="isLoggedIn" class="header__logout">
+    <a href="#" (click)="onClick()">Logout</a>
+  </div>
+</header>

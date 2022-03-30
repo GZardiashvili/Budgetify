@@ -10,6 +10,7 @@ import {FeaturesModule} from "../features/features.module";
 import {LoginComponent} from "../auth/login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {RouterModule} from "@angular/router";
+import {LayoutModule} from "../layout/layout.module";
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
@@ -24,6 +25,7 @@ import {RouterModule} from "@angular/router";
     AuthModule,
     FeaturesModule,
     RouterModule,
+    LayoutModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -32,6 +34,7 @@ import {RouterModule} from "@angular/router";
     MatButtonModule,
     ReactiveFormsModule,
     FeaturesModule,
+    LayoutModule,
   ]
 })
 export class SharedModule {
