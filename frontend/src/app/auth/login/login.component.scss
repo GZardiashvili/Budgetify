@@ -39,11 +39,19 @@
       justify-self: center;
     }
 
-    .app-main__button-primary {;
+    .app-main__button-primary {
       grid-column: 2/3;
       width: 430px;
       height: 40px;
       background-color: var_1.$btn-primary;
+      color: #FFF;
+    }
+
+    .app-main__button-disabled {
+      grid-column: 2/3;
+      width: 430px;
+      height: 40px;
+      background-color: var_1.$btn-disabled;
       color: #FFF;
     }
 

@@ -11,9 +11,10 @@ import {LoginComponent} from "../auth/login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {RouterModule} from "@angular/router";
 import {LayoutModule} from "../layout/layout.module";
+import {NotFoundComponent} from "../not-found/not-found.component";
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent],
+  declarations: [LoginComponent, RegisterComponent, NotFoundComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,

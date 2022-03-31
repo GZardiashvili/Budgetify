@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
 
   loginFormGroup: FormGroup = new FormGroup({
     emailControl: new FormControl('', [Validators.required, Validators.email]),
-    passwordControl: new FormControl('', [Validators.required, Validators.minLength(6)])
+    passwordControl: new FormControl('', [Validators.required, Validators.minLength(4)])
   });
 
 

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NopagefoundComponent } from './nopagefound.component';
+import { PiggyBankComponent } from './piggy-bank.component';
 
-describe('NopagefoundComponent', () => {
-  let component: NopagefoundComponent;
-  let fixture: ComponentFixture<NopagefoundComponent>;
+describe('PiggyBankComponent', () => {
+  let component: PiggyBankComponent;
+  let fixture: ComponentFixture<PiggyBankComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NopagefoundComponent ]
+      declarations: [ PiggyBankComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NopagefoundComponent);
+    fixture = TestBed.createComponent(PiggyBankComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

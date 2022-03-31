@@ -2,16 +2,39 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/imenu-item.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/not-found/not-found.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/not-found/not-found.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/not-found/not-found.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app-routing.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/features.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/features.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistic/statistic.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistic/statistic.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistic/statistic.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/not-found/not-found.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistic/statistic.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/header/header.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/header/header.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/header/header.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/header/header.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/main-page/main-page.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/nopagefound/nopagefound.component.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/nopagefound/nopagefound.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/menu.config.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/nopagefound/nopagefound.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/nopagefound/nopagefound.component.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/sidebar.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/sidebar.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/sidebar/sidebar.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/shared.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/styles/palette.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/styles/palette.scss" afterDir="false" />
     </list>
@@ -19,6 +42,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
@@ -32,7 +62,9 @@
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="26qEuneKn0GwVG2aouMQszdtx4S" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="autoscrollFromSource" value="true" />
     <option name="autoscrollToSource" value="true" />
@@ -40,6 +72,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -50,6 +83,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\layout" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\auth" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\auth\guards" />
@@ -67,7 +101,7 @@
       <workItem from="1648143321537" duration="538000" />
       <workItem from="1648144043141" duration="99000" />
       <workItem from="1648145541301" duration="41000" />
-      <workItem from="1648664054802" duration="13123000" />
+      <workItem from="1648664054802" duration="24293000" />
     </task>
     <servers />
   </component>
@@ -84,6 +118,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {IMenuItem} from "./imenu-item";
+import {MENU_CONFIG} from "./menu.config";
 
 @Component({
   selector: 'app-sidebar',
@@ -6,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
+  menu: IMenuItem[] = MENU_CONFIG;
 
-  constructor() { }
+  constructor() {
+  }
+
+  trackBy(index: number, item: IMenuItem): string {
+    return item.id;
+  }
+
 
   ngOnInit(): void {
   }

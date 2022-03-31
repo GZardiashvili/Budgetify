@@ -2,13 +2,20 @@ import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {HeaderComponent} from "./header/header.component";
 import {SidebarComponent} from "./sidebar/sidebar.component";
-import {NopagefoundComponent} from "./nopagefound/nopagefound.component";
-import {MainPageComponent} from "./main-page/main-page.component";
+import {RouterModule} from "@angular/router";
+import {MatIconModule} from "@angular/material/icon";
+
 
 @NgModule({
-  declarations: [MainPageComponent, HeaderComponent, SidebarComponent, NopagefoundComponent],
+  declarations: [HeaderComponent, SidebarComponent],
+  exports: [
+    SidebarComponent,
+    HeaderComponent
+  ],
   imports: [
     CommonModule,
+    RouterModule,
+    MatIconModule,
   ]
 })
 export class LayoutModule {
