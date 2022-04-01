@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {AuthService} from "../../auth/services/auth.service";
+import {AuthService} from "../../../auth/services/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
@@ -13,10 +13,6 @@ export class HeaderComponent {
   @Output() loggedOutClicked: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(private authService: AuthService, private router: Router) {
-  }
-
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
   }
 
 

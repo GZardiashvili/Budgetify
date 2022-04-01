@@ -1,13 +1,16 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {HeaderComponent} from "./header/header.component";
-import {SidebarComponent} from "./sidebar/sidebar.component";
+import {HeaderComponent} from "./components/header/header.component";
+import {SidebarComponent} from "./components/sidebar/sidebar.component";
 import {RouterModule} from "@angular/router";
 import {MatIconModule} from "@angular/material/icon";
+import {LayoutComponent} from './layout.component';
+import {LayoutRoutingModule} from "./layout-routing.module";
+import {SharedModule} from "../shared/shared.module";
 
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent],
+  declarations: [HeaderComponent, SidebarComponent, LayoutComponent],
   exports: [
     SidebarComponent,
     HeaderComponent
@@ -16,6 +19,8 @@ import {MatIconModule} from "@angular/material/icon";
     CommonModule,
     RouterModule,
     MatIconModule,
+    SharedModule,
+    LayoutRoutingModule,
   ]
 })
 export class LayoutModule {

@@ -5,16 +5,13 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
-import {AuthModule} from "../auth/auth.module";
-import {FeaturesModule} from "../features/features.module";
-import {LoginComponent} from "../auth/login/login.component";
 import {RegisterComponent} from "../register/register.component";
 import {RouterModule} from "@angular/router";
 import {LayoutModule} from "../layout/layout.module";
 import {NotFoundComponent} from "../not-found/not-found.component";
 
 @NgModule({
-  declarations: [LoginComponent, RegisterComponent, NotFoundComponent],
+  declarations: [RegisterComponent, NotFoundComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -23,10 +20,7 @@ import {NotFoundComponent} from "../not-found/not-found.component";
     MatButtonModule,
     ReactiveFormsModule,
     HttpClientModule,
-    AuthModule,
-    FeaturesModule,
     RouterModule,
-    LayoutModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -34,8 +28,8 @@ import {NotFoundComponent} from "../not-found/not-found.component";
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
-    FeaturesModule,
-    LayoutModule,
+    RouterModule,
+
   ]
 })
 export class SharedModule {

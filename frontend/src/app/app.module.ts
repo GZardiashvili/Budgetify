@@ -6,6 +6,8 @@ import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SharedModule} from "./shared/shared.module";
 import {MatIconModule} from "@angular/material/icon";
+import {LayoutModule} from "./layout/layout.module";
+import {AuthModule} from "./auth/auth.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +17,9 @@ import {MatIconModule} from "@angular/material/icon";
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    AuthModule,
     SharedModule,
+    LayoutModule,
     MatIconModule,
   ],
   providers: [],

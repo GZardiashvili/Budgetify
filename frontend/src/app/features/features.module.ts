@@ -5,7 +5,6 @@ import {SubscriptionsComponent} from './subscriptions/subscriptions.component';
 import {ObligatoryComponent} from './obligatory/obligatory.component';
 import {MainPageComponent} from "./main-page/main-page.component";
 import {PiggyBankComponent} from './piggy-bank/piggy-bank.component';
-import {LayoutModule} from "../layout/layout.module";
 import {StatisticsComponent} from './statistics/statistics.component';
 
 
@@ -28,7 +27,6 @@ import {StatisticsComponent} from './statistics/statistics.component';
   ],
   imports: [
     CommonModule,
-    LayoutModule,
   ]
 })
 export class FeaturesModule {

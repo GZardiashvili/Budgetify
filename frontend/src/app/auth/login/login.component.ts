@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
@@ -8,7 +8,7 @@ import {Router} from "@angular/router";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
 
   loginFormGroup: FormGroup = new FormGroup({
     emailControl: new FormControl('', [Validators.required, Validators.email]),
@@ -17,20 +17,15 @@ export class LoginComponent implements OnInit {
 
 
   constructor(private authService: AuthService, private router: Router) {
-
+    if (this.authService.isAuthenticated()) {
+      this.router.navigate(['/']).then();
+    }
   }
 
-
-  ngOnInit(): void {
-    this.loginFormGroup.valueChanges.subscribe(value => {
-      console.log(value);
-    });
-  }
 
   login() {
     this.authService.login(this.loginFormGroup.value.emailControl, this.loginFormGroup.value.passwordControl).subscribe(
       (data) => {
-        console.log(data);
         this.router.navigate(['/home']).then();
       },
       (error) => {
