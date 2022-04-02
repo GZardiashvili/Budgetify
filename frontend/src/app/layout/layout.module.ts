@@ -8,6 +8,7 @@ import {LayoutComponent} from './layout.component';
 import {LayoutRoutingModule} from "./layout-routing.module";
 import {SharedModule} from "../shared/shared.module";
 import {MatMenuModule} from "@angular/material/menu";
+import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import {MatMenuModule} from "@angular/material/menu";
     SharedModule,
     LayoutRoutingModule,
     MatMenuModule,
+    FontAwesomeModule,
   ]
 })
 export class LayoutModule {

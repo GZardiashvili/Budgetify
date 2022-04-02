@@ -1,35 +1,44 @@
 import {IMenuItem} from "./imenu-item";
+import {
+  faCalendarCheck,
+  faChartArea,
+  faChartColumn,
+  faEllipsis,
+  faHome, faMoneyBill,
+  faPlay,
+  faTag
+} from '@fortawesome/free-solid-svg-icons';
 
 export const MENU_CONFIG: IMenuItem[] = [
   {
     id: 'home',
     title: 'Home',
-    icon: 'house-window',
+    icon: faHome,
     route: '/home',
     permission: 'user'
   },
   {
     id: 'categories',
-    title: 'Categories',
-    icon: 'categories',
+    title: 'categories',
+    icon: faTag,
     route: '/categories',
     permission: 'user'
   }, {
     id: 'subscriptions',
     title: 'Subscriptions',
-    icon: 'subscriptions',
+    icon: faCalendarCheck,
     route: '/subscriptions',
     permission: 'user'
   }, {
     id: 'obligatory',
     title: 'Obligatory',
-    icon: 'Obligatory',
+    icon: faMoneyBill,
     route: '/obligatory',
     permission: 'user'
   }, {
     id: 'statistics',
     title: 'Statistics',
-    icon: 'statistics',
+    icon: faChartColumn,
     route: '/statistics',
     permission: 'user'
   },

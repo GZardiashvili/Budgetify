@@ -1,6 +1,10 @@
 import {Component, OnInit} from '@angular/core';
+import {
+  faEllipsis,
+} from '@fortawesome/free-solid-svg-icons';
 import {IMenuItem} from "./imenu-item";
 import {MENU_CONFIG} from "./menu.config";
+
 
 @Component({
   selector: 'app-sidebar',
@@ -36,6 +40,8 @@ export class SidebarComponent implements OnInit {
       link: 'view-account'
     }
   ]
+
+  faDetails = faEllipsis
 
   constructor() {
   }
