@@ -17,12 +17,14 @@ export class AuthService {
     return this.http.post(`${environment.apiUrl}login`, {email, password}).pipe(
       tap((res: any) => {
         localStorage.setItem('token', res['token']);
+        localStorage.setItem('role', res['role']);
       })
     );
   }
 
   logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('role');
   }
 
   isAuthenticated() {

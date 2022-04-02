@@ -7,6 +7,8 @@ import {SharedModule} from "./shared/shared.module";
 import {MatIconModule} from "@angular/material/icon";
 import {LayoutModule} from "./layout/layout.module";
 import {AuthModule} from "./auth/auth.module";
+import {HTTP_INTERCEPTORS} from "@angular/common/http";
+import {AuthInterceptor} from "./auth/interceptors/auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -21,7 +23,13 @@ import {AuthModule} from "./auth/auth.module";
     LayoutModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

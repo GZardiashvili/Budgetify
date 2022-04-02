@@ -15,13 +15,22 @@
       </li>
     </ul>
   </nav>
-
-  <button class="btn-list" mat-button [matMenuTriggerFor]="account">Accounts
+  <button class="btn-list" mat-button [matMenuTriggerFor]="account">
+    <fa-icon [icon]="faAccounts"></fa-icon>
+    Accounts
     <fa-icon [icon]="faDetails"></fa-icon>
   </button>
   <mat-menu #account="matMenu">
-    <ng-container *ngFor="let account of accounts">
-      <button class="btn-list--item" mat-menu-item>{{account.name}}</button>
+
+    <ng-container *ngFor="let account of accounts | async">
+      <button class="btn-list--item" mat-menu-item [routerLink]=" 'accounts/' + account.id">
+        <span>{{account.title}}</span>
+        <span>${{account.availableAmount}}</span>
+      </button>
     </ng-container>
+    <button class="btn-list--item" mat-menu-item>
+      <fa-icon [icon]="faAdd"></fa-icon>
+      Add account
+    </button>
   </mat-menu>
 </div>

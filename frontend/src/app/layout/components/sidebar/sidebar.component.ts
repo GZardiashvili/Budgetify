@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
 import {
+  faBoxesStacked, faCirclePlus,
   faEllipsis,
 } from '@fortawesome/free-solid-svg-icons';
 import {IMenuItem} from "./imenu-item";
 import {MENU_CONFIG} from "./menu.config";
+import {AccountService} from "./accounts/account.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -13,37 +16,14 @@ import {MENU_CONFIG} from "./menu.config";
 })
 export class SidebarComponent implements OnInit {
   menu: IMenuItem[] = MENU_CONFIG;
-  accounts = [
-    {
-      name: 'Accounts',
-      icon: 'fa fa-user-circle-o',
-      link: 'accounts'
-    },
-    {
-      name: 'Add Account',
-      icon: 'fa fa-user-plus',
-      link: 'add-account'
-    },
-    {
-      name: 'Edit Account',
-      icon: 'fa fa-user-edit',
-      link: 'edit-account'
-    },
-    {
-      name: 'Delete Account',
-      icon: 'fa fa-user-times',
-      link: 'delete-account'
-    },
-    {
-      name: 'View Account',
-      icon: 'fa fa-user-circle-o',
-      link: 'view-account'
-    }
-  ]
+  accounts: any = this.accountService.getAccounts()
 
   faDetails = faEllipsis
+  faAccounts = faBoxesStacked
+  faAdd = faCirclePlus
 
-  constructor() {
+  constructor(private accountService: AccountService) {
+
   }
 
   trackBy(index: number, item: IMenuItem): string {
@@ -52,6 +32,7 @@ export class SidebarComponent implements OnInit {
 
 
   ngOnInit(): void {
+
   }
 
 }
