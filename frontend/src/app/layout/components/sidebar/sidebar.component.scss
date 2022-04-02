@@ -1,1 +1,87 @@
+@use "../../../shared/styles/palette.scss" as var_1;
+
+.container {
+  height: 95vh;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+
+
+  .menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-start;
+
+    .logo {
+      padding: 9px 12px;
+      cursor: pointer;
+
+      a {
+        img {
+          width: 50px;
+          ratio: 1;
+          opacity: 0.8;
+
+          &:hover {
+            opacity: 1;
+            box-shadow: -7px -5px 10px 0px var_1.$logo-red, 7px -5px 10px 0px var_1.$logo-orange, 0px 8px 10px 0px var_1.$logo-green;
+            border-radius: 50%;
+          }
+        }
+      }
+
+    }
+
+    &__list {
+      display: flex;
+      flex-direction: column;
+      list-style: none;
+
+      &-icon {
+
+      }
+
+      &-item {
+
+        a {
+          color: var_1.$btn-menu;
+          display: flex;
+          gap: 1rem;
+          text-decoration: none;
+          font-size: 1.35rem;
+          border-radius: 30px;
+          padding: 1rem 1.5rem;
+          width: fit-content;
+
+          &:hover {
+            background-color: var_1.$btn-menu-hover;
+          }
+
+          &:active {
+            color: var_1.$btn-menu;
+          }
+        }
+      }
+    }
+  }
+
+  .btn-list {
+    color: var_1.$btn-menu;
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;
+    font-size: 1.1rem;
+    border-radius: 30px;
+    padding: 0.5rem 2rem;
+    width: fit-content;
+
+    &:hover {
+      background-color: var_1.$btn-menu-hover;
+    }
+  }
+
+}
 

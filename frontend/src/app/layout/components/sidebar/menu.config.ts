@@ -4,7 +4,7 @@ export const MENU_CONFIG: IMenuItem[] = [
   {
     id: 'home',
     title: 'Home',
-    icon: 'home',
+    icon: 'house-window',
     route: '/home',
     permission: 'user'
   },

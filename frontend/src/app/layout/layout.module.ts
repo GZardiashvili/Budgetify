@@ -7,6 +7,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {LayoutComponent} from './layout.component';
 import {LayoutRoutingModule} from "./layout-routing.module";
 import {SharedModule} from "../shared/shared.module";
+import {MatMenuModule} from "@angular/material/menu";
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import {SharedModule} from "../shared/shared.module";
     MatIconModule,
     SharedModule,
     LayoutRoutingModule,
+    MatMenuModule,
   ]
 })
 export class LayoutModule {

@@ -1,10 +1,27 @@
-<nav class="menu">
-  <ul class="menu__list">
-    <li *ngFor="let menuItem of menu; let i = index; trackBy:trackBy" class="menu__list-item">
-      <a [routerLink]="menuItem.route">
-        <span>{{menuItem.title}}</span>
+<div class="container">
+
+  <nav class="menu">
+    <div class="logo">
+      <a>
+        <img src="./assets/sm-logo.png" alt="logo">
       </a>
-    </li>
-  </ul>
-</nav>
+    </div>
+    <ul class="menu__list">
+      <li *ngFor="let menuItem of menu; let i = index; trackBy:trackBy" class="menu__list-item">
+        <a [routerLink]="menuItem.route">
+          <span class="menu__list-icon">*</span>
+          <span>{{menuItem.title}}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <button class="btn-list" mat-button [matMenuTriggerFor]="account">Accounts</button>
+  <mat-menu #account="matMenu">
+    <ng-container *ngFor="let account of accounts">
+      <button class="btn-list--item" mat-menu-item>{{account.name}}</button>
+    </ng-container>
+  </mat-menu>
+</div>
+
 

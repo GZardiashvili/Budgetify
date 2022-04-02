@@ -9,6 +9,33 @@ import {MENU_CONFIG} from "./menu.config";
 })
 export class SidebarComponent implements OnInit {
   menu: IMenuItem[] = MENU_CONFIG;
+  accounts = [
+    {
+      name: 'Accounts',
+      icon: 'fa fa-user-circle-o',
+      link: 'accounts'
+    },
+    {
+      name: 'Add Account',
+      icon: 'fa fa-user-plus',
+      link: 'add-account'
+    },
+    {
+      name: 'Edit Account',
+      icon: 'fa fa-user-edit',
+      link: 'edit-account'
+    },
+    {
+      name: 'Delete Account',
+      icon: 'fa fa-user-times',
+      link: 'delete-account'
+    },
+    {
+      name: 'View Account',
+      icon: 'fa fa-user-circle-o',
+      link: 'view-account'
+    }
+  ]
 
   constructor() {
   }

@@ -7,7 +7,6 @@ import {MatButtonModule} from "@angular/material/button";
 import {HttpClientModule} from "@angular/common/http";
 import {RegisterComponent} from "../register/register.component";
 import {RouterModule} from "@angular/router";
-import {LayoutModule} from "../layout/layout.module";
 import {NotFoundComponent} from "../not-found/not-found.component";
 
 @NgModule({
@@ -29,7 +28,6 @@ import {NotFoundComponent} from "../not-found/not-found.component";
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
-
   ]
 })
 export class SharedModule {

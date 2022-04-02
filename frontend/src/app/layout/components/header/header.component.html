@@ -1,3 +1,10 @@
-<div class="mat-raised-button" (click)="logout()" role="button">logout</div>
-
-
+<div class="app-header">
+  <div class="app-header__profile">
+    <button class="btn-list" mat-button [matMenuTriggerFor]="userAcc">{{profile.name}}</button>
+    <mat-menu #userAcc="matMenu">
+      <button class="btn-list--item" mat-menu-item>{{profile.account.label}}</button>
+      <button class="btn-list--item" mat-menu-item>{{profile.display.label}}</button>
+      <button class="btn-list--item" mat-menu-item (click)="logout()">{{profile.logout}}</button>
+    </mat-menu>
+  </div>
+</div>

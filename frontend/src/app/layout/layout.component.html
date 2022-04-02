@@ -1,6 +1,8 @@
-<ng-container>
-  <app-header></app-header>
-  <app-sidebar></app-sidebar>
-  <router-outlet></router-outlet>
-</ng-container>
+<div class="layout">
+  <app-header class="layout__header"></app-header>
+  <app-sidebar class="layout__sidebar"></app-sidebar>
+  <div class="layout__outlet">
+    <router-outlet></router-outlet>
+  </div>
+</div>
 

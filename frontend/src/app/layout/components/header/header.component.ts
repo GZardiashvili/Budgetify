@@ -8,9 +8,20 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
-  @Input() isLoggedIn!: boolean;
-  @Output() menuButtonClicked: EventEmitter<void> = new EventEmitter<void>();
-  @Output() loggedOutClicked: EventEmitter<void> = new EventEmitter<void>();
+  profile: any = {
+    name: 'Giorgi Zardiashvili',
+    pfpUrl: '',
+    account: {
+      label: 'Account settings',
+      url: '',
+    },
+    display: {
+      label: 'Display settings',
+      url: '',
+    },
+    logout: 'Log out',
+  }
+
 
   constructor(private authService: AuthService, private router: Router) {
   }

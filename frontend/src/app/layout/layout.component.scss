@@ -1,0 +1,22 @@
+.layout {
+  width: 80%;
+  display: grid;
+  grid-template-columns:auto 1fr auto;
+  grid-template-rows: 64px 1fr;
+  grid-template-areas:
+    "sidebar header header"
+    "sidebar content right-sidebar";
+  margin: 0 auto;
+
+  &__header {
+    grid-area: header;
+  }
+
+  &__sidebar {
+    grid-area: sidebar;
+  }
+
+  &__outlet {
+    grid-area: content;
+  }
+}
