@@ -14,7 +14,11 @@ export class AccountService {
     return this.http.get(`${environment.apiUrl}accounts`);
   }
 
-  getAccountById(id: number) {
+  getAccountById(id: string) {
     return this.http.get(`${environment.apiUrl}accounts/${id}`);
+  }
+
+  addAccount(account: any) {
+    return this.http.post(`${environment.apiUrl}accounts`, account);
   }
 }

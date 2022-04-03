@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ObligatoryService} from "./services/obligatory.service";
 
 @Component({
   selector: 'app-obligatory',
@@ -6,8 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./obligatory.component.scss']
 })
 export class ObligatoryComponent implements OnInit {
+  obligates: any = this.obligatoryService.getObligates();
 
-  constructor() { }
+  constructor(private obligatoryService: ObligatoryService) {
+  }
+
 
   ngOnInit(): void {
   }

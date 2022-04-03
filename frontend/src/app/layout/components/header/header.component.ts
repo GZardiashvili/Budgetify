@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component} from '@angular/core';
 import {AuthService} from "../../../auth/services/auth.service";
 import {Router} from "@angular/router";
+import {UserService} from "./services/user/user.service";
 
 @Component({
   selector: 'app-header',
@@ -8,8 +9,10 @@ import {Router} from "@angular/router";
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  user: any;
+
   profile: any = {
-    name: 'Giorgi Zardiashvili',
+    name: '',
     pfpUrl: '',
     account: {
       label: 'Account settings',
@@ -23,7 +26,14 @@ export class HeaderComponent {
   }
 
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private router: Router, private authService: AuthService, private userService: UserService) {
+    this.userService.getUserProfile().subscribe(user => {
+      this.user = user
+      this.profile.name = this.user.firstName + ' ' + this.user.lastName
+      this.profile.pfpUrl = this.user.pfpUrl == '' ? this.user.pfpUrl : '../../assets/default-pfp.png'
+      this.profile.account.url = '/account'
+      this.profile.display.url = '/display'
+    })
   }
 
 

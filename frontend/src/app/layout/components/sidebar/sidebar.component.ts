@@ -30,6 +30,9 @@ export class SidebarComponent implements OnInit {
     return item.id;
   }
 
+  addAccount(account: any) {
+    this.accountService.addAccount(account)
+  }
 
   ngOnInit(): void {
 

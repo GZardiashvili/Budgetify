@@ -18,6 +18,7 @@ export class AuthService {
       tap((res: any) => {
         localStorage.setItem('token', res['token']);
         localStorage.setItem('role', res['role']);
+        localStorage.setItem('userId', res['id']);
       })
     );
   }
@@ -25,6 +26,8 @@ export class AuthService {
   logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('role');
+    localStorage.removeItem('userId');
+
   }
 
   isAuthenticated() {

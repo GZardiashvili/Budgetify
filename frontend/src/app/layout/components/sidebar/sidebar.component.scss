@@ -23,12 +23,12 @@
         img {
           width: 50px;
           ratio: 1;
-          opacity: 0.8;
+
 
           &:hover {
-            opacity: 1;
             box-shadow: -7px -5px 10px 0px var_1.$logo-red, 7px -5px 10px 0px var_1.$logo-orange, 0px 8px 10px 0px var_1.$logo-green;
             border-radius: 50%;
+
           }
         }
       }
@@ -47,17 +47,18 @@
       &-item {
 
         a {
-          color: var_1.$btn-menu;
           display: flex;
+          color: var_1.$btn-menu;
           gap: 1rem;
           text-decoration: none;
           font-size: 1.35rem;
-          border-radius: 30px;
+          border-radius: 15px;
           padding: 1rem 1.5rem;
           width: fit-content;
 
           &:hover {
-            background-color: var_1.$btn-menu-hover;
+            //background-color: var_1.$btn-menu-hover;
+            box-shadow: 0 5px 22px 0 rgba(31, 38, 135, 0.1);
           }
 
           &:active {
@@ -69,19 +70,20 @@
   }
 
   .btn-list {
-    color: var_1.$btn-menu;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.25);
+    background-color: var_1.$base-color;
+    color: var_1.$bg-color;
     display: flex;
     gap: 1rem;
     text-decoration: none;
     font-size: 1.1rem;
-    border-radius: 30px;
+    border-radius: 15px;
     padding: 0.5rem 2rem;
     width: fit-content;
 
     &:hover {
-      background-color: var_1.$btn-menu-hover;
+      box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
     }
   }
-
 }
 
