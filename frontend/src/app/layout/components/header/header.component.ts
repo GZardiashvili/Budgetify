@@ -1,14 +1,15 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from "@angular/core";
 import {AuthService} from "../../../auth/services/auth.service";
 import {Router} from "@angular/router";
 import {UserService} from "./services/user/user.service";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnDestroy {
   user: any;
 
   profile: any = {
@@ -25,7 +26,6 @@ export class HeaderComponent {
     logout: 'Log out',
   }
 
-
   constructor(private router: Router, private authService: AuthService, private userService: UserService) {
     this.userService.getUserProfile().subscribe(user => {
       this.user = user
@@ -36,9 +36,12 @@ export class HeaderComponent {
     })
   }
 
+  ngOnDestroy() {
+    this.user.unsubscribe()
+  }
 
   logout() {
     this.authService.logout();
-    this.router.navigate(['/login']).then();
+    this.router.navigate(['/login']);
   }
 }

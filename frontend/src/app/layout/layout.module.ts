@@ -13,10 +13,7 @@ import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 
 @NgModule({
   declarations: [HeaderComponent, SidebarComponent, LayoutComponent],
-  exports: [
-    SidebarComponent,
-    HeaderComponent
-  ],
+  exports: [],
   imports: [
     CommonModule,
     RouterModule,

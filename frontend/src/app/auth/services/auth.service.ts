@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {tap} from "rxjs/operators";
@@ -8,9 +8,7 @@ import {tap} from "rxjs/operators";
   providedIn: 'root'
 })
 export class AuthService {
-
   constructor(private http: HttpClient) {
-
   }
 
   login(email: string, password: string) {

@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component} from "@angular/core";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
@@ -18,7 +18,7 @@ export class LoginComponent {
 
   constructor(private authService: AuthService, private router: Router) {
     if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/']).then();
+      this.router.navigate(['/']);
     }
   }
 
@@ -26,7 +26,7 @@ export class LoginComponent {
   login() {
     this.authService.login(this.loginFormGroup.value.emailControl, this.loginFormGroup.value.passwordControl).subscribe(
       (data) => {
-        this.router.navigate(['/home']).then();
+        this.router.navigate(['/home']);
       },
       (error) => {
         console.log(error);

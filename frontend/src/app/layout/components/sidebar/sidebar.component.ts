@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit {
   }
 
   getAccountId(id: string) {
-    // this.accountService.id = id
+
   }
 
   ngOnInit(): void {

@@ -2,26 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/categories/category.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/services/transaction.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/services/transaction.service.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/obligatoryPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/obligatoryPayment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/models/transaction.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/transaction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/main-page.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/login/login.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/auth/services/auth.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/auth/services/auth.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/styles/palette.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/styles/palette.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +25,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="frontend" />
+        <entry key="$PROJECT_DIR$" value="temp-acc-filter" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -63,7 +50,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../icons" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="settings.javascript.prettier" />
     <property name="ts.external.directory.path" value="C:\Users\GZard\Desktop\Budgetify\frontend\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>

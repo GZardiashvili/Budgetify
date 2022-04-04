@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
-import {map} from "rxjs/operators";
 import {ActivatedRoute} from "@angular/router";
 
 @Injectable({
@@ -29,11 +28,4 @@ export class AccountService {
     return this.http.post(`${environment.apiUrl}accounts`, account);
   }
 
-  getAccountId() {
-    // let accId;
-    // this.id.subscribe(id => {
-    //   accId = id;
-    // });
-    // return accId;
-  }
 }
