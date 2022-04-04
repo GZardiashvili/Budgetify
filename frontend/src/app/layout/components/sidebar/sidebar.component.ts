@@ -6,7 +6,6 @@ import {
 import {IMenuItem} from "./imenu-item";
 import {MENU_CONFIG} from "./menu.config";
 import {AccountService} from "./accounts/account.service";
-import {Observable} from "rxjs";
 
 
 @Component({
@@ -23,7 +22,6 @@ export class SidebarComponent implements OnInit {
   faAdd = faCirclePlus
 
   constructor(private accountService: AccountService) {
-
   }
 
   trackBy(index: number, item: IMenuItem): string {
@@ -32,6 +30,10 @@ export class SidebarComponent implements OnInit {
 
   addAccount(account: any) {
     this.accountService.addAccount(account)
+  }
+
+  getAccountId(id: string) {
+    // this.accountService.id = id
   }
 
   ngOnInit(): void {

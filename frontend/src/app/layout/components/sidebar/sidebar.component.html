@@ -22,7 +22,7 @@
   <mat-menu #account="matMenu">
 
     <ng-container *ngFor="let account of accounts | async">
-      <button class="btn-list--item" mat-menu-item [routerLink]=" 'accounts/' + account.id">
+      <button class="btn-list--item" mat-menu-item (click)="getAccountId(account.id)">
         <span>{{account.title}}</span>
         <span>${{account.availableAmount}}</span>
       </button>

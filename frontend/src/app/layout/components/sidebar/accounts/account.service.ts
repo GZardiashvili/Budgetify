@@ -1,16 +1,23 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
+import {Observable} from "rxjs";
+import {map} from "rxjs/operators";
+import {ActivatedRoute} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-
-  constructor(private http: HttpClient) {
+  get id(): any {
+    console.log(this.route.snapshot.paramMap.get('id'));
+    return this.route.snapshot.paramMap.get('id');
   }
 
-  getAccounts() {
+  constructor(private http: HttpClient, private route: ActivatedRoute) {
+  }
+
+  getAccounts(): Observable<any> {
     return this.http.get(`${environment.apiUrl}accounts`);
   }
 
@@ -20,5 +27,13 @@ export class AccountService {
 
   addAccount(account: any) {
     return this.http.post(`${environment.apiUrl}accounts`, account);
+  }
+
+  getAccountId() {
+    // let accId;
+    // this.id.subscribe(id => {
+    //   accId = id;
+    // });
+    // return accId;
   }
 }

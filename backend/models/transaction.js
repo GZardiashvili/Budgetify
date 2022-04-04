@@ -1,25 +1,25 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-  type: String,
-  accountId: String,
-  title: { type: String, required: true },
-  description: String,
-  dateOfOperation: Date,
-  category: String,
-  currency: String,
-  amount: Number,
-  linkToFile: String,
-  dateOfCreation: Date,
-  dateOfUpdate: Date,
+    type: String,
+    accountId: String,
+    title: {type: String, required: true},
+    description: {type: String, required: true},
+    dateOfOperation: Date,
+    category: {type: String, required: true},
+    currency: String,
+    amount: {type: Number, required: true},
+    linkToFile: String,
+    dateOfCreation: Date,
+    dateOfUpdate: Date,
 });
 
 transactionSchema.set('toJSON', {
-  transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
-  },
+    transform: (document, returnedObject) => {
+        returnedObject.id = returnedObject._id.toString();
+        delete returnedObject._id;
+        delete returnedObject.__v;
+    },
 });
 
 module.exports = mongoose.model('Transaction', transactionSchema);
