@@ -12,7 +12,7 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    return this.http.post(`${environment.apiUrl}login`, {email, password}).pipe(
+    return this.http.post(new URL('login', environment.apiUrl).toString(), {email, password}).pipe(
       tap((res: any) => {
         localStorage.setItem('token', res['token']);
         localStorage.setItem('role', res['role']);

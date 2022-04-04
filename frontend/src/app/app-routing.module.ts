@@ -5,21 +5,25 @@ import {AuthGuard} from "./auth/guards/auth.guard";
 import {RegisterComponent} from "./register/register.component";
 import {LayoutComponent} from "./layout/layout.component";
 
-const routes: Routes = [{
-  path: 'login',
-  component: LoginComponent,
-}, {
-  path: 'register',
-  component: RegisterComponent,
-}, {
-  path: '',
-  component: LayoutComponent,
-  loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
-  canActivate: [AuthGuard],
-}, {
-  path: '**',
-  redirectTo: '',
-}
+const routes: Routes = [
+  {
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
+  },
+  {
+    path: '',
+    component: LayoutComponent,
+    loadChildren: () => import('./layout/layout.module').then(m => m.LayoutModule),
+    canActivate: [AuthGuard],
+  },
+  {
+    path: '**',
+    redirectTo: '',
+  }
 ];
 
 @NgModule({
