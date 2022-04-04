@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {
   faBoxesStacked, faCirclePlus,
   faEllipsis,
@@ -6,6 +6,8 @@ import {
 import {IMenuItem} from "./imenu-item";
 import {MENU_CONFIG} from "./menu.config";
 import {AccountService} from "./accounts/account.service";
+import {Observable} from "rxjs";
+import {Account} from "./accounts/account";
 
 
 @Component({
@@ -15,7 +17,7 @@ import {AccountService} from "./accounts/account.service";
 })
 export class SidebarComponent implements OnInit {
   menu: IMenuItem[] = MENU_CONFIG;
-  accounts: any = this.accountService.getAccounts()
+  accounts: Observable<Account[]> = this.accountService.getAccounts()
 
   faDetails = faEllipsis
   faAccounts = faBoxesStacked
@@ -28,7 +30,7 @@ export class SidebarComponent implements OnInit {
     return item.id;
   }
 
-  addAccount(account: any) {
+  addAccount(account: Account) {
     this.accountService.addAccount(account)
   }
 

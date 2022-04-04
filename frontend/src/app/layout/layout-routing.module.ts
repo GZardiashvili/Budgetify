@@ -17,7 +17,6 @@ const routes: Routes = [{
   {
     path: 'subscriptions',
     loadChildren: () => import('../features/subscriptions/subscriptions.module').then(m => m.SubscriptionsModule),
-    canActivate: [AuthGuard],
   },
   {
     path: 'obligatory',

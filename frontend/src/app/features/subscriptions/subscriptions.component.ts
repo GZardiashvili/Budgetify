@@ -1,5 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {SubscriptionService} from "./services/subscription.service";
+import {Observable} from "rxjs";
+import {Subscriptions} from "./subscriptions";
 
 @Component({
   selector: 'app-subscriptions',
@@ -7,7 +9,7 @@ import {SubscriptionService} from "./services/subscription.service";
   styleUrls: ['./subscriptions.component.scss']
 })
 export class SubscriptionsComponent implements OnInit {
-  subscriptions: any = this.subscriptionService.getSubscriptions()
+  subscriptions: Observable<Subscriptions[]> = this.subscriptionService.getSubscriptions()
 
   constructor(private subscriptionService: SubscriptionService) {
   }

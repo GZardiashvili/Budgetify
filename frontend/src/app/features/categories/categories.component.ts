@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit} from "@angular/core";
 import {CategoryService} from "./services/category.service";
+import {Category} from "./category";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-categories',
@@ -7,7 +9,7 @@ import {CategoryService} from "./services/category.service";
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-  categories: any = this.categoryService.getCategories()
+  categories: Observable<Category[]> = this.categoryService.getCategories()
 
   constructor(private categoryService: CategoryService) {
   }

@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
+import {Obligatory} from "../obligatory";
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,6 @@ export class ObligatoryService {
   }
 
   getObligates() {
-    return this.http.get(`${environment.apiUrl}obligatoryPayments`);
+    return this.http.get<Obligatory[]>(`${environment.apiUrl}obligatoryPayments`);
   }
 }

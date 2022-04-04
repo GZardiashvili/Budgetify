@@ -3,29 +3,29 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../../environments/environment";
 import {Observable} from "rxjs";
 import {ActivatedRoute} from "@angular/router";
+import {Account} from "./account";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AccountService {
-  get id(): any {
-    console.log(this.route.snapshot.paramMap.get('id'));
+  get id(): string | null {
     return this.route.snapshot.paramMap.get('id');
   }
 
   constructor(private http: HttpClient, private route: ActivatedRoute) {
   }
 
-  getAccounts(): Observable<any> {
-    return this.http.get(`${environment.apiUrl}accounts`);
+  getAccounts(): Observable<Account[]> {
+    return this.http.get<Account[]>(`${environment.apiUrl}accounts`);
   }
 
   getAccountById(id: string) {
-    return this.http.get(`${environment.apiUrl}accounts/${id}`);
+    return this.http.get<Account>(`${environment.apiUrl}accounts/${id}`);
   }
 
-  addAccount(account: any) {
-    return this.http.post(`${environment.apiUrl}accounts`, account);
+  addAccount(account: Account): Observable<Account> {
+    return this.http.post<Account>(`${environment.apiUrl}accounts`, account);
   }
 
 }
