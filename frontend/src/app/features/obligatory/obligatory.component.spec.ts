@@ -8,9 +8,8 @@ describe('ObligatoryComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ObligatoryComponent ]
-    })
-    .compileComponents();
+      declarations: [ObligatoryComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

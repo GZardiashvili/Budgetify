@@ -1,12 +1,10 @@
-import {IMenuItem} from "./imenu-item";
+import { IMenuItem } from './imenu-item';
 import {
   faCalendarCheck,
-  faChartArea,
   faChartColumn,
-  faEllipsis,
-  faHome, faMoneyBill,
-  faPlay,
-  faTag
+  faHome,
+  faMoneyBill,
+  faTag,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const MENU_CONFIG: IMenuItem[] = [
@@ -15,32 +13,34 @@ export const MENU_CONFIG: IMenuItem[] = [
     title: 'Home',
     icon: faHome,
     route: '/home',
-    permission: 'user'
+    permission: 'user',
   },
   {
     id: 'categories',
     title: 'categories',
     icon: faTag,
     route: '/categories',
-    permission: 'user'
-  }, {
+    permission: 'user',
+  },
+  {
     id: 'subscriptions',
     title: 'Subscriptions',
     icon: faCalendarCheck,
     route: '/subscriptions',
-    permission: 'user'
-  }, {
+    permission: 'user',
+  },
+  {
     id: 'obligatory',
     title: 'Obligatory',
     icon: faMoneyBill,
     route: '/obligatory',
-    permission: 'user'
-  }, {
+    permission: 'user',
+  },
+  {
     id: 'statistics',
     title: 'Statistics',
     icon: faChartColumn,
     route: '/statistics',
-    permission: 'user'
+    permission: 'user',
   },
 ];
-

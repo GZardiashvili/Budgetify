@@ -1,7 +1,7 @@
 .layout {
   width: 80%;
   display: grid;
-  grid-template-columns:auto 1fr auto;
+  grid-template-columns: auto 1fr auto;
   grid-template-rows: 64px 1fr;
   grid-template-areas:
     "sidebar header header"

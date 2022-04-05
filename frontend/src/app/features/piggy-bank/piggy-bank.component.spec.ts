@@ -8,9 +8,8 @@ describe('PiggyBankComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PiggyBankComponent ]
-    })
-    .compileComponents();
+      declarations: [PiggyBankComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

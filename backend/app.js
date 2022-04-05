@@ -3,8 +3,8 @@ require('dotenv').config();
 const cors = require('cors');
 const passport = require('passport');
 
-const {jwtCallback} = require('./auth/passport');
-const {adminGuard} = require('./guards/adminGuard');
+const { jwtCallback } = require('./auth/passport');
+const { adminGuard } = require('./guards/adminGuard');
 
 const accountRouter = require('./controllers/accounts');
 const categoryRouter = require('./controllers/categories');
@@ -23,17 +23,17 @@ const app = express();
 
 app.use(express.json());
 app.use(cors());
-app.use(express.urlencoded({extended: false}));
+app.use(express.urlencoded({ extended: false }));
 app.use(passport.initialize());
 
 const opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 passport.use(new JwtStrategy(opts, jwtCallback));
 
-const auth = passport.authenticate('jwt', {session: false});
+const auth = passport.authenticate('jwt', { session: false });
 
 app.use('/accounts', auth, accountRouter);
 app.use('/categories', auth, categoryRouter);
@@ -44,6 +44,5 @@ app.use('/transactions', auth, transactionRouter);
 app.use('/users', auth, adminGuard, usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
-
 
 module.exports = app;
