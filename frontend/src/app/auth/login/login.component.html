@@ -3,6 +3,7 @@
     <h1 class="app-login__header">Welcome!</h1>
     <img class="app-main__logo" src="../../assets/sm-logo.png" alt="logo">
     <form class="app-login__form" [formGroup]="loginFormGroup">
+      <p *ngIf="loginClicked">Email or Password is not correct</p>
       <mat-form-field class="app-login__form-field">
         <mat-label>Email <sup>*</sup></mat-label>
         <input matInput type="email" name="email" formControlName="emailControl">
