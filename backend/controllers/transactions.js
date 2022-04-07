@@ -3,12 +3,11 @@ const Transaction = require('../models/transaction');
 
 const router = express.Router();
 
-router.get('/:id?', (req, res) => {
+router.get('/:accountId/:id?', (req, res) => {
     if (req.params.id) {
-
         Transaction.findById(req.params.id)
             .then((transaction) => {
-                if (transaction) {
+                if (transaction && transaction.accountId === req.params.accountId) {
                     res.json(transaction);
                 } else {
                     res.status(404).end();
@@ -21,7 +20,7 @@ router.get('/:id?', (req, res) => {
         Transaction.find()
             .then((transactions) => {
                 if (transactions) {
-                    res.json(transactions);
+                    res.json(transactions.filter((transaction) => transaction.accountId === req.params.accountId));
                 } else {
                     res.status(404).end();
                 }

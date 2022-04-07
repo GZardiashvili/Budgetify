@@ -1,17 +1,17 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { environment } from '../../../../environments/environment';
-import { Obligatory } from '../obligatory';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {environment} from '../../../../environments/environment';
+import {Obligatory} from '../obligatory';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ObligatoryService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getObligates() {
+  getObligates(accountId: string) {
     return this.http.get<Obligatory[]>(
-      `${environment.apiUrl}obligatoryPayments`
-    );
+      `${environment.apiUrl}obligatoryPayments/${accountId}`);
   }
 }

@@ -1,14 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
   faBoxesStacked,
   faCirclePlus,
   faEllipsis,
 } from '@fortawesome/free-solid-svg-icons';
-import { IMenuItem } from './imenu-item';
-import { MENU_CONFIG } from './menu.config';
-import { AccountService } from './accounts/account.service';
-import { Observable } from 'rxjs';
-import { Account } from './accounts/account';
+import {IMenuItem} from './imenu-item';
+import {MENU_CONFIG} from './menu.config';
+import {AccountService} from './accounts/account.service';
+import {Observable} from 'rxjs';
+import {Account} from './accounts/account';
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-sidebar',
@@ -23,7 +24,9 @@ export class SidebarComponent implements OnInit {
   faAccounts = faBoxesStacked;
   faAdd = faCirclePlus;
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private route: ActivatedRoute, private router: Router) {
+
+  }
 
   trackBy(index: number, item: IMenuItem): string {
     return item.id;
@@ -33,7 +36,18 @@ export class SidebarComponent implements OnInit {
     this.accountService.addAccount(account);
   }
 
-  getAccountId(id: string) {}
+  setAccountId(id: string) {
+    localStorage.setItem('accountId', id);
+  }
 
-  ngOnInit(): void {}
+  get getAccountId() {
+    return localStorage.getItem('accountId');
+  }
+
+  get url() {
+    return this.router.url.split('/')[0] + '/' + this.router.url.split('/')[1];
+  }
+
+  ngOnInit(): void {
+  }
 }

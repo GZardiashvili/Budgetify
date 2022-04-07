@@ -3,12 +3,11 @@ const Subscription = require('../models/subscription');
 
 const router = express.Router();
 
-router.get('/:id?', (req, res) => {
+router.get('/:accountId/:id?', (req, res) => {
     if (req.params.id) {
-
         Subscription.findById(req.params.id)
             .then((subscription) => {
-                if (subscription) {
+                if (subscription && subscription.accountId === req.params.accountId) {
                     res.json(subscription);
                 } else {
                     res.status(404).end();
@@ -20,7 +19,9 @@ router.get('/:id?', (req, res) => {
     } else {
         Subscription.find().then((subscriptions) => {
             if (subscriptions) {
-                res.json(subscriptions);
+                res.json(subscriptions.filter((subscription) => {
+                    return subscription.accountId === req.params.accountId;
+                }));
             } else {
                 res.status(404).end();
             }

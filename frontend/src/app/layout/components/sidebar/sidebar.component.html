@@ -7,7 +7,7 @@
     </div>
     <ul class="menu__list">
       <li *ngFor="let menuItem of menu; let i = index; trackBy:trackBy" class="menu__list-item">
-        <a [routerLink]="menuItem.route">
+        <a [routerLink]="menuItem.route + '/' + getAccountId">
           <span class="menu__list-icon"><fa-icon [icon]="menuItem.icon"></fa-icon></span>
           <span>{{menuItem.title}}</span>
         </a>
@@ -22,7 +22,8 @@
   <mat-menu #account="matMenu">
 
     <ng-container *ngFor="let account of accounts | async">
-      <button class="btn-list--item" mat-menu-item (click)="getAccountId(account.id)">
+      <button class="btn-list--item" mat-menu-item (click)="setAccountId(account.id)"
+              [routerLink]="[url, account.id]">
         <span>{{account.title}}</span>
         <span>${{account.availableAmount}}</span>
       </button>
@@ -33,3 +34,4 @@
     </button>
   </mat-menu>
 </div>
+<p>{{url}}</p>

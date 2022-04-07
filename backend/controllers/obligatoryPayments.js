@@ -3,12 +3,11 @@ const ObligatoryPayment = require('../models/obligatoryPayment');
 
 const router = express.Router();
 
-router.get('/:id?', (req, res) => {
+router.get('/:accountId/:id?', (req, res) => {
     if (req.params.id) {
-
         ObligatoryPayment.findById(req.params.id)
             .then((obligatoryPayment) => {
-                if (obligatoryPayment) {
+                if (obligatoryPayment && obligatoryPayment.accountId === req.params.accountId) {
                     res.json(obligatoryPayment);
                 } else {
                     res.status(404).end();
@@ -21,7 +20,7 @@ router.get('/:id?', (req, res) => {
         ObligatoryPayment.find()
             .then((obligatoryPayments) => {
                 if (obligatoryPayments) {
-                    res.json(obligatoryPayments);
+                    res.json(obligatoryPayments.filter((obligatoryPayment) => obligatoryPayment.accountId === req.params.accountId));
                 } else {
                     res.status(404).end();
                 }
