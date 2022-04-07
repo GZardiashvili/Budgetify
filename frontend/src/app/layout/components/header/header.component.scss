@@ -1,0 +1,35 @@
+@use "../../../shared/styles/palette.scss" as var_1;
+
+.app-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+
+  &__profile {
+
+
+    .btn-list {
+
+      img {
+        height: 2.5rem;
+        ratio: 1;
+        border-radius: 50%;
+      }
+
+      color: var_1.$btn-menu;
+      display: flex;
+      gap: 1rem;
+      text-decoration: none;
+      font-size: 1rem;
+      border-radius: 10px;
+      padding: 0.25rem 1rem;
+      width: fit-content;
+
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+
+      }
+    }
+  }
+}

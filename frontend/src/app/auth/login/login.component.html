@@ -1,0 +1,21 @@
+<div class="app-main">
+  <div class="app-login">
+    <h1 class="app-login__header">Welcome!</h1>
+    <img class="app-main__logo" src="../../assets/sm-logo.png" alt="logo">
+    <form class="app-login__form" [formGroup]="loginFormGroup">
+      <p *ngIf="loginClicked">Email or Password is not correct</p>
+      <mat-form-field class="app-login__form-field">
+        <mat-label>Email <sup>*</sup></mat-label>
+        <input matInput type="email" name="email" formControlName="emailControl">
+      </mat-form-field>
+      <mat-form-field class="app-login__form-field">
+        <mat-label>Password <sup>*</sup></mat-label>
+        <input matInput type="password" name="password" formControlName="passwordControl">
+      </mat-form-field>
+    </form>
+    <button class="app-main__button-primary" mat-raised-button (click)="login()">
+      Login
+    </button>
+    <p class="app-main__register">Need an account? <a [routerLink]="'../register'">Register</a></p>
+  </div>
+</div>

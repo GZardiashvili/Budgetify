@@ -1,0 +1,6 @@
+<ng-container *ngFor="let obligatory of obligates | async">
+  <div type="button">
+    <span>{{obligatory.title}} </span>
+    <span>{{obligatory.dayOfPayment}}</span>
+  </div>
+</ng-container>

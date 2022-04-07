@@ -16,6 +16,7 @@
     "comma-dangle": "off",
     "require-jsdoc": "off",
     "new-cap": "off",
-    "max-len": "off"
+    "max-len": "off",
+    "linebreak-style": 0
   }
 }

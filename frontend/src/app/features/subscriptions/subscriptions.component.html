@@ -1,0 +1,6 @@
+<ng-container *ngFor="let subscription of subscriptions | async">
+  <div type="button">
+    <span>{{subscription.title}} </span>
+    <span>{{subscription.dayOfPayment}}</span>
+  </div>
+</ng-container>

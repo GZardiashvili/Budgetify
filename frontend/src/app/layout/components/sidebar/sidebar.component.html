@@ -1,0 +1,35 @@
+<div class="container">
+  <nav class="menu">
+    <div class="logo">
+      <a>
+        <img src="./assets/sm-logo.png" alt="logo">
+      </a>
+    </div>
+    <ul class="menu__list">
+      <li *ngFor="let menuItem of menu; let i = index; trackBy:trackBy" class="menu__list-item">
+        <a [routerLink]="menuItem.route">
+          <span class="menu__list-icon"><fa-icon [icon]="menuItem.icon"></fa-icon></span>
+          <span>{{menuItem.title}}</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  <button class="btn-list" mat-button [matMenuTriggerFor]="account">
+    <fa-icon [icon]="faAccounts"></fa-icon>
+    Accounts
+    <fa-icon [icon]="faDetails"></fa-icon>
+  </button>
+  <mat-menu #account="matMenu">
+
+    <ng-container *ngFor="let account of accounts | async">
+      <button class="btn-list--item" mat-menu-item (click)="getAccountId(account.id)">
+        <span>{{account.title}}</span>
+        <span>${{account.availableAmount}}</span>
+      </button>
+    </ng-container>
+    <button class="btn-list--item" mat-menu-item>
+      <fa-icon [icon]="faAdd"></fa-icon>
+      Add account
+    </button>
+  </mat-menu>
+</div>
