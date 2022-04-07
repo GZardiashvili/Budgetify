@@ -1,16 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from '../auth/guards/auth.guard';
 import {NotFoundComponent} from '../not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'transactions',
     pathMatch: 'full',
   },
   {
-    path: 'home/:accountId',
+    path: 'transactions/:accountId',
     loadChildren: () =>
       import('../features/main-page/main-page.module').then(
         (m) => m.MainPageModule

@@ -7,7 +7,7 @@
     </div>
     <ul class="menu__list">
       <li *ngFor="let menuItem of menu; let i = index; trackBy:trackBy" class="menu__list-item">
-        <a [routerLink]="menuItem.route + '/' + getAccountId">
+        <a [routerLink]="menuItem.route === '/categories' ? menuItem.route : menuItem.route + '/' + getAccountId">
           <span class="menu__list-icon"><fa-icon [icon]="menuItem.icon"></fa-icon></span>
           <span>{{menuItem.title}}</span>
         </a>
