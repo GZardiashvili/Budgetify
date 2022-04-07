@@ -1,10 +1,10 @@
-import {Component, OnDestroy} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {AuthService} from '../services/auth.service';
-import {Router} from '@angular/router';
-import {UtilsService} from '../../shared/utils/utils.service';
-import {Subject} from "rxjs";
-import {takeUntil} from "rxjs/operators";
+import { Component, OnDestroy } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { UtilsService } from '../../shared/utils/utils.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
@@ -17,13 +17,14 @@ export class LoginComponent implements OnDestroy {
   accountId: string = this.utilsService.getAccountId || '';
   loginFormGroup: FormGroup = new FormGroup({
     emailControl: new FormControl('', [Validators.required, Validators.email]),
-    passwordControl: new FormControl('', [
-      Validators.required,
-    ]),
+    passwordControl: new FormControl('', [Validators.required]),
   });
 
-  constructor(private authService: AuthService, private router: Router, private utilsService: UtilsService) {
-  }
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private utilsService: UtilsService
+  ) {}
 
   login() {
     if (this.loginFormGroup.invalid) {
@@ -34,7 +35,8 @@ export class LoginComponent implements OnDestroy {
         .login(
           this.loginFormGroup.value.emailControl,
           this.loginFormGroup.value.passwordControl
-        ).pipe(takeUntil(this.componentIsDestroyed$))
+        )
+        .pipe(takeUntil(this.componentIsDestroyed$))
         .subscribe(
           () => {
             this.router.navigate(['/transactions', this.accountId]);

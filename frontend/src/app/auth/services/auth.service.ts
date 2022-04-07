@@ -1,15 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {tap} from 'rxjs/operators';
-import {UtilsService} from '../../shared/utils/utils.service';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { tap } from 'rxjs/operators';
+import { UtilsService } from '../../shared/utils/utils.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient, private utilsService: UtilsService) {
-  }
+  constructor(private http: HttpClient, private utilsService: UtilsService) {}
 
   login(email: string, password: string) {
     return this.http
