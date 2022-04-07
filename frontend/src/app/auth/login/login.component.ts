@@ -1,15 +1,18 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
 import {UtilsService} from '../../shared/utils/utils.service';
+import {Subject} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnDestroy {
+  private componentIsDestroyed$ = new Subject<boolean>();
   loginClicked = false;
   accountId: string = this.utilsService.getAccountId || '';
   loginFormGroup: FormGroup = new FormGroup({
@@ -31,7 +34,7 @@ export class LoginComponent {
         .login(
           this.loginFormGroup.value.emailControl,
           this.loginFormGroup.value.passwordControl
-        )
+        ).pipe(takeUntil(this.componentIsDestroyed$))
         .subscribe(
           () => {
             this.router.navigate(['/transactions', this.accountId]);
@@ -41,6 +44,10 @@ export class LoginComponent {
           }
         );
     }
+  }
 
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
   }
 }
