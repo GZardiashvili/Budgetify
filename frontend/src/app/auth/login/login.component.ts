@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
 import {Router} from '@angular/router';
+import {UtilsService} from '../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-login',
@@ -10,6 +11,7 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent {
   loginClicked = false;
+  accountId: string | null = this.utilsService.getAccountId;
   loginFormGroup: FormGroup = new FormGroup({
     emailControl: new FormControl('', [Validators.required, Validators.email]),
     passwordControl: new FormControl('', [
@@ -17,7 +19,7 @@ export class LoginComponent {
     ]),
   });
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(private authService: AuthService, private router: Router, private utilsService: UtilsService) {
   }
 
   login() {
@@ -32,6 +34,9 @@ export class LoginComponent {
         )
         .subscribe(
           (data) => {
+            if (this.accountId) {
+              this.router.navigate(['/home', this.accountId]);
+            }
             this.router.navigate(['/home']);
           },
           (error) => {

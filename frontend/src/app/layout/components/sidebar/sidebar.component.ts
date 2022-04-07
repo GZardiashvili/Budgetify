@@ -9,7 +9,8 @@ import {MENU_CONFIG} from './menu.config';
 import {AccountService} from './accounts/account.service';
 import {Observable} from 'rxjs';
 import {Account} from './accounts/account';
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute, Router} from '@angular/router';
+import {UtilsService} from "../../../shared/utils/utils.service";
 
 @Component({
   selector: 'app-sidebar',
@@ -24,7 +25,7 @@ export class SidebarComponent implements OnInit {
   faAccounts = faBoxesStacked;
   faAdd = faCirclePlus;
 
-  constructor(private accountService: AccountService, private route: ActivatedRoute, private router: Router) {
+  constructor(private accountService: AccountService, private utilsService: UtilsService, private route: ActivatedRoute, private router: Router) {
 
   }
 
@@ -36,12 +37,12 @@ export class SidebarComponent implements OnInit {
     this.accountService.addAccount(account);
   }
 
-  setAccountId(id: string) {
-    localStorage.setItem('accountId', id);
+  get getAccountId(): string | null {
+    return this.utilsService.getAccountId;
   }
 
-  get getAccountId() {
-    return localStorage.getItem('accountId');
+  setAccountId(accountId: string) {
+    this.utilsService.setAccountId(accountId);
   }
 
   get url() {
