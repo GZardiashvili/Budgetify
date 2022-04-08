@@ -9,9 +9,10 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { PiggyBankComponent } from '../features/piggy-bank/piggy-bank.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, LayoutComponent],
+  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent],
   exports: [],
   imports: [
     CommonModule,
@@ -23,4 +24,5 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     FontAwesomeModule,
   ],
 })
-export class LayoutModule {}
+export class LayoutModule {
+}
