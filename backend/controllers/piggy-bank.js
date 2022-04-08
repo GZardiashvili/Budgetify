@@ -51,7 +51,7 @@ router.post('/create', (req, res) => {
         });
 });
 
-router.delete('/:accountId/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     PiggyBank.findByIdAndRemove(req.params.id)
         .then(() => {
             res.status(204).end();
@@ -73,8 +73,12 @@ router.put('/:accountId/:id', (req, res) => {
     }
 
     PiggyBank.findByIdAndUpdate(req.params.id, piggyBank, {new: true})
-        .then((updatedTransaction) => {
-            res.json(updatedTransaction);
+        .then((piggyBank) => {
+            if (piggyBank && piggyBank.accountId === req.params.accountId) {
+                res.json(piggyBank);
+            } else {
+                res.status(404).end();
+            }
         })
         .catch((error) => {
             console.error('The Promise is rejected!', error);
