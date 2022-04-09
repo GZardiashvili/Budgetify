@@ -11,7 +11,7 @@ export class PiggyBankService {
   constructor(private http: HttpClient) {
   }
 
-  getPiggyBank() {
-    return this.http.get<PiggyBank>(`${environment.apiUrl}piggy-bank`);
+  getPiggyBanks() {
+    return this.http.get<PiggyBank[]>(`${environment.apiUrl}piggyBanks/6248c4feb08520e2a903fc3a`);
   }
 }

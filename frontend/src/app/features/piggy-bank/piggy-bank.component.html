@@ -1,1 +1,19 @@
-<p>piggy-bank works!</p>
+<div class="container">
+  <fa-icon [icon]="faPiggyBank"></fa-icon>
+  <p>Add Piggy Bank</p>
+</div>
+
+<div class="flex">
+  <ng-container *ngFor="let piggyBank of piggyBanks | async">
+    <div class="piggy-bank">
+      <fa-icon [icon]="faPiggyBank"></fa-icon>
+      <span>{{piggyBank.title}}</span>
+      <span>{{piggyBank.savings}} / {{piggyBank.goal}}</span>
+      <mat-progress-bar mode="determinate"
+                        [value]="piggyBank.savings / piggyBank.goal * 100">
+      </mat-progress-bar>
+    </div>
+  </ng-container>
+</div>
+
+

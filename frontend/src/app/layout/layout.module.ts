@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PiggyBankComponent } from '../features/piggy-bank/piggy-bank.component';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent],
@@ -22,6 +23,7 @@ import { PiggyBankComponent } from '../features/piggy-bank/piggy-bank.component'
     LayoutRoutingModule,
     MatMenuModule,
     FontAwesomeModule,
+    MatProgressBarModule,
   ],
 })
 export class LayoutModule {
