@@ -1,8 +1,6 @@
-<ng-container *ngFor="let transaction of transactions | async">
-  <div type="button">
-    <span>{{transaction.category}} </span>
-    <span>{{transaction.title}} </span>
-    <span>{{transaction.amount}} </span>
-    <span>{{transaction.dateOfOperation | date}} </span>
-  </div>
-</ng-container>
+<div class="container">
+  <ng-container *ngFor="let transaction of transactions | async">
+    <ui-card [card]="transaction" [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
+  </ng-container>
+</div>
+

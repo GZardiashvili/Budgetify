@@ -8,10 +8,10 @@ const obligatoryPaymentSchema = new mongoose.Schema({
     currency: String,
     dayOfPayment: Date,
     frequency: String,
-    dateOfTheFirstPayment: Date,
-    dateOfTheLastPayment: Date,
-    createdOn: Date,
-    updatedOn: Date,
+    firstDayOfPayment: Date,
+    lastDayOfPayment: Date,
+    dateOfCreation: Date,
+    dateOfUpdate: Date,
 });
 
 obligatoryPaymentSchema.set('toJSON', {

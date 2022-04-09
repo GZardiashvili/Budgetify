@@ -1,13 +1,13 @@
 export interface Obligatory {
-  userId: string;
+  accountId: string;
   title: string;
   description: string;
   amount: number;
   currency: string;
-  dayOfPayment: Date;
   frequency: string;
-  dateOfTheFirstPayment: Date;
-  dateOfTheLastPayment: Date;
-  createdOn: Date;
-  updatedOn: Date;
+  dayOfPayment: Date;
+  firstDayOfPayment: Date;
+  lastDayOfPayment: Date;
+  dateOfCreation: Date;
+  dateOfUpdate: Date;
 }

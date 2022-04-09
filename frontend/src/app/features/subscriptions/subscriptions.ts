@@ -1,6 +1,7 @@
 export interface Subscriptions {
   accountId: string;
   title: string;
+  description: string;
   firstDayOfPayment: Date;
   lastDayOfPayment: Date;
   dayOfPayment: Date;

@@ -8,9 +8,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from '../register/register.component';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { CardComponent } from './card/card.component';
+import { MatCardModule } from '@angular/material/card';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
-  declarations: [RegisterComponent, NotFoundComponent],
+  declarations: [RegisterComponent, NotFoundComponent, CardComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -20,6 +23,8 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
+    MatCardModule,
+    FontAwesomeModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -28,6 +33,8 @@ import { NotFoundComponent } from '../not-found/not-found.component';
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    CardComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

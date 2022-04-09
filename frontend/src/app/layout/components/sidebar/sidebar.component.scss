@@ -57,8 +57,8 @@
           width: fit-content;
 
           &:hover {
-            //background-color: var_1.$btn-menu-hover;
-            box-shadow: 0 5px 22px 0 rgba(31, 38, 135, 0.1);
+            background-color: var_1.$btn-menu-hover;
+            //box-shadow: 0 5px 22px 0 rgba(31, 38, 135, 0.1);
           }
 
           &:active {
