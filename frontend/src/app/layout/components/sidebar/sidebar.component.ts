@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   faBoxesStacked,
   faCirclePlus,
@@ -17,7 +17,7 @@ import { UtilsService } from '../../../shared/utils/utils.service';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   menu: IMenuItem[] = MENU_CONFIG;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
 
@@ -30,7 +30,8 @@ export class SidebarComponent implements OnInit {
     private utilsService: UtilsService,
     private route: ActivatedRoute,
     private router: Router
-  ) {}
+  ) {
+  }
 
   trackBy(index: number, item: IMenuItem): string {
     return item.id;
@@ -40,17 +41,19 @@ export class SidebarComponent implements OnInit {
     this.accountService.addAccount(account);
   }
 
-  get getAccountId(): string | null {
-    return this.utilsService.getAccountId;
+  get accountId(): string | null {
+    return this.utilsService.accountId;
   }
 
   setAccountId(accountId: string) {
     this.utilsService.setAccountId(accountId);
   }
 
-  get url() {
-    return this.router.url.split('/')[0] + '/' + this.router.url.split('/')[1];
+  getBaseUrl() {
+    return this.router.url.split('/')[1];
   }
 
-  ngOnInit(): void {}
+  accountSelect() {
+    this.router.navigate([this.getBaseUrl() + '/' + this.accountId], {skipLocationChange: true});
+  }
 }

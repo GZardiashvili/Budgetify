@@ -9,6 +9,13 @@ const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'transactions',
+    loadChildren: () =>
+      import('../features/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
+  },
+  {
     path: 'transactions/:accountId',
     loadChildren: () =>
       import('../features/main-page/main-page.module').then(
@@ -23,6 +30,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'subscriptions',
+    loadChildren: () =>
+      import('../features/subscriptions/subscriptions.module').then(
+        (m) => m.SubscriptionsModule
+      ),
+  },
+  {
     path: 'subscriptions/:accountId',
     loadChildren: () =>
       import('../features/subscriptions/subscriptions.module').then(
@@ -30,10 +44,24 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'obligatory',
+    loadChildren: () =>
+      import('../features/obligatory/obligatory.module').then(
+        (m) => m.ObligatoryModule
+      ),
+  },
+  {
     path: 'obligatory/:accountId',
     loadChildren: () =>
       import('../features/obligatory/obligatory.module').then(
         (m) => m.ObligatoryModule
+      ),
+  },
+  {
+    path: 'statistics',
+    loadChildren: () =>
+      import('../features/statistics/statistics.module').then(
+        (m) => m.StatisticsModule
       ),
   },
   {
@@ -53,4 +81,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LayoutRoutingModule {}
+export class LayoutRoutingModule {
+}

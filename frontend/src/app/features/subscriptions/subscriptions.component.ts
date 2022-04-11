@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { UtilsService } from '../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-subscriptions',
@@ -15,7 +16,8 @@ export class SubscriptionsComponent implements OnInit {
 
   constructor(
     private subscriptionService: SubscriptionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -23,7 +25,7 @@ export class SubscriptionsComponent implements OnInit {
     this.subscriptions$ = this.route.paramMap
       .pipe(
         switchMap(params => {
-          const id = params.get('accountId');
+          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
           return this.subscriptionService.getSubscriptions(String(id));
         })
       );

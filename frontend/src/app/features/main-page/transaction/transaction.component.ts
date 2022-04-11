@@ -4,6 +4,7 @@ import { Transaction } from './transaction';
 import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
+import { UtilsService } from '../../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-transaction',
@@ -15,7 +16,8 @@ export class TransactionComponent implements OnInit {
 
   constructor(
     private transactionService: TransactionService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -23,7 +25,7 @@ export class TransactionComponent implements OnInit {
     this.transactions$ = this.route.paramMap
       .pipe(
         switchMap(params => {
-          const id = params.get('accountId');
+          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
           return this.transactionService.getTransactions(String(id));
         })
       );

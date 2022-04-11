@@ -1,5 +1,5 @@
-import {Component} from '@angular/core';
-import {UtilsService} from '../../shared/utils/utils.service';
+import { Component } from '@angular/core';
+import { UtilsService } from '../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-main-page',
@@ -10,8 +10,8 @@ export class MainPageComponent {
   constructor(private utilsService: UtilsService) {
   }
 
-  get getAccountId(): string | null {
-    return this.utilsService.getAccountId
+  get accountId(): string | null {
+    return this.utilsService.accountId
   }
 
 }

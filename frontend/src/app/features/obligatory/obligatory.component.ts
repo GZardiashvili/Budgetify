@@ -1,9 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ObligatoryService } from './services/obligatory.service';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
+import { UtilsService } from '../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-obligatory',
@@ -15,7 +16,8 @@ export class ObligatoryComponent implements OnInit {
 
   constructor(
     private obligatoryService: ObligatoryService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -23,7 +25,7 @@ export class ObligatoryComponent implements OnInit {
     this.obligates$ = this.route.paramMap
       .pipe(
         switchMap(params => {
-          const id = params.get('accountId');
+          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
           return this.obligatoryService.getObligates(String(id));
         })
       );

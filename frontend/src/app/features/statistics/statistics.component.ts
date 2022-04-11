@@ -4,6 +4,7 @@ import { Statistics } from './statistics';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { StatisticsService } from './services/statistics.service';
+import { UtilsService } from '../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-statistics',
@@ -15,7 +16,8 @@ export class StatisticsComponent implements OnInit {
 
   constructor(
     private statisticsService: StatisticsService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private utilsService: UtilsService
   ) {
   }
 
@@ -23,7 +25,7 @@ export class StatisticsComponent implements OnInit {
     this.statistics$ = this.route.paramMap
       .pipe(
         switchMap(params => {
-          const id = params.get('accountId');
+          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
           return this.statisticsService.getStatistics(String(id));
         })
       );

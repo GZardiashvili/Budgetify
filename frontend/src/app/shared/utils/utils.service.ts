@@ -4,13 +4,14 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class UtilsService {
-  constructor() {}
+  constructor() {
+  }
 
   setAccountId(id: string) {
     localStorage.setItem('accountId', id);
   }
 
-  get getAccountId(): string | null {
+  get accountId(): string | null {
     if (localStorage.getItem('accountId')) {
       return localStorage.getItem('accountId');
     }
