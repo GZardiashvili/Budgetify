@@ -11,6 +11,7 @@ export class PiggyBankService {
   constructor(private http: HttpClient) {
   }
 
+// must change when binding-with-account is implemented
   getPiggyBanks() {
     return this.http.get<PiggyBank[]>(`${environment.apiUrl}piggyBanks/6248c4feb08520e2a903fc3a`);
   }
