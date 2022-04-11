@@ -1,36 +1,32 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
-import { Observable, Subject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-transaction',
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss'],
 })
-export class TransactionComponent implements OnInit, OnDestroy {
-  private componentIsDestroyed$ = new Subject<boolean>();
-  transactions!: Observable<Transaction[]>;
+export class TransactionComponent implements OnInit {
+  transactions$!: Observable<Transaction[]>;
 
   constructor(
     private transactionService: TransactionService,
     private route: ActivatedRoute
-  ) {}
+  ) {
+  }
 
   ngOnInit(): void {
-    this.route.params
-      .pipe(takeUntil(this.componentIsDestroyed$))
-      .subscribe((params) => {
-        this.transactions = this.transactionService.getTransactions(
-          params.accountId
-        );
-      });
+    this.transactions$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const id = params.get('accountId');
+          return this.transactionService.getTransactions(String(id));
+        })
+      );
   }
 
-  ngOnDestroy() {
-    this.componentIsDestroyed$.next(true);
-    this.componentIsDestroyed$.complete();
-  }
 }

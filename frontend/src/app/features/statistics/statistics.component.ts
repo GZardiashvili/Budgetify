@@ -1,7 +1,7 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Statistics } from './statistics';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { StatisticsService } from './services/statistics.service';
 
@@ -10,27 +10,22 @@ import { StatisticsService } from './services/statistics.service';
   templateUrl: './statistics.component.html',
   styleUrls: ['./statistics.component.scss'],
 })
-export class StatisticsComponent implements OnInit, OnDestroy {
-  private componentIsDestroyed$ = new Subject<boolean>();
-  statistics!: Observable<Statistics>;
+export class StatisticsComponent implements OnInit {
+  statistics$!: Observable<Statistics>;
 
   constructor(
     private statisticsService: StatisticsService,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.route.params
-      .pipe(takeUntil(this.componentIsDestroyed$))
-      .subscribe((params) => {
-        this.statistics = this.statisticsService.getStatistics(
-          params.accountId
-        );
-      });
+  ) {
   }
 
-  ngOnDestroy() {
-    this.componentIsDestroyed$.next(true);
-    this.componentIsDestroyed$.complete();
+  ngOnInit(): void {
+    this.statistics$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const id = params.get('accountId');
+          return this.statisticsService.getStatistics(String(id));
+        })
+      );
   }
 }

@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
-import { UtilsService } from '../../shared/utils/utils.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -14,7 +13,6 @@ import { takeUntil } from 'rxjs/operators';
 export class LoginComponent implements OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   loginClicked = false;
-  accountId: string = this.utilsService.getAccountId || '';
   loginFormGroup: FormGroup = new FormGroup({
     emailControl: new FormControl('', [Validators.required, Validators.email]),
     passwordControl: new FormControl('', [Validators.required]),
@@ -23,8 +21,8 @@ export class LoginComponent implements OnDestroy {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private utilsService: UtilsService
-  ) {}
+  ) {
+  }
 
   login() {
     if (this.loginFormGroup.invalid) {
@@ -39,7 +37,7 @@ export class LoginComponent implements OnDestroy {
         .pipe(takeUntil(this.componentIsDestroyed$))
         .subscribe(
           () => {
-            this.router.navigate(['/transactions', this.accountId]);
+            this.router.navigate(['/']);
           },
           (error) => {
             console.log(error);

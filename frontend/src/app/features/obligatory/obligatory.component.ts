@@ -3,32 +3,29 @@ import { ObligatoryService } from './services/obligatory.service';
 import { Observable, Subject } from 'rxjs';
 import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-obligatory',
   templateUrl: './obligatory.component.html',
   styleUrls: ['./obligatory.component.scss'],
 })
-export class ObligatoryComponent implements OnInit, OnDestroy {
-  private componentIsDestroyed$ = new Subject<boolean>();
-  obligates!: Observable<Obligatory[]>;
+export class ObligatoryComponent implements OnInit {
+  obligates$!: Observable<Obligatory[]>;
 
   constructor(
     private obligatoryService: ObligatoryService,
     private route: ActivatedRoute
-  ) {}
-
-  ngOnInit(): void {
-    this.route.params
-      .pipe(takeUntil(this.componentIsDestroyed$))
-      .subscribe((params) => {
-        this.obligates = this.obligatoryService.getObligates(params.accountId);
-      });
+  ) {
   }
 
-  ngOnDestroy() {
-    this.componentIsDestroyed$.next(true);
-    this.componentIsDestroyed$.complete();
+  ngOnInit(): void {
+    this.obligates$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const id = params.get('accountId');
+          return this.obligatoryService.getObligates(String(id));
+        })
+      );
   }
 }
