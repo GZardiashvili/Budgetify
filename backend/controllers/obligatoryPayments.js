@@ -3,32 +3,28 @@ const ObligatoryPayment = require('../models/obligatoryPayment');
 
 const router = express.Router();
 
-router.get('/:accountId/:id?', (req, res) => {
-    if (req.params.id) {
-        ObligatoryPayment.findById(req.params.id)
-            .then((obligatoryPayment) => {
-                if (obligatoryPayment && obligatoryPayment.accountId === req.params.accountId) {
-                    res.json(obligatoryPayment);
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    } else {
-        ObligatoryPayment.find()
-            .then((obligatoryPayments) => {
-                if (obligatoryPayments) {
-                    res.json(obligatoryPayments.filter((obligatoryPayment) => obligatoryPayment.accountId === req.params.accountId));
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    }
+router.get('/:accountId', (req, res) => {
+    ObligatoryPayment.find({accountId: req.params.accountId}, (err, obligatoryPayments) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(obligatoryPayments);
+        }
+    }).catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
+});
+
+router.get('/:accountId/:id', (req, res) => {
+    ObligatoryPayment.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, obligatoryPayment) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(obligatoryPayment);
+        }
+    }).catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
@@ -43,7 +39,7 @@ router.post('/', (req, res) => {
         dayOfPayment: body.dayOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
-        dateOfThelastPayment: body.dateOfThelastPayment,
+        dateOfTheLastPayment: body.dateOfThelastPayment,
         createdOn: body.createdOn,
         updatedOn: body.updatedOn,
     });

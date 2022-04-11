@@ -3,36 +3,33 @@ const Statistics = require('../models/statistics');
 
 const router = express.Router();
 
-router.get('/:accountId/:id?', (req, res) => {
-  if (req.params.id) {
-    Statistics.findById(req.params.id)
-      .then((statistics) => {
-        if (statistics && statistics.accountId === req.params.accountId) {
-          res.json(statistics);
-        } else {
-          res.status(404).end();
-        }
-      })
-      .catch((error) => {
-        console.error('The Promise is rejected!', error);
-      });
-  } else {
-    Statistics.find()
-      .then((statistics) => {
+router.get('/:accountId', (req, res) => {
+    Statistics.find({
+        accountId: req.params.accountId,
+    }).then((statistics) => {
         if (statistics) {
-          res.json(
-            statistics.filter(
-              (statistics) => statistics.accountId === req.params.accountId
-            )
-          );
+            res.send(statistics);
         } else {
-          res.status(404).end();
+            res.sendStatus(404);
         }
-      })
-      .catch((error) => {
+    }).catch((error) => {
         console.error('The Promise is rejected!', error);
-      });
-  }
+    });
+});
+
+router.get('/:accountId/:id', (req, res) => {
+    Statistics.findOne({
+        _id: req.params.id,
+        accountId: req.params.accountId,
+    }).then((statistics) => {
+        if (statistics) {
+            res.send(statistics);
+        } else {
+            res.sendStatus(404);
+        }
+    }).catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;

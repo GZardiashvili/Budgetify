@@ -3,32 +3,28 @@ const Subscription = require('../models/subscription');
 
 const router = express.Router();
 
-router.get('/:accountId/:id?', (req, res) => {
-    if (req.params.id) {
-        Subscription.findById(req.params.id)
-            .then((subscription) => {
-                if (subscription && subscription.accountId === req.params.accountId) {
-                    res.json(subscription);
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    } else {
-        Subscription.find().then((subscriptions) => {
-            if (subscriptions) {
-                res.json(subscriptions.filter((subscription) => {
-                    return subscription.accountId === req.params.accountId;
-                }));
-            } else {
-                res.status(404).end();
-            }
-        }).catch((error) => {
-            console.error('The Promise is rejected!', error);
-        });
-    }
+router.get('/:accountId', (req, res) => {
+    Subscription.find({accountId: req.params.accountId}, (err, subscriptions) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(subscriptions);
+        }
+    }).catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
+});
+
+router.get('/:accountId/:id', (req, res) => {
+    Subscription.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, subscription) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(subscription);
+        }
+    }).catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
