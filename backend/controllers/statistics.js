@@ -12,7 +12,7 @@ router.get('/:accountId', (req, res) => {
         } else {
             res.sendStatus(404);
         }
-    }).catch((error) => {
+    }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });
@@ -27,7 +27,7 @@ router.get('/:accountId/:id', (req, res) => {
         } else {
             res.sendStatus(404);
         }
-    }).catch((error) => {
+    }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });

@@ -10,7 +10,7 @@ router.get('/:accountId', (req, res) => {
         } else {
             res.status(200).send(subscriptions);
         }
-    }).catch((error) => {
+    }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });
@@ -22,7 +22,7 @@ router.get('/:accountId/:id', (req, res) => {
         } else {
             res.status(200).send(subscription);
         }
-    }).catch((error) => {
+    }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });
