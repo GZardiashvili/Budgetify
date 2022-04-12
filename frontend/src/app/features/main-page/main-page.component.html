@@ -1,1 +1,7 @@
-<app-transaction></app-transaction>
+<ng-container *ngIf="accountId; else startPage">
+  <app-transaction></app-transaction>
+</ng-container>
+
+<ng-template #startPage>
+  <h1>Please add account</h1>
+</ng-template>
