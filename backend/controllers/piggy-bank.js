@@ -5,26 +5,14 @@ const router = express.Router();
 
 router.get('/:accountId', (req, res) => {
     PiggyBank.find({accountId: req.params.accountId}, (err, piggyBanks) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(piggyBanks);
-        }
-    }).catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+        res.status(200).send(piggyBanks);
+    }).clone()
 });
 
 router.get('/:accountId/:id', (req, res) => {
-    PiggyBank.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, subscription) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(piggyBank);
-        }
-    }).catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+    PiggyBank.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, piggyBank) => {
+        res.status(200).send(piggyBank);
+    }).clone()
 });
 
 router.post('/create', (req, res) => {
@@ -69,17 +57,18 @@ router.put('/:accountId/:id', (req, res) => {
         crashDate: body.crashDate,
     }
 
-    PiggyBank.findByIdAndUpdate(req.params.id, piggyBank, {new: true})
-        .then((piggyBank) => {
-            if (piggyBank && piggyBank.accountId === req.params.accountId) {
-                res.json(piggyBank);
-            } else {
-                res.status(404).end();
-            }
-        })
-        .catch((error) => {
-            console.error('The Promise is rejected!', error);
-        });
+    PiggyBank.findOneAndUpdate({
+        _id: req.params.id,
+        accountId: req.params.accountId
+    }, piggyBank, {new: true}, (err, updatedPiggyBank) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(updatedPiggyBank);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 module.exports = router;

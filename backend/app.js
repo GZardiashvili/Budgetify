@@ -17,6 +17,7 @@ const statisticsRouter = require('./controllers/statistics');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./auth/login');
 const registerRouter = require('./controllers/register');
+const errorHandler = require('./middlewares/errorHandler');
 
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
@@ -29,8 +30,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 
 const opts = {
-  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-  secretOrKey: process.env.JWT_SECRET,
+    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+    secretOrKey: process.env.JWT_SECRET,
 };
 
 passport.use(new JwtStrategy(opts, jwtCallback));
@@ -48,5 +49,6 @@ app.use('/statistics', auth, statisticsRouter);
 app.use('/users', auth, adminGuard, usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use(errorHandler);
 
 module.exports = app;
