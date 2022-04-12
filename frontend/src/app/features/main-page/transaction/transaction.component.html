@@ -1,4 +1,4 @@
-<ng-container *ngFor="let transaction of transactions | async">
+<ng-container *ngFor="let transaction of transactions$ | async">
   <div type="button">
     <span>{{transaction.category}} </span>
     <span>{{transaction.title}} </span>

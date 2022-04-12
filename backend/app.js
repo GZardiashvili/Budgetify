@@ -13,6 +13,7 @@ const obligatoryPaymentRouter = require('./controllers/obligatoryPayments');
 const subscriptionRouter = require('./controllers/subscriptions');
 const transactionRouter = require('./controllers/transactions');
 const piggyBankRouter = require('./controllers/piggy-bank');
+const statisticsRouter = require('./controllers/statistics');
 const usersRouter = require('./controllers/users');
 const loginRouter = require('./auth/login');
 const registerRouter = require('./controllers/register');
@@ -28,8 +29,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(passport.initialize());
 
 const opts = {
-    jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-    secretOrKey: process.env.JWT_SECRET,
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.JWT_SECRET,
 };
 
 passport.use(new JwtStrategy(opts, jwtCallback));
@@ -43,6 +44,7 @@ app.use('/obligatoryPayments', auth, obligatoryPaymentRouter);
 app.use('/subscriptions', auth, subscriptionRouter);
 app.use('/transactions', auth, transactionRouter);
 app.use('/piggyBanks', auth, piggyBankRouter);
+app.use('/statistics', auth, statisticsRouter);
 app.use('/users', auth, adminGuard, usersRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);

@@ -9,10 +9,6 @@ import { Account } from './account';
   providedIn: 'root',
 })
 export class AccountService {
-  get id(): string | null {
-    return this.route.snapshot.paramMap.get('id');
-  }
-
   constructor(private http: HttpClient, private route: ActivatedRoute) {}
 
   getAccounts(): Observable<Account[]> {

@@ -3,33 +3,33 @@ const Transaction = require('../models/transaction');
 
 const router = express.Router();
 
-router.get('/:id?', (req, res) => {
-    if (req.params.id) {
+router.get('/:accountId', (req, res) => {
+    Transaction.find({
+        accountId: req.params.accountId
+    }, (err, transactions) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(transactions);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
+});
 
-        Transaction.findById(req.params.id)
-            .then((transaction) => {
-                if (transaction) {
-                    res.json(transaction);
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    } else {
-        Transaction.find()
-            .then((transactions) => {
-                if (transactions) {
-                    res.json(transactions);
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    }
+router.get('/:accountId/:id', (req, res) => {
+    Transaction.findOne({
+        _id: req.params.id,
+        account: req.params.accountId
+    }, (err, transaction) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(transaction);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {

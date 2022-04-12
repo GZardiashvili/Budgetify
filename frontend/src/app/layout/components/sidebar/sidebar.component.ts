@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import {
   faBoxesStacked,
   faCirclePlus,
@@ -9,13 +9,15 @@ import { MENU_CONFIG } from './menu.config';
 import { AccountService } from './accounts/account.service';
 import { Observable } from 'rxjs';
 import { Account } from './accounts/account';
+import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from '../../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent {
   menu: IMenuItem[] = MENU_CONFIG;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
 
@@ -23,7 +25,13 @@ export class SidebarComponent implements OnInit {
   faAccounts = faBoxesStacked;
   faAdd = faCirclePlus;
 
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private utilsService: UtilsService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
 
   trackBy(index: number, item: IMenuItem): string {
     return item.id;
@@ -33,7 +41,19 @@ export class SidebarComponent implements OnInit {
     this.accountService.addAccount(account);
   }
 
-  getAccountId(id: string) {}
+  get accountId(): string | null {
+    return this.utilsService.accountId;
+  }
 
-  ngOnInit(): void {}
+  setAccountId(accountId: string) {
+    this.utilsService.setAccountId(accountId);
+  }
+
+  getBaseUrl() {
+    return this.router.url.split('/')[1];
+  }
+
+  accountSelect() {
+    this.router.navigate([this.getBaseUrl() + '/' + this.accountId], {skipLocationChange: true});
+  }
 }
