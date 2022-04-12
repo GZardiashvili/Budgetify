@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngFor="let transaction of transactions | async">
+  <ng-container *ngFor="let transaction of transactions$ | async">
     <ui-card [card]="transaction" [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
   </ng-container>
 </div>

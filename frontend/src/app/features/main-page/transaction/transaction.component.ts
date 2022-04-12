@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
+import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-transaction',
@@ -13,6 +14,8 @@ import { UtilsService } from '../../../shared/utils/utils.service';
 })
 export class TransactionComponent implements OnInit {
   transactions$!: Observable<Transaction[]>;
+  faExpense = faCircleArrowUp;
+  faIncome = faCircleArrowDown
 
   constructor(
     private transactionService: TransactionService,

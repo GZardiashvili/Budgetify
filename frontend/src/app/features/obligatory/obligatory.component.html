@@ -1,5 +1,5 @@
 <div class="container">
-  <ng-container *ngFor="let obligate of obligates | async">
+  <ng-container *ngFor="let obligate of obligates$ | async">
     <ui-card [card]="obligate"></ui-card>
   </ng-container>
 </div>
