@@ -1,11 +1,11 @@
-import {Component, OnDestroy} from '@angular/core';
-import {AuthService} from '../../../auth/services/auth.service';
-import {Router} from '@angular/router';
-import {UserService} from './services/user/user.service';
-import {Profile} from './models/profile';
-import {User} from './models/user';
-import {Observable, Subject} from 'rxjs';
-import {takeUntil} from "rxjs/operators";
+import { Component, OnDestroy } from '@angular/core';
+import { AuthService } from '../../../auth/services/auth.service';
+import { Router } from '@angular/router';
+import { UserService } from './services/user/user.service';
+import { Profile } from './models/profile';
+import { User } from './models/user';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-header',

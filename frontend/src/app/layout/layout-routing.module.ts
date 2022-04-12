@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from '../auth/guards/auth.guard';
 import { NotFoundComponent } from '../not-found/not-found.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'transactions',
     pathMatch: 'full',
   },
   {
-    path: 'home',
+    path: 'transactions',
+    loadChildren: () =>
+      import('../features/main-page/main-page.module').then(
+        (m) => m.MainPageModule
+      ),
+  },
+  {
+    path: 'transactions/:accountId',
     loadChildren: () =>
       import('../features/main-page/main-page.module').then(
         (m) => m.MainPageModule
@@ -31,6 +37,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'subscriptions/:accountId',
+    loadChildren: () =>
+      import('../features/subscriptions/subscriptions.module').then(
+        (m) => m.SubscriptionsModule
+      ),
+  },
+  {
     path: 'obligatory',
     loadChildren: () =>
       import('../features/obligatory/obligatory.module').then(
@@ -38,7 +51,21 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'obligatory/:accountId',
+    loadChildren: () =>
+      import('../features/obligatory/obligatory.module').then(
+        (m) => m.ObligatoryModule
+      ),
+  },
+  {
     path: 'statistics',
+    loadChildren: () =>
+      import('../features/statistics/statistics.module').then(
+        (m) => m.StatisticsModule
+      ),
+  },
+  {
+    path: 'statistics/:accountId',
     loadChildren: () =>
       import('../features/statistics/statistics.module').then(
         (m) => m.StatisticsModule
@@ -54,4 +81,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LayoutRoutingModule {}
+export class LayoutRoutingModule {
+}

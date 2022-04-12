@@ -1,14 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {environment} from '../../../environments/environment';
-import {tap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environments/environment';
+import { tap } from 'rxjs/operators';
+import { UtilsService } from '../../shared/utils/utils.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  constructor(private http: HttpClient) {
-  }
+  constructor(private http: HttpClient, private utilsService: UtilsService) {}
 
   login(email: string, password: string) {
     return this.http
@@ -18,24 +18,20 @@ export class AuthService {
       })
       .pipe(
         tap((res: any) => {
-          localStorage.setItem('token', res['token']);
-          localStorage.setItem('role', res['role']);
-          localStorage.setItem('userId', res['id']);
+          this.utilsService.fillStorage(res);
         })
       );
   }
 
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    localStorage.removeItem('userId');
+    return this.utilsService.clearStorage();
   }
 
   isAuthenticated() {
-    return !!localStorage.getItem('token');
+    return this.utilsService.isAuthenticated();
   }
 
   getToken() {
-    return localStorage.getItem('token');
+    return this.utilsService.getToken();
   }
 }

@@ -9,7 +9,9 @@ import { Subscriptions } from '../subscriptions';
 export class SubscriptionService {
   constructor(private http: HttpClient) {}
 
-  getSubscriptions() {
-    return this.http.get<Subscriptions[]>(`${environment.apiUrl}subscriptions`);
+  getSubscriptions(accountId: string) {
+    return this.http.get<Subscriptions[]>(
+      `${environment.apiUrl}subscriptions/${accountId}`
+    );
   }
 }

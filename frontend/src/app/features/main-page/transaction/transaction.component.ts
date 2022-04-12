@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
 import { Observable } from 'rxjs';
-import { AccountService } from '../../../layout/components/sidebar/accounts/account.service';
+import { ActivatedRoute } from '@angular/router';
+import { switchMap } from 'rxjs/operators';
+import { UtilsService } from '../../../shared/utils/utils.service';
 
 @Component({
   selector: 'app-transaction',
@@ -10,13 +12,23 @@ import { AccountService } from '../../../layout/components/sidebar/accounts/acco
   styleUrls: ['./transaction.component.scss'],
 })
 export class TransactionComponent implements OnInit {
-  transactions: Observable<Transaction[]> =
-    this.transactionService.getTransactions();
+  transactions$!: Observable<Transaction[]>;
 
   constructor(
     private transactionService: TransactionService,
-    private accountService: AccountService
-  ) {}
+    private route: ActivatedRoute,
+    private utilsService: UtilsService
+  ) {
+  }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.transactions$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+          return this.transactionService.getTransactions(String(id));
+        })
+      );
+  }
+
 }

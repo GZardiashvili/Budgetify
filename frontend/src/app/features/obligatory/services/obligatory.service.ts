@@ -9,9 +9,9 @@ import { Obligatory } from '../obligatory';
 export class ObligatoryService {
   constructor(private http: HttpClient) {}
 
-  getObligates() {
+  getObligates(accountId: string) {
     return this.http.get<Obligatory[]>(
-      `${environment.apiUrl}obligatoryPayments`
+      `${environment.apiUrl}obligatoryPayments/${accountId}`
     );
   }
 }
