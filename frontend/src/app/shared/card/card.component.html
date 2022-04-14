@@ -1,5 +1,5 @@
 <ng-container *ngIf="card">
-  <mat-card>
+  <mat-card (click)="onClick.emit()">
     <mat-card-actions *ngIf="card.category">
       <button mat-button><span>{{card.category}}</span></button>
     </mat-card-actions>

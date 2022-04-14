@@ -1,8 +1,10 @@
 export interface Transaction {
-  type: string;
+  id: string;
   accountId: string;
+  type: string;
   title: string;
   description: string;
+  payee: string;
   dateOfOperation: Date;
   category: string;
   currency: string;

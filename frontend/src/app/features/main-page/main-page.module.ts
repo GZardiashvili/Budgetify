@@ -6,6 +6,7 @@ import { TransactionComponent } from './transaction/transaction.component';
 import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { SharedModule } from '../../shared/shared.module';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [MainPageComponent, TransactionComponent],
@@ -17,6 +18,8 @@ import { SharedModule } from '../../shared/shared.module';
     MatCardModule,
     FontAwesomeModule,
     SharedModule,
+    MatSidenavModule,
   ],
 })
-export class MainPageModule {}
+export class MainPageModule {
+}

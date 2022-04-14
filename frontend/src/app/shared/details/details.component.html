@@ -1,0 +1,16 @@
+<form style="display: flex; flex-direction: column; width: 50%; gap: 10px; margin: 50px" [formGroup]="detailsForm">
+  <input *ngIf="detailsForm.get('type')" formControlName="type">
+  <input *ngIf="detailsForm.get('title')" formControlName="title">
+  <input *ngIf="detailsForm.get('description')" formControlName="description">
+  <input *ngIf="detailsForm.get('category')" formControlName="category">
+  <input *ngIf="detailsForm.get('currency')" formControlName="currency">
+  <input *ngIf="detailsForm.get('amount')" formControlName="amount">
+  <input *ngIf="detailsForm.get('frequency')" formControlName="frequency">
+  <input *ngIf="detailsForm.get('linkToFile')" formControlName="linkToFile">
+  <input *ngIf="detailsForm.get('dateOfOperation')" formControlName="dateOfOperation">
+  <input *ngIf="detailsForm.get('dateOfCreation')" formControlName="dateOfCreation">
+  <input *ngIf="detailsForm.get('dateOfUpdate')" formControlName="dateOfUpdate">
+  <input *ngIf="detailsForm.get('firstDayOfPayment')" formControlName="firstDayOfPayment">
+  <input *ngIf="detailsForm.get('lastDayOfPayment')" formControlName="lastDayOfPayment">
+  <input *ngIf="detailsForm.get('dayOfPayment')" formControlName="dayOfPayment">
+</form>

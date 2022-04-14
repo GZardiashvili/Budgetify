@@ -8,11 +8,18 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class TransactionService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getTransactions(accountId: string): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(
       `${environment.apiUrl}transactions/${accountId}`
+    );
+  }
+
+  getTransaction(accountId: string, id: string): Observable<Transaction> {
+    return this.http.get<Transaction>(
+      `${environment.apiUrl}transactions/${accountId}/${id}`
     );
   }
 }

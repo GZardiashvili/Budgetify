@@ -1,10 +1,11 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
-    type: String,
     accountId: String,
+    type: String,
     title: {type: String, required: true},
     description: {type: String, required: true},
+    payee: String,
     dateOfOperation: Date,
     category: {type: String, required: true},
     currency: String,

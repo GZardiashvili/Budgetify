@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from './card';
 
 @Component({
@@ -9,6 +9,7 @@ import { Card } from './card';
 export class CardComponent implements OnInit {
   @Input() card!: Card;
   @Input() icon!: any;
+  @Output() onClick = new EventEmitter();
 
   constructor() {
   }

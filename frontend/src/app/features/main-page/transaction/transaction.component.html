@@ -1,6 +1,19 @@
 <div class="container">
   <ng-container *ngFor="let transaction of transactions$ | async">
-    <ui-card [card]="transaction" [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
+    <ui-card (click)="getTransaction(transaction.id)" (onClick)="sidenav.toggle()" [card]="transaction"
+             [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
   </ng-container>
 </div>
-
+<mat-sidenav-container class="container">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    class="details-sidenav"
+    fixedInViewport="fixed"
+    fixedTopGap="155"
+    fixedBottomGap="155"
+    position="end"
+  >
+    <ui-details [detailsForm]="transactionForm"></ui-details>
+  </mat-sidenav>
+</mat-sidenav-container>

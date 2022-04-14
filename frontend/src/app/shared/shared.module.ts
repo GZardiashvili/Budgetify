@@ -11,9 +11,10 @@ import { NotFoundComponent } from '../not-found/not-found.component';
 import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DetailsComponent } from './details/details.component';
 
 @NgModule({
-  declarations: [RegisterComponent, NotFoundComponent, CardComponent],
+  declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -34,6 +35,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ReactiveFormsModule,
     RouterModule,
     CardComponent,
+    DetailsComponent,
   ],
 })
 export class SharedModule {
