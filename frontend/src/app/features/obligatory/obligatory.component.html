@@ -1,5 +1,19 @@
 <div class="container">
   <ng-container *ngFor="let obligate of obligates$ | async">
-    <ui-card [card]="obligate"></ui-card>
+    <ui-card (click)="getObligate(obligate.id)" (onClick)="sidenav.toggle()" [card]="obligate"></ui-card>
   </ng-container>
 </div>
+<mat-sidenav-container class="container">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    class="details-sidenav"
+    fixedInViewport="fixed"
+    fixedTopGap="155"
+    fixedBottomGap="155"
+    position="end"
+  >
+    <ui-details [detailsInfo]="obligate$ | async" [detailsForm]="obligateForm"
+                (close)="sidenav.toggle()"></ui-details>
+  </mat-sidenav>
+</mat-sidenav-container>

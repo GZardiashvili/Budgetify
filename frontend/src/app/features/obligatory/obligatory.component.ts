@@ -3,8 +3,9 @@ import { ObligatoryService } from './services/obligatory.service';
 import { Observable } from 'rxjs';
 import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-obligatory',
@@ -13,6 +14,13 @@ import { UtilsService } from '../../shared/utils/utils.service';
 })
 export class ObligatoryComponent implements OnInit {
   obligates$!: Observable<Obligatory[]>;
+  obligate$!: Observable<Obligatory>;
+
+  obligateForm: FormGroup = new FormGroup({
+    title: new FormControl(''),
+    description: new FormControl(''),
+    amount: new FormControl(''),
+  });
 
   constructor(
     private obligatoryService: ObligatoryService,
@@ -29,5 +37,23 @@ export class ObligatoryComponent implements OnInit {
           return this.obligatoryService.getObligates(String(id));
         })
       );
+  }
+
+  getObligate(id: string) {
+    this.obligate$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const accountId = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+        return this.obligatoryService.getObligate(String(accountId), String(id));
+      })
+    );
+
+    this.obligate$.pipe(tap(obligate => {
+
+      this.obligateForm.get('title')?.setValue(obligate.title);
+      this.obligateForm.get('description')?.setValue(obligate.description);
+      this.obligateForm.get('currency')?.setValue(obligate.currency);
+      this.obligateForm.get('amount')?.setValue(obligate.amount);
+
+    })).subscribe();
   }
 }

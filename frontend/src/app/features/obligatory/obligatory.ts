@@ -1,4 +1,5 @@
 export interface Obligatory {
+  id: string;
   accountId: string;
   title: string;
   description: string;
