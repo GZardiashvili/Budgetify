@@ -1,4 +1,5 @@
 export interface Subscriptions {
+  id: string;
   accountId: string;
   title: string;
   description: string;

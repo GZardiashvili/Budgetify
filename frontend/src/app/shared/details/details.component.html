@@ -12,12 +12,12 @@
       <p *ngIf="detailsInfo.amount">{{detailsInfo.amount}}</p>
       <p *ngIf="detailsInfo.frequency">{{detailsInfo.frequency}}</p>
       <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
-      <p *ngIf="detailsInfo.dateOfOperation">{{detailsInfo.dateOfOperation}}</p>
-      <p *ngIf="detailsInfo.dateOfCreation">{{detailsInfo.dateOfCreation}}</p>
-      <p *ngIf="detailsInfo.dateOfUpdate">{{detailsInfo.dateOfUpdate}}</p>
-      <p *ngIf="detailsInfo.firstDayOfPayment">{{detailsInfo.firstDayOfPayment}}</p>
-      <p *ngIf="detailsInfo.lastDayOfPayment">{{detailsInfo.lastDayOfPayment}}</p>
-      <p *ngIf="detailsInfo.dayOfPayment">{{detailsInfo.dayOfPayment}}</p>
+      <p *ngIf="detailsInfo.dateOfOperation">{{detailsInfo.dateOfOperation | date}}</p>
+      <p *ngIf="detailsInfo.dateOfCreation">{{detailsInfo.dateOfCreation | date}}</p>
+      <p *ngIf="detailsInfo.dateOfUpdate">{{detailsInfo.dateOfUpdate | date}}</p>
+      <p *ngIf="detailsInfo.firstDayOfPayment">{{detailsInfo.firstDayOfPayment | date}}</p>
+      <p *ngIf="detailsInfo.lastDayOfPayment">{{detailsInfo.lastDayOfPayment | date}}</p>
+      <p *ngIf="detailsInfo.dayOfPayment">{{detailsInfo.dayOfPayment | date}}</p>
     </ng-container>
 
     <div class="details-sidebar__footer">
