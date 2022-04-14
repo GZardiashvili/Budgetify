@@ -18,7 +18,6 @@ import { DetailsComponent } from './details/details.component';
   imports: [
     CommonModule,
     MatFormFieldModule,
-    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
@@ -28,7 +27,6 @@ import { DetailsComponent } from './details/details.component';
     FontAwesomeModule,
   ],
   exports: [
-    MatFormFieldModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,

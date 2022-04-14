@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
+import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Card } from '../card/card';
 
 @Component({
   selector: 'ui-details',
@@ -7,6 +9,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./details.component.scss']
 })
 export class DetailsComponent {
+  faEdit = faPenToSquare
+  faClose = faXmark
   @Input() detailsForm: FormGroup = new FormGroup({
     id: new FormControl(''),
     type: new FormControl(''),
@@ -25,6 +29,22 @@ export class DetailsComponent {
     lastDayOfPayment: new FormControl(''),
     dayOfPayment: new FormControl(''),
   });
+  @Input() detailsInfo: Card | null = null;
+
+  @Output() delete = new EventEmitter();
+  @Output() save = new EventEmitter();
+  @Output() close = new EventEmitter();
+
+
+  currentView: 'details' | 'edit' = 'details';
+
+  goToEdit() {
+    this.currentView = 'edit';
+  }
+
+  goToDetails() {
+    this.currentView = 'details';
+  }
 
   constructor() {
   }

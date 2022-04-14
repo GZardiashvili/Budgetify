@@ -14,6 +14,7 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ui-details [detailsForm]="transactionForm"></ui-details>
+    <ui-details [detailsInfo]="transaction$ | async" [detailsForm]="transactionForm"
+                (close)="sidenav.toggle()"></ui-details>
   </mat-sidenav>
 </mat-sidenav-container>

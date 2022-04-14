@@ -1,0 +1,36 @@
+.details-sidebar {
+
+  &__header {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+
+    fa-icon {
+      margin: 7px 5px;
+      cursor: pointer;
+
+      &:first-child {
+        font-size: 1.3rem;
+      }
+
+      &:last-child {
+        font-size: 1.5rem;
+        margin-right: 15px;
+      }
+    }
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 50px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    margin: 50px;
+  }
+}
