@@ -1,0 +1,80 @@
+.container {
+  display: flex;
+  align-items: center;
+  background-color: #B9E2E6;
+  border-radius: 10px;
+  padding: 10px 16px;
+  gap: 10px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  width: 200px;
+
+  p {
+    font-size: 1rem;
+    font-weight: bold;
+    padding-top: 10px;
+    color: #373737;
+  }
+}
+
+
+.flex {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  cursor: pointer;
+
+  .piggy-bank {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "icon title"
+                          "icon amount"
+                          "icon progress-bar";
+    border-radius: 10px;
+    background-color: #FECEE2;
+    padding: 4px 16px;
+
+    span:nth-child(2) {
+      font-size: 1rem;
+      font-weight: bold;
+      color: #373737;
+      grid-area: title;
+    }
+
+    span:nth-child(3) {
+      grid-area: amount;
+    }
+
+    mat-progress-bar {
+      grid-area: progress-bar;
+    }
+
+    ::ng-deep .mat-progress-bar {
+      min-height: 7px;
+      border-radius: 3px;
+
+      &-buffer {
+        background-color: #fff;
+      }
+
+      &-fill::after {
+        background-color: #FF76AE;
+      }
+    }
+  }
+
+  fa-icon {
+    grid-area: icon;
+    align-self: center;
+    justify-self: center;
+  }
+}
+
+fa-icon {
+  font-size: 1.5rem;
+  color: #FF76AE;
+  background-color: #FFF;
+  border-radius: 50%;
+  padding: 10px;
+}

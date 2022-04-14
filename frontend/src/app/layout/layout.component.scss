@@ -21,4 +21,9 @@
   &__outlet {
     grid-area: content;
   }
+
+  &__piggy-bank {
+    grid-area: right-sidebar;
+    align-self: flex-end;
+  }
 }
