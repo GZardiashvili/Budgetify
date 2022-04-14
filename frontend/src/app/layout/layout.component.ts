@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../auth/services/auth.service';
+import { delay } from 'rxjs/operators';
+import { LoadingService } from '../shared/loading/services/loading.service';
 
 @Component({
   selector: 'app-layout',
@@ -7,11 +8,20 @@ import { AuthService } from '../auth/services/auth.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  constructor(private authService: AuthService) {}
+  loading: boolean = false;
 
-  ngOnInit(): void {}
+  constructor(private loadingService: LoadingService) {
+  }
 
-  get isAuthenticated(): boolean {
-    return this.authService.isAuthenticated();
+  ngOnInit(): void {
+    this.listenToLoading();
+  }
+
+  listenToLoading(): void {
+    this.loadingService.loadingSub
+      .pipe(delay(0)) // wait for the loading to be set
+      .subscribe((loading) => {
+        this.loading = loading;
+      });
   }
 }

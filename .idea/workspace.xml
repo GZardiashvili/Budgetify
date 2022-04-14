@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/loading/interceptors/loading.interceptor.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/loading/interceptors/loading.interceptor.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/loading/services/loading.service.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/loading/services/loading.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/obligatoryPayments.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/obligatoryPayments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +27,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="ui/create-card" />
+        <entry key="$PROJECT_DIR$" value="local/details" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />

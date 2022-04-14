@@ -1,3 +1,18 @@
+.loading-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+
+  &.flex-content-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .layout {
   width: 80%;
   display: grid;

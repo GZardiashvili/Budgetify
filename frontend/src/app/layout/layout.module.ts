@@ -11,6 +11,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PiggyBankComponent } from '../features/piggy-bank/piggy-bank.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent],
@@ -24,6 +25,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
     MatMenuModule,
     FontAwesomeModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
   ],
 })
 export class LayoutModule {
