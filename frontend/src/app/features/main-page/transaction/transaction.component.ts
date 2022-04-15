@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FormControl, FormGroup } from '@angular/forms';
@@ -13,7 +13,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss'],
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, OnDestroy {
+  private componentIsDestroyed$ = new Subject<boolean>();
   transactions$!: Observable<Transaction[]>;
   transaction$!: Observable<Transaction>;
   faExpense = faCircleArrowUp;
@@ -54,14 +55,21 @@ export class TransactionComponent implements OnInit {
       })
     );
 
-    this.transaction$.pipe(tap(transaction => {
-      this.transactionForm.get('type')?.setValue(transaction.title);
-      this.transactionForm.get('title')?.setValue(transaction.title);
-      this.transactionForm.get('description')?.setValue(transaction.description);
-      this.transactionForm.get('category')?.setValue(transaction.category);
-      this.transactionForm.get('currency')?.setValue(transaction.currency);
-      this.transactionForm.get('amount')?.setValue(transaction.amount);
-      this.transactionForm.get('linkToFile')?.setValue(transaction.linkToFile);
-    })).subscribe();
+    this.transaction$.pipe(
+      takeUntil(this.componentIsDestroyed$),
+      tap(transaction => {
+        this.transactionForm.get('type')?.setValue(transaction.title);
+        this.transactionForm.get('title')?.setValue(transaction.title);
+        this.transactionForm.get('description')?.setValue(transaction.description);
+        this.transactionForm.get('category')?.setValue(transaction.category);
+        this.transactionForm.get('currency')?.setValue(transaction.currency);
+        this.transactionForm.get('amount')?.setValue(transaction.amount);
+        this.transactionForm.get('linkToFile')?.setValue(transaction.linkToFile);
+      })).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
   }
 }

@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionService } from './services/subscription.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Transaction } from '../main-page/transaction/transaction';
@@ -13,7 +13,8 @@ import { Transaction } from '../main-page/transaction/transaction';
   templateUrl: './subscriptions.component.html',
   styleUrls: ['./subscriptions.component.scss'],
 })
-export class SubscriptionsComponent implements OnInit {
+export class SubscriptionsComponent implements OnInit, OnDestroy {
+  private componentIsDestroyed$ = new Subject<boolean>();
   subscriptions$!: Observable<Subscriptions[]>;
   subscription$!: Observable<Transaction>;
 
@@ -49,11 +50,19 @@ export class SubscriptionsComponent implements OnInit {
       })
     );
 
-    this.subscription$.pipe(tap(subscription => {
-      this.subscriptionForm.get('title')?.setValue(subscription.title);
-      this.subscriptionForm.get('description')?.setValue(subscription.description);
-      this.subscriptionForm.get('category')?.setValue(subscription.category);
-      this.subscriptionForm.get('amount')?.setValue(subscription.amount);
-    })).subscribe();
+    this.subscription$.pipe(takeUntil(
+        this.componentIsDestroyed$),
+      tap(subscription => {
+        this.subscriptionForm.get('title')?.setValue(subscription.title);
+        this.subscriptionForm.get('description')?.setValue(subscription.description);
+        this.subscriptionForm.get('category')?.setValue(subscription.category);
+        this.subscriptionForm.get('amount')?.setValue(subscription.amount);
+      })).subscribe();
   }
+
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
+  }
+
 }

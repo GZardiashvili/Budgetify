@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ObligatoryService } from './services/obligatory.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, tap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { FormControl, FormGroup } from '@angular/forms';
 
@@ -12,7 +12,8 @@ import { FormControl, FormGroup } from '@angular/forms';
   templateUrl: './obligatory.component.html',
   styleUrls: ['./obligatory.component.scss'],
 })
-export class ObligatoryComponent implements OnInit {
+export class ObligatoryComponent implements OnInit, OnDestroy {
+  private componentIsDestroyed$ = new Subject<boolean>();
   obligates$!: Observable<Obligatory[]>;
   obligate$!: Observable<Obligatory>;
 
@@ -47,13 +48,19 @@ export class ObligatoryComponent implements OnInit {
       })
     );
 
-    this.obligate$.pipe(tap(obligate => {
+    this.obligate$.pipe(
+      takeUntil(this.componentIsDestroyed$),
+      tap(obligate => {
+        this.obligateForm.get('title')?.setValue(obligate.title);
+        this.obligateForm.get('description')?.setValue(obligate.description);
+        this.obligateForm.get('currency')?.setValue(obligate.currency);
+        this.obligateForm.get('amount')?.setValue(obligate.amount);
 
-      this.obligateForm.get('title')?.setValue(obligate.title);
-      this.obligateForm.get('description')?.setValue(obligate.description);
-      this.obligateForm.get('currency')?.setValue(obligate.currency);
-      this.obligateForm.get('amount')?.setValue(obligate.amount);
+      })).subscribe();
+  }
 
-    })).subscribe();
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
   }
 }
