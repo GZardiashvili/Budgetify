@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Card } from './card';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'ui-card',
@@ -8,8 +9,7 @@ import { Card } from './card';
 })
 export class CardComponent implements OnInit {
   @Input() card!: Card;
-  @Input() icon!: any;
-  @Output() onClick = new EventEmitter();
+  @Input() icon!: IconProp;
 
   constructor() {
   }

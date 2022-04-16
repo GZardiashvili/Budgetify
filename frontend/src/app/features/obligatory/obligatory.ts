@@ -6,9 +6,9 @@ export interface Obligatory {
   amount: number;
   currency: string;
   frequency: string;
-  dayOfPayment: Date;
-  firstDayOfPayment: Date;
-  lastDayOfPayment: Date;
+  dateOfPayment: Date;
+  firstDateOfPayment: Date;
+  lastDateOfPayment: Date;
   dateOfCreation: Date;
   dateOfUpdate: Date;
 }

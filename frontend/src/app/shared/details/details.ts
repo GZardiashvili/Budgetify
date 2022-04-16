@@ -9,10 +9,9 @@ export interface Details {
   amount?: number;
   frequency?: string;
   linkToFile?: string;
-  dateOfOperation?: Date;
   dateOfCreation?: Date;
   dateOfUpdate?: Date;
-  firstDayOfPayment?: Date;
-  lastDayOfPayment?: Date;
-  dayOfPayment?: Date;
+  firstDateOfPayment?: Date;
+  lastDateOfPayment?: Date;
+  dateOfPayment?: Date;
 }

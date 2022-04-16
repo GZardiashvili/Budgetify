@@ -5,7 +5,7 @@ import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-obligatory',
@@ -17,16 +17,22 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
   obligates$!: Observable<Obligatory[]>;
   obligate$!: Observable<Obligatory>;
 
-  obligateForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    description: new FormControl(''),
-    amount: new FormControl(''),
+  // obligateForm: FormGroup = new FormGroup({
+  //   title: new FormControl(''),
+  //   description: new FormControl(''),
+  //   amount: new FormControl(''),
+  // });
+  obligateForm = this.fb.group({
+    title: [''],
+    description: [''],
+    amount: [''],
   });
 
   constructor(
     private obligatoryService: ObligatoryService,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private fb: FormBuilder
   ) {
   }
 
@@ -51,11 +57,7 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
     this.obligate$.pipe(
       takeUntil(this.componentIsDestroyed$),
       tap(obligate => {
-        this.obligateForm.get('title')?.setValue(obligate.title);
-        this.obligateForm.get('description')?.setValue(obligate.description);
-        this.obligateForm.get('currency')?.setValue(obligate.currency);
-        this.obligateForm.get('amount')?.setValue(obligate.amount);
-
+        this.obligateForm.patchValue(obligate)
       })).subscribe();
   }
 

@@ -6,8 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class LoadingService {
 
-  loadingSub: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  loadingMap: Map<string, boolean> = new Map<string, boolean>();
+  loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  loadingArr: string[] = [];
 
   constructor() {
   }
@@ -17,13 +17,13 @@ export class LoadingService {
       throw new Error('The request URL must be provided to the LoadingService.setLoading function');
     }
     if (loading === true) {
-      this.loadingMap.set(url, loading);
-      this.loadingSub.next(true);
-    } else if (loading === false && this.loadingMap.has(url)) {
-      this.loadingMap.delete(url);
+      this.loadingArr.push(url);
+      this.loading$.next(true);
+    } else if (loading === false && this.loadingArr.length > 0) {
+      this.loadingArr = this.loadingArr.filter(item => item !== url);
     }
-    if (this.loadingMap.size === 0) {
-      this.loadingSub.next(false);
+    if (this.loadingArr.length === 0) {
+      this.loading$.next(false);
     }
   }
 }

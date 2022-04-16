@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngFor="let obligate of obligates$ | async">
-    <ui-card (click)="getObligate(obligate.id)" (onClick)="sidenav.toggle()" [card]="obligate"></ui-card>
+    <ui-card (click)="getObligate(obligate.id);sidenav.toggle()" [card]="obligate"></ui-card>
   </ng-container>
 </div>
 <mat-sidenav-container class="container">

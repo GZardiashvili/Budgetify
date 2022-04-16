@@ -3,9 +3,9 @@ export interface Subscriptions {
   accountId: string;
   title: string;
   description: string;
-  firstDayOfPayment: Date;
-  lastDayOfPayment: Date;
-  dayOfPayment: Date;
+  firstDateOfPayment: Date;
+  lastDateOfPayment: Date;
+  dateOfPayment: Date;
   category: string;
   currency: string;
   amount: number;

@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngFor="let subscription of subscriptions$ | async">
-    <ui-card (click)="getSubscription(subscription.id)" (onClick)="sidenav.toggle()" [card]="subscription"></ui-card>
+    <ui-card (click)="getSubscription(subscription.id);sidenav.toggle()" [card]="subscription"></ui-card>
   </ng-container>
 </div>
 

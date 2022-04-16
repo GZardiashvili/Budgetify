@@ -5,7 +5,7 @@ import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Transaction } from '../main-page/transaction/transaction';
 
 @Component({
@@ -18,17 +18,18 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   subscriptions$!: Observable<Subscriptions[]>;
   subscription$!: Observable<Transaction>;
 
-  subscriptionForm: FormGroup = new FormGroup({
-    title: new FormControl(''),
-    category: new FormControl(''),
-    description: new FormControl(''),
-    amount: new FormControl(''),
+  subscriptionForm: FormGroup = this.fb.group({
+    title: [''],
+    category: [''],
+    description: [''],
+    amount: [''],
   });
 
   constructor(
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private fb: FormBuilder
   ) {
   }
 
@@ -53,10 +54,7 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
     this.subscription$.pipe(takeUntil(
         this.componentIsDestroyed$),
       tap(subscription => {
-        this.subscriptionForm.get('title')?.setValue(subscription.title);
-        this.subscriptionForm.get('description')?.setValue(subscription.description);
-        this.subscriptionForm.get('category')?.setValue(subscription.category);
-        this.subscriptionForm.get('amount')?.setValue(subscription.amount);
+        this.subscriptionForm.patchValue(subscription)
       })).subscribe();
   }
 

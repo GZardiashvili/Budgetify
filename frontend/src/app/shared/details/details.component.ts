@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Card } from '../card/card';
 
@@ -11,23 +11,22 @@ import { Card } from '../card/card';
 export class DetailsComponent {
   faEdit = faPenToSquare
   faClose = faXmark
-  @Input() detailsForm: FormGroup = new FormGroup({
-    id: new FormControl(''),
-    type: new FormControl(''),
-    accountId: new FormControl(''),
-    title: new FormControl(''),
-    description: new FormControl(''),
-    category: new FormControl(''),
-    currency: new FormControl(''),
-    amount: new FormControl(''),
-    frequency: new FormControl(''),
-    linkToFile: new FormControl(''),
-    dateOfOperation: new FormControl(''),
-    dateOfCreation: new FormControl(''),
-    dateOfUpdate: new FormControl(''),
-    firstDayOfPayment: new FormControl(''),
-    lastDayOfPayment: new FormControl(''),
-    dayOfPayment: new FormControl(''),
+  @Input() detailsForm = this.fb.group({
+    id: [''],
+    type: [''],
+    accountId: [''],
+    title: [''],
+    description: [''],
+    category: [''],
+    currency: [''],
+    amount: [''],
+    frequency: [''],
+    linkToFile: [''],
+    dateOfCreation: [''],
+    dateOfUpdate: [''],
+    firstDateOfPayment: [''],
+    lastDateOfPayment: [''],
+    dateOfPayment: [''],
   });
   @Input() detailsInfo: Card | null = null;
 
@@ -46,7 +45,7 @@ export class DetailsComponent {
     this.currentView = 'details';
   }
 
-  constructor() {
+  constructor(private fb: FormBuilder) {
   }
 
 }

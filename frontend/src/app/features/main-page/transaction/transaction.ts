@@ -5,7 +5,7 @@ export interface Transaction {
   title: string;
   description: string;
   payee: string;
-  dateOfOperation: Date;
+  dateOfPayment: Date;
   category: string;
   currency: string;
   amount: number;

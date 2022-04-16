@@ -1,5 +1,5 @@
 <ng-container *ngIf="card">
-  <mat-card (click)="onClick.emit()">
+  <mat-card>
     <mat-card-actions *ngIf="card.category">
       <button mat-button><span>{{card.category}}</span></button>
     </mat-card-actions>
@@ -14,10 +14,10 @@
         <span *ngIf="card.type==='incomes'" class="icon-incomes"><fa-icon [icon]="icon"></fa-icon></span>
       </ng-container>
       <span class="underline" *ngIf="card.type">{{card.type}}</span>
-      <span class="underline" *ngIf="card.dateOfOperation">{{card.dateOfOperation | date}}</span>
+      <span class="underline" *ngIf="card.dateOfPayment">{{card.dateOfPayment | date}}</span>
       <span
-        *ngIf="card.dayOfPayment">Next payment date: <span class="underline">{{card.dayOfPayment | date}}</span></span>
+        *ngIf="card.dateOfPayment">Next payment date: <span
+        class="underline">{{card.dateOfPayment | date}}</span></span>
     </mat-card-content>
   </mat-card>
 </ng-container>
-

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { delay } from 'rxjs/operators';
+import { delay, tap } from 'rxjs/operators';
 import { LoadingService } from '../shared/loading/services/loading.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-layout',
@@ -8,7 +9,7 @@ import { LoadingService } from '../shared/loading/services/loading.service';
   styleUrls: ['./layout.component.scss'],
 })
 export class LayoutComponent implements OnInit {
-  loading: boolean = false;
+  loading!: Observable<boolean>
 
   constructor(private loadingService: LoadingService) {
   }
@@ -18,10 +19,6 @@ export class LayoutComponent implements OnInit {
   }
 
   listenToLoading(): void {
-    this.loadingService.loadingSub
-      .pipe(delay(0)) // wait for the loading to be set
-      .subscribe((loading) => {
-        this.loading = loading;
-      });
+    this.loading = this.loadingService.loading$
   }
 }

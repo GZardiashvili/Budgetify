@@ -36,7 +36,7 @@ router.post('/', (req, res) => {
         description: body.description,
         amount: body.amount,
         currency: body.currency,
-        dayOfPayment: body.dayOfPayment,
+        dateOfPayment: body.dateOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
         dateOfTheLastPayment: body.dateOfThelastPayment,
