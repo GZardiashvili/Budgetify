@@ -4,8 +4,7 @@ export interface Transaction {
   type: string;
   title: string;
   description: string;
-  payee: string;
-  dateOfPayment: Date;
+  dateOfOperation: Date;
   category: string;
   currency: string;
   amount: number;

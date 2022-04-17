@@ -16,7 +16,7 @@ import { Transaction } from '../main-page/transaction/transaction';
 export class SubscriptionsComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   subscriptions$!: Observable<Subscriptions[]>;
-  subscription$!: Observable<Transaction>;
+  subscription$!: Observable<Subscriptions>;
 
   subscriptionForm: FormGroup = this.fb.group({
     title: [''],

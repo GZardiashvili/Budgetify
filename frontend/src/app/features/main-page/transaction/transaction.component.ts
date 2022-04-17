@@ -27,7 +27,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
     category: [''],
     currency: [''],
     amount: [''],
-    dateOfPayment: [''],
+    dateOfOperation: [''],
     linkToFile: [''],
   });
 

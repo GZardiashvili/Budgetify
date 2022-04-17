@@ -12,9 +12,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PiggyBankComponent } from '../features/piggy-bank/piggy-bank.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AccountsComponent } from './components/sidebar/accounts/accounts.component';
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent],
+  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent, AccountsComponent],
   exports: [],
   imports: [
     CommonModule,

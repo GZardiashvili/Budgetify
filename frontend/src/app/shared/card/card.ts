@@ -9,6 +9,7 @@ export interface Card {
   amount?: number;
   frequency?: string;
   linkToFile?: string;
+  dateOfOperation?: Date;
   dateOfCreation?: Date;
   dateOfUpdate?: Date;
   firstDateOfPayment?: Date;

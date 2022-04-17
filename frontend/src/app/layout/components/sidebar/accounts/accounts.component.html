@@ -1,0 +1,25 @@
+<button mat-button [matMenuTriggerFor]="account">
+  <div class="account" *ngIf="activeAccount | async as acc">
+    <span class="account__icon"><fa-icon [icon]="faDetails"></fa-icon></span>
+    <span class="account__title">{{acc.title}} </span>
+    <span class="account__amount">{{acc.availableAmount}}</span>
+    <span class="account__currency">$</span>
+  </div>
+</button>
+<mat-menu #account="matMenu">
+  <ng-container *ngFor="let account of accounts | async">
+    <button mat-menu-item (click)="setAccountId(account.id); accountSelect()">
+      <div class="account">
+        <span class="account__title">{{account.title}} </span>
+        <span class="account__amount">{{account.availableAmount}}</span>
+        <span class="account__currency">$</span>
+      </div>
+    </button>
+  </ng-container>
+  <button mat-menu-item>
+    <div class="account__add">
+      <fa-icon [icon]="faAdd"></fa-icon>
+      <span>Add account</span>
+    </div>
+  </button>
+</mat-menu>

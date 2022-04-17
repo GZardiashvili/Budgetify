@@ -18,8 +18,8 @@ export class SubscriptionService {
     );
   }
 
-  getSubscription(accountId: string, id: string): Observable<Transaction> {
-    return this.http.get<Transaction>(
+  getSubscription(accountId: string, id: string): Observable<Subscriptions> {
+    return this.http.get<Subscriptions>(
       `${environment.apiUrl}subscriptions/${accountId}/${id}`
     );
   }

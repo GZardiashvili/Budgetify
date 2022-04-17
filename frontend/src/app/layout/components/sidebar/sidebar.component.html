@@ -14,22 +14,5 @@
       </li>
     </ul>
   </nav>
-  <button class="btn-list" mat-button [matMenuTriggerFor]="account">
-    <fa-icon [icon]="faAccounts"></fa-icon>
-    Accounts
-    <fa-icon [icon]="faDetails"></fa-icon>
-  </button>
-  <mat-menu #account="matMenu">
-
-    <ng-container *ngFor="let account of accounts | async">
-      <button class="btn-list--item" mat-menu-item (click)="setAccountId(account.id); accountSelect()">
-        <span>{{account.title}}</span>
-        <span>${{account.availableAmount}}</span>
-      </button>
-    </ng-container>
-    <button class="btn-list--item" mat-menu-item>
-      <fa-icon [icon]="faAdd"></fa-icon>
-      Add account
-    </button>
-  </mat-menu>
+  <app-accounts></app-accounts>
 </div>
