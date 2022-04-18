@@ -1,23 +1,34 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionService } from './services/subscription.service';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-subscriptions',
   templateUrl: './subscriptions.component.html',
   styleUrls: ['./subscriptions.component.scss'],
 })
-export class SubscriptionsComponent implements OnInit {
+export class SubscriptionsComponent implements OnInit, OnDestroy {
+  private componentIsDestroyed$ = new Subject<boolean>();
   subscriptions$!: Observable<Subscriptions[]>;
+  subscription$!: Observable<Subscriptions>;
+
+  subscriptionForm: FormGroup = this.fb.group({
+    title: [''],
+    category: [''],
+    description: [''],
+    amount: [''],
+  });
 
   constructor(
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
+    private fb: FormBuilder
   ) {
   }
 
@@ -30,4 +41,25 @@ export class SubscriptionsComponent implements OnInit {
         })
       );
   }
+
+  getSubscription(id: string) {
+    this.subscription$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        const accountId = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+        return this.subscriptionService.getSubscription(String(accountId), String(id));
+      })
+    );
+
+    this.subscription$.pipe(takeUntil(
+        this.componentIsDestroyed$),
+      tap(subscription => {
+        this.subscriptionForm.patchValue(subscription)
+      })).subscribe();
+  }
+
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
+  }
+
 }

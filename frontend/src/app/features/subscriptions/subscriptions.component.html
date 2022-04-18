@@ -1,6 +1,21 @@
-<ng-container *ngFor="let subscription of subscriptions$ | async">
-  <div type="button">
-    <span>{{subscription.title}} </span>
-    <span>{{subscription.dayOfPayment}}</span>
-  </div>
-</ng-container>
+<div class="container">
+  <ng-container *ngFor="let subscription of subscriptions$ | async">
+    <ui-card (click)="getSubscription(subscription.id);sidenav.toggle()" [card]="subscription"></ui-card>
+  </ng-container>
+</div>
+
+<mat-sidenav-container class="container">
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    class="details-sidenav"
+    fixedInViewport="fixed"
+    fixedTopGap="155"
+    fixedBottomGap="155"
+    position="end"
+  >
+    <ui-details [title]="'Subscription'" [detailsInfo]="subscription$ | async"
+                [detailsForm]="subscriptionForm"
+                (close)="sidenav.toggle()"></ui-details>
+  </mat-sidenav>
+</mat-sidenav-container>

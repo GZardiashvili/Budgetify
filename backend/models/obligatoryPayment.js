@@ -6,12 +6,12 @@ const obligatoryPaymentSchema = new mongoose.Schema({
     description: String,
     amount: {type: Number, required: true},
     currency: String,
-    dayOfPayment: Date,
+    dateOfPayment: Date,
     frequency: String,
-    dateOfTheFirstPayment: Date,
-    dateOfTheLastPayment: Date,
-    createdOn: Date,
-    updatedOn: Date,
+    firstDateOfPayment: Date,
+    lastDateOfPayment: Date,
+    dateOfCreation: Date,
+    dateOfUpdate: Date,
 });
 
 obligatoryPaymentSchema.set('toJSON', {

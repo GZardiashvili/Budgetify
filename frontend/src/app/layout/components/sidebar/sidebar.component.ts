@@ -1,16 +1,7 @@
 import { Component } from '@angular/core';
-import {
-  faBoxesStacked,
-  faCirclePlus,
-  faEllipsis,
-} from '@fortawesome/free-solid-svg-icons';
 import { IMenuItem } from './imenu-item';
 import { MENU_CONFIG } from './menu.config';
-import { AccountService } from './accounts/account.service';
-import { Observable } from 'rxjs';
-import { Account } from './accounts/account';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UtilsService } from '../../../shared/utils/utils.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -19,41 +10,11 @@ import { UtilsService } from '../../../shared/utils/utils.service';
 })
 export class SidebarComponent {
   menu: IMenuItem[] = MENU_CONFIG;
-  accounts: Observable<Account[]> = this.accountService.getAccounts();
 
-  faDetails = faEllipsis;
-  faAccounts = faBoxesStacked;
-  faAdd = faCirclePlus;
-
-  constructor(
-    private accountService: AccountService,
-    private utilsService: UtilsService,
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+  constructor() {
   }
 
   trackBy(index: number, item: IMenuItem): string {
     return item.id;
-  }
-
-  addAccount(account: Account) {
-    this.accountService.addAccount(account);
-  }
-
-  get accountId(): string | null {
-    return this.utilsService.accountId;
-  }
-
-  setAccountId(accountId: string) {
-    this.utilsService.setAccountId(accountId);
-  }
-
-  getBaseUrl() {
-    return this.router.url.split('/')[1];
-  }
-
-  accountSelect() {
-    this.router.navigate([this.getBaseUrl() + '/' + this.accountId], {skipLocationChange: true});
   }
 }

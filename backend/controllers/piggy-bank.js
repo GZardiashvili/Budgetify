@@ -20,8 +20,8 @@ router.post('/create', (req, res) => {
 
     const piggyBank = new PiggyBank({
         accountId: body.accountId,
-        title: body.title,
         goal: body.goal,
+        goalAmount: body.goalAmount,
         description: body.description,
         savings: body.savings,
         crashDate: body.crashDate,
@@ -52,6 +52,7 @@ router.put('/:accountId/:id', (req, res) => {
     const piggyBank = {
         accountId: body.accountId,
         goal: body.goal,
+        goalAmount: body.goalAmount,
         description: body.description,
         savings: body.savings,
         crashDate: body.crashDate,

@@ -11,20 +11,25 @@ import { MatMenuModule } from '@angular/material/menu';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PiggyBankComponent } from '../features/piggy-bank/piggy-bank.component';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { AccountsComponent } from './components/sidebar/accounts/accounts.component';
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent],
+  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent, AccountsComponent],
   exports: [],
-  imports: [
-    CommonModule,
-    RouterModule,
-    MatIconModule,
-    SharedModule,
-    LayoutRoutingModule,
-    MatMenuModule,
-    FontAwesomeModule,
-    MatProgressBarModule,
-  ],
+    imports: [
+        CommonModule,
+        RouterModule,
+        MatIconModule,
+        SharedModule,
+        LayoutRoutingModule,
+        MatMenuModule,
+        FontAwesomeModule,
+        MatProgressBarModule,
+        MatProgressSpinnerModule,
+        MatSidenavModule,
+    ],
 })
 export class LayoutModule {
 }

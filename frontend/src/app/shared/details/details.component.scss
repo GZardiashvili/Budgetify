@@ -1,0 +1,108 @@
+.details-sidebar {
+  padding: 7px 12px;
+
+  &__header {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+
+    h1 {
+      width: 100%;
+      float: left;
+      margin: 7px 5px;
+    }
+
+    fa-icon {
+      margin: 7px 5px;
+      cursor: pointer;
+
+      &:nth-child(2) {
+        font-size: 1.3rem;
+      }
+
+      &:last-child {
+        font-size: 1.5rem;
+      }
+    }
+  }
+
+  .container {
+    .flex {
+      display: flex;
+      row-gap: 1rem;
+
+      &--row {
+        flex-direction: row;
+      }
+
+      &--col {
+        flex-direction: column;
+
+        p {
+          width: 100%;
+          border-bottom: 1px solid #4C4F53;
+          padding-bottom: 1rem;
+
+          span {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    & > div:first-child {
+      justify-content: space-between;
+      margin-top: 5px;
+
+      .type {
+        span {
+          padding: 0 5px;
+          font-size: 1.2rem;
+        }
+      }
+
+      .balance {
+        span {
+          padding: 0 5px;
+          font-size: 1.2rem;
+        }
+      }
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 10px;
+      color: #2C2F33;
+    }
+
+    .category {
+      display: flex;
+      margin-right: 5px;
+      min-width: 85px;
+      height: 45px;
+      justify-content: center;
+      align-items: center;
+      border: 2px solid #4C4F53;
+      border-radius: 10px;
+      cursor: default;
+      color: #4C4F53;
+      font-size: 0.9rem;
+    }
+  }
+
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-right: 50px;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: right;
+    gap: 10px;
+    margin-right: 50px;
+  }
+
+}

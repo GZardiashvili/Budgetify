@@ -30,6 +30,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'categories/:accountId',
+    loadChildren: () =>
+      import('../features/categories/categories.module').then(
+        (m) => m.CategoriesModule
+      ),
+  },
+  {
     path: 'subscriptions',
     loadChildren: () =>
       import('../features/subscriptions/subscriptions.module').then(

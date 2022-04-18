@@ -2,11 +2,11 @@ const mongoose = require('mongoose');
 
 const piggyBankSchema = new mongoose.Schema({
     accountId: {type: String, required: true},
-    title: {
+    goal: {
         type: String,
         required: true
     },
-    goal: Number,
+    goalAmount: Number,
     description: String,
     savings: Number,
     crashDate: Date,

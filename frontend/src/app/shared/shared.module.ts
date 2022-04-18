@@ -8,26 +8,35 @@ import { HttpClientModule } from '@angular/common/http';
 import { RegisterComponent } from '../register/register.component';
 import { RouterModule } from '@angular/router';
 import { NotFoundComponent } from '../not-found/not-found.component';
+import { CardComponent } from './card/card.component';
+import { MatCardModule } from '@angular/material/card';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { DetailsComponent } from './details/details.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
-  declarations: [RegisterComponent, NotFoundComponent],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule,
-  ],
+  declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent],
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule,
+        MatCardModule,
+        FontAwesomeModule,
+        MatDatepickerModule,
+    ],
   exports: [
     MatFormFieldModule,
-    MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
     ReactiveFormsModule,
     RouterModule,
+    CardComponent,
+    DetailsComponent,
   ],
 })
-export class SharedModule {}
+export class SharedModule {
+}

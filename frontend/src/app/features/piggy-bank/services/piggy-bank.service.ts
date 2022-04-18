@@ -15,4 +15,8 @@ export class PiggyBankService {
   getPiggyBanks() {
     return this.http.get<PiggyBank[]>(`${environment.apiUrl}piggyBanks/6248c4feb08520e2a903fc3a`);
   }
+
+  getPiggyBank(id: string) {
+    return this.http.get<PiggyBank>(`${environment.apiUrl}piggyBanks/6248c4feb08520e2a903fc3a/${id}`);
+  }
 }

@@ -1,0 +1,23 @@
+<ng-container *ngIf="card">
+  <mat-card>
+    <mat-card-actions *ngIf="card.category">
+      <button mat-button><span>{{card.category[0]}}</span></button>
+    </mat-card-actions>
+    <mat-card-title>
+      <span *ngIf="card.title">{{card.title}}</span>
+      <span *ngIf="card.amount"
+            [ngClass]="card.type=='incomes' ? 'incomes' : 'expenses'">${{card.amount}} </span>
+    </mat-card-title>
+    <mat-card-content>
+      <ng-container *ngIf="icon">
+        <span *ngIf="card.type==='expenses'" class="icon-expenses"><fa-icon [icon]="icon"></fa-icon></span>
+        <span *ngIf="card.type==='incomes'" class="icon-incomes"><fa-icon [icon]="icon"></fa-icon></span>
+      </ng-container>
+      <span class="underline" *ngIf="card.type">{{card.type}}</span>
+      <span class="underline" *ngIf="card.dateOfOperation">{{card.dateOfOperation | date}}</span>
+      <span
+        *ngIf="card.dateOfPayment">Next payment date: <span
+        class="underline">{{card.dateOfPayment | date}}</span></span>
+    </mat-card-content>
+  </mat-card>
+</ng-container>

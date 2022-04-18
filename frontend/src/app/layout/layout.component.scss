@@ -1,12 +1,30 @@
+.loading-container {
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+
+  &.flex-content-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 .layout {
   width: 80%;
   display: grid;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 64px 1fr;
   grid-template-areas:
     "sidebar header header"
     "sidebar content right-sidebar";
   margin: 0 auto;
+  column-gap: 10%;
+  row-gap: 20px;
 
   &__header {
     grid-area: header;

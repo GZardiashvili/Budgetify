@@ -33,9 +33,9 @@ router.post('/', (req, res) => {
     const subscription = new Subscription({
         accountId: body.accountId,
         title: body.title,
-        firstDayOfPayment: body.firstDayOfPayment,
-        lastDayOfPayment: body.lastDayOfPayment,
-        dayOfPayment: body.dayOfPayment,
+        firstDateOfPayment: body.firstDateOfPayment,
+        lastDateOfPayment: body.lastDateOfPayment,
+        dateOfPayment: body.dateOfPayment,
         category: body.category,
         currency: body.currency,
         amount: body.amount,
@@ -63,9 +63,9 @@ router.put('/:id', (req, res) => {
 
     const subscription = {
         accountId: body.accountId,
-        firstDayOfPayment: body.firstDayOfPayment,
-        lastDayOfPayment: body.lastDayOfPayment,
-        dayOfPayment: body.dayOfPayment,
+        firstDateOfPayment: body.firstDateOfPayment,
+        lastDateOfPayment: body.lastDateOfPayment,
+        dateOfPayment: body.dateOfPayment,
         category: body.category,
         currency: body.currency,
         amount: body.amount,

@@ -71,23 +71,23 @@ describe('app', () => {
   describe('accounts', () => {
     it('GET account with invalid id', async () => {
       const response = await supertest(app)
-        .get('/accounts/6239c2f1850f32169565f5fe')
+        .get('/services/6239c2f1850f32169565f5fe')
         .set('Authorization', `${loginToken}`);
       expect(response.status).toBe(404);
     });
 
     it('POST account', async () => {
       const response = await supertest(app)
-        .post('/accounts')
+        .post('/services')
         .set('Authorization', `${loginToken}`)
         .send(accForTest);
       expect(response.status).toBe(200);
       expect(response.body.title).toEqual('Added while testing account POST');
     });
 
-    it('GET all accounts', async () => {
+    it('GET all services', async () => {
       const response = await supertest(app)
-        .get('/accounts')
+        .get('/services')
         .set('Authorization', `${loginToken}`);
       expect(response.status).toBe(200);
       expect(response.body[0].title).toBe('Added while testing account POST');
@@ -96,7 +96,7 @@ describe('app', () => {
 
     it('PUT account', async () => {
       const id = await supertest(app)
-        .get('/accounts/')
+        .get('/services/')
         .set('Authorization', `${loginToken}`);
 
       const accId = id.body[0].id;
@@ -111,7 +111,7 @@ describe('app', () => {
 
     it('DELETE account', async () => {
       const id = await supertest(app)
-        .get('/accounts/')
+        .get('/services/')
         .set('Authorization', `${loginToken}`);
 
       const accId = id.body[0].id;
