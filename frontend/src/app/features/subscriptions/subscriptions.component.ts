@@ -5,8 +5,7 @@ import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { Transaction } from '../main-page/transaction/transaction';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-subscriptions',

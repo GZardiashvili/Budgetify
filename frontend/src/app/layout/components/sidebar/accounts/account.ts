@@ -3,7 +3,7 @@ export interface Account {
   userId: string;
   title: string;
   description: string;
-  category: string;
+  category: string[];
   currency: string;
   availableAmount: number;
   dateOfCreation: Date;

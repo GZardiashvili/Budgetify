@@ -17,7 +17,7 @@ export class AccountsComponent {
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
-  activeAccount: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  activeAccount: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
   accountForm = this.fb.group({
     type: [''],
     title: [''],
