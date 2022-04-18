@@ -12,20 +12,22 @@ import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailsComponent } from './details/details.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @NgModule({
   declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent],
-  imports: [
-    CommonModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    RouterModule,
-    MatCardModule,
-    FontAwesomeModule,
-  ],
+    imports: [
+        CommonModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        HttpClientModule,
+        RouterModule,
+        MatCardModule,
+        FontAwesomeModule,
+        MatDatepickerModule,
+    ],
   exports: [
     MatFormFieldModule,
     MatInputModule,

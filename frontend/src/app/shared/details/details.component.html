@@ -1,34 +1,61 @@
 <ng-container *ngIf="currentView=='details'; else edit">
   <div class="details-sidebar">
     <div class="details-sidebar__header">
+      <h1>{{title}} Information</h1>
       <fa-icon [icon]="faEdit" (click)="goToEdit()"></fa-icon>
       <fa-icon [icon]="faClose" (click)="close.emit()"></fa-icon>
     </div>
     <ng-container *ngIf="detailsInfo">
-      <p *ngIf="detailsInfo.type">{{detailsInfo.type}}</p>
-      <p *ngIf="detailsInfo.title">{{detailsInfo.title}}</p>
-      <p *ngIf="detailsInfo.category">{{detailsInfo.category}}</p>
-      <p *ngIf="detailsInfo.currency">{{detailsInfo.currency}}</p>
-      <p *ngIf="detailsInfo.amount">{{detailsInfo.amount}}</p>
-      <p *ngIf="detailsInfo.frequency">{{detailsInfo.frequency}}</p>
-      <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
-      <p *ngIf="detailsInfo.dateOfCreation">{{detailsInfo.dateOfCreation | date}}</p>
-      <p *ngIf="detailsInfo.dateOfUpdate">{{detailsInfo.dateOfUpdate | date}}</p>
-      <p *ngIf="detailsInfo.firstDateOfPayment">{{detailsInfo.firstDateOfPayment | date}}</p>
-      <p *ngIf="detailsInfo.lastDateOfPayment">{{detailsInfo.lastDateOfPayment | date}}</p>
-      <p *ngIf="detailsInfo.dateOfPayment">{{detailsInfo.dateOfPayment | date}}</p>
+      <div class="container">
+        <div class="flex flex--row">
+          <div class="type">
+            <ng-container *ngIf="icon">
+              <span *ngIf="detailsInfo.type==='expenses'" class="icon-expenses"><fa-icon [icon]="icon"></fa-icon></span>
+              <span *ngIf="detailsInfo.type==='incomes'" class="icon-incomes"><fa-icon [icon]="icon"></fa-icon></span>
+            </ng-container>
+            <span *ngIf="detailsInfo.type">{{detailsInfo.type}}</span>
+          </div>
+          <div class="balance">
+            <span *ngIf="detailsInfo.currency">{{detailsInfo.currency}}</span>
+            <span *ngIf="detailsInfo.amount">{{detailsInfo.amount}}</span>
+          </div>
+        </div>
+        <h2 *ngIf="detailsInfo.title">{{detailsInfo.title}}</h2>
+        <div class="flex flex--row">
+          <ng-container *ngFor="let category of detailsInfo.category">
+            <p class="category" *ngIf="category">{{category}}</p>
+          </ng-container>
+        </div>
+        <div class="flex flex--col ">
+          <p *ngIf="detailsInfo.dateOfPayment">
+            <span>Payment Date: </span>{{detailsInfo.dateOfPayment | date: 'mm/dd/yyyy'}}</p>
+          <p *ngIf="detailsInfo.dateOfOperation">
+            <span>Payment Date: </span>{{detailsInfo.dateOfOperation | date: 'mm/dd/yyyy'}}</p>
+          <p *ngIf="detailsInfo.firstDateOfPayment || detailsInfo.lastDateOfPayment">
+            <span>Payment Dates: </span>{{detailsInfo.firstDateOfPayment | date: 'mm/dd/yyyy'}}
+            - {{detailsInfo.lastDateOfPayment | date: 'mm/dd/yyyy'}}
+          </p>
+          <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
+          <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
+          <p *ngIf="detailsInfo.goal"><span>Goal: </span>{{detailsInfo.goal}}</p>
+          <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
+          <p *ngIf="detailsInfo.savings"><span>Saved Amount: </span>{{detailsInfo.savings}}</p>
+          <p *ngIf="detailsInfo.availableAmount"><span>Available Amount: </span>{{detailsInfo.availableAmount}}</p>
+        </div>
+      </div>
     </ng-container>
-
     <div class="details-sidebar__footer">
       <button mat-raised-button color="primary" (click)="delete.emit()">Delete</button>
     </div>
   </div>
 </ng-container>
 
-<div class="details-sidebar">
-  <ng-template #edit>
+
+<ng-template #edit>
+  <div class="details-sidebar">
     <div class="details-sidebar__header">
-      <fa-icon [icon]="faClose"></fa-icon>
+      <h1>Edit {{title}}</h1>
+      <fa-icon (click)="close.emit()" [icon]="faClose"></fa-icon>
     </div>
     <form class="details-sidebar__form"
           [formGroup]="detailsForm">
@@ -42,7 +69,11 @@
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('description')">
         <mat-label>Description</mat-label>
-        <input matInput name="description" formControlName="description">
+        <textarea matInput name="description" formControlName="description"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('category')">
         <mat-label>Category</mat-label>
@@ -76,24 +107,25 @@
         <mat-label>Date of update</mat-label>
         <input matInput name="dateOfUpdate" formControlName="dateOfUpdate">
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('firstDayOfPayment')">
+      <mat-form-field *ngIf="detailsForm.get('firstDateOfPayment')">
         <mat-label>First day of payment</mat-label>
-        <input matInput name="firstDayOfPayment"
-               formControlName="firstDayOfPayment">
+        <input matInput name="firstDateOfPayment"
+               formControlName="firstDateOfPayment">
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('lastDayOfPayment')">
+      <mat-form-field *ngIf="detailsForm.get('lastDateOfPayment')">
         <mat-label>Last day of payment</mat-label>
-        <input matInput name="lastDayOfPayment"
-               formControlName="lastDayOfPayment">
+        <input matInput name="lastDateOfPayment"
+               formControlName="lastDateOfPayment">
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('dayOfPayment')">
+      <mat-form-field *ngIf="detailsForm.get('dateOfPayment')">
         <mat-label>Day of payment</mat-label>
-        <input matInput name="dayOfPayment" formControlName="dayOfPayment">
+        <input matInput name="dateOfPayment" formControlName="dateOfPayment">
       </mat-form-field>
     </form>
     <div class="details-sidebar__footer">
       <button mat-raised-button color="primary" (click)="goToDetails()">Cancel</button>
       <button mat-raised-button color="primary" (click)="save.emit()">Save</button>
     </div>
-  </ng-template>
-</div>
+  </div>
+</ng-template>
+

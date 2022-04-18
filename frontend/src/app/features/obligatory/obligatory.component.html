@@ -13,7 +13,7 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ui-details [detailsInfo]="obligate$ | async" [detailsForm]="obligateForm"
+    <ui-details [title]="'Obligatory'" [detailsInfo]="obligate$ | async" [detailsForm]="obligateForm"
                 (close)="sidenav.toggle()"></ui-details>
   </mat-sidenav>
 </mat-sidenav-container>

@@ -1,6 +1,6 @@
 <button mat-button [matMenuTriggerFor]="account">
   <div class="account" *ngIf="activeAccount | async as acc">
-    <span class="account__icon"><fa-icon [icon]="faDetails"></fa-icon></span>
+    <span class="account__icon"><fa-icon [icon]="faDetails" (click)="sidenav.toggle()"></fa-icon></span>
     <span class="account__title">{{acc.title}} </span>
     <span class="account__amount">{{acc.availableAmount}}</span>
     <span class="account__currency">$</span>
@@ -23,3 +23,21 @@
     </div>
   </button>
 </mat-menu>
+
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    class="details-sidenav"
+    fixedInViewport="fixed"
+    fixedTopGap="110"
+    fixedBottomGap="155"
+    position="end"
+  >
+    <ng-container *ngIf="activeAccount | async as acc">
+      <ui-details [title]="'Account'" [detailsInfo]="acc"
+                  [detailsForm]="accountForm"
+                  (close)="sidenav.toggle()"></ui-details>
+    </ng-container>
+  </mat-sidenav>
+</mat-sidenav-container>

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Card } from '../card/card';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
   selector: 'ui-details',
@@ -11,6 +12,7 @@ import { Card } from '../card/card';
 export class DetailsComponent {
   faEdit = faPenToSquare
   faClose = faXmark
+  @Input() title: string = ''
   @Input() detailsForm = this.fb.group({
     id: [''],
     type: [''],
@@ -27,8 +29,13 @@ export class DetailsComponent {
     firstDateOfPayment: [''],
     lastDateOfPayment: [''],
     dateOfPayment: [''],
+    goal: [''],
+    goalAmount: [''],
+    savings: [''],
+    availableAmount: [''],
   });
   @Input() detailsInfo: Card | null = null;
+  @Input() icon: IconProp | null = null;
 
   @Output() delete = new EventEmitter();
   @Output() save = new EventEmitter();

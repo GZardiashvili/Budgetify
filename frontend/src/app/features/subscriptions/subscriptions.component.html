@@ -14,7 +14,8 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ui-details [detailsInfo]="subscription$ | async" [detailsForm]="subscriptionForm"
+    <ui-details [title]="'Subscription'" [detailsInfo]="subscription$ | async"
+                [detailsForm]="subscriptionForm"
                 (close)="sidenav.toggle()"></ui-details>
   </mat-sidenav>
 </mat-sidenav-container>

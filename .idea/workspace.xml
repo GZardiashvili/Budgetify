@@ -2,27 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/app.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.test.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/controllers/transactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/transactions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/piggy-bank.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/piggy-bank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/subscription.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/subscription.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/backend/models/transaction.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/transaction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/services/subscription.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/services/subscription.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/account.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/sidebar.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/services/piggy-bank.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/services/piggy-bank.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/card/card.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/card/card.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/card/card.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/card/card.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/card/card.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/card/card.component.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/card/card.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/card/card.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/shared.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +107,7 @@
       <workItem from="1648145541301" duration="41000" />
       <workItem from="1648664054802" duration="24293000" />
       <workItem from="1648829251438" duration="28207000" />
+      <workItem from="1650207449781" duration="13724000" />
     </task>
     <servers />
   </component>

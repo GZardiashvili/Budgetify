@@ -1,10 +1,11 @@
-import { Component, OnInit, } from '@angular/core';
+import { Component } from '@angular/core';
 import { faCirclePlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { Account } from './account';
 import { AccountService } from './services/account.service';
 import { UtilsService } from '../../../../shared/utils/utils.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { FormBuilder } from '@angular/forms';
 
 
 @Component({
@@ -16,12 +17,21 @@ export class AccountsComponent {
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
-  activeAccount: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
+  activeAccount: BehaviorSubject<any> = new BehaviorSubject<any>(null);
+  accountForm = this.fb.group({
+    type: [''],
+    title: [''],
+    description: [''],
+    category: [''],
+    currency: [''],
+    availableAmount: [''],
+  });
 
   constructor(private accountService: AccountService,
               private utilsService: UtilsService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private fb: FormBuilder) {
     this.accountService.getAccountById(this.accountId).subscribe(account => {
       this.activeAccount.next(account);
     });

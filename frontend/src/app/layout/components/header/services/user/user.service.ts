@@ -7,9 +7,12 @@ import { User } from '../../models/user';
   providedIn: 'root',
 })
 export class UserService {
-  id = localStorage.getItem('userId');
+  get id() {
+    return localStorage.getItem('userId');
+  }
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
   getUserProfile() {
     return this.http.get<User>(`${environment.apiUrl}users/${this.id}`);

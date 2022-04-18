@@ -1,7 +1,7 @@
 export interface PiggyBank {
   accountId: string;
-  title: string;
-  goal: number;
+  goal: string;
+  goalAmount: number;
   description: string;
   savings: number;
   crashDate: Date;

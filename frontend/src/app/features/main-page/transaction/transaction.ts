@@ -5,7 +5,7 @@ export interface Transaction {
   title: string;
   description: string;
   dateOfOperation: Date;
-  category: string;
+  category: string[];
   currency: string;
   amount: number;
   linkToFile: string;

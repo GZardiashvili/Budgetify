@@ -7,7 +7,7 @@ const transactionSchema = new mongoose.Schema({
     description: {type: String, required: true},
     payee: String,
     dateOfOperation: Date,
-    category: {type: String, required: true},
+    category: [{type: String, required: true}],
     currency: String,
     amount: {type: Number, required: true},
     linkToFile: String,

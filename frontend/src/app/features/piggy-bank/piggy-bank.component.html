@@ -5,15 +5,31 @@
 
 <div class="flex">
   <ng-container *ngFor="let piggyBank of piggyBanks | async">
-    <div class="piggy-bank">
+    <div class="piggy-bank" type="button" (click)="sidenav.toggle()">
       <fa-icon [icon]="faPiggyBank"></fa-icon>
-      <span>{{piggyBank.title}}</span>
+      <span>{{piggyBank.goal}}</span>
       <span>{{piggyBank.savings}} / {{piggyBank.goal}}</span>
       <mat-progress-bar mode="determinate"
-                        [value]="piggyBank.savings / piggyBank.goal * 100">
+                        [value]="piggyBank.savings / piggyBank.goalAmount * 100">
       </mat-progress-bar>
     </div>
   </ng-container>
 </div>
 
-
+<mat-sidenav-container>
+  <mat-sidenav
+    #sidenav
+    mode="over"
+    class="details-sidenav"
+    fixedInViewport="fixed"
+    fixedTopGap="110"
+    fixedBottomGap="155"
+    position="end"
+  >
+    <ng-container *ngIf="piggyBank | async as piggyBank">
+      <ui-details [title]="'Piggy Bank'" [detailsInfo]="piggyBank"
+                  [detailsForm]="piggyBankForm"
+                  (close)="sidenav.toggle()"></ui-details>
+    </ng-container>
+  </mat-sidenav>
+</mat-sidenav-container>

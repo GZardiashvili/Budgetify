@@ -1,7 +1,7 @@
 <ng-container *ngIf="card">
   <mat-card>
     <mat-card-actions *ngIf="card.category">
-      <button mat-button><span>{{card.category}}</span></button>
+      <button mat-button><span>{{card.category[0]}}</span></button>
     </mat-card-actions>
     <mat-card-title>
       <span *ngIf="card.title">{{card.title}}</span>
