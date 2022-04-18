@@ -1,10 +1,11 @@
 const express = require('express');
 const Transaction = require('../models/transaction');
-
 const router = express.Router();
+const bindUser = require('../utils/bindUser');
 
 router.get('/:accountId', (req, res) => {
     Transaction.find({
+        user: bindUser(req, res).id,
         accountId: req.params.accountId
     }, (err, transactions) => {
         if (err) {
@@ -19,8 +20,9 @@ router.get('/:accountId', (req, res) => {
 
 router.get('/:accountId/:id', (req, res) => {
     Transaction.findOne({
-        _id: req.params.id,
-        account: req.params.accountId
+        user: bindUser(req, res).id,
+        account: req.params.accountId,
+        id: req.params.id
     }, (err, transaction) => {
         if (err) {
             res.status(500).send(err);
@@ -32,12 +34,13 @@ router.get('/:accountId/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
     const body = req.body;
 
     const transaction = new Transaction({
-        type: body.type,
+        user: bindUser(req, res).id,
         accountId: body.accountId,
+        type: body.type,
         title: body.title,
         description: body.description,
         dateOfOperation: body.dateOfOperation,
@@ -58,8 +61,11 @@ router.post('/', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
-    Transaction.findByIdAndRemove(req.params.id)
+router.delete('/delete/:id', (req, res) => {
+    Transaction.findOneAndDelete({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    })
         .then(() => {
             res.status(204).end();
         })
@@ -68,7 +74,7 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const body = req.body;
 
     const transaction = {
@@ -85,7 +91,10 @@ router.put('/:id', (req, res) => {
         dateOfUpdate: body.dateOfUpdate,
     };
 
-    Transaction.findByIdAndUpdate(req.params.id, transaction, {new: true})
+    Transaction.findOneAndUpdate({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    }, transaction, {new: true})
         .then((updatedTransaction) => {
             res.json(updatedTransaction);
         })

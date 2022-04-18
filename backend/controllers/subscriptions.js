@@ -1,22 +1,31 @@
 const express = require('express');
 const Subscription = require('../models/subscription');
+const bindUser = require('../utils/bindUser');
 
 const router = express.Router();
 
 router.get('/:accountId', (req, res) => {
-    Subscription.find({accountId: req.params.accountId}, (err, subscriptions) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(subscriptions);
-        }
-    }).clone().catch((error) => {
+    Subscription.find({
+            user: bindUser(req, res).id,
+            accountId: req.params.accountId
+        },
+        (err, subscriptions) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(subscriptions);
+            }
+        }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });
 
 router.get('/:accountId/:id', (req, res) => {
-    Subscription.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, subscription) => {
+    Subscription.findOne({
+        user: bindUser(req, res).id,
+        account: req.params.accountId,
+        id: req.params.id
+    }, (err, subscription) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -27,7 +36,7 @@ router.get('/:accountId/:id', (req, res) => {
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
     const body = req.body;
 
     const subscription = new Subscription({
@@ -52,13 +61,16 @@ router.post('/', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
-    Subscription.findByIdAndRemove(req.params.id).then(() => {
+router.delete('/delete/:id', (req, res) => {
+    Subscription.findOneAndDelete({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    }).then(() => {
         res.status(204).end();
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const body = req.body;
 
     const subscription = {
@@ -72,9 +84,10 @@ router.put('/:id', (req, res) => {
         dateOfCreation: body.dateOfCreation,
         dateOfUpdate: body.dateOfUpdate,
     };
-    Subscription.findByIdAndUpdate(req.params.id, subscription, {
-        new: true,
-    })
+    Subscription.findOneAndUpdate({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    }, subscription, {new: true})
         .then((updatedSubscription) => {
             res.json(updatedSubscription);
         })

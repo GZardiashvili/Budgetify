@@ -32,13 +32,13 @@ router.get('/:id?', (req, res) => {
     }
 });
 
-router.delete('/:id', (req, res) => {
+router.delete('/delete/:id', (req, res) => {
     User.findByIdAndRemove(req.params.id).then(() => {
         res.status(204).end();
     });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const body = req.body;
 
     const user = {

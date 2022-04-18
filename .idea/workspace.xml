@@ -2,10 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/backend/utils/bindUser.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/backend/utils/getTokenFromHeaders.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/account.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/account.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/accounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/accounts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/categories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/currencies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/obligatoryPayments.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/obligatoryPayments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/statistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/transactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/transactions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/users.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/users.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/account.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/account.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/category.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/category.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/currency.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/currency.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/obligatoryPayment.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/obligatoryPayment.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/piggy-bank.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/piggy-bank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/statistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/subscription.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/subscription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/models/transaction.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/models/transaction.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +33,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -61,11 +79,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\GZard\Desktop\Budgetify\backend\utils" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\layout\components\sidebar\accounts" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\layout\components\header\models" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\main-page\transactions\services" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\subscriptions" />
-      <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\statistics" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

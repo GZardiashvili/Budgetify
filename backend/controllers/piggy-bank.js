@@ -1,18 +1,28 @@
 const express = require('express');
 const PiggyBank = require('../models/piggy-bank');
+const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
 router.get('/:accountId', (req, res) => {
-    PiggyBank.find({accountId: req.params.accountId}, (err, piggyBanks) => {
-        res.status(200).send(piggyBanks);
-    }).clone()
+    PiggyBank.find({
+            user: bindUser(req, res).id,
+            accountId: req.params.accountId
+        },
+        (err, piggyBanks) => {
+            res.status(200).send(piggyBanks);
+        }).clone()
 });
 
 router.get('/:accountId/:id', (req, res) => {
-    PiggyBank.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, piggyBank) => {
-        res.status(200).send(piggyBank);
-    }).clone()
+    PiggyBank.findOne({
+            user: bindUser(req, res).id,
+            accountId: req.params.accountId,
+            id: req.params.id,
+        },
+        (err, piggyBank) => {
+            res.status(200).send(piggyBank);
+        }).clone()
 });
 
 router.post('/create', (req, res) => {
@@ -36,8 +46,11 @@ router.post('/create', (req, res) => {
         });
 });
 
-router.delete('/:id', (req, res) => {
-    PiggyBank.findByIdAndRemove(req.params.id)
+router.delete('/delete/:id', (req, res) => {
+    PiggyBank.findOneAndDelete({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    })
         .then(() => {
             res.status(204).end();
         })
@@ -46,7 +59,7 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-router.put('/:accountId/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const body = req.body;
 
     const piggyBank = {
@@ -59,17 +72,15 @@ router.put('/:accountId/:id', (req, res) => {
     }
 
     PiggyBank.findOneAndUpdate({
-        _id: req.params.id,
-        accountId: req.params.accountId
-    }, piggyBank, {new: true}, (err, updatedPiggyBank) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(updatedPiggyBank);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+        user: bindUser(req, res).id,
+        id: req.params.id
+    }, piggyBank, {new: true})
+        .then((updatedPiggyBank) => {
+            res.json(updatedPiggyBank);
+        })
+        .catch((error) => {
+            console.error('The Promise is rejected!', error);
+        });
 });
 
 module.exports = router;

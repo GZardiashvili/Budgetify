@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const subscriptionSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     accountId: String,
     title: {type: String, required: true, unique: true},
     firstDateOfPayment: {type: Date, required: true},

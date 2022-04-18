@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const accountSchema = new mongoose.Schema({
-    userId: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     title: {
         type: String,
         maxlength: 128,

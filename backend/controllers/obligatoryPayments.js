@@ -1,10 +1,14 @@
 const express = require('express');
 const ObligatoryPayment = require('../models/obligatoryPayment');
+const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
 router.get('/:accountId', (req, res) => {
-    ObligatoryPayment.find({accountId: req.params.accountId}, (err, obligatoryPayments) => {
+    ObligatoryPayment.find({
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId
+    }, (err, obligatoryPayments) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -16,18 +20,23 @@ router.get('/:accountId', (req, res) => {
 });
 
 router.get('/:accountId/:id', (req, res) => {
-    ObligatoryPayment.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, obligatoryPayment) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(obligatoryPayment);
-        }
-    }).clone().catch((error) => {
+    ObligatoryPayment.findOne({
+            user: bindUser(req, res).id,
+            accountId: req.params.accountId,
+            id: req.params.id,
+        },
+        (err, obligatoryPayment) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(obligatoryPayment);
+            }
+        }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/create', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = new ObligatoryPayment({
@@ -48,8 +57,11 @@ router.post('/', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
-    ObligatoryPayment.findByIdAndRemove(req.params.id)
+router.delete('/delete/:id', (req, res) => {
+    ObligatoryPayment.findOneAndDelete({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    })
         .then(() => {
             res.status(204).end();
         })
@@ -58,7 +70,7 @@ router.delete('/:id', (req, res) => {
         });
 });
 
-router.put('/:id', (req, res) => {
+router.put('/update/:id', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = {
@@ -74,11 +86,12 @@ router.put('/:id', (req, res) => {
         createdOn: body.createdOn,
         updatedOn: body.updatedOn,
     };
-    ObligatoryPayment.findByIdAndUpdate(req.params.id, obligatoryPayment, {
-        new: true,
-    })
-        .then((updatedUser) => {
-            res.json(updatedUser);
+    ObligatoryPayment.findOneAndUpdate({
+        user: bindUser(req, res).id,
+        id: req.params.id
+    }, obligatoryPayment, {new: true})
+        .then((updatedObligatoryPayment) => {
+            res.json(updatedObligatoryPayment);
         })
         .catch((error) => {
             console.error('The Promise is rejected!', error);

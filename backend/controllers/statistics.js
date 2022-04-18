@@ -1,10 +1,12 @@
 const express = require('express');
 const Statistics = require('../models/statistics');
+const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
 router.get('/:accountId', (req, res) => {
     Statistics.find({
+        user: bindUser(req, res).id,
         accountId: req.params.accountId,
     }).then((statistics) => {
         if (statistics) {
@@ -19,8 +21,9 @@ router.get('/:accountId', (req, res) => {
 
 router.get('/:accountId/:id', (req, res) => {
     Statistics.findOne({
-        _id: req.params.id,
+        user: bindUser(req, res).id,
         accountId: req.params.accountId,
+        id: req.params.id,
     }).then((statistics) => {
         if (statistics) {
             res.send(statistics);
