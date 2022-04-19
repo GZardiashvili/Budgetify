@@ -1,9 +1,8 @@
 export interface Account {
   id: string;
-  userId: string;
+  user: string;
   title: string;
   description: string;
-  category: string[];
   currency: string;
   availableAmount: number;
   dateOfCreation: Date;

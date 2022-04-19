@@ -15,9 +15,8 @@ const accountSchema = new mongoose.Schema({
         },
     },
     description: String,
-    category: [{type: String, required: true}],
     currency: {type: String, required: true},
-    availableAmount: {type: Number, required: true},
+    availableAmount: {type: Number},
     dateOfCreation: Date,
     dateOfUpdate: Date,
 });

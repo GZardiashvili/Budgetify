@@ -36,7 +36,7 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
     this.subscriptions$ = this.route.paramMap
       .pipe(
         switchMap(params => {
-          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+          const id = params.get('accountId') || this.utilsService.accountId;
           return this.subscriptionService.getSubscriptions(String(id));
         })
       );
@@ -45,7 +45,7 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   getSubscription(id: string) {
     this.subscription$ = this.route.paramMap.pipe(
       switchMap(params => {
-        const accountId = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+        const accountId = params.get('accountId') || this.utilsService.accountId;
         return this.subscriptionService.getSubscription(String(accountId), String(id));
       })
     );
@@ -55,6 +55,35 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
       tap(subscription => {
         this.subscriptionForm.patchValue(subscription)
       })).subscribe();
+  }
+
+  updateSubscription(id: string, subscription: Subscriptions) {
+    subscription = this.subscriptionForm.value;
+    this.subscriptionService.updateSubscription(id, subscription)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$))
+      .subscribe();
+    this.subscriptions$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.subscriptionService.getSubscriptions(String(accountId));
+        })
+      );
+  }
+
+  deleteSubscription(id: string) {
+    this.subscriptionService.deleteSubscription(id)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$))
+      .subscribe();
+    this.subscriptions$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.subscriptionService.getSubscriptions(String(accountId));
+        })
+      );
   }
 
   ngOnDestroy() {

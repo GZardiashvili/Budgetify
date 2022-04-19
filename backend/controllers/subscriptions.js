@@ -43,6 +43,7 @@ router.post('/create', (req, res) => {
         user: bindUser(req, res).id,
         accountId: body.accountId,
         title: body.title,
+        description: body.description,
         firstDateOfPayment: body.firstDateOfPayment,
         lastDateOfPayment: body.lastDateOfPayment,
         dateOfPayment: body.dateOfPayment,
@@ -76,6 +77,8 @@ router.put('/update/:id', (req, res) => {
 
     const subscription = {
         accountId: body.accountId,
+        title: body.title,
+        description: body.description,
         firstDateOfPayment: body.firstDateOfPayment,
         lastDateOfPayment: body.lastDateOfPayment,
         dateOfPayment: body.dateOfPayment,

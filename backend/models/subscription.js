@@ -15,6 +15,10 @@ const subscriptionSchema = new mongoose.Schema({
             collation: {locale: 'en', strength: 2},
         },
     },
+    description: {
+        type: String,
+        required: true,
+    },
     firstDateOfPayment: {type: Date, required: true},
     lastDateOfPayment: Date,
     dateOfPayment: {type: Date, required: true},

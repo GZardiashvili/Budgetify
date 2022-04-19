@@ -34,7 +34,19 @@ export class DetailsComponent {
     savings: [''],
     availableAmount: [''],
   });
-  @Input() detailsInfo: Card | null = null;
+
+  // @Input() detailsInfo: Card | null = null;
+  @Input()
+  get detailsInfo(): Card | null {
+    return this._detailsInfo;
+  }
+
+  set detailsInfo(detailsInfo: Card | null) {
+    this._detailsInfo = (detailsInfo) ? detailsInfo : null;
+  }
+
+  private _detailsInfo: Card | null = null;
+
   @Input() icon: IconProp | null = null;
 
   @Output() delete = new EventEmitter();

@@ -22,10 +22,8 @@ export class AccountsComponent implements OnInit, OnDestroy {
   account$!: Observable<Account>;
   activeAccount: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
   accountForm = this.fb.group({
-    type: [''],
     title: [''],
     description: [''],
-    category: [''],
     currency: [''],
     availableAmount: [''],
   });

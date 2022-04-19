@@ -13,7 +13,12 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ui-details [title]="'Obligatory'" [detailsInfo]="obligate$ | async" [detailsForm]="obligateForm"
-                (close)="sidenav.toggle()"></ui-details>
+    <ng-container *ngIf="obligate$ | async as obligate">
+      <ui-details [title]="'Obligatory'" [detailsInfo]="obligate$ | async" [detailsForm]="obligateForm"
+                  (save)="updateObligate(obligate.id, obligate)"
+                  (delete)="deleteObligate(obligate.id)"
+                  (close)="sidenav.toggle()"></ui-details>
+    </ng-container>
+
   </mat-sidenav>
 </mat-sidenav-container>

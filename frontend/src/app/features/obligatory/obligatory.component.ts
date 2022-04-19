@@ -5,7 +5,7 @@ import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-obligatory',
@@ -17,11 +17,6 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
   obligates$!: Observable<Obligatory[]>;
   obligate$!: Observable<Obligatory>;
 
-  // obligateForm: FormGroup = new FormGroup({
-  //   title: new FormControl(''),
-  //   description: new FormControl(''),
-  //   amount: new FormControl(''),
-  // });
   obligateForm = this.fb.group({
     title: [''],
     description: [''],
@@ -40,7 +35,7 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
     this.obligates$ = this.route.paramMap
       .pipe(
         switchMap(params => {
-          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+          const id = params.get('accountId') || this.utilsService.accountId;
           return this.obligatoryService.getObligates(String(id));
         })
       );
@@ -59,6 +54,35 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
       tap(obligate => {
         this.obligateForm.patchValue(obligate)
       })).subscribe();
+  }
+
+  updateObligate(id: string, obligate: Obligatory) {
+    obligate = this.obligateForm.value;
+    this.obligatoryService.updateObligate(id, obligate)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$))
+      .subscribe();
+    this.obligates$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.obligatoryService.getObligates(String(accountId));
+        })
+      );
+  }
+
+  deleteObligate(id: string) {
+    this.obligatoryService.deleteObligate(id)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$))
+      .subscribe();
+    this.obligates$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.obligatoryService.getObligates(String(accountId));
+        })
+      );
   }
 
   ngOnDestroy() {

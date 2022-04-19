@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Subscriptions } from '../subscriptions';
 import { Observable } from 'rxjs';
-import { Transaction } from '../../main-page/transaction/transaction';
 
 @Injectable({
   providedIn: 'root',
@@ -22,5 +21,16 @@ export class SubscriptionService {
     return this.http.get<Subscriptions>(
       `${environment.apiUrl}subscriptions/${accountId}/${id}`
     );
+  }
+
+  updateSubscription(id: string, transaction: Subscriptions): Observable<Subscriptions> {
+    return this.http.put<Subscriptions>(
+      `${environment.apiUrl}subscriptions/update/${id}`,
+      transaction
+    );
+  }
+
+  deleteSubscription(id: string) {
+    return this.http.delete(`${environment.apiUrl}subscriptions/delete/${id}`);
   }
 }

@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngFor="let transaction of transactions$ | async">
-    <ui-card (click)="getTransaction(transaction.id);sidenav.toggle();" [card]="transaction"
+    <ui-card (click)="getTransaction(transaction.id); sidenav.toggle();" [card]="transaction"
              [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
   </ng-container>
 </div>

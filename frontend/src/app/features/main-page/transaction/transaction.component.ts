@@ -1,4 +1,8 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
 import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
 import { Observable, Subject } from 'rxjs';
@@ -13,9 +17,10 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './transaction.component.html',
   styleUrls: ['./transaction.component.scss'],
 })
-export class TransactionComponent implements OnInit, OnChanges, OnDestroy {
+export class TransactionComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   transactions$!: Observable<Transaction[]>;
+  transactions: Transaction[] = [];
   transaction$!: Observable<Transaction>;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
@@ -35,7 +40,7 @@ export class TransactionComponent implements OnInit, OnChanges, OnDestroy {
     private transactionService: TransactionService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
   ) {
   }
 
@@ -49,9 +54,6 @@ export class TransactionComponent implements OnInit, OnChanges, OnDestroy {
       );
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-    console.log(changes);
-  }
 
   getTransaction(id: string) {
     this.transaction$ = this.route.paramMap.pipe(
@@ -74,7 +76,13 @@ export class TransactionComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(
         takeUntil(this.componentIsDestroyed$))
       .subscribe();
-
+    this.transactions$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.transactionService.getTransactions(String(accountId));
+        })
+      );
   }
 
   deleteTransaction(id: string) {
@@ -82,6 +90,13 @@ export class TransactionComponent implements OnInit, OnChanges, OnDestroy {
       .pipe(
         takeUntil(this.componentIsDestroyed$))
       .subscribe();
+    this.transactions$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.transactionService.getTransactions(String(accountId));
+        })
+      );
   }
 
   ngOnDestroy() {

@@ -14,8 +14,12 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ui-details [title]="'Subscription'" [detailsInfo]="subscription$ | async"
-                [detailsForm]="subscriptionForm"
-                (close)="sidenav.toggle()"></ui-details>
+    <ng-container *ngIf="subscription$ | async as subscription">
+      <ui-details [title]="'Subscription'" [detailsInfo]="subscription$ | async"
+                  [detailsForm]="subscriptionForm"
+                  (save)="updateSubscription(subscription.id, subscription)"
+                  (delete)="deleteSubscription(subscription.id)"
+                  (close)="sidenav.toggle()"></ui-details>
+    </ng-container>
   </mat-sidenav>
 </mat-sidenav-container>
