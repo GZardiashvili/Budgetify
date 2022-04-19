@@ -5,7 +5,15 @@ const categorySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    title: {type: String, required: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
     type: String,
 });
 

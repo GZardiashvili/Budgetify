@@ -1,6 +1,7 @@
 <button mat-button [matMenuTriggerFor]="account">
   <div class="account" *ngIf="activeAccount | async as acc">
-    <span class="account__icon"><fa-icon [icon]="faDetails" (click)="sidenav.toggle()"></fa-icon></span>
+    <span class="account__icon"><fa-icon [icon]="faDetails"
+                                         (click)="sidenav.toggle(); getAccount(acc.id);"></fa-icon></span>
     <span class="account__title">{{acc.title}} </span>
     <span class="account__amount">{{acc.availableAmount}}</span>
     <span class="account__currency">$</span>

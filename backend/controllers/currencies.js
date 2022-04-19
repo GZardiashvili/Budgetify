@@ -1,6 +1,5 @@
 const express = require('express');
 const Currency = require('../models/currency');
-const Transaction = require("../models/transaction");
 const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
@@ -40,7 +39,9 @@ router.post('/create', (req, res) => {
     const body = req.body;
 
     const currency = new Currency({
-        name: body.name, sign: body.sign,
+        user: bindUser(req, res).id,
+        name: body.name,
+        sign: body.sign,
     });
     currency.save().then((savedCurrency) => {
         res.json(savedCurrency);
@@ -67,7 +68,6 @@ router.put('/update/:id', (req, res) => {
         name: body.name, sign: body.sign,
     };
     Currency.findOneAndUpdate({
-        user: bindUser(req, res).id,
         id: req.params.id
     }, currency, {new: true})
         .then((updatedCurrency) => {

@@ -17,6 +17,8 @@
     <ng-container *ngIf="transaction$ | async as transaction">
       <ui-details [title]="'Transaction'" [detailsInfo]="transaction"
                   [detailsForm]="transactionForm"
+                  (save)="updateTransaction(transaction.id, transaction)"
+                  (delete)="deleteTransaction(transaction.id)"
                   [icon]="transaction.type==='expenses'? faExpense : faIncome" (close)="sidenav.toggle()"></ui-details>
     </ng-container>
   </mat-sidenav>

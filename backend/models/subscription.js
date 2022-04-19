@@ -6,7 +6,15 @@ const subscriptionSchema = new mongoose.Schema({
         ref: 'User',
     },
     accountId: String,
-    title: {type: String, required: true, unique: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
     firstDateOfPayment: {type: Date, required: true},
     lastDateOfPayment: Date,
     dateOfPayment: {type: Date, required: true},

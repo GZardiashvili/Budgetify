@@ -8,6 +8,7 @@ import { IconProp } from '@fortawesome/fontawesome-svg-core';
   styleUrls: ['./card.component.scss']
 })
 export class CardComponent implements OnInit {
+
   @Input() card!: Card;
   @Input() icon!: IconProp;
 

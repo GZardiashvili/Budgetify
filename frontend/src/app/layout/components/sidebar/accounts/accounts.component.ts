@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faCirclePlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { Account } from './account';
 import { AccountService } from './services/account.service';
 import { UtilsService } from '../../../../shared/utils/utils.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
+import { switchMap, takeUntil, tap } from 'rxjs/operators';
 
 
 @Component({
@@ -13,10 +14,12 @@ import { FormBuilder } from '@angular/forms';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss']
 })
-export class AccountsComponent {
+export class AccountsComponent implements OnInit, OnDestroy {
+  private componentIsDestroyed$ = new Subject<boolean>();
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
+  account$!: Observable<Account>;
   activeAccount: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
   accountForm = this.fb.group({
     type: [''],
@@ -32,9 +35,11 @@ export class AccountsComponent {
               private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder) {
-    this.accountService.getAccountById(this.accountId).subscribe(account => {
-      this.activeAccount.next(account);
-    });
+    this.accountService.getAccountById(this.accountId).pipe(
+      takeUntil(this.componentIsDestroyed$))
+      .subscribe(account => {
+        this.activeAccount.next(account);
+      });
   }
 
   get accountId(): string | null {
@@ -58,5 +63,26 @@ export class AccountsComponent {
     this.accountService.getAccountById(this.accountId).subscribe(account => {
       this.activeAccount.next(account);
     });
+  }
+
+  getAccount(id: string) {
+    this.account$ = this.route.paramMap.pipe(
+      switchMap(params => {
+        return this.accountService.getAccountById(String(id));
+      })
+    );
+    this.account$.pipe(
+      takeUntil(this.componentIsDestroyed$),
+      tap(account => {
+        this.accountForm.patchValue(account);
+      })).subscribe();
+  }
+
+  ngOnInit() {
+  }
+
+  ngOnDestroy() {
+    this.componentIsDestroyed$.next(true);
+    this.componentIsDestroyed$.complete();
   }
 }

@@ -6,7 +6,15 @@ const obligatoryPaymentSchema = new mongoose.Schema({
         ref: 'User',
     },
     accountId: String,
-    title: {type: String, required: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
     description: String,
     amount: {type: Number, required: true},
     currency: String,

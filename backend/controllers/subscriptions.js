@@ -40,6 +40,7 @@ router.post('/create', (req, res) => {
     const body = req.body;
 
     const subscription = new Subscription({
+        user: bindUser(req, res).id,
         accountId: body.accountId,
         title: body.title,
         firstDateOfPayment: body.firstDateOfPayment,

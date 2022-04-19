@@ -1,11 +1,10 @@
 const express = require('express');
 const Account = require('../models/account');
-const Transaction = require("../models/transaction");
 const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/:id', (req, res) => {
+router.get('/', (req, res) => {
     Account.find({
         user: bindUser(req, res).id,
     }, (err, accounts) => {
@@ -37,7 +36,7 @@ router.post('/create', (req, res) => {
     const body = req.body;
 
     const account = new Account({
-        userId: body.userId,
+        user: bindUser(req, res).id,
         title: body.title,
         description: body.description,
         category: body.category,
@@ -73,7 +72,7 @@ router.put('update/:id', (req, res) => {
     const body = req.body;
 
     const account = {
-        userId: body.userId,
+        user: body.user,
         title: body.title,
         description: body.description,
         category: body.category,

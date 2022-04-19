@@ -11,12 +11,11 @@ export class PiggyBankService {
   constructor(private http: HttpClient) {
   }
 
-// must change when binding-with-account is implemented
-  getPiggyBanks() {
-    return this.http.get<PiggyBank[]>(`${environment.apiUrl}piggyBanks/6248c4feb08520e2a903fc3a`);
+  getPiggyBanks(accountId: string | null) {
+    return this.http.get<PiggyBank[]>(`${environment.apiUrl}piggyBanks/${accountId}`);
   }
 
-  getPiggyBank(id: string) {
-    return this.http.get<PiggyBank>(`${environment.apiUrl}piggyBanks/6248c4feb08520e2a903fc3a/${id}`);
+  getPiggyBank(accountId: string | null, id: string) {
+    return this.http.get<PiggyBank>(`${environment.apiUrl}piggyBanks/${accountId}/${id}`);
   }
 }

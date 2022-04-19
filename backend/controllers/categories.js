@@ -1,14 +1,12 @@
 const express = require('express');
 const Category = require('../models/category');
-const Transaction = require("../models/transaction");
 const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
+router.get('/', (req, res) => {
     Category.find({
         user: bindUser(req, res).id,
-        accountId: req.params.accountId
     }, (err, Categories) => {
         if (err) {
             res.status(500).send(err);
@@ -20,10 +18,9 @@ router.get('/:accountId', (req, res) => {
     });
 });
 
-router.get('/:accountId/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Category.findOne({
         user: bindUser(req, res).id,
-        account: req.params.accountId,
         id: req.params.id
     }, (err, category) => {
         if (err) {
@@ -40,7 +37,9 @@ router.post('/create', (req, res) => {
     const body = req.body;
 
     const category = new Category({
-        title: body.title, type: body.type,
+        user: bindUser(req, res).id,
+        title: body.title,
+        type: body.type,
     });
     category
         .save()

@@ -40,7 +40,8 @@ router.post('/create', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = new ObligatoryPayment({
-        userId: body.userId,
+        user: bindUser(req, res).id,
+        accountId: body.accountId,
         title: body.title,
         description: body.description,
         amount: body.amount,
@@ -74,7 +75,7 @@ router.put('/update/:id', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = {
-        userId: body.userId,
+        user: body.user,
         title: body.title,
         description: body.description,
         amount: body.amount,

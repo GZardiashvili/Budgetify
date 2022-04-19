@@ -7,7 +7,15 @@ const transactionSchema = new mongoose.Schema({
     },
     accountId: String,
     type: String,
-    title: {type: String, required: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
     description: {type: String, required: true},
     payee: String,
     dateOfOperation: Date,

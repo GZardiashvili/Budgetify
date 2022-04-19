@@ -29,6 +29,7 @@ router.post('/create', (req, res) => {
     const body = req.body;
 
     const piggyBank = new PiggyBank({
+        user: bindUser(req, res).id,
         accountId: body.accountId,
         goal: body.goal,
         goalAmount: body.goalAmount,

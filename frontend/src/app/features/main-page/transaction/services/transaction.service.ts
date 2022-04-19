@@ -22,4 +22,15 @@ export class TransactionService {
       `${environment.apiUrl}transactions/${accountId}/${id}`
     );
   }
+
+  updateTransaction(id: string, transaction: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(
+      `${environment.apiUrl}transactions/update/${id}`,
+      transaction
+    );
+  }
+
+  deleteTransaction(id: string) {
+    return this.http.delete(`${environment.apiUrl}transactions/delete/${id}`);
+  }
 }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { delay, tap } from 'rxjs/operators';
 import { LoadingService } from '../shared/loading/services/loading.service';
 import { Observable } from 'rxjs';
 

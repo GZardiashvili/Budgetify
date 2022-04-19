@@ -1,6 +1,6 @@
 export interface Card {
   id?: string;
-  userId?: string;
+  user?: string;
   type?: string;
   accountId?: string;
   title?: string;
