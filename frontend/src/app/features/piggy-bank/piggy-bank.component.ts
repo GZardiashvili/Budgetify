@@ -53,6 +53,35 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
       })).subscribe();
   }
 
+  updatePiggyBank(id: string, piggyBank: PiggyBank) {
+    piggyBank = this.piggyBankForm.value;
+    this.piggyBankService.updatePiggyBank(id, piggyBank)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$))
+      .subscribe();
+    this.piggyBanks$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.piggyBankService.getPiggyBanks(String(accountId));
+        })
+      );
+  }
+
+  deletePiggyBank(id: string) {
+    this.piggyBankService.deletePiggyBank(id)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$))
+      .subscribe();
+    this.piggyBanks$ = this.route.paramMap
+      .pipe(
+        switchMap(params => {
+          const accountId = params.get('accountId') || this.utilsService.accountId;
+          return this.piggyBankService.getPiggyBanks(String(accountId));
+        })
+      );
+  }
+
   ngOnDestroy() {
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();

@@ -21,6 +21,6 @@ export class AccountService {
   }
 
   addAccount(account: Account): Observable<Account> {
-    return this.http.post<Account>(`${environment.apiUrl}accounts`, account);
+    return this.http.post<Account>(`${environment.apiUrl}accounts/create`, account);
   }
 }

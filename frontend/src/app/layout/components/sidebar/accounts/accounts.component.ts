@@ -19,7 +19,7 @@ export class AccountsComponent implements OnInit, OnDestroy {
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
-  account$!: Observable<Account>;
+  // account$!: Observable<Account>;
   activeAccount: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
   accountForm = this.fb.group({
     title: [''],
@@ -33,11 +33,6 @@ export class AccountsComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder) {
-    this.accountService.getAccountById(this.accountId).pipe(
-      takeUntil(this.componentIsDestroyed$))
-      .subscribe(account => {
-        this.activeAccount.next(account);
-      });
   }
 
   get accountId(): string | null {
@@ -57,26 +52,26 @@ export class AccountsComponent implements OnInit, OnDestroy {
   }
 
   accountSelect() {
-    this.router.navigate([this.getBaseUrl() + '/' + this.accountId], {skipLocationChange: true});
-    this.accountService.getAccountById(this.accountId).subscribe(account => {
+    this.router.navigate([this.getBaseUrl() + '/' + this.accountId],);
+    this.route.paramMap.pipe(switchMap(params => {
+      return this.accountService.getAccountById(this.accountId);
+    }), takeUntil(this.componentIsDestroyed$)).subscribe(account => {
+      console.log(account);
       this.activeAccount.next(account);
     });
-  }
 
-  getAccount(id: string) {
-    this.account$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        return this.accountService.getAccountById(String(id));
-      })
-    );
-    this.account$.pipe(
-      takeUntil(this.componentIsDestroyed$),
-      tap(account => {
-        this.accountForm.patchValue(account);
-      })).subscribe();
+    // this.accountService.getAccountById(this.accountId).subscribe(account => {
+    //   // console.log(account.id);
+    //   this.activeAccount.next(account);
+    // });
   }
 
   ngOnInit() {
+    this.accountService.getAccountById(this.accountId).pipe(
+      takeUntil(this.componentIsDestroyed$))
+      .subscribe(account => {
+        this.activeAccount.next(account);
+      });
   }
 
   ngOnDestroy() {

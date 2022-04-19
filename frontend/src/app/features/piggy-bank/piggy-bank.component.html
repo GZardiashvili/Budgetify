@@ -29,6 +29,8 @@
     <ng-container *ngIf="piggyBank$ | async as piggyBank">
       <ui-details [title]="'Piggy Bank'" [detailsInfo]="piggyBank"
                   [detailsForm]="piggyBankForm"
+                  (save)="updatePiggyBank(piggyBank.id, piggyBank)"
+                  (delete)="deletePiggyBank(piggyBank.id)"
                   (close)="sidenav.toggle()"></ui-details>
     </ng-container>
   </mat-sidenav>
