@@ -5,18 +5,9 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/services/piggy-bank.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/services/piggy-bank.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.spec.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,6 +71,56 @@
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\subscriptions" />
     </key>
   </component>
+  <component name="RunManager" selected="Karma.Account service.should get account by id">
+    <configuration name="Account service.should get account by id" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
+      <config-file value="$PROJECT_DIR$/frontend/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/frontend/node_modules/@angular/cli" />
+      <working-directory value="$PROJECT_DIR$/frontend" />
+      <node-interpreter value="project" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file-path value="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" />
+      <test-names>
+        <test-name value="Account service" />
+        <test-name value="should get account by id" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="accountService.should be created" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
+      <config-file value="$PROJECT_DIR$/frontend/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/frontend/node_modules/@angular/cli" />
+      <working-directory value="$PROJECT_DIR$/frontend" />
+      <node-interpreter value="project" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file-path value="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" />
+      <test-names>
+        <test-name value="accountService" />
+        <test-name value="should be created" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="layout component" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
+      <config-file value="$PROJECT_DIR$/frontend/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/frontend/node_modules/@angular/cli" />
+      <working-directory value="$PROJECT_DIR$/frontend" />
+      <node-interpreter value="project" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file-path value="$PROJECT_DIR$/frontend/src/app/layout/layout.component.spec.ts" />
+      <test-names>
+        <test-name value="layout component" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Karma.Account service.should get account by id" />
+        <item itemvalue="Karma.accountService.should be created" />
+        <item itemvalue="Karma.layout component" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -118,5 +159,8 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Budgetify$layout_component.dat" NAME="layout component Coverage Results" MODIFIED="1650396432978" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="KarmaJavaScriptTestRunnerCoverage" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
