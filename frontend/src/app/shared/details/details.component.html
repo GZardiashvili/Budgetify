@@ -67,6 +67,14 @@
         <mat-label>Title</mat-label>
         <input matInput name="title" formControlName="title">
       </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('goal')">
+        <mat-label>Goal</mat-label>
+        <input matInput name="goal" formControlName="goal">
+      </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('goalAmount')">
+        <mat-label>Goal Amount</mat-label>
+        <input matInput name="goalAmount" formControlName="goalAmount">
+      </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('description')">
         <mat-label>Description</mat-label>
         <textarea matInput name="description" formControlName="description"

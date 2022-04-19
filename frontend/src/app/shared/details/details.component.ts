@@ -35,7 +35,6 @@ export class DetailsComponent {
     availableAmount: [''],
   });
 
-  // @Input() detailsInfo: Card | null = null;
   @Input()
   get detailsInfo(): Card | null {
     return this._detailsInfo;
