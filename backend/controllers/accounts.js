@@ -18,10 +18,10 @@ router.get('/', (req, res) => {
     });
 });
 
-router.get('/:id', (req, res) => {
+router.get('/:accountId', (req, res) => {
     Account.findOne({
         user: bindUser(req, res).id,
-        id: req.params.id
+        id: req.params.accountId
     }, (err, account) => {
         if (err) {
             res.status(500).send(err);
@@ -54,10 +54,10 @@ router.post('/create', (req, res) => {
         });
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/delete/:accountId', (req, res) => {
     Account.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        id: req.params.accountId
     })
         .then(() => {
             res.status(204).end();
@@ -67,7 +67,7 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
-router.put('update/:id', (req, res) => {
+router.put('update/:accountId', (req, res) => {
     const body = req.body;
 
     const account = {
@@ -81,7 +81,7 @@ router.put('update/:id', (req, res) => {
     };
     Account.findOneAndUpdate({
         user: bindUser(req, res).id,
-        id: req.params.id
+        id: req.params.accountId
     }, account, {new: true})
         .then((updatedAccount) => {
             res.json(updatedAccount);

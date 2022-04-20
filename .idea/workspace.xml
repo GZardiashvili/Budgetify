@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.spec.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.spec.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -86,6 +83,20 @@
       </test-names>
       <method v="2" />
     </configuration>
+    <configuration name="Account service.should test HttpClient.get by id" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
+      <config-file value="$PROJECT_DIR$/frontend/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/frontend/node_modules/@angular/cli" />
+      <working-directory value="$PROJECT_DIR$/frontend" />
+      <node-interpreter value="project" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file-path value="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.spec.ts" />
+      <test-names>
+        <test-name value="Account service" />
+        <test-name value="should test HttpClient.get by id" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="accountService.should be created" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
       <config-file value="$PROJECT_DIR$/frontend/karma.conf.js" />
       <karma-package-dir value="$PROJECT_DIR$/frontend/node_modules/@angular/cli" />
@@ -116,6 +127,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Karma.Account service.should get account by id" />
+        <item itemvalue="Karma.Account service.should test HttpClient.get by id" />
         <item itemvalue="Karma.accountService.should be created" />
         <item itemvalue="Karma.layout component" />
       </list>

@@ -1,15 +1,18 @@
-<button mat-button [matMenuTriggerFor]="account">
-  <div class="account" *ngIf="activeAccount | async as acc">
-    <span class="account__icon"><fa-icon [icon]="faDetails"
-                                         (click)="sidenav.toggle();"></fa-icon></span>
-    <span class="account__title">{{acc.title}} </span>
-    <span class="account__amount">{{acc.availableAmount}}</span>
-    <span class="account__currency">$</span>
+<div class="container">
+  <button mat-button [matMenuTriggerFor]="account">
+    <div class="account" *ngIf="activeAccount | async as acc">
+      <span class="account__title">{{acc.title}} </span>
+      <span class="account__amount">{{acc.availableAmount}}</span>
+      <span class="account__currency">$</span>
+    </div>
+  </button>
+  <div class="account__icon" (click)="sidenav.toggle()">
+    <fa-icon [icon]="faDetails"></fa-icon>
   </div>
-</button>
+</div>
 <mat-menu #account="matMenu">
   <ng-container *ngFor="let account of accounts | async">
-    <button mat-menu-item (click)="setAccountId(account.id); accountSelect()">
+    <button mat-menu-item (click)="accountSelect(account)">
       <div class="account">
         <span class="account__title">{{account.title}} </span>
         <span class="account__amount">{{account.availableAmount}}</span>

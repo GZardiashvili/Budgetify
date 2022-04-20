@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { faCirclePlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
 import { Account } from './account';
 import { AccountService } from './services/account.service';
 import { UtilsService } from '../../../../shared/utils/utils.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { takeUntil } from 'rxjs/operators';
 
 
 @Component({
@@ -14,13 +14,12 @@ import { switchMap, takeUntil, tap } from 'rxjs/operators';
   templateUrl: './accounts.component.html',
   styleUrls: ['./accounts.component.scss']
 })
-export class AccountsComponent implements OnInit, OnDestroy {
+export class AccountsComponent implements OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
   accounts: Observable<Account[]> = this.accountService.getAccounts();
-  // account$!: Observable<Account>;
-  activeAccount: BehaviorSubject<Account | null> = new BehaviorSubject<Account | null>(null);
+  activeAccount: Subject<Account | null> = new Subject<Account | null>();
   accountForm = this.fb.group({
     title: [''],
     description: [''],
@@ -33,6 +32,14 @@ export class AccountsComponent implements OnInit, OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder) {
+    this.accountService.getAccount(this.accountId)
+      .pipe(
+        takeUntil(this.componentIsDestroyed$)
+      ).subscribe(account => {
+      this.router.navigate([this.getBaseUrl() + '/' + account.id], {skipLocationChange: true});
+      this.activeAccount.next(account);
+      this.accountForm.patchValue(account);
+    });
   }
 
   get accountId(): string | null {
@@ -43,35 +50,15 @@ export class AccountsComponent implements OnInit, OnDestroy {
     this.accountService.addAccount(account);
   }
 
-  setAccountId(accountId: string) {
-    this.utilsService.setAccountId(accountId);
-  }
-
   getBaseUrl() {
     return this.router.url.split('/')[1];
   }
 
-  accountSelect() {
-    this.router.navigate([this.getBaseUrl() + '/' + this.accountId],);
-    this.route.paramMap.pipe(switchMap(params => {
-      return this.accountService.getAccountById(this.accountId);
-    }), takeUntil(this.componentIsDestroyed$)).subscribe(account => {
-      console.log(account);
-      this.activeAccount.next(account);
-    });
-
-    // this.accountService.getAccountById(this.accountId).subscribe(account => {
-    //   // console.log(account.id);
-    //   this.activeAccount.next(account);
-    // });
-  }
-
-  ngOnInit() {
-    this.accountService.getAccountById(this.accountId).pipe(
-      takeUntil(this.componentIsDestroyed$))
-      .subscribe(account => {
-        this.activeAccount.next(account);
-      });
+  accountSelect(account: Account) {
+    this.router.navigate([this.getBaseUrl() + '/' + account.id], {skipLocationChange: true});
+    this.utilsService.setAccountId(account.id);
+    this.accountForm.patchValue(account);
+    this.activeAccount.next(account);
   }
 
   ngOnDestroy() {

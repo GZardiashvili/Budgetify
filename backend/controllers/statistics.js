@@ -1,7 +1,7 @@
 const express = require('express');
 const Statistics = require('../models/statistics');
 const bindUser = require("../utils/bindUser");
-
+const Transaction = require('../models/transaction');
 const router = express.Router();
 
 router.get('/:accountId', (req, res) => {
