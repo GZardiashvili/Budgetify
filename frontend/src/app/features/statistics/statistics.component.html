@@ -1,13 +1,9 @@
-<!--<mat-form-field appearance="standard">-->
-<!--  <mat-label>Statistics</mat-label>-->
-<!--  <mat-select (selectionChange)="createStatistics($event.value)">-->
-<!--    <ng-container *ngIf="statistics$ | async as statistics">-->
-<!--      &lt;!&ndash;        <mat-option *ngFor="let stat of statistics" [value]="stat.id">{{stat.name}}</mat-option>&ndash;&gt;-->
-<!--      <p>{{statistics | json}}</p>-->
-<!--    </ng-container>-->
-<!--  </mat-select>-->
-<!--</mat-form-field>-->
-<button>Category Statistics</button>
-<button>Monthly Statistics</button>
-<div [chart]="chart"></div>
+<button (click)="goToCategory()">Category Statistics</button>
+<button (click)="goToMonthly()">Monthly Statistics</button>
+<ng-container *ngIf="currentView=='categoryStat'; else monthlyStat">
+  <div [chart]="categoriesStatistics"></div>
+</ng-container>
 
+<ng-template #monthlyStat>
+  <div [chart]="monthlyStatistics"></div>
+</ng-template>

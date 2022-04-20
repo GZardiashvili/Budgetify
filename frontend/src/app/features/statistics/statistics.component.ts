@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { Statistics } from './statistics';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { StatisticsService } from './services/statistics.service';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { Chart } from 'angular-highcharts'
+import { Transaction } from '../main-page/transaction/transaction';
 
 @Component({
   selector: 'app-statistics',
@@ -14,44 +14,40 @@ import { Chart } from 'angular-highcharts'
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
-  statistics$!: Observable<Statistics>;
   statisticsArrOptions: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  incomes: number[] = [20, 10, 5, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100];
-  expenses: number[] = [10, 50, 100, 30, 15, 20, 30, 40, 50, 60, 70, 80, 70];
-  economy: number[] = [5, 15, 12, 30, 17, 20, 30, 40, 52, 50, 30, 35, 45];
-  name = 'Statistics';
-  chart!: Chart;
+  incomes: number[] = [];
+  expenses: number[] = [];
+  economy: number[] = [];
+  categories: string[] = ['Food', 'Clothes', 'Transport', 'Entertainment', 'Other'];
+  monthlyStatistics!: Chart;
+  categoriesStatistics!: Chart;
+  report!: Chart;
+  currentView: 'categoryStat' | 'monthlyStat' = 'categoryStat';
 
   constructor(
     private statisticsService: StatisticsService,
     private route: ActivatedRoute,
     private utilsService: UtilsService
   ) {
+    this.statisticsService.getTransactions(this.utilsService.accountId)
+      .pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe(transactions => {
+        let stats = this.utilsService.translateForStatistic(transactions)
+        this.incomes = stats.pos;
+        this.expenses = stats.neg;
+        this.economy = stats.economy;
+        this.createMonthlyStatistics();
+        this.createCategoriesStatistics();
+      });
   }
+
+  transactions!: Transaction[];
+
 
   ngOnInit(): void {
-    this.createChart()
-    // this.statistics$ = this.route.paramMap
-    //   .pipe(
-    //     switchMap(params => {
-    //       const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
-    //       return this.statisticsService.getStatistics(String(id));
-    //     })
-    //   );
   }
 
-  createStatistics(id: string) {
-    // this.statistics$;
-    // this.statisticsService.getReport(id).pipe(tap(r => {
-    //   this.reportArrValues = Object.values(r);
-    // })).subscribe();
-    // this.reportService.getProgramById(id).pipe(tap(p => {
-    //   this.name = p.name;
-    // })).subscribe();
-    // this.report$ = this.reportService.getReport(id);
-  }
-
-  createChart() {
+  createMonthlyStatistics() {
     const chart = new Chart({
       chart: {
         type: 'line',
@@ -143,9 +139,87 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         },
       ],
     });
-    this.chart = chart;
+    this.monthlyStatistics = chart;
     chart.ref$.pipe(
       takeUntil(this.componentIsDestroyed$)).subscribe();
+  }
+
+  createCategoriesStatistics() {
+    const chart = new Chart({
+      chart: {
+        type: 'pie',
+      },
+      credits: {
+        enabled: false,
+      },
+      title: {
+        text: '',
+      },
+      yAxis: {
+        visible: true,
+        min: 0,
+        minTickInterval: 1,
+        allowDecimals: false
+      },
+      legend: {
+        enabled: true,
+      },
+      xAxis: {
+        lineColor: '#fff',
+        categories: this.categories,
+        min: 0,
+        minTickInterval: 1,
+        allowDecimals: false
+      },
+      plotOptions: {
+        series: {
+          borderRadius: 5,
+        } as any,
+      },
+      series: [
+        {
+          type: 'pie',
+          name: 'Category',
+          data: [
+            {
+              name: 'food',
+              y: this.incomes[0]
+            },
+            {
+              name: 'clothes',
+              y: this.incomes[1]
+            },
+            {
+              name: 'transport',
+              y: this.incomes[2]
+            },
+            {
+              name: 'health',
+              y: this.incomes[3]
+            },
+            {
+              name: 'entertainment',
+              y: this.incomes[4]
+            },
+            {
+              name: 'other',
+              y: this.incomes[5]
+            },
+          ],
+        },
+      ],
+    });
+    this.categoriesStatistics = chart;
+    chart.ref$.pipe(
+      takeUntil(this.componentIsDestroyed$)).subscribe();
+  }
+
+  goToMonthly() {
+    this.currentView = 'monthlyStat';
+  }
+
+  goToCategory() {
+    this.currentView = 'categoryStat';
   }
 
   ngOnDestroy() {
