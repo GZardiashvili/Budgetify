@@ -132,7 +132,7 @@
     </form>
     <div class="details-sidebar__footer">
       <button mat-raised-button color="primary" (click)="goToDetails()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="save.emit()">Save</button>
+      <button mat-raised-button color="primary" (click)="save.emit(); goToDetails();">Save</button>
     </div>
   </div>
 </ng-template>

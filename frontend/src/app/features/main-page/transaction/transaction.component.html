@@ -1,6 +1,6 @@
 <div class="container">
-  <ng-container *ngFor="let transaction of transactions$ | async">
-    <ui-card (click)="getTransaction(transaction.id); sidenav.toggle();" [card]="transaction"
+  <ng-container *ngFor="let transaction of transactions">
+    <ui-card (click)="getTransaction(transaction.accountId,transaction.id); sidenav.toggle();" [card]="transaction"
              [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
   </ng-container>
 </div>
@@ -14,10 +14,10 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="transaction$ | async as transaction">
+    <ng-container *ngIf="transaction">
       <ui-details [title]="'Transaction'" [detailsInfo]="transaction"
                   [detailsForm]="transactionForm"
-                  (save)="updateTransaction(transaction.id, transaction)"
+                  (save)="updateTransaction(transaction.accountId,transaction.id, transaction)"
                   (delete)="deleteTransaction(transaction.id)"
                   [icon]="transaction.type==='expenses'? faExpense : faIncome" (close)="sidenav.toggle()"></ui-details>
     </ng-container>

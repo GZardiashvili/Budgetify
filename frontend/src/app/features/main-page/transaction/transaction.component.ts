@@ -1,13 +1,13 @@
 import {
-  Component,
+  Component, OnChanges,
   OnDestroy,
-  OnInit,
+  OnInit, SimpleChanges,
 } from '@angular/core';
 import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
 import { Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder } from '@angular/forms';
@@ -19,9 +19,8 @@ import { FormBuilder } from '@angular/forms';
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
-  transactions$!: Observable<Transaction[]>;
-  transactions: Transaction[] = [];
-  transaction$!: Observable<Transaction>;
+  transactions!: Transaction[];
+  transaction!: Transaction;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
 
@@ -45,44 +44,30 @@ export class TransactionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.transactions$ = this.route.paramMap
+    this.route.paramMap
       .pipe(
         switchMap(params => {
           const id = params.get('accountId') || this.utilsService.accountId;
           return this.transactionService.getTransactions(String(id));
         })
-      );
+      ).subscribe(transactions => {
+      this.transactions = transactions;
+    });
   }
 
-
-  getTransaction(id: string) {
-    this.transaction$ = this.route.paramMap.pipe(
-      switchMap(params => {
-        const accountId = params.get('accountId') || this.utilsService.accountId;
-        return this.transactionService.getTransaction(String(accountId), String(id));
-      })
-    );
-
-    this.transaction$.pipe(
-      takeUntil(this.componentIsDestroyed$),
-      tap(transaction => {
-        this.transactionForm.patchValue(transaction);
-      })).subscribe();
+  getTransaction(accountId: string, id: string) {
+    this.transactionService.getTransaction(accountId, id).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(transaction => {
+      this.transactionForm.patchValue(transaction);
+      this.transaction = transaction;
+    });
   }
 
-  updateTransaction(id: string, transaction: Transaction) {
+  updateTransaction(accountId: string, id: string, transaction: Transaction) {
     transaction = this.transactionForm.value;
     this.transactionService.updateTransaction(id, transaction)
-      .pipe(
-        takeUntil(this.componentIsDestroyed$))
+      .pipe(takeUntil(this.componentIsDestroyed$))
       .subscribe();
-    this.transactions$ = this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const accountId = params.get('accountId') || this.utilsService.accountId;
-          return this.transactionService.getTransactions(String(accountId));
-        })
-      );
+    this.transactions = this.transactions.map(tr => tr.id === id ? transaction : tr);
   }
 
   deleteTransaction(id: string) {
@@ -90,13 +75,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
       .pipe(
         takeUntil(this.componentIsDestroyed$))
       .subscribe();
-    this.transactions$ = this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const accountId = params.get('accountId') || this.utilsService.accountId;
-          return this.transactionService.getTransactions(String(accountId));
-        })
-      );
+    this.transactions = this.transactions.filter(tr => tr.id !== id);
   }
 
   ngOnDestroy() {

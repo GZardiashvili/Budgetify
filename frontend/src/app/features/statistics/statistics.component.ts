@@ -16,7 +16,9 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   statistics$!: Observable<Statistics>;
   statisticsArrOptions: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  statisticsArrValues: number[] = [];
+  incomes: number[] = [20, 10, 5, 15, 20, 30, 40, 50, 60, 70, 80, 90, 100];
+  expenses: number[] = [10, 50, 100, 30, 15, 20, 30, 40, 50, 60, 70, 80, 70];
+  economy: number[] = [5, 15, 12, 30, 17, 20, 30, 40, 52, 50, 30, 35, 45];
   name = 'Statistics';
   chart!: Chart;
 
@@ -29,17 +31,17 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.createChart()
-    this.statistics$ = this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
-          return this.statisticsService.getStatistics(String(id));
-        })
-      );
+    // this.statistics$ = this.route.paramMap
+    //   .pipe(
+    //     switchMap(params => {
+    //       const id = params.get('accountId') ? params.get('accountId') : this.utilsService.accountId;
+    //       return this.statisticsService.getStatistics(String(id));
+    //     })
+    //   );
   }
 
   createStatistics(id: string) {
-    this.statistics$;
+    // this.statistics$;
     // this.statisticsService.getReport(id).pipe(tap(r => {
     //   this.reportArrValues = Object.values(r);
     // })).subscribe();
@@ -84,21 +86,59 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       series: [
         {
           type: 'line',
-          color: '#72b5e9',
-          name: this.name,
+          color: '#1FC222',
+          name: 'Incomes',
           data: [
-            {y: this.statisticsArrValues[0]},
-            {y: this.statisticsArrValues[1]},
-            {y: this.statisticsArrValues[2]},
-            {y: this.statisticsArrValues[3]},
-            {y: this.statisticsArrValues[4]},
-            {y: this.statisticsArrValues[5]},
-            {y: this.statisticsArrValues[6]},
-            {y: this.statisticsArrValues[7]},
-            {y: this.statisticsArrValues[8]},
-            {y: this.statisticsArrValues[9]},
-            {y: this.statisticsArrValues[10]},
-            {y: this.statisticsArrValues[11]},
+            {y: this.incomes[0]},
+            {y: this.incomes[1]},
+            {y: this.incomes[2]},
+            {y: this.incomes[3]},
+            {y: this.incomes[4]},
+            {y: this.incomes[5]},
+            {y: this.incomes[6]},
+            {y: this.incomes[7]},
+            {y: this.incomes[8]},
+            {y: this.incomes[9]},
+            {y: this.incomes[10]},
+            {y: this.incomes[11]},
+          ],
+        },
+        {
+          type: 'line',
+          color: '#EE3F19',
+          name: 'Expenses',
+          data: [
+            {y: this.expenses[0]},
+            {y: this.expenses[1]},
+            {y: this.expenses[2]},
+            {y: this.expenses[3]},
+            {y: this.expenses[4]},
+            {y: this.expenses[5]},
+            {y: this.expenses[6]},
+            {y: this.expenses[7]},
+            {y: this.expenses[8]},
+            {y: this.expenses[9]},
+            {y: this.expenses[10]},
+            {y: this.expenses[11]},
+          ],
+        },
+        {
+          type: 'line',
+          color: '#6200EE',
+          name: 'Econcomy',
+          data: [
+            {y: this.economy[0]},
+            {y: this.economy[1]},
+            {y: this.economy[2]},
+            {y: this.economy[3]},
+            {y: this.economy[4]},
+            {y: this.economy[5]},
+            {y: this.economy[6]},
+            {y: this.economy[7]},
+            {y: this.economy[8]},
+            {y: this.economy[9]},
+            {y: this.economy[10]},
+            {y: this.economy[11]},
           ],
         },
       ],
