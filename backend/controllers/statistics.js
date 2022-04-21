@@ -2,20 +2,21 @@ const express = require('express');
 const Statistics = require('../models/statistics');
 const bindUser = require("../utils/bindUser");
 const Transaction = require('../models/transaction');
+const translateForStatistic = require("../utils/translateForStatistics");
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
-    Statistics.find({
+router.get('/:accountId', async (req, res) => {
+    const transactions = await Transaction.find({
         user: bindUser(req, res).id,
         accountId: req.params.accountId,
-    }).then((statistics) => {
-        if (statistics) {
-            res.send(statistics);
-        } else {
-            res.sendStatus(404);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
+    });
+
+    const {incomes, expenses, economy, byCategory} = translateForStatistic(transactions);
+    res.json({
+        incomes,
+        expenses,
+        economy,
+        byCategory,
     });
 });
 

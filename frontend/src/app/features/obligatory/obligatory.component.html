@@ -1,11 +1,12 @@
 <div class="container">
   <ng-container *ngFor="let obligate of obligates$ | async">
-    <ui-card (click)="getObligate(obligate.id);sidenav.toggle()" [card]="obligate"></ui-card>
+    <ui-card (click)="getObligate(obligate.id);sidenav.opened = true" [card]="obligate"></ui-card>
   </ng-container>
 </div>
 <mat-sidenav-container class="container">
   <mat-sidenav
     #sidenav
+    [opened]="false"
     mode="over"
     class="details-sidenav"
     fixedInViewport="fixed"
@@ -16,7 +17,7 @@
     <ng-container *ngIf="obligate">
       <ui-details [title]="'Obligatory'" [detailsInfo]="obligate" [detailsForm]="obligateForm"
                   (save)="updateObligate(obligate.id, obligate)"
-                  (delete)="deleteObligate(obligate.id); obligate = null; sidenav.toggle();"
+                  (delete)="deleteObligate(obligate.id); obligate = null; sidenav.opened = false;"
                   (close)="sidenav.toggle()"></ui-details>
     </ng-container>
 

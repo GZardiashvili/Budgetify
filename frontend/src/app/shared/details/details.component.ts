@@ -41,7 +41,7 @@ export class DetailsComponent {
   }
 
   set detailsInfo(detailsInfo: Card | null) {
-    this._detailsInfo = (detailsInfo) ? detailsInfo : null;
+    this._detailsInfo = (detailsInfo) || null;
   }
 
   private _detailsInfo: Card | null = null;

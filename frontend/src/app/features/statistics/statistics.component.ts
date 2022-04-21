@@ -15,36 +15,27 @@ import { Transaction } from '../main-page/transaction/transaction';
 export class StatisticsComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   statisticsArrOptions: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  incomes: number[] = [];
-  expenses: number[] = [];
-  economy: number[] = [];
-  categories: string[] = ['Food', 'Clothes', 'Transport', 'Entertainment', 'Other'];
   monthlyStatistics!: Chart;
   categoriesStatistics!: Chart;
   report!: Chart;
   currentView: 'categoryStat' | 'monthlyStat' = 'categoryStat';
+  statistics!: any;
 
   constructor(
     private statisticsService: StatisticsService,
     private route: ActivatedRoute,
-    private utilsService: UtilsService
+    private utilsService: UtilsService,
   ) {
-    this.statisticsService.getTransactions(this.utilsService.accountId)
+  }
+
+  ngOnInit(): void {
+    this.statisticsService.getStatistics(this.utilsService.accountId)
       .pipe(takeUntil(this.componentIsDestroyed$))
-      .subscribe(transactions => {
-        let stats = this.utilsService.translateForStatistic(transactions)
-        this.incomes = stats.pos;
-        this.expenses = stats.neg;
-        this.economy = stats.economy;
+      .subscribe(statistics => {
+        this.statistics = statistics;
         this.createMonthlyStatistics();
         this.createCategoriesStatistics();
       });
-  }
-
-  transactions!: Transaction[];
-
-
-  ngOnInit(): void {
   }
 
   createMonthlyStatistics() {
@@ -85,18 +76,18 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           color: '#1FC222',
           name: 'Incomes',
           data: [
-            {y: this.incomes[0]},
-            {y: this.incomes[1]},
-            {y: this.incomes[2]},
-            {y: this.incomes[3]},
-            {y: this.incomes[4]},
-            {y: this.incomes[5]},
-            {y: this.incomes[6]},
-            {y: this.incomes[7]},
-            {y: this.incomes[8]},
-            {y: this.incomes[9]},
-            {y: this.incomes[10]},
-            {y: this.incomes[11]},
+            {y: this.statistics.incomes[0]},
+            {y: this.statistics.incomes[1]},
+            {y: this.statistics.incomes[2]},
+            {y: this.statistics.incomes[3]},
+            {y: this.statistics.incomes[4]},
+            {y: this.statistics.incomes[5]},
+            {y: this.statistics.incomes[6]},
+            {y: this.statistics.incomes[7]},
+            {y: this.statistics.incomes[8]},
+            {y: this.statistics.incomes[9]},
+            {y: this.statistics.incomes[10]},
+            {y: this.statistics.incomes[11]},
           ],
         },
         {
@@ -104,18 +95,18 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           color: '#EE3F19',
           name: 'Expenses',
           data: [
-            {y: this.expenses[0]},
-            {y: this.expenses[1]},
-            {y: this.expenses[2]},
-            {y: this.expenses[3]},
-            {y: this.expenses[4]},
-            {y: this.expenses[5]},
-            {y: this.expenses[6]},
-            {y: this.expenses[7]},
-            {y: this.expenses[8]},
-            {y: this.expenses[9]},
-            {y: this.expenses[10]},
-            {y: this.expenses[11]},
+            {y: this.statistics.expenses[0]},
+            {y: this.statistics.expenses[1]},
+            {y: this.statistics.expenses[2]},
+            {y: this.statistics.expenses[3]},
+            {y: this.statistics.expenses[4]},
+            {y: this.statistics.expenses[5]},
+            {y: this.statistics.expenses[6]},
+            {y: this.statistics.expenses[7]},
+            {y: this.statistics.expenses[8]},
+            {y: this.statistics.expenses[9]},
+            {y: this.statistics.expenses[10]},
+            {y: this.statistics.expenses[11]},
           ],
         },
         {
@@ -123,18 +114,18 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           color: '#6200EE',
           name: 'Econcomy',
           data: [
-            {y: this.economy[0]},
-            {y: this.economy[1]},
-            {y: this.economy[2]},
-            {y: this.economy[3]},
-            {y: this.economy[4]},
-            {y: this.economy[5]},
-            {y: this.economy[6]},
-            {y: this.economy[7]},
-            {y: this.economy[8]},
-            {y: this.economy[9]},
-            {y: this.economy[10]},
-            {y: this.economy[11]},
+            {y: this.statistics.economy[0]},
+            {y: this.statistics.economy[1]},
+            {y: this.statistics.economy[2]},
+            {y: this.statistics.economy[3]},
+            {y: this.statistics.economy[4]},
+            {y: this.statistics.economy[5]},
+            {y: this.statistics.economy[6]},
+            {y: this.statistics.economy[7]},
+            {y: this.statistics.economy[8]},
+            {y: this.statistics.economy[9]},
+            {y: this.statistics.economy[10]},
+            {y: this.statistics.economy[11]},
           ],
         },
       ],
@@ -166,7 +157,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       },
       xAxis: {
         lineColor: '#fff',
-        categories: this.categories,
         min: 0,
         minTickInterval: 1,
         allowDecimals: false
@@ -179,31 +169,31 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       series: [
         {
           type: 'pie',
-          name: 'Category',
+          name: 'Expenses',
           data: [
             {
-              name: 'food',
-              y: this.incomes[0]
+              name: this.statistics.byCategory[0]?.category,
+              y: this.statistics.byCategory[0]?.amount,
             },
             {
-              name: 'clothes',
-              y: this.incomes[1]
+              name: this.statistics.byCategory[1]?.category,
+              y: this.statistics.byCategory[1]?.amount,
             },
             {
-              name: 'transport',
-              y: this.incomes[2]
+              name: this.statistics.byCategory[2]?.category,
+              y: this.statistics.byCategory[2]?.amount,
             },
             {
-              name: 'health',
-              y: this.incomes[3]
+              name: this.statistics.byCategory[3]?.category,
+              y: this.statistics.byCategory[3]?.amount,
             },
             {
-              name: 'entertainment',
-              y: this.incomes[4]
+              name: this.statistics.byCategory[4]?.category,
+              y: this.statistics.byCategory[4]?.amount,
             },
             {
-              name: 'other',
-              y: this.incomes[5]
+              name: this.statistics.byCategory[5]?.category,
+              y: this.statistics.byCategory[5]?.amount,
             },
           ],
         },

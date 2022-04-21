@@ -1,6 +1,6 @@
 <div class="container">
   <ng-container *ngFor="let subscription of subscriptions$ | async">
-    <ui-card (click)="getSubscription(subscription.id);sidenav.toggle()" [card]="subscription"></ui-card>
+    <ui-card (click)="getSubscription(subscription.id);sidenav.opened = true" [card]="subscription"></ui-card>
   </ng-container>
 </div>
 
@@ -18,7 +18,7 @@
       <ui-details [title]="'Subscription'" [detailsInfo]="subscription"
                   [detailsForm]="subscriptionForm"
                   (save)="updateSubscription(subscription.id, subscription)"
-                  (delete)="deleteSubscription(subscription.id); subscription= null; sidenav.toggle()"
+                  (delete)="deleteSubscription(subscription.id); subscription = null; sidenav.opened = false"
                   (close)="sidenav.toggle()"></ui-details>
     </ng-container>
   </mat-sidenav>
