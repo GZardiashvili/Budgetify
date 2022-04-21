@@ -36,12 +36,12 @@ router.get('/:accountId/:id', (req, res) => {
     });
 });
 
-router.post('/create', (req, res) => {
+router.post('/create/:accountId', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = new ObligatoryPayment({
         user: bindUser(req, res).id,
-        accountId: body.accountId,
+        accountId: req.params.accountId,
         title: body.title,
         description: body.description,
         amount: body.amount,
@@ -49,7 +49,7 @@ router.post('/create', (req, res) => {
         dateOfPayment: body.dateOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
-        dateOfTheLastPayment: body.dateOfThelastPayment,
+        dateOfTheLastPayment: body.dateOfTheLastPayment,
         createdOn: body.createdOn,
         updatedOn: body.updatedOn,
     });
@@ -83,7 +83,7 @@ router.put('/update/:id', (req, res) => {
         dayOfPayment: body.dayOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
-        dateOfThelastPayment: body.dateOfThelastPayment,
+        dateOfTheLastPayment: body.dateOfTheLastPayment,
         createdOn: body.createdOn,
         updatedOn: body.updatedOn,
     };

@@ -28,6 +28,13 @@ export class PiggyBankService {
     );
   }
 
+  addPiggyBank(accountId: string, piggyBank: PiggyBank): Observable<PiggyBank> {
+    return this.http.post<PiggyBank>(
+      `${environment.apiUrl}piggyBanks/create/${accountId}`,
+      piggyBank
+    );
+  }
+
   deletePiggyBank(id: string) {
     return this.http.delete(`${environment.apiUrl}piggyBanks/delete/${id}`);
   }

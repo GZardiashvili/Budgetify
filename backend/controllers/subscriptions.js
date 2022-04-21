@@ -36,12 +36,12 @@ router.get('/:accountId/:id', (req, res) => {
     });
 });
 
-router.post('/create', (req, res) => {
+router.post('/create/:accountId', (req, res) => {
     const body = req.body;
 
     const subscription = new Subscription({
         user: bindUser(req, res).id,
-        accountId: body.accountId,
+        accountId: req.params.accountId,
         title: body.title,
         description: body.description,
         firstDateOfPayment: body.firstDateOfPayment,

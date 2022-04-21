@@ -34,12 +34,12 @@ router.get('/:accountId/:id', (req, res) => {
     });
 });
 
-router.post('/create', (req, res) => {
+router.post('/create/:accountId', (req, res) => {
     const body = req.body;
 
     const transaction = new Transaction({
         user: bindUser(req, res).id,
-        accountId: body.accountId,
+        accountId: req.params.accountId,
         type: body.type,
         title: body.title,
         description: body.description,

@@ -16,6 +16,7 @@ import { ActivatedRoute } from '@angular/router';
 export class PiggyBankComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   private readonly reloadPiggyBanks$ = new BehaviorSubject(true);
+  accountId = this.utilsService.accountId;
 
   faPiggyBank = faPiggyBank;
   piggyBanks$!: Observable<PiggyBank[]>;
@@ -24,7 +25,7 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
     goal: [''],
     goalAmount: [''],
     description: [''],
-    savings: [''],
+    savings: ['0'],
     crashDate: [''],
   });
 
@@ -41,18 +42,33 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
       this.reloadPiggyBanks$,
     ]).pipe(
       switchMap(([params]) => {
-        const accountId = params.get('accountId') || this.utilsService.accountId;
-        return this.piggyBankService.getPiggyBanks(String(accountId));
+        return this.piggyBankService.getPiggyBanks(String(this.accountId));
       })
     );
+  }
+
+  view: 'details' | 'edit' = 'details';
+
+  editView() {
+    this.view = 'edit';
+    this.piggyBankForm.reset();
+  }
+
+  detailsView() {
+    this.view = 'details';
+  }
+
+  addPiggyBank(piggyBank: PiggyBank) {
+    this.piggyBankService.addPiggyBank(String(this.accountId), piggyBank).subscribe(() => {
+      this.reloadPiggyBanks$.next(true);
+    });
   }
 
   getPiggyBank(id: string) {
     this.route.paramMap.pipe(
       takeUntil(this.componentIsDestroyed$),
       switchMap(params => {
-        const accountId = params.get('accountId') || this.utilsService.accountId;
-        return this.piggyBankService.getPiggyBank(String(accountId), String(id));
+        return this.piggyBankService.getPiggyBank(String(this.accountId), String(id));
       })
     ).subscribe(piggyBank => {
       this.piggyBank = piggyBank;

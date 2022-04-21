@@ -17,9 +17,16 @@
           </div>
           <div class="balance">
             <span *ngIf="detailsInfo.currency"
-                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.currency}}</span>
+                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'"
+                  [ngClass]="detailsInfo.availableAmount ? 'amount-incomes': 'amount-expenses'"
+            >{{detailsInfo.currency}}
+            </span>
             <span *ngIf="detailsInfo.amount"
-                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.amount}}</span>
+                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.amount}}
+            </span>
+            <span *ngIf="detailsInfo.availableAmount"
+                  class="amount-incomes">{{detailsInfo.availableAmount}}
+            </span>
           </div>
         </div>
         <h2 *ngIf="detailsInfo.title">{{detailsInfo.title}}</h2>
@@ -38,16 +45,16 @@
             - {{detailsInfo.lastDateOfPayment | date: 'mm/dd/yyyy'}}
           </p>
           <p *ngIf="detailsInfo.goal"><span>Goal: </span>{{detailsInfo.goal}}</p>
-          <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
           <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
-          <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
           <p *ngIf="detailsInfo.savings"><span>Saved Amount: </span>{{detailsInfo.savings}}</p>
+          <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
+          <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
           <p *ngIf="detailsInfo.availableAmount"><span>Available Amount: </span>{{detailsInfo.availableAmount}}</p>
         </div>
       </div>
     </ng-container>
     <div class="details-sidebar__footer">
-      <button mat-flat-button color="warn" (click)="delete.emit()">Delete</button>
+      <button mat-flat-button color="warn" (click)="delete.emit()">{{btnText}}</button>
     </div>
   </div>
 </ng-container>

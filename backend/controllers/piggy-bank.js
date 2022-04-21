@@ -25,16 +25,16 @@ router.get('/:accountId/:id', (req, res) => {
         }).clone()
 });
 
-router.post('/create', (req, res) => {
+router.post('/create/:accountId', (req, res) => {
     const body = req.body;
 
     const piggyBank = new PiggyBank({
         user: bindUser(req, res).id,
-        accountId: body.accountId,
+        accountId: req.params.accountId,
         goal: body.goal,
         goalAmount: body.goalAmount,
         description: body.description,
-        savings: body.savings,
+        savings: body.savings ?? 0,
         crashDate: body.crashDate,
     });
     piggyBank

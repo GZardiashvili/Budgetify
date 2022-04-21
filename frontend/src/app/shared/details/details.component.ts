@@ -47,13 +47,14 @@ export class DetailsComponent {
   private _detailsInfo: Card | null = null;
 
   @Input() icon: IconProp | null = null;
+  @Input() btnText: string = 'Delete';
 
   @Output() delete = new EventEmitter();
   @Output() save = new EventEmitter();
   @Output() close = new EventEmitter();
 
 
-  currentView: 'details' | 'edit' = 'details';
+  @Input() currentView: 'details' | 'edit' = 'details';
 
   goToEdit() {
     this.currentView = 'edit';
