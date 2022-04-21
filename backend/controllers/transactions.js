@@ -6,7 +6,7 @@ const bindUser = require('../utils/bindUser');
 router.get('/:accountId', (req, res) => {
     Transaction.find({
         user: bindUser(req, res).id,
-        accountId: req.params.accountId
+        accountId: req.params.accountId,
     }, (err, transactions) => {
         if (err) {
             res.status(500).send(err);

@@ -3,8 +3,10 @@ function translateForStatistic(transactions) {
     const expensesTr = transactions.filter((el) => el.type === 'expenses');
     const incomes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const expenses = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    const byCategory = []
-    const calculate = expensesTr.reduce((acc, cur) => {
+    const expensesByCategory = []
+    const incomesByCategory = []
+
+    const calculateExp = expensesTr.reduce((acc, cur) => {
         cur.category.forEach((cat) => {
             if (!acc[cat]) {
                 acc[cat] = 0;
@@ -13,8 +15,21 @@ function translateForStatistic(transactions) {
         });
         return acc;
     }, {});
-    Object.entries(calculate).forEach(([key, value]) => {
-        byCategory.push({category: key, amount: value});
+    Object.entries(calculateExp).forEach(([key, value]) => {
+        expensesByCategory.push({category: key, amount: value});
+    });
+
+    const calculateInc = incomesTr.reduce((acc, cur) => {
+        cur.category.forEach((cat) => {
+            if (!acc[cat]) {
+                acc[cat] = 0;
+            }
+            acc[cat] += cur.amount;
+        });
+        return acc;
+    }, {});
+    Object.entries(calculateInc).forEach(([key, value]) => {
+        incomesByCategory.push({category: key, amount: value});
     });
 
     incomesTr.reduce((acc, el) => {
@@ -103,7 +118,8 @@ function translateForStatistic(transactions) {
         incomes,
         expenses,
         economy,
-        byCategory,
+        incomesByCategory,
+        expensesByCategory,
     };
 }
 

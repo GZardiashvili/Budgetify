@@ -31,6 +31,7 @@
 <mat-sidenav-container>
   <mat-sidenav
     #sidenav
+    [opened]="false"
     mode="over"
     class="details-sidenav"
     fixedInViewport="fixed"
@@ -42,8 +43,8 @@
       <ui-details [title]="'Account'" [detailsInfo]="acc"
                   [detailsForm]="accountForm"
                   (save)="updateAccount(acc.id, acc)"
-                  (delete)="deleteAccount(acc.id); sidenav.toggle()"
-                  (close)="sidenav.toggle()"></ui-details>
+                  (delete)="deleteAccount(acc.id); sidenav.opened = false"
+                  (close)="sidenav.opened = false"></ui-details>
     </ng-container>
   </mat-sidenav>
 </mat-sidenav-container>

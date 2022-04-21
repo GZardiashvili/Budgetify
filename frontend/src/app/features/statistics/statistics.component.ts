@@ -5,7 +5,6 @@ import { ActivatedRoute } from '@angular/router';
 import { StatisticsService } from './services/statistics.service';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { Chart } from 'angular-highcharts'
-import { Transaction } from '../main-page/transaction/transaction';
 
 @Component({
   selector: 'app-statistics',
@@ -16,7 +15,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   statisticsArrOptions: string[] = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   monthlyStatistics!: Chart;
-  categoriesStatistics!: Chart;
+  incomesCategoriesStatistics!: Chart;
+  expensesCategoriesStatistics!: Chart;
   report!: Chart;
   currentView: 'categoryStat' | 'monthlyStat' = 'categoryStat';
   statistics!: any;
@@ -34,7 +34,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       .subscribe(statistics => {
         this.statistics = statistics;
         this.createMonthlyStatistics();
-        this.createCategoriesStatistics();
+        this.createExpensesStatistics();
+        this.createIncomesStatistics();
       });
   }
 
@@ -135,7 +136,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       takeUntil(this.componentIsDestroyed$)).subscribe();
   }
 
-  createCategoriesStatistics() {
+  createExpensesStatistics() {
     const chart = new Chart({
       chart: {
         type: 'pie',
@@ -172,34 +173,103 @@ export class StatisticsComponent implements OnInit, OnDestroy {
           name: 'Expenses',
           data: [
             {
-              name: this.statistics.byCategory[0]?.category,
-              y: this.statistics.byCategory[0]?.amount,
+              name: this.statistics.expensesByCategory[0]?.category,
+              y: this.statistics.expensesByCategory[0]?.amount,
             },
             {
-              name: this.statistics.byCategory[1]?.category,
-              y: this.statistics.byCategory[1]?.amount,
+              name: this.statistics.expensesByCategory[1]?.category,
+              y: this.statistics.expensesByCategory[1]?.amount,
             },
             {
-              name: this.statistics.byCategory[2]?.category,
-              y: this.statistics.byCategory[2]?.amount,
+              name: this.statistics.expensesByCategory[2]?.category,
+              y: this.statistics.expensesByCategory[2]?.amount,
             },
             {
-              name: this.statistics.byCategory[3]?.category,
-              y: this.statistics.byCategory[3]?.amount,
+              name: this.statistics.expensesByCategory[3]?.category,
+              y: this.statistics.expensesByCategory[3]?.amount,
             },
             {
-              name: this.statistics.byCategory[4]?.category,
-              y: this.statistics.byCategory[4]?.amount,
+              name: this.statistics.expensesByCategory[4]?.category,
+              y: this.statistics.expensesByCategory[4]?.amount,
             },
             {
-              name: this.statistics.byCategory[5]?.category,
-              y: this.statistics.byCategory[5]?.amount,
+              name: this.statistics.expensesByCategory[5]?.category,
+              y: this.statistics.expensesByCategory[5]?.amount,
             },
           ],
         },
       ],
     });
-    this.categoriesStatistics = chart;
+    this.expensesCategoriesStatistics = chart;
+    chart.ref$.pipe(
+      takeUntil(this.componentIsDestroyed$)).subscribe();
+  }
+
+  createIncomesStatistics() {
+    const chart = new Chart({
+      chart: {
+        type: 'pie',
+      },
+      credits: {
+        enabled: false,
+      },
+      title: {
+        text: '',
+      },
+      yAxis: {
+        visible: true,
+        min: 0,
+        minTickInterval: 1,
+        allowDecimals: false
+      },
+      legend: {
+        enabled: true,
+      },
+      xAxis: {
+        lineColor: '#fff',
+        min: 0,
+        minTickInterval: 1,
+        allowDecimals: false
+      },
+      plotOptions: {
+        series: {
+          borderRadius: 5,
+        } as any,
+      },
+      series: [
+        {
+          type: 'pie',
+          name: 'Incomes',
+          data: [
+            {
+              name: this.statistics.incomesByCategory[0]?.category,
+              y: this.statistics.incomesByCategory[0]?.amount,
+            },
+            {
+              name: this.statistics.incomesByCategory[1]?.category,
+              y: this.statistics.incomesByCategory[1]?.amount,
+            },
+            {
+              name: this.statistics.incomesByCategory[2]?.category,
+              y: this.statistics.incomesByCategory[2]?.amount,
+            },
+            {
+              name: this.statistics.incomesByCategory[3]?.category,
+              y: this.statistics.incomesByCategory[3]?.amount,
+            },
+            {
+              name: this.statistics.incomesByCategory[4]?.category,
+              y: this.statistics.incomesByCategory[4]?.amount,
+            },
+            {
+              name: this.statistics.incomesByCategory[5]?.category,
+              y: this.statistics.incomesByCategory[5]?.amount,
+            },
+          ],
+        },
+      ],
+    });
+    this.incomesCategoriesStatistics = chart;
     chart.ref$.pipe(
       takeUntil(this.componentIsDestroyed$)).subscribe();
   }

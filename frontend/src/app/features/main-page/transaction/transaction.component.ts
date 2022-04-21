@@ -53,6 +53,13 @@ export class TransactionComponent implements OnInit, OnDestroy {
     );
   }
 
+  createTransaction() {
+    const transaction = this.transactionForm.value;
+    this.transactionService.createTransaction(transaction).subscribe(() => {
+      this.reloadTransactions$.next(true);
+    });
+  }
+
   getTransaction(id: string) {
     this.route.paramMap.pipe(
       takeUntil(this.componentIsDestroyed$),

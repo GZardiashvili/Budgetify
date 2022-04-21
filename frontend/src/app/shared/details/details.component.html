@@ -16,8 +16,10 @@
             <span *ngIf="detailsInfo.type">{{detailsInfo.type}}</span>
           </div>
           <div class="balance">
-            <span *ngIf="detailsInfo.currency">{{detailsInfo.currency}}</span>
-            <span *ngIf="detailsInfo.amount">{{detailsInfo.amount}}</span>
+            <span *ngIf="detailsInfo.currency"
+                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.currency}}</span>
+            <span *ngIf="detailsInfo.amount"
+                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.amount}}</span>
           </div>
         </div>
         <h2 *ngIf="detailsInfo.title">{{detailsInfo.title}}</h2>

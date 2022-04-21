@@ -1,7 +1,10 @@
 <button (click)="goToCategory()">Category Statistics</button>
 <button (click)="goToMonthly()">Monthly Statistics</button>
 <ng-container *ngIf="currentView=='categoryStat'; else monthlyStat">
-  <div [chart]="categoriesStatistics"></div>
+  <div class="flex">
+    <div [chart]="incomesCategoriesStatistics"></div>
+    <div [chart]="expensesCategoriesStatistics"></div>
+  </div>
 </ng-container>
 
 <ng-template #monthlyStat>

@@ -11,6 +11,13 @@ export class TransactionService {
   constructor(private http: HttpClient) {
   }
 
+  createTransaction(transaction: Transaction): Observable<Transaction> {
+    return this.http.put<Transaction>(
+      `${environment.apiUrl}transactions/create/`,
+      transaction
+    );
+  }
+
   getTransactions(accountId: string): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(
       `${environment.apiUrl}transactions/${accountId}`

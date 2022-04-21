@@ -20,7 +20,7 @@
   grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 64px 1fr;
   grid-template-areas:
-    "sidebar header header"
+    "sidebar search header"
     "sidebar content right-sidebar";
   margin: 0 auto;
   column-gap: 10%;
@@ -36,6 +36,10 @@
 
   &__outlet {
     grid-area: content;
+  }
+
+  &__search {
+    grid-area: search;
   }
 
   &__piggy-bank {
