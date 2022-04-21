@@ -23,7 +23,7 @@ router.get('/:accountId/:id', (req, res) => {
     Statistics.findOne({
         user: bindUser(req, res).id,
         accountId: req.params.accountId,
-        id: req.params.id,
+        _id: req.params.id,
     }).then((statistics) => {
         if (statistics) {
             res.send(statistics);

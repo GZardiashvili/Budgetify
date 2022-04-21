@@ -35,9 +35,9 @@
             <span>Payment Dates: </span>{{detailsInfo.firstDateOfPayment | date: 'mm/dd/yyyy'}}
             - {{detailsInfo.lastDateOfPayment | date: 'mm/dd/yyyy'}}
           </p>
+          <p *ngIf="detailsInfo.goal"><span>Goal: </span>{{detailsInfo.goal}}</p>
           <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
           <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
-          <p *ngIf="detailsInfo.goal"><span>Goal: </span>{{detailsInfo.goal}}</p>
           <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
           <p *ngIf="detailsInfo.savings"><span>Saved Amount: </span>{{detailsInfo.savings}}</p>
           <p *ngIf="detailsInfo.availableAmount"><span>Available Amount: </span>{{detailsInfo.availableAmount}}</p>

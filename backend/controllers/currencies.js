@@ -23,7 +23,7 @@ router.get('/:accountId/:id', (req, res) => {
     Currency.findOne({
         user: bindUser(req, res).id,
         account: req.params.accountId,
-        id: req.params.id
+        _id: req.params.id
     }, (err, currency) => {
         if (err) {
             res.status(500).send(err);
@@ -51,7 +51,7 @@ router.post('/create', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     Currency.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     })
         .then(() => {
             res.status(204).end();
@@ -68,7 +68,7 @@ router.put('/update/:id', (req, res) => {
         name: body.name, sign: body.sign,
     };
     Currency.findOneAndUpdate({
-        id: req.params.id
+        _id: req.params.id
     }, currency, {new: true})
         .then((updatedCurrency) => {
             res.json(updatedCurrency);

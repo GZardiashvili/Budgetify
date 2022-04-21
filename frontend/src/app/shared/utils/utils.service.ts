@@ -8,8 +8,8 @@ export class UtilsService {
   constructor() {
   }
 
-  setAccountId(id: string) {
-    localStorage.setItem('accountId', id);
+  setAccountId(id: string | null) {
+    localStorage.setItem('accountId', String(id));
   }
 
   get accountId(): string | null {

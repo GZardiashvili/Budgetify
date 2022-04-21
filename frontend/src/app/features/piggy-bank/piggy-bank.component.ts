@@ -2,10 +2,10 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
 import { PiggyBankService } from './services/piggy-bank.service';
 import { PiggyBank } from './piggy-bank';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -15,9 +15,11 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PiggyBankComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
+  private readonly reloadPiggyBanks$ = new BehaviorSubject(true);
+
   faPiggyBank = faPiggyBank;
   piggyBanks$!: Observable<PiggyBank[]>;
-  piggyBank$!: Observable<PiggyBank>;
+  piggyBank!: PiggyBank | null;
   piggyBankForm = this.fb.group({
     goal: [''],
     goalAmount: [''],
@@ -34,56 +36,56 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const accountId = this.utilsService.accountId;
-    this.piggyBanks$ = this.piggyBankService.getPiggyBanks(accountId);
+    this.piggyBanks$ = combineLatest([
+      this.route.paramMap,
+      this.reloadPiggyBanks$,
+    ]).pipe(
+      switchMap(([params]) => {
+        const accountId = params.get('accountId') || this.utilsService.accountId;
+        return this.piggyBankService.getPiggyBanks(String(accountId));
+      })
+    );
   }
 
   getPiggyBank(id: string) {
-    this.piggyBank$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
+      takeUntil(this.componentIsDestroyed$),
       switchMap(params => {
         const accountId = params.get('accountId') || this.utilsService.accountId;
         return this.piggyBankService.getPiggyBank(String(accountId), String(id));
       })
-    );
-
-    this.piggyBank$.pipe(
-      takeUntil(this.componentIsDestroyed$),
-      tap(piggyBank => {
-        this.piggyBankForm.patchValue(piggyBank);
-      })).subscribe();
+    ).subscribe(piggyBank => {
+      this.piggyBank = piggyBank;
+      this.piggyBankForm.patchValue(piggyBank);
+    });
   }
 
   updatePiggyBank(id: string, piggyBank: PiggyBank) {
     piggyBank = this.piggyBankForm.value;
+    this.piggyBank = piggyBank;
     this.piggyBankService.updatePiggyBank(id, piggyBank)
       .pipe(
         takeUntil(this.componentIsDestroyed$))
-      .subscribe();
-    this.piggyBanks$ = this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const accountId = params.get('accountId') || this.utilsService.accountId;
-          return this.piggyBankService.getPiggyBanks(String(accountId));
-        })
-      );
+      .subscribe(() => {
+        this.reloadPiggyBanks();
+      });
   }
 
   deletePiggyBank(id: string) {
     this.piggyBankService.deletePiggyBank(id)
       .pipe(
         takeUntil(this.componentIsDestroyed$))
-      .subscribe();
-    this.piggyBanks$ = this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const accountId = params.get('accountId') || this.utilsService.accountId;
-          return this.piggyBankService.getPiggyBanks(String(accountId));
-        })
-      );
+      .subscribe(() => {
+        this.reloadPiggyBanks();
+      });
   }
 
   ngOnDestroy() {
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();
+  }
+
+  private reloadPiggyBanks(): void {
+    this.reloadPiggyBanks$.next(true);
   }
 }

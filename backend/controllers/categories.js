@@ -21,7 +21,7 @@ router.get('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Category.findOne({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     }, (err, category) => {
         if (err) {
             res.status(500).send(err);
@@ -54,7 +54,7 @@ router.post('/create', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     Category.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     })
         .then(() => {
             res.status(204).end();
@@ -73,7 +73,7 @@ router.put('/update/:id', (req, res) => {
     Category
         .findOneAndUpdate({
             user: bindUser(req, res).id,
-            id: req.params.id
+            _id: req.params.id
         }, category, {new: true})
         .then((updatedCategory) => {
             res.json(updatedCategory);

@@ -18,7 +18,7 @@ router.get('/:accountId/:id', (req, res) => {
     PiggyBank.findOne({
             user: bindUser(req, res).id,
             accountId: req.params.accountId,
-            id: req.params.id,
+            _id: req.params.id,
         },
         (err, piggyBank) => {
             res.status(200).send(piggyBank);
@@ -50,7 +50,7 @@ router.post('/create', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     PiggyBank.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     })
         .then(() => {
             res.status(204).end();
@@ -74,7 +74,7 @@ router.put('/update/:id', (req, res) => {
 
     PiggyBank.findOneAndUpdate({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     }, piggyBank, {new: true})
         .then((updatedPiggyBank) => {
             res.json(updatedPiggyBank);

@@ -23,7 +23,7 @@ router.get('/:accountId/:id', (req, res) => {
     ObligatoryPayment.findOne({
             user: bindUser(req, res).id,
             accountId: req.params.accountId,
-            id: req.params.id,
+            _id: req.params.id,
         },
         (err, obligatoryPayment) => {
             if (err) {
@@ -61,7 +61,7 @@ router.post('/create', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     ObligatoryPayment.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     })
         .then(() => {
             res.status(204).end();
@@ -89,7 +89,7 @@ router.put('/update/:id', (req, res) => {
     };
     ObligatoryPayment.findOneAndUpdate({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     }, obligatoryPayment, {new: true})
         .then((updatedObligatoryPayment) => {
             res.json(updatedObligatoryPayment);

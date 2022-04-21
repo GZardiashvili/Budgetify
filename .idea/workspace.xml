@@ -3,9 +3,27 @@
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistics/services/statistics.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/statistics/services/statistics.service.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/statistics/statistics.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/accounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/accounts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/categories.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/categories.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/currencies.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/currencies.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/obligatoryPayments.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/obligatoryPayments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/piggy-bank.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/statistics.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/statistics.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/subscriptions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/subscriptions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/transactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/transactions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/obligatory/obligatory.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/subscriptions/subscriptions.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/services/account.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/details/details.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/utils/utils.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/utils/utils.service.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -63,11 +81,11 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\piggy-bank" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\backend\utils" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\layout\components\sidebar\accounts" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\layout\components\header\models" />
       <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\main-page\transactions\services" />
-      <recent name="C:\Users\GZard\Desktop\Budgetify\frontend\src\app\features\subscriptions" />
     </key>
   </component>
   <component name="RunManager" selected="Karma.Account service.should get account by id">
@@ -150,6 +168,7 @@
       <workItem from="1648664054802" duration="24293000" />
       <workItem from="1648829251438" duration="28207000" />
       <workItem from="1650207449781" duration="14434000" />
+      <workItem from="1650512827024" duration="8822000" />
     </task>
     <servers />
   </component>

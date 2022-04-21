@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Account } from '../account';
+import { Subscriptions } from '../../../../../features/subscriptions/subscriptions';
 
 @Injectable({
   providedIn: 'root',
@@ -23,4 +24,16 @@ export class AccountService {
   addAccount(account: Account): Observable<Account> {
     return this.http.post<Account>(`${environment.apiUrl}accounts/create`, account);
   }
+
+  updateAccount(id: string, account: Account): Observable<Account> {
+    return this.http.put<Account>(
+      `${environment.apiUrl}accounts/update/${id}`,
+      account
+    );
+  }
+
+  deleteAccount(id: string) {
+    return this.http.delete(`${environment.apiUrl}accounts/delete/${id}`);
+  }
+  
 }

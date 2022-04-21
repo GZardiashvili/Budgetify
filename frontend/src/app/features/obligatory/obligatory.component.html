@@ -13,10 +13,10 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="obligate$ | async as obligate">
-      <ui-details [title]="'Obligatory'" [detailsInfo]="obligate$ | async" [detailsForm]="obligateForm"
+    <ng-container *ngIf="obligate">
+      <ui-details [title]="'Obligatory'" [detailsInfo]="obligate" [detailsForm]="obligateForm"
                   (save)="updateObligate(obligate.id, obligate)"
-                  (delete)="deleteObligate(obligate.id)"
+                  (delete)="deleteObligate(obligate.id); obligate = null; sidenav.toggle();"
                   (close)="sidenav.toggle()"></ui-details>
     </ng-container>
 

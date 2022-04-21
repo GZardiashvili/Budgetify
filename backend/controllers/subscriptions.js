@@ -21,10 +21,10 @@ router.get('/:accountId', (req, res) => {
 });
 
 router.get('/:accountId/:id', (req, res) => {
-    Subscription.findOne({
+    Subscription.findById({
         user: bindUser(req, res).id,
         account: req.params.accountId,
-        id: req.params.id
+        _id: req.params.id
     }, (err, subscription) => {
         if (err) {
             res.status(500).send(err);
@@ -66,7 +66,7 @@ router.post('/create', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     Subscription.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     }).then(() => {
         res.status(204).end();
     });
@@ -90,7 +90,7 @@ router.put('/update/:id', (req, res) => {
     };
     Subscription.findOneAndUpdate({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     }, subscription, {new: true})
         .then((updatedSubscription) => {
             res.json(updatedSubscription);

@@ -26,11 +26,11 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="piggyBank$ | async as piggyBank">
+    <ng-container *ngIf="piggyBank">
       <ui-details [title]="'Piggy Bank'" [detailsInfo]="piggyBank"
                   [detailsForm]="piggyBankForm"
                   (save)="updatePiggyBank(piggyBank.id, piggyBank)"
-                  (delete)="deletePiggyBank(piggyBank.id)"
+                  (delete)="deletePiggyBank(piggyBank.id); piggyBank = null; sidenav.toggle();"
                   (close)="sidenav.toggle()"></ui-details>
     </ng-container>
   </mat-sidenav>

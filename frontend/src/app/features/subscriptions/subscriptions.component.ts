@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SubscriptionService } from './services/subscription.service';
-import { combineLatest, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, takeUntil, tap } from 'rxjs/operators';
@@ -14,10 +14,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class SubscriptionsComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
-  subscriptions$!: Observable<Subscriptions[]>;
-  subscription$!: Observable<Subscriptions>;
+  private readonly reloadSubscriptions$ = new BehaviorSubject(true);
 
-  private readonly reloadSubscriptions$ = new Subject();
+  subscriptions$!: Observable<Subscriptions[]>;
+  subscription!: Subscriptions | null;
 
   subscriptionForm: FormGroup = this.fb.group({
     title: [''],
@@ -37,32 +37,31 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions$ = combineLatest([
       this.route.paramMap,
-      this.reloadSubscriptions$
+      this.reloadSubscriptions$,
     ]).pipe(
       switchMap(([params]) => {
-        const id = params.get('accountId') || this.utilsService.accountId;
-        return this.subscriptionService.getSubscriptions(String(id));
+        const accountId = params.get('accountId') || this.utilsService.accountId;
+        return this.subscriptionService.getSubscriptions(String(accountId));
       })
     );
   }
 
   getSubscription(id: string) {
-    this.subscription$ = this.route.paramMap.pipe(
+    this.route.paramMap.pipe(
+      takeUntil(this.componentIsDestroyed$),
       switchMap(params => {
         const accountId = params.get('accountId') || this.utilsService.accountId;
         return this.subscriptionService.getSubscription(String(accountId), String(id));
       })
-    );
-
-    this.subscription$.pipe(takeUntil(
-        this.componentIsDestroyed$),
-      tap(subscription => {
-        this.subscriptionForm.patchValue(subscription)
-      })).subscribe();
+    ).subscribe(subscription => {
+      this.subscription = subscription;
+      this.subscriptionForm.patchValue(subscription);
+    });
   }
 
   updateSubscription(id: string, subscription: Subscriptions) {
     subscription = this.subscriptionForm.value;
+    this.subscription = subscription;
     this.subscriptionService.updateSubscription(id, subscription)
       .pipe(takeUntil(this.componentIsDestroyed$))
       .subscribe(() => {
@@ -84,6 +83,6 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   }
 
   private reloadSubscriptions(): void {
-    this.reloadSubscriptions$.next();
+    this.reloadSubscriptions$.next(true);
   }
 }

@@ -22,7 +22,7 @@ router.get('/:accountId/:id', (req, res) => {
     Transaction.findOne({
         user: bindUser(req, res).id,
         account: req.params.accountId,
-        id: req.params.id
+        _id: req.params.id
     }, (err, transaction) => {
         if (err) {
             res.status(500).send(err);
@@ -64,7 +64,7 @@ router.post('/create', (req, res) => {
 router.delete('/delete/:id', (req, res) => {
     Transaction.findOneAndDelete({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     })
         .then(() => {
             res.status(204).end();
@@ -93,7 +93,7 @@ router.put('/update/:id', (req, res) => {
 
     Transaction.findOneAndUpdate({
         user: bindUser(req, res).id,
-        id: req.params.id
+        _id: req.params.id
     }, transaction, {new: true})
         .then((updatedTransaction) => {
             res.json(updatedTransaction);

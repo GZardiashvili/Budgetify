@@ -6,7 +6,6 @@ const passport = require('passport');
 const {jwtCallback} = require('./auth/passport');
 const {adminGuard} = require('./guards/adminGuard');
 
-const bindUser = require('./utils/bindUser');
 const accountRouter = require('./controllers/accounts');
 const categoryRouter = require('./controllers/categories');
 const currencyRouter = require('./controllers/currencies');

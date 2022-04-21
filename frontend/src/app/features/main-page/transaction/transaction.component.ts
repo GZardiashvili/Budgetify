@@ -1,11 +1,7 @@
-import {
-  Component, OnChanges,
-  OnDestroy,
-  OnInit, SimpleChanges,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
-import { Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
@@ -19,8 +15,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class TransactionComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
-  transactions!: Transaction[];
-  transaction!: Transaction;
+  private readonly reloadTransactions$ = new BehaviorSubject(true);
+
+  transactions$!: Observable<Transaction[]>;
+  transaction!: Transaction | null;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
 
@@ -44,42 +42,55 @@ export class TransactionComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.paramMap
-      .pipe(
-        switchMap(params => {
-          const id = params.get('accountId') || this.utilsService.accountId;
-          return this.transactionService.getTransactions(String(id));
-        })
-      ).subscribe(transactions => {
-      this.transactions = transactions;
-    });
+    this.transactions$ = combineLatest([
+      this.route.paramMap,
+      this.reloadTransactions$,
+    ]).pipe(
+      switchMap(([params]) => {
+        const accountId = params.get('accountId') || this.utilsService.accountId;
+        return this.transactionService.getTransactions(String(accountId));
+      })
+    );
   }
 
-  getTransaction(accountId: string, id: string) {
-    this.transactionService.getTransaction(accountId, id).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(transaction => {
-      this.transactionForm.patchValue(transaction);
+  getTransaction(id: string) {
+    this.route.paramMap.pipe(
+      takeUntil(this.componentIsDestroyed$),
+      switchMap(params => {
+        const accountId = params.get('accountId') || this.utilsService.accountId;
+        return this.transactionService.getTransaction(String(accountId), String(id));
+      })
+    ).subscribe(transaction => {
       this.transaction = transaction;
+      this.transactionForm.patchValue(transaction);
     });
   }
 
-  updateTransaction(accountId: string, id: string, transaction: Transaction) {
+  updateTransaction(id: string, transaction: Transaction) {
     transaction = this.transactionForm.value;
+    this.transaction = transaction;
     this.transactionService.updateTransaction(id, transaction)
       .pipe(takeUntil(this.componentIsDestroyed$))
-      .subscribe();
-    this.transactions = this.transactions.map(tr => tr.id === id ? transaction : tr);
+      .subscribe(() => {
+        this.reloadTransactions()
+      });
   }
 
   deleteTransaction(id: string) {
     this.transactionService.deleteTransaction(id)
       .pipe(
         takeUntil(this.componentIsDestroyed$))
-      .subscribe();
-    this.transactions = this.transactions.filter(tr => tr.id !== id);
+      .subscribe(() => {
+        this.reloadTransactions()
+      });
   }
 
   ngOnDestroy() {
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();
+  }
+
+  private reloadTransactions(): void {
+    this.reloadTransactions$.next(true);
   }
 }

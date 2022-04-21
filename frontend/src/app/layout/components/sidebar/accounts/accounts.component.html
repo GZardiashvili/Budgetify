@@ -11,7 +11,7 @@
   </div>
 </div>
 <mat-menu #account="matMenu">
-  <ng-container *ngFor="let account of accounts | async">
+  <ng-container *ngFor="let account of accounts$ | async">
     <button mat-menu-item (click)="accountSelect(account)">
       <div class="account">
         <span class="account__title">{{account.title}} </span>
@@ -41,6 +41,8 @@
     <ng-container *ngIf="activeAccount | async as acc">
       <ui-details [title]="'Account'" [detailsInfo]="acc"
                   [detailsForm]="accountForm"
+                  (save)="updateAccount(acc.id, acc)"
+                  (delete)="deleteAccount(acc.id); sidenav.toggle()"
                   (close)="sidenav.toggle()"></ui-details>
     </ng-container>
   </mat-sidenav>
