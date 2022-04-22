@@ -7,7 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Observable, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { takeUntil } from 'rxjs/operators';
-
+import { TransactionService } from '../../../../features/main-page/transaction/services/transaction.service';
+import { CommonService } from '../../../../shared/common/common.service';
 
 @Component({
   selector: 'app-accounts',
@@ -30,6 +31,8 @@ export class AccountsComponent implements OnDestroy {
   });
 
   constructor(private accountService: AccountService,
+              private transactionService: TransactionService,
+              private commonService: CommonService,
               private utilsService: UtilsService,
               private route: ActivatedRoute,
               private router: Router,
@@ -39,8 +42,15 @@ export class AccountsComponent implements OnDestroy {
         takeUntil(this.componentIsDestroyed$)
       ).subscribe(account => {
       this.router.navigate([this.getBaseUrl() + '/' + account.id], {skipLocationChange: true});
-      this.activeAccount.next(account);
       this.accountForm.patchValue(account);
+      this.activeAccount.next(account);
+      this.commonService.getUpdate().pipe(takeUntil(this.componentIsDestroyed$))
+        .subscribe((amt: number) => {
+          let newAmount = account.availableAmount + amt;
+          account.availableAmount = newAmount;
+          let newAcc = {...account, availableAmount: newAmount};
+          this.updateAccount(String(this.accountId), newAcc);
+        });
     });
   }
 
@@ -64,7 +74,18 @@ export class AccountsComponent implements OnDestroy {
   }
 
   updateAccount(id: string, account: Account) {
-    account = this.accountForm.value;
+    if (!account) {
+      account = this.accountForm.value;
+    }
+    this.accountService.updateAccount(id, account)
+      .pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe(() => {
+        this.activeAccount.next(account);
+        this.reloadAccounts();
+      });
+  }
+
+  updateAccountFromTr(id: string, account: Account) {
     this.accountService.updateAccount(id, account)
       .pipe(takeUntil(this.componentIsDestroyed$))
       .subscribe(() => {

@@ -63,7 +63,6 @@
 
 ::ng-deep.mat-menu-panel {
   border-radius: 10px;
-  width: 215px;
   padding: 0;
   margin: 0;
 
@@ -76,10 +75,12 @@
   .account {
     background-color: var_1.$white !important;
     border-radius: 0 !important;
+    height: 105px;
+    width: 215px;
   }
 
   button {
-    height: 105px;
+    height: fit-content;
     padding: 0;
     margin: 0;
     border-bottom: 1px solid #64737F;

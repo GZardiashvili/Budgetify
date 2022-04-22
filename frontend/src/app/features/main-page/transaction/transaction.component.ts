@@ -7,6 +7,7 @@ import { switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder } from '@angular/forms';
+import { CommonService } from '../../../shared/common/common.service';
 
 @Component({
   selector: 'app-transaction',
@@ -35,6 +36,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
 
   constructor(
     private transactionService: TransactionService,
+    private commonService: CommonService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
     private fb: FormBuilder,
@@ -74,20 +76,36 @@ export class TransactionComponent implements OnInit, OnDestroy {
   }
 
   updateTransaction(id: string, transaction: Transaction) {
+    let prevTransaction = this.transaction;
     transaction = this.transactionForm.value;
     this.transaction = transaction;
     this.transactionService.updateTransaction(id, transaction)
       .pipe(takeUntil(this.componentIsDestroyed$))
       .subscribe(() => {
+        let diff = 0;
+        if (transaction.type === 'incomes') {
+          diff = transaction.amount - prevTransaction!.amount;
+        } else {
+          diff = prevTransaction!.amount - transaction.amount;
+        }
+        this.commonService.sendUpdate(diff);
         this.reloadTransactions()
       });
   }
 
   deleteTransaction(id: string) {
+    let trSnapshot = this.transaction;
     this.transactionService.deleteTransaction(id)
       .pipe(
         takeUntil(this.componentIsDestroyed$))
       .subscribe(() => {
+        let diff = 0;
+        if (trSnapshot!.type === 'incomes') {
+          diff = diff - trSnapshot!.amount;
+        } else {
+          diff = diff + trSnapshot!.amount;
+        }
+        this.commonService.sendUpdate(diff);
         this.reloadTransactions()
       });
   }

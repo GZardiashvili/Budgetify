@@ -20,7 +20,7 @@
                   [detailsForm]="transactionForm"
                   (save)="updateTransaction(transaction.id, transaction)"
                   (delete)="deleteTransaction(transaction.id); transaction = null; sidenav.opened = false;"
-                  [icon]="transaction.type==='expenses'? faExpense : faIncome" (close)="sidenav.toggle()">
+                  [icon]="transaction.type==='expenses'? faExpense : faIncome" (close)="sidenav.opened = false">
       </ui-details>
     </ng-container>
   </mat-sidenav>
