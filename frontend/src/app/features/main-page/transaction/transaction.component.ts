@@ -47,34 +47,18 @@ export class TransactionComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.transactions$ = combineLatest([
       this.route.paramMap,
+      this.commonService.getSearchTerm().pipe(
+        takeUntil(this.componentIsDestroyed$),
+        debounceTime(1000),
+        distinctUntilChanged(),
+      ),
       this.reloadTransactions$,
     ]).pipe(
-      switchMap(([params]) => {
+      switchMap(([params, term]) => {
         const accountId = params.get('accountId') || this.utilsService.accountId;
-
-        // this.searchControl.valueChanges.pipe(
-        //   takeUntil(this.componentIsDestroyed$),
-        //   debounceTime(300),
-        //   distinctUntilChanged(),
-        // ).subscribe(value => {
-        //   this.reloadTransactions$.next(true);
-        //   return this.transactionService.getTransactions(String(accountId), value);
-        // });
-
-        this.commonService.getSearchTerm().pipe(
-          takeUntil(this.componentIsDestroyed$),
-          debounceTime(1000),
-          distinctUntilChanged(),
-        ).subscribe((term: string) => {
-          this.term = term;
-
-            this.reloadTransactions$.next(true); // this reloads in every 1 second
-
-          return this.transactionService.getTransactions(String(accountId), term);
-        });
-        return this.transactionService.getTransactions(String(accountId), this.term);
-      }),
-    )
+        return this.transactionService.getTransactions(String(accountId), term);
+      })
+    );
   }
 
   createTransaction() {
