@@ -3,10 +3,10 @@ import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import { CommonService } from '../../../shared/common/common.service';
 
 @Component({
@@ -17,11 +17,12 @@ import { CommonService } from '../../../shared/common/common.service';
 export class TransactionComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   private readonly reloadTransactions$ = new BehaviorSubject(true);
-
+  searchControl = new FormControl('', []);
   transactions$!: Observable<Transaction[]>;
   transaction!: Transaction | null;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
+  term: string = '';
 
   transactionForm = this.fb.group({
     type: [''],
@@ -50,9 +51,30 @@ export class TransactionComponent implements OnInit, OnDestroy {
     ]).pipe(
       switchMap(([params]) => {
         const accountId = params.get('accountId') || this.utilsService.accountId;
-        return this.transactionService.getTransactions(String(accountId));
-      })
-    );
+
+        // this.searchControl.valueChanges.pipe(
+        //   takeUntil(this.componentIsDestroyed$),
+        //   debounceTime(300),
+        //   distinctUntilChanged(),
+        // ).subscribe(value => {
+        //   this.reloadTransactions$.next(true);
+        //   return this.transactionService.getTransactions(String(accountId), value);
+        // });
+
+        this.commonService.getSearchTerm().pipe(
+          takeUntil(this.componentIsDestroyed$),
+          debounceTime(1000),
+          distinctUntilChanged(),
+        ).subscribe((term: string) => {
+          this.term = term;
+
+            this.reloadTransactions$.next(true); // this reloads in every 1 second
+
+          return this.transactionService.getTransactions(String(accountId), term);
+        });
+        return this.transactionService.getTransactions(String(accountId), this.term);
+      }),
+    )
   }
 
   createTransaction() {

@@ -2,16 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25988816-a8a5-45e4-8fb5-aec38866a34c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/common/common.service.spec.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/frontend/src/app/shared/common/common.service.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/search/search.component.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/search/search.component.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/search/search.component.spec.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/search/search.component.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/backend/utils/calculateBalance.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/backend/controllers/transactions.js" beforeDir="false" afterPath="$PROJECT_DIR$/backend/controllers/transactions.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/services/transaction.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/services/transaction.service.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/main-page/transaction/transaction.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/header/header.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/components/sidebar/accounts/accounts.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/features/piggy-bank/piggy-bank.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/layout/layout.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/common/common.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/common/common.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/shared/shared.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/shared/shared.module.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,7 +161,7 @@
       <workItem from="1648664054802" duration="24293000" />
       <workItem from="1648829251438" duration="28207000" />
       <workItem from="1650207449781" duration="14434000" />
-      <workItem from="1650512827024" duration="60400000" />
+      <workItem from="1650512827024" duration="80444000" />
     </task>
     <servers />
   </component>

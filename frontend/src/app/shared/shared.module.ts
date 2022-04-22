@@ -13,9 +13,10 @@ import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailsComponent } from './details/details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { SearchComponent } from '../layout/components/search/search.component';
 
 @NgModule({
-  declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent],
+    declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent, SearchComponent],
     imports: [
         CommonModule,
         MatFormFieldModule,
@@ -28,15 +29,16 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         FontAwesomeModule,
         MatDatepickerModule,
     ],
-  exports: [
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    ReactiveFormsModule,
-    RouterModule,
-    CardComponent,
-    DetailsComponent,
-  ],
+    exports: [
+        MatFormFieldModule,
+        MatInputModule,
+        MatButtonModule,
+        ReactiveFormsModule,
+        RouterModule,
+        CardComponent,
+        DetailsComponent,
+        SearchComponent,
+    ],
 })
 export class SharedModule {
 }

@@ -3,10 +3,18 @@ const Transaction = require('../models/transaction');
 const router = express.Router();
 const bindUser = require('../utils/bindUser');
 
-router.get('/:accountId', (req, res) => {
+router.get('/:accountId/find/:search?', (req, res) => {
     Transaction.find({
         user: bindUser(req, res).id,
         accountId: req.params.accountId,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
+                }
+            },
+        ]
     }, (err, transactions) => {
         if (err) {
             res.status(500).send(err);

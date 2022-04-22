@@ -1,3 +1,7 @@
+<!--<input type="text" class="layout__search" [formControl]="searchControl">-->
+
+<!--<app-search [searchControl]="searchControl"></app-search>-->
+
 <div class="container">
   <ng-container *ngFor="let transaction of transactions$ | async ">
     <ui-card (click)="getTransaction(transaction.id); sidenav.opened = true;" [card]="transaction"
