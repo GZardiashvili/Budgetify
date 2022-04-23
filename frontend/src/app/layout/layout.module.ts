@@ -14,10 +14,11 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AccountsComponent } from './components/sidebar/accounts/accounts.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { SearchComponent } from './components/search/search.component';
 
 
 @NgModule({
-  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent, AccountsComponent],
+  declarations: [HeaderComponent, SidebarComponent, PiggyBankComponent, LayoutComponent, AccountsComponent, SearchComponent],
   exports: [],
   imports: [
     CommonModule,

@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { CommonService } from '../../../shared/common/common.service';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-search',
@@ -8,8 +10,7 @@ import { CommonService } from '../../../shared/common/common.service';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
-
-  // @Input() search = this.searchControl.valueChanges.pipe(delay(500));
+  faSearch: IconProp = faSearch;
   searchControl: FormControl = new FormControl('');
 
   constructor(private commonService: CommonService) {
