@@ -7,6 +7,7 @@ import { FormBuilder } from '@angular/forms';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
+import { CommonService } from '../../shared/common/common.service';
 
 @Component({
   selector: 'app-piggy-bank',
@@ -32,6 +33,7 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   constructor(private fb: FormBuilder,
               private route: ActivatedRoute,
               private piggyBankService: PiggyBankService,
+              private commonService: CommonService,
               private utilsService: UtilsService,
   ) {
   }
@@ -87,11 +89,14 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
       });
   }
 
-  deletePiggyBank(id: string) {
+  crashPiggyBank(id: string) {
+    let piggySnapshot = this.piggyBank;
+
     this.piggyBankService.deletePiggyBank(id)
       .pipe(
         takeUntil(this.componentIsDestroyed$))
       .subscribe(() => {
+        this.commonService.sendUpdate(piggySnapshot!.savings);
         this.reloadPiggyBanks();
       });
   }

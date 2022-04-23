@@ -19,9 +19,9 @@ export class TransactionService {
     );
   }
 
-  getTransactions(accountId: string): Observable<Transaction[]> {
+  getTransactions(accountId: string, search?: string): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(
-      `${environment.apiUrl}transactions/${accountId}`
+      `${environment.apiUrl}transactions/${accountId}/find?search=${search}`
     );
   }
 
@@ -41,4 +41,5 @@ export class TransactionService {
   deleteTransaction(id: string) {
     return this.http.delete(`${environment.apiUrl}transactions/delete/${id}`);
   }
+
 }

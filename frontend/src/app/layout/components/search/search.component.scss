@@ -1,0 +1,35 @@
+.container {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  height: 88px;
+  width: 39%;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+
+  .layout__search {
+    width: 400px;
+    height: 42px;
+    background-color: #EFF3F4;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    border-radius: 0 20px 20px 0;
+
+  }
+
+  fa-icon {
+    width: 30px;
+    height: 33px;
+    border-radius: 20px 0 0 20px;
+    background-color: #EFF3F4;
+    padding: 11px 0 0 20px;
+    color: #75838D;
+    font-size: 1.1rem;
+  }
+}

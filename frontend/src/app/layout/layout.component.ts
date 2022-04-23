@@ -4,7 +4,6 @@ import {
 import { LoadingService } from '../shared/loading/services/loading.service';
 import { Observable } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-layout',
@@ -13,8 +12,6 @@ import { FormControl } from '@angular/forms';
 })
 export class LayoutComponent implements OnInit {
   loading!: Observable<boolean>
-  searchControl = new FormControl('');
-  @Output() search = this.searchControl.valueChanges.pipe(delay(500));
   @Output() add = new EventEmitter();
 
   constructor(private loadingService: LoadingService) {
@@ -22,8 +19,5 @@ export class LayoutComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.searchControl.valueChanges.subscribe(value => {
-      console.log(value);
-    });
   }
 }
