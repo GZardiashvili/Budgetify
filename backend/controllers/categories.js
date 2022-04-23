@@ -4,9 +4,17 @@ const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/find/:search?', (req, res) => {
     Category.find({
         user: bindUser(req, res).id,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
+                }
+            },
+        ]
     }, (err, Categories) => {
         if (err) {
             res.status(500).send(err);

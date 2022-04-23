@@ -1,3 +1,5 @@
+import { Category } from '../../features/categories/category';
+
 export interface Card {
   id?: string;
   user?: string;
@@ -5,7 +7,7 @@ export interface Card {
   accountId?: string;
   title?: string;
   description?: string;
-  category?: string[];
+  category?: Category[];
   currency?: string;
   amount?: number;
   availableAmount?: number;

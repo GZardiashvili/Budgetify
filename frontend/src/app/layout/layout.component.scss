@@ -18,9 +18,10 @@
   width: 70%;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 64px 1fr;
+  grid-template-rows: 64px 1fr 64px;
   grid-template-areas:
-    "sidebar search header"
+    "header header right-sidebar"
+    "sidebar content right-sidebar"
     "sidebar content right-sidebar";
   margin: 0 auto;
   column-gap: 10%;
@@ -32,6 +33,7 @@
 
   &__sidebar {
     grid-area: sidebar;
+    margin-top: 15px;
   }
 
   &__outlet {
@@ -39,18 +41,14 @@
     margin-top: 30px;
     width: 90%;
     justify-self: center;
-  }
 
-
-  &__search {
-    grid-area: search;
   }
 
   &__piggy-bank {
     grid-area: right-sidebar;
     align-self: flex-end;
     position: fixed;
-    right: 150px;
+    right: 203px;
     bottom: 40px;
   }
 

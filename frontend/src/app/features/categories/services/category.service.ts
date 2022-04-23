@@ -7,9 +7,22 @@ import { Category } from '../category';
   providedIn: 'root',
 })
 export class CategoryService {
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+  }
 
-  getCategories() {
-    return this.http.get<Category[]>(`${environment.apiUrl}categories`);
+  createCategory(category: Category) {
+    return this.http.post(`${environment.apiUrl}/categories/create`, category);
+  }
+
+  getCategories(search?: string) {
+    return this.http.get<Category[]>(`${environment.apiUrl}categories/find?search=${search}`);
+  }
+
+  updateCategory(id: string, category: Category) {
+    return this.http.put(`${environment.apiUrl}/categories/update/${id}`, category);
+  }
+
+  deleteCategory(id: number) {
+    return this.http.delete(`${environment.apiUrl}categories/delete/${id}`);
   }
 }

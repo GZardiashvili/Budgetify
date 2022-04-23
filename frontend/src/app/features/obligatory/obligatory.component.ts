@@ -3,9 +3,10 @@ import { ObligatoryService } from './services/obligatory.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { FormBuilder } from '@angular/forms';
+import { CommonService } from '../../shared/common/common.service';
 
 @Component({
   selector: 'app-obligatory',
@@ -29,18 +30,24 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
     private obligatoryService: ObligatoryService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private commonService: CommonService
   ) {
   }
 
   ngOnInit(): void {
     this.obligates$ = combineLatest([
       this.route.paramMap,
+      this.commonService.getSearchTerm().pipe(
+        takeUntil(this.componentIsDestroyed$),
+        debounceTime(300),
+        distinctUntilChanged(),
+      ),
       this.reloadObligates$,
     ]).pipe(
-      switchMap(([params]) => {
+      switchMap(([params, term]) => {
         const id = params.get('accountId') || this.utilsService.accountId;
-        return this.obligatoryService.getObligates(String(id));
+        return this.obligatoryService.getObligates(String(id), term);
       })
     );
   }

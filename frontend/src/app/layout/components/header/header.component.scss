@@ -1,12 +1,45 @@
 @use "../../../shared/styles/palette.scss" as var_1;
 
 .app-header {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-areas: "logo search profile";
+  width: 84%;
+  min-height: 94px;
+  position: fixed;
+  z-index: 2;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  &__logo {
+    padding: 9px 12px;
+    grid-area: logo;
+
+    a {
+      img {
+        width: 50px;
+        ratio: 1;
+
+
+        &:hover {
+          box-shadow: -7px -5px 10px -10px var_1.$logo-red, 7px -5px 10px -9px var_1.$logo-orange, 0px 8px 10px -7px var_1.$logo-green;
+          border-radius: 50%;
+
+        }
+
+      }
+    }
+
+  }
+
+  &__search {
+    grid-area: search;
+  }
 
   &__profile {
-    position: fixed;
+    grid-area: profile;
 
     .btn-list {
 
@@ -33,4 +66,3 @@
     }
   }
 }
-

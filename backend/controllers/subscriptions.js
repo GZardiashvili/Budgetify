@@ -4,36 +4,29 @@ const bindUser = require('../utils/bindUser');
 
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
-    Subscription.find({
-            user: bindUser(req, res).id,
-            accountId: req.params.accountId
-        },
-        (err, subscriptions) => {
-            if (err) {
-                res.status(500).send(err);
-            } else {
-                res.status(200).send(subscriptions);
+router.get('/:accountId/find/:search?', async (req, res) => {
+    const subscriptions = await Subscription.find({
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
+                }
             }
-        }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+        ]
+    }).populate('category');
+    res.status(200).send(subscriptions);
 });
 
-router.get('/:accountId/:id', (req, res) => {
-    Subscription.findById({
+router.get('/:accountId/:id', async (req, res) => {
+    const subscription = await Subscription.findOne({
         user: bindUser(req, res).id,
-        account: req.params.accountId,
+        accountId: req.params.accountId,
         _id: req.params.id
-    }, (err, subscription) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(subscription);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+    }).populate('category');
+    res.status(200).send(subscription);
 });
 
 router.post('/create/:accountId', (req, res) => {

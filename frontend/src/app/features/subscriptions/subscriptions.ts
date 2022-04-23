@@ -1,3 +1,5 @@
+import { Category } from '../categories/category';
+
 export interface Subscriptions {
   id: string;
   accountId: string;
@@ -6,7 +8,7 @@ export interface Subscriptions {
   firstDateOfPayment: Date;
   lastDateOfPayment: Date;
   dateOfPayment: Date;
-  category: string[];
+  category: Category[];
   currency: string;
   amount: number;
   dateOfCreation: Date;

@@ -11,9 +11,9 @@ export class SubscriptionService {
   constructor(private http: HttpClient) {
   }
 
-  getSubscriptions(accountId: string) {
+  getSubscriptions(accountId: string, search?: string): Observable<Subscriptions[]> {
     return this.http.get<Subscriptions[]>(
-      `${environment.apiUrl}subscriptions/${accountId}`
+      `${environment.apiUrl}subscriptions/${accountId}/find?search=${search}`
     );
   }
 

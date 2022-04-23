@@ -32,7 +32,7 @@
         <h2 *ngIf="detailsInfo.title">{{detailsInfo.title}}</h2>
         <div class="flex flex--row">
           <ng-container *ngFor="let category of detailsInfo.category">
-            <p class="category" *ngIf="category">{{category}}</p>
+            <p class="category" *ngIf="category">{{category.title}}</p>
           </ng-container>
         </div>
         <div class="flex flex--col ">

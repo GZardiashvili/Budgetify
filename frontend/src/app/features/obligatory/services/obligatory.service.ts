@@ -11,9 +11,9 @@ export class ObligatoryService {
   constructor(private http: HttpClient) {
   }
 
-  getObligates(accountId: string) {
+  getObligates(accountId: string, search?: string): Observable<Obligatory[]> {
     return this.http.get<Obligatory[]>(
-      `${environment.apiUrl}obligatoryPayments/${accountId}`
+      `${environment.apiUrl}obligatoryPayments/${accountId}/find?search=${search}`
     );
   }
 

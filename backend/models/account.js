@@ -15,7 +15,11 @@ const accountSchema = new mongoose.Schema({
         },
     },
     description: String,
-    currency: {type: String, required: true},
+    currency: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Currency',
+        required: true
+    },
     availableAmount: {type: Number},
     dateOfCreation: Date,
     dateOfUpdate: Date,

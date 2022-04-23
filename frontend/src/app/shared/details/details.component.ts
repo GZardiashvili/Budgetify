@@ -29,6 +29,7 @@ export class DetailsComponent {
     firstDateOfPayment: [''],
     lastDateOfPayment: [''],
     dateOfPayment: [''],
+    dateOfOperation: [''],
     goal: [''],
     goalAmount: [''],
     savings: [''],

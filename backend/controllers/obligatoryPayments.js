@@ -4,10 +4,18 @@ const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
+router.get('/:accountId/find/:search?', (req, res) => {
     ObligatoryPayment.find({
         user: bindUser(req, res).id,
-        accountId: req.params.accountId
+        accountId: req.params.accountId,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
+                }
+            }
+        ]
     }, (err, obligatoryPayments) => {
         if (err) {
             res.status(500).send(err);

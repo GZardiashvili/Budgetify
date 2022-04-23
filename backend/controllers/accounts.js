@@ -4,33 +4,19 @@ const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    Account.find({
+router.get('/', async (req, res) => {
+    const accounts = await Account.find({
         user: bindUser(req, res).id,
-    }, (err, accounts) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(accounts);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+    }).populate('currency');
+    res.status(200).send(accounts);
 });
 
-router.get('/:accountId', (req, res) => {
-    Account.findOne({
+router.get('/:accountId', async (req, res) => {
+    const account = await Account.findOne({
         user: bindUser(req, res).id,
         _id: req.params.accountId
-    }, (err, account) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(account);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+    }).populate('currency');
+    res.status(200).send(account);
 });
 router.post('/create', (req, res) => {
     const body = req.body;

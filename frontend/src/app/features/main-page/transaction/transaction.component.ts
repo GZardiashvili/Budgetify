@@ -3,10 +3,10 @@ import { TransactionService } from './services/transaction.service';
 import { Transaction } from './transaction';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
-import { debounceTime, distinctUntilChanged, switchMap, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
 import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, FormControl } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { CommonService } from '../../../shared/common/common.service';
 
 @Component({
@@ -17,12 +17,10 @@ import { CommonService } from '../../../shared/common/common.service';
 export class TransactionComponent implements OnInit, OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   private readonly reloadTransactions$ = new BehaviorSubject(true);
-  searchControl = new FormControl('', []);
   transactions$!: Observable<Transaction[]>;
   transaction!: Transaction | null;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
-  term: string = '';
 
   transactionForm = this.fb.group({
     type: [''],
@@ -49,7 +47,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
       this.route.paramMap,
       this.commonService.getSearchTerm().pipe(
         takeUntil(this.componentIsDestroyed$),
-        debounceTime(1000),
+        debounceTime(300),
         distinctUntilChanged(),
       ),
       this.reloadTransactions$,

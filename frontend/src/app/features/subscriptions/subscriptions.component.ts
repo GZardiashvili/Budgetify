@@ -3,9 +3,10 @@ import { SubscriptionService } from './services/subscription.service';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
-import { switchMap, takeUntil, tap } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { CommonService } from '../../shared/common/common.service';
 
 @Component({
   selector: 'app-subscriptions',
@@ -30,18 +31,24 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
     private subscriptionService: SubscriptionService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private commonService: CommonService,
   ) {
   }
 
   ngOnInit(): void {
     this.subscriptions$ = combineLatest([
       this.route.paramMap,
+      this.commonService.getSearchTerm().pipe(
+        takeUntil(this.componentIsDestroyed$),
+        debounceTime(300),
+        distinctUntilChanged(),
+      ),
       this.reloadSubscriptions$,
     ]).pipe(
-      switchMap(([params]) => {
+      switchMap(([params, term]) => {
         const accountId = params.get('accountId') || this.utilsService.accountId;
-        return this.subscriptionService.getSubscriptions(String(accountId));
+        return this.subscriptionService.getSubscriptions(String(accountId), term);
       })
     );
   }

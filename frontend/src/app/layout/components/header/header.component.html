@@ -1,4 +1,10 @@
 <div class="app-header">
+  <div class="app-header__logo">
+    <a [routerLink]="'/'">
+      <img src="./assets/sm-logo.png" alt="logo">
+    </a>
+  </div>
+  <app-search class="app-header__search"></app-search>
   <div class="app-header__profile">
     <button class="btn-list" mat-button [matMenuTriggerFor]="userAcc">
       <img src="{{profile.pfpUrl}}" alt="pfp">

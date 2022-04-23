@@ -1,12 +1,13 @@
 <div class="container">
-  <ng-container *ngFor="let category of categories | async">
+  <ng-container *ngFor="let category of categories$ | async">
     <div
       [class]="category.type == 'incomes'?'category-list category-list--border-green':'category-list category-list--border-red'"
       type="button">
       <span class="category-list__title">{{category.title}}</span>
       <div class="category-list__icon">
         <span class="category-list__icon-edit" (click)="sidenav.opened=true"><fa-icon [icon]="faEdit"></fa-icon> </span>
-        <span class="category-list__icon-delete" (click)="delete()"><fa-icon [icon]="faXMark"></fa-icon></span>
+        <span class="category-list__icon-delete" (click)="deleteCategory(category.id)"><fa-icon
+          [icon]="faXMark"></fa-icon></span>
       </div>
     </div>
   </ng-container>
@@ -23,7 +24,7 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="categories">
+    <ng-container *ngIf="categories$">
       <div class="content">
         <h1>Add category</h1>
         <form [formGroup]="categoryForm">
