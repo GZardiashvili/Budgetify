@@ -35,7 +35,7 @@ router.get('/:accountId/:id', (req, res) => {
     });
 });
 
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
     const body = req.body;
 
     const currency = new Currency({
@@ -48,7 +48,7 @@ router.post('/create', (req, res) => {
     });
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Currency.findOneAndDelete({
         user: bindUser(req, res).id,
         _id: req.params.id
@@ -61,7 +61,7 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
-router.put('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const body = req.body;
 
     const currency = {

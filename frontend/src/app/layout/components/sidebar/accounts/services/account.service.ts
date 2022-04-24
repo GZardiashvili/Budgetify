@@ -21,18 +21,18 @@ export class AccountService {
   }
 
   addAccount(account: Account): Observable<Account> {
-    return this.http.post<Account>(`${environment.apiUrl}accounts/create`, account);
+    return this.http.post<Account>(`${environment.apiUrl}accounts`, account);
   }
 
   updateAccount(id: string, account: Account): Observable<Account> {
     return this.http.put<Account>(
-      `${environment.apiUrl}accounts/update/${id}`,
+      `${environment.apiUrl}accounts/${id}`,
       account
     );
   }
 
   deleteAccount(id: string) {
-    return this.http.delete(`${environment.apiUrl}accounts/delete/${id}`);
+    return this.http.delete(`${environment.apiUrl}accounts/${id}`);
   }
 
 }

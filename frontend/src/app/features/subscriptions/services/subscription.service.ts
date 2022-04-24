@@ -12,7 +12,7 @@ export class SubscriptionService {
   }
 
   addSubscription(accountId: string, subscription: Subscriptions): Observable<Subscriptions> {
-    return this.http.post<Subscriptions>(`${environment.apiUrl}subscriptions/create/${accountId}`, subscription);
+    return this.http.post<Subscriptions>(`${environment.apiUrl}subscriptions/${accountId}`, subscription);
   }
 
 
@@ -30,12 +30,12 @@ export class SubscriptionService {
 
   updateSubscription(id: string, transaction: Subscriptions): Observable<Subscriptions> {
     return this.http.put<Subscriptions>(
-      `${environment.apiUrl}subscriptions/update/${id}`,
+      `${environment.apiUrl}subscriptions/${id}`,
       transaction
     );
   }
 
   deleteSubscription(id: string) {
-    return this.http.delete(`${environment.apiUrl}subscriptions/delete/${id}`);
+    return this.http.delete(`${environment.apiUrl}subscriptions/${id}`);
   }
 }

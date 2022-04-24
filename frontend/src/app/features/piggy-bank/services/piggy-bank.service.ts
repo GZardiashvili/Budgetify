@@ -14,7 +14,7 @@ export class PiggyBankService {
 
   addPiggyBank(accountId: string, piggyBank: PiggyBank): Observable<PiggyBank> {
     return this.http.post<PiggyBank>(
-      `${environment.apiUrl}piggyBanks/create/${accountId}`,
+      `${environment.apiUrl}piggyBanks/${accountId}`,
       piggyBank
     );
   }
@@ -29,12 +29,12 @@ export class PiggyBankService {
 
   updatePiggyBank(id: string, piggyBank: PiggyBank): Observable<PiggyBank> {
     return this.http.put<PiggyBank>(
-      `${environment.apiUrl}piggyBanks/update/${id}`,
+      `${environment.apiUrl}piggyBanks/${id}`,
       piggyBank
     );
   }
 
   deletePiggyBank(id: string) {
-    return this.http.delete(`${environment.apiUrl}piggyBanks/delete/${id}`);
+    return this.http.delete(`${environment.apiUrl}piggyBanks/${id}`);
   }
 }

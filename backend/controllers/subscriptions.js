@@ -29,7 +29,7 @@ router.get('/:accountId/:id', async (req, res) => {
     res.status(200).send(subscription);
 });
 
-router.post('/create/:accountId', (req, res) => {
+router.post('/:accountId', (req, res) => {
     const body = req.body;
 
     const subscription = new Subscription({
@@ -56,7 +56,7 @@ router.post('/create/:accountId', (req, res) => {
         });
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Subscription.findOneAndDelete({
         user: bindUser(req, res).id,
         _id: req.params.id
@@ -65,7 +65,7 @@ router.delete('/delete/:id', (req, res) => {
     });
 });
 
-router.put('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const body = req.body;
 
     const subscription = {

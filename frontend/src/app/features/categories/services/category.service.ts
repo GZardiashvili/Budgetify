@@ -11,7 +11,7 @@ export class CategoryService {
   }
 
   createCategory(category: Category) {
-    return this.http.post(`${environment.apiUrl}/categories/create`, category);
+    return this.http.post(`${environment.apiUrl}/categories`, category);
   }
 
   getCategories(search?: string) {
@@ -19,10 +19,10 @@ export class CategoryService {
   }
 
   updateCategory(id: string, category: Category) {
-    return this.http.put(`${environment.apiUrl}/categories/update/${id}`, category);
+    return this.http.put(`${environment.apiUrl}/categories/${id}`, category);
   }
 
   deleteCategory(id: number) {
-    return this.http.delete(`${environment.apiUrl}categories/delete/${id}`);
+    return this.http.delete(`${environment.apiUrl}categories/${id}`);
   }
 }

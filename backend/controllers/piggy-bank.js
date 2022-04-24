@@ -25,7 +25,7 @@ router.get('/:accountId/:id', (req, res) => {
         }).clone()
 });
 
-router.post('/create/:accountId', (req, res) => {
+router.post('/:accountId', (req, res) => {
     const body = req.body;
 
     const piggyBank = new PiggyBank({
@@ -47,7 +47,7 @@ router.post('/create/:accountId', (req, res) => {
         });
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     PiggyBank.findOneAndDelete({
         user: bindUser(req, res).id,
         _id: req.params.id
@@ -60,7 +60,7 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
-router.put('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const body = req.body;
 
     const piggyBank = {

@@ -12,7 +12,7 @@ export class ObligatoryService {
   }
 
   addObligatory(accountId: string, obligatory: Obligatory): Observable<any> {
-    return this.http.post(`${environment.apiUrl}obligatoryPayments/create/${accountId}`, obligatory);
+    return this.http.post(`${environment.apiUrl}obligatoryPayments/${accountId}`, obligatory);
   }
 
   getObligates(accountId: string, search?: string): Observable<Obligatory[]> {
@@ -29,12 +29,12 @@ export class ObligatoryService {
 
   updateObligate(id: string, obligate: Obligatory): Observable<Obligatory> {
     return this.http.put<Obligatory>(
-      `${environment.apiUrl}obligatoryPayments/update/${id}`,
+      `${environment.apiUrl}obligatoryPayments/${id}`,
       obligate
     );
   }
 
   deleteObligate(id: string) {
-    return this.http.delete(`${environment.apiUrl}obligatoryPayments/delete/${id}`);
+    return this.http.delete(`${environment.apiUrl}obligatoryPayments/${id}`);
   }
 }

@@ -18,7 +18,7 @@ router.get('/:accountId', async (req, res) => {
     }).populate('currency');
     res.status(200).send(account);
 });
-router.post('/create', (req, res) => {
+router.post('/', (req, res) => {
     const body = req.body;
 
     const account = new Account({
@@ -40,7 +40,7 @@ router.post('/create', (req, res) => {
         });
 });
 
-router.delete('/delete/:accountId', (req, res) => {
+router.delete('/:accountId', (req, res) => {
     Account.findOneAndDelete({
         user: bindUser(req, res).id,
         _id: req.params.accountId
@@ -53,7 +53,7 @@ router.delete('/delete/:accountId', (req, res) => {
         });
 });
 
-router.put('/update/:accountId', (req, res) => {
+router.put('/:accountId', (req, res) => {
     const body = req.body;
 
     const account = {

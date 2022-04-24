@@ -31,7 +31,7 @@ router.get('/:accountId/:id', async (req, res) => {
 
 });
 
-router.post('/create/:accountId', async (req, res) => {
+router.post('/:accountId', async (req, res) => {
     const body = req.body;
 
     const transaction = new Transaction({
@@ -53,7 +53,7 @@ router.post('/create/:accountId', async (req, res) => {
     res.status(200).send(savedTransaction);
 });
 
-router.delete('/delete/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     Transaction.findOneAndDelete({
         user: bindUser(req, res).id,
         _id: req.params.id
@@ -66,7 +66,7 @@ router.delete('/delete/:id', (req, res) => {
         });
 });
 
-router.put('/update/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     const body = req.body;
 
     const transaction = {

@@ -14,7 +14,7 @@ export class TransactionService {
 
   addTransaction(accountId: string, transaction: Transaction): Observable<Transaction> {
     return this.http.post<Transaction>(
-      `${environment.apiUrl}transactions/create/${accountId}`,
+      `${environment.apiUrl}transactions/${accountId}`,
       transaction
     );
   }
@@ -33,13 +33,13 @@ export class TransactionService {
 
   updateTransaction(id: string, transaction: Transaction): Observable<Transaction> {
     return this.http.put<Transaction>(
-      `${environment.apiUrl}transactions/update/${id}`,
+      `${environment.apiUrl}transactions/${id}`,
       transaction
     );
   }
 
   deleteTransaction(id: string) {
-    return this.http.delete(`${environment.apiUrl}transactions/delete/${id}`);
+    return this.http.delete(`${environment.apiUrl}transactions/${id}`);
   }
 
 }
