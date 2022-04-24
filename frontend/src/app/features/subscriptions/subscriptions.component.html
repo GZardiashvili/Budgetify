@@ -1,6 +1,20 @@
+<div class="container" type="button" (click)="sidenav.opened = true; editView()">
+  <p>Add Subscription</p>
+  <ng-template #create>
+    <div class="flex">
+      <ui-details [title]="'Add Subscription'"
+                  [currentView]="view"
+                  [detailsForm]="subscriptionForm"
+                  (save)="addSubscription(subscriptionForm.value); sidenav.opened = false"
+                  (close)="sidenav.opened = false">
+      </ui-details>
+    </div>
+  </ng-template>
+</div>
 <div class="container">
   <ng-container *ngFor="let subscription of subscriptions$ | async">
-    <ui-card (click)="getSubscription(subscription.id);sidenav.opened = true" [card]="subscription"></ui-card>
+    <ui-card (click)="getSubscription(subscription.id); detailsView(); sidenav.opened = true"
+             [card]="subscription"></ui-card>
   </ng-container>
 </div>
 
@@ -14,12 +28,13 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="subscription">
+    <ng-container *ngIf="subscription; else create">
       <ui-details [title]="'Subscription'" [detailsInfo]="subscription"
                   [detailsForm]="subscriptionForm"
                   (save)="updateSubscription(subscription.id, subscription)"
-                  (delete)="deleteSubscription(subscription.id); subscription = null; sidenav.opened = false"
-                  (close)="sidenav.toggle()"></ui-details>
+                  (delete)="deleteSubscription(subscription.id); subscription = null; subscriptionForm.reset(); sidenav.opened = false"
+                  [currentView]="view"
+                  (close)="sidenav.opened = false; subscription = null"></ui-details>
     </ng-container>
   </mat-sidenav>
 </mat-sidenav-container>

@@ -4,11 +4,10 @@
   <ng-template #create>
     <div class="flex">
       <fa-icon [icon]="faPiggyBank"></fa-icon>
-      <span>Add Piggy Bank</span>
-      <ui-details [title]="'Piggy Bank'"
+      <ui-details [title]="'Add Piggy Bank'"
                   [currentView]="view"
                   [detailsForm]="piggyBankForm"
-                  (save)="addPiggyBank(piggyBankForm.value); editView(); sidenav.opened = false"
+                  (save)="addPiggyBank(piggyBankForm.value); sidenav.opened = false"
                   (close)="sidenav.opened = false">
       </ui-details>
     </div>

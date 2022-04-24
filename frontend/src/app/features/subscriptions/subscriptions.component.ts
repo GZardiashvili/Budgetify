@@ -19,6 +19,7 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
 
   subscriptions$!: Observable<Subscriptions[]>;
   subscription!: Subscriptions | null;
+  accountId = this.utilsService.accountId;
 
   subscriptionForm: FormGroup = this.fb.group({
     title: [''],
@@ -51,6 +52,23 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
         return this.subscriptionService.getSubscriptions(String(accountId), term);
       })
     );
+  }
+
+  view: 'details' | 'edit' = 'details';
+
+  editView() {
+    this.view = 'edit';
+    this.subscriptionForm.reset();
+  }
+
+  detailsView() {
+    this.view = 'details';
+  }
+
+  addSubscription(subscription: Subscriptions) {
+    this.subscriptionService.addSubscription(String(this.accountId), subscription).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(() => {
+      this.reloadSubscriptions$.next(true);
+    });
   }
 
   getSubscription(id: string) {

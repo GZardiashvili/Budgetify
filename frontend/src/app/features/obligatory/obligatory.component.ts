@@ -19,6 +19,7 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
 
   obligates$!: Observable<Obligatory[]>;
   obligate!: Obligatory | null;
+  accountId = this.utilsService.accountId;
 
   obligateForm = this.fb.group({
     title: [''],
@@ -50,6 +51,23 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
         return this.obligatoryService.getObligates(String(id), term);
       })
     );
+  }
+
+  view: 'details' | 'edit' = 'details';
+
+  editView() {
+    this.view = 'edit';
+    this.obligateForm.reset();
+  }
+
+  detailsView() {
+    this.view = 'details';
+  }
+
+  addObligatory(obligatory: Obligatory) {
+    this.obligatoryService.addObligatory(String(this.accountId), obligatory).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(() => {
+      this.reloadObligates$.next(true);
+    });
   }
 
   getObligate(id: string) {

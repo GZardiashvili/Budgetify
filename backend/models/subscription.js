@@ -27,7 +27,7 @@ const subscriptionSchema = new mongoose.Schema({
         ref: 'Category',
         required: true
     }],
-    currency: {type: String, required: true},
+    currency: {type: String},
     amount: {type: Number, required: true},
     dateOfCreation: Date,
     dateOfUpdate: Date,

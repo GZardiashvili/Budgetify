@@ -11,6 +11,11 @@ export class SubscriptionService {
   constructor(private http: HttpClient) {
   }
 
+  addSubscription(accountId: string, subscription: Subscriptions): Observable<Subscriptions> {
+    return this.http.post<Subscriptions>(`${environment.apiUrl}subscriptions/create/${accountId}`, subscription);
+  }
+
+
   getSubscriptions(accountId: string, search?: string): Observable<Subscriptions[]> {
     return this.http.get<Subscriptions[]>(
       `${environment.apiUrl}subscriptions/${accountId}/find?search=${search}`

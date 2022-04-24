@@ -1,6 +1,20 @@
+<div type="button" (click)="sidenav.opened = true; editView()">
+  <p>Add Transaction</p>
+  <ng-template #create>
+    <div class="flex">
+      <ui-details [title]="'Add Transaction'"
+                  [currentView]="view"
+                  [detailsForm]="transactionForm"
+                  (save)="addTransaction(transactionForm.value); sidenav.opened = false"
+                  (close)="sidenav.opened = false">
+      </ui-details>
+    </div>
+  </ng-template>
+</div>
+
 <div class="container">
   <ng-container *ngFor="let transaction of transactions$ | async ">
-    <ui-card (click)="getTransaction(transaction.id); sidenav.opened = true;" [card]="transaction"
+    <ui-card (click)="getTransaction(transaction.id); detailsView(); sidenav.opened = true;" [card]="transaction"
              [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
   </ng-container>
 </div>
@@ -15,11 +29,13 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="transaction">
+    <ng-container *ngIf="transaction; else create">
       <ui-details [title]="'Transaction'" [detailsInfo]="transaction"
                   [detailsForm]="transactionForm"
+                  [currentView]="view"
                   (save)="updateTransaction(transaction.id, transaction)"
-                  (delete)="deleteTransaction(transaction.id); transaction = null; sidenav.opened = false;"
+                  (delete)="deleteTransaction(transaction.id); transaction = null; transactionForm.reset(); sidenav.opened = false;"
+                  (close)="sidenav.opened = false"
                   [icon]="transaction.type==='expenses'? faExpense : faIncome" (close)="sidenav.opened = false">
       </ui-details>
     </ng-container>

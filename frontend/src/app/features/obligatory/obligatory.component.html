@@ -1,6 +1,19 @@
+<div type="button" (click)="sidenav.opened = true; editView()">
+  <p>Add Obligatory</p>
+  <ng-template #create>
+    <div class="flex">
+      <ui-details [title]="'Add Obligatory'"
+                  [currentView]="view"
+                  [detailsForm]="obligateForm"
+                  (save)="addObligatory(obligateForm.value); sidenav.opened = false"
+                  (close)="sidenav.opened = false">
+      </ui-details>
+    </div>
+  </ng-template>
+</div>
 <div class="container">
   <ng-container *ngFor="let obligate of obligates$ | async">
-    <ui-card (click)="getObligate(obligate.id);sidenav.opened = true" [card]="obligate"></ui-card>
+    <ui-card (click)="getObligate(obligate.id);detailsView(); sidenav.opened = true" [card]="obligate"></ui-card>
   </ng-container>
 </div>
 <mat-sidenav-container class="container">
@@ -14,11 +27,13 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="obligate">
-      <ui-details [title]="'Obligatory'" [detailsInfo]="obligate" [detailsForm]="obligateForm"
+    <ng-container *ngIf="obligate; else create">
+      <ui-details [title]="'Obligatory'" [detailsInfo]="obligate"
+                  [detailsForm]="obligateForm"
+                  [currentView]="view"
                   (save)="updateObligate(obligate.id, obligate)"
                   (delete)="deleteObligate(obligate.id); obligate = null; sidenav.opened = false;"
-                  (close)="sidenav.toggle()"></ui-details>
+                  (close)="sidenav.opened = false"></ui-details>
     </ng-container>
 
   </mat-sidenav>

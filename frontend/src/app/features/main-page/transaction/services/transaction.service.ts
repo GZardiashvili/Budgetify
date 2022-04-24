@@ -12,9 +12,9 @@ export class TransactionService {
   constructor(private http: HttpClient) {
   }
 
-  createTransaction(transaction: Transaction): Observable<Transaction> {
-    return this.http.put<Transaction>(
-      `${environment.apiUrl}transactions/create/`,
+  addTransaction(accountId: string, transaction: Transaction): Observable<Transaction> {
+    return this.http.post<Transaction>(
+      `${environment.apiUrl}transactions/create/${accountId}`,
       transaction
     );
   }

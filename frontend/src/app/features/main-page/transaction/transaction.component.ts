@@ -19,6 +19,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
   private readonly reloadTransactions$ = new BehaviorSubject(true);
   transactions$!: Observable<Transaction[]>;
   transaction!: Transaction | null;
+  accountId = this.utilsService.accountId;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
 
@@ -59,9 +60,26 @@ export class TransactionComponent implements OnInit, OnDestroy {
     );
   }
 
-  createTransaction() {
-    const transaction = this.transactionForm.value;
-    this.transactionService.createTransaction(transaction).subscribe(() => {
+  view: 'details' | 'edit' = 'details';
+
+  editView() {
+    this.view = 'edit';
+    this.transactionForm.reset();
+  }
+
+  detailsView() {
+    this.view = 'details';
+  }
+
+  addTransaction(transaction: Transaction) {
+    this.transactionService.addTransaction(String(this.accountId), transaction).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(() => {
+      let diff = 0;
+      if (transaction.type === 'incomes') {
+        diff = Math.abs(transaction.amount);
+      } else {
+        diff = -Math.abs(transaction.amount);
+      }
+      this.commonService.sendUpdate(diff);
       this.reloadTransactions$.next(true);
     });
   }

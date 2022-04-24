@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Account } from '../account';
-import { Subscriptions } from '../../../../../features/subscriptions/subscriptions';
 
 @Injectable({
   providedIn: 'root',
@@ -35,5 +34,5 @@ export class AccountService {
   deleteAccount(id: string) {
     return this.http.delete(`${environment.apiUrl}accounts/delete/${id}`);
   }
-  
+
 }

@@ -58,8 +58,35 @@ export class AccountsComponent implements OnDestroy {
     return this.utilsService.accountId;
   }
 
+  view: 'details' | 'edit' = 'details';
+  mode: 'create' | 'default' = 'default';
+
+  editView() {
+    this.view = 'edit';
+  }
+
+  createMode() {
+    this.mode = 'create';
+    this.accountForm.reset();
+  }
+
+  detailsView() {
+    this.mode = 'default';
+    this.view = 'details';
+    this.accountService.getAccount(this.accountId).pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe(account => {
+        this.accountForm.patchValue(account);
+        this.activeAccount.next(account);
+      });
+  }
+
   addAccount(account: Account) {
-    this.accountService.addAccount(account);
+    this.accountService.addAccount(account).pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe(() => {
+        this.activeAccount.next(account);
+        this.accountSelect(account);
+        this.reloadAccounts();
+      });
   }
 
   getBaseUrl() {

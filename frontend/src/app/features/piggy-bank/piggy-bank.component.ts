@@ -61,7 +61,7 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   }
 
   addPiggyBank(piggyBank: PiggyBank) {
-    this.piggyBankService.addPiggyBank(String(this.accountId), piggyBank).subscribe(() => {
+    this.piggyBankService.addPiggyBank(String(this.accountId), piggyBank).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(() => {
       this.reloadPiggyBanks$.next(true);
     });
   }
