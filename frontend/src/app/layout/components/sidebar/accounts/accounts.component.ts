@@ -4,9 +4,9 @@ import { Account } from './account';
 import { AccountService } from './services/account.service';
 import { UtilsService } from '../../../../shared/utils/utils.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
-import { takeUntil } from 'rxjs/operators';
+import { switchMap, takeUntil } from 'rxjs/operators';
 import { TransactionService } from '../../../../features/main-page/transaction/services/transaction.service';
 import { CommonService } from '../../../../shared/common/common.service';
 
@@ -21,13 +21,13 @@ export class AccountsComponent implements OnDestroy {
 
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
-  accounts$: Observable<Account[]> = this.accountService.getAccounts();
+  accounts$!: Observable<Account[]>;
   activeAccount: Subject<Account | null> = new Subject<Account | null>();
   accountForm = this.fb.group({
     title: [''],
     description: [''],
     currency: [''],
-    availableAmount: [''],
+    availableAmount: ['0'],
   });
 
   constructor(private accountService: AccountService,
@@ -37,6 +37,13 @@ export class AccountsComponent implements OnDestroy {
               private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder) {
+    this.accounts$ = combineLatest([
+      this.reloadAccounts$,
+      this.accountService.getAccounts()
+    ]).pipe(switchMap(() => {
+      return this.accountService.getAccounts();
+    }));
+
     this.accountService.getAccount(this.accountId)
       .pipe(
         takeUntil(this.componentIsDestroyed$)
@@ -82,10 +89,11 @@ export class AccountsComponent implements OnDestroy {
 
   addAccount(account: Account) {
     this.accountService.addAccount(account).pipe(takeUntil(this.componentIsDestroyed$))
-      .subscribe(() => {
-        this.activeAccount.next(account);
-        this.accountSelect(account);
-        this.reloadAccounts();
+      .subscribe((newAcc) => {
+        this.accountSelect(newAcc);
+        this.activeAccount.next(newAcc);
+        console.log(newAcc.id)
+        this.reloadAccounts$.next(true);
       });
   }
 

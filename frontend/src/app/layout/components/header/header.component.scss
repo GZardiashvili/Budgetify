@@ -4,17 +4,17 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   grid-template-areas: "logo search profile";
-  width: 84%;
-  min-height: 94px;
+  width:100%;
+  min-height: 74px;
   position: fixed;
   z-index: 2;
-  border: 1px solid rgba(255, 255, 255, 0.18);
   background: rgba(255, 255, 255, 0.75);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(117, 131, 141, 0.19);
 
   &__logo {
-    padding: 9px 12px;
+    padding: 9px 20px;
     grid-area: logo;
 
     a {
@@ -40,7 +40,7 @@
 
   &__profile {
     grid-area: profile;
-
+    justify-self: end;
     .btn-list {
 
       img {
@@ -66,3 +66,4 @@
     }
   }
 }
+

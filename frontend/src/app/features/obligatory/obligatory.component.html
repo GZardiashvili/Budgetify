@@ -33,7 +33,7 @@
                   [currentView]="view"
                   (save)="updateObligate(obligate.id, obligate)"
                   (delete)="deleteObligate(obligate.id); obligate = null; sidenav.opened = false;"
-                  (close)="sidenav.opened = false"></ui-details>
+                  (close)="detailsView(); obligate=null; sidenav.opened = false"></ui-details>
     </ng-container>
 
   </mat-sidenav>

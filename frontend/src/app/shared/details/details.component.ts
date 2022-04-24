@@ -1,15 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormControl } from '@angular/forms';
+import { faCircleArrowDown, faCircleArrowUp, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { Card } from '../card/card';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { Category } from '../../features/categories/category';
+import { CategoryService } from '../../features/categories/services/category.service';
 
 @Component({
   selector: 'ui-details',
   templateUrl: './details.component.html',
   styleUrls: ['./details.component.scss']
 })
-export class DetailsComponent {
+export class DetailsComponent implements OnInit {
   faEdit = faPenToSquare
   faClose = faXmark
   @Input() title: string = ''
@@ -35,6 +37,8 @@ export class DetailsComponent {
     savings: [''],
     availableAmount: [''],
   });
+  faExpense = faCircleArrowUp;
+  faIncome = faCircleArrowDown
 
   @Input()
   get detailsInfo(): Card | null {
@@ -56,6 +60,19 @@ export class DetailsComponent {
 
 
   @Input() currentView: 'details' | 'edit' = 'details';
+  @Input() categories!: Category[] | null;
+
+  ngOnInit() {
+    this.detailsForm.get('category')?.setValue(this.detailsInfo?.category);
+  }
+
+  chooseIncomes() {
+    this.detailsForm.get('type')?.setValue('incomes');
+  }
+
+  chooseExpenses() {
+    this.detailsForm.get('type')?.setValue('expenses');
+  }
 
   goToEdit() {
     this.currentView = 'edit';
@@ -65,7 +82,8 @@ export class DetailsComponent {
     this.currentView = 'details';
   }
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private categoryService: CategoryService) {
   }
+
 
 }

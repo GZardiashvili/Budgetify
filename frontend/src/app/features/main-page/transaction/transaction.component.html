@@ -4,6 +4,7 @@
     <div class="flex">
       <ui-details [title]="'Add Transaction'"
                   [currentView]="view"
+                  [categories]="categories$ | async"
                   [detailsForm]="transactionForm"
                   (save)="addTransaction(transactionForm.value); sidenav.opened = false"
                   (close)="sidenav.opened = false">
@@ -14,7 +15,8 @@
 
 <div class="container">
   <ng-container *ngFor="let transaction of transactions$ | async ">
-    <ui-card (click)="getTransaction(transaction.id); detailsView(); sidenav.opened = true;" [card]="transaction"
+    <ui-card (click)="getTransaction(transaction.id); detailsView(); sidenav.opened = true;"
+             [card]="transaction"
              [icon]="transaction.type==='expenses'? faExpense : faIncome"></ui-card>
   </ng-container>
 </div>
@@ -33,10 +35,15 @@
       <ui-details [title]="'Transaction'" [detailsInfo]="transaction"
                   [detailsForm]="transactionForm"
                   [currentView]="view"
+                  [categories]="categories$ | async"
                   (save)="updateTransaction(transaction.id, transaction)"
-                  (delete)="deleteTransaction(transaction.id); transaction = null; transactionForm.reset(); sidenav.opened = false;"
-                  (close)="sidenav.opened = false"
-                  [icon]="transaction.type==='expenses'? faExpense : faIncome" (close)="sidenav.opened = false">
+                  (delete)="deleteTransaction(transaction.id);
+                    transaction = null;
+                    transactionForm.reset();
+                    sidenav.opened = false;"
+                  (close)="detailsView(); transaction=null; sidenav.opened = false"
+                  [icon]="transaction.type==='expenses'? faExpense : faIncome"
+      >
       </ui-details>
     </ng-container>
   </mat-sidenav>

@@ -6,7 +6,6 @@ const router = express.Router();
 
 router.get('/:id?', (req, res) => {
     if (req.params.id) {
-
         User.findById(req.params.id)
             .then((user) => {
                 if (user) {

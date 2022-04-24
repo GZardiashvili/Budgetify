@@ -12,17 +12,16 @@
     height: 45px;
     border: 2px solid #4C4F53;
     border-radius: 10px;
-    //color: #4C4F53;
     font-size: 1.1rem;
     padding: 0 7px;
     text-transform: capitalize;
 
     &--border-red {
-      border: 2px solid #FF0000;
+      border: 2px solid #F44336;
     }
 
     &--border-green {
-      border: 2px solid #00FF00;
+      border: 2px solid #28B820;
     }
 
     &__title {
@@ -51,40 +50,87 @@
 }
 
 .content {
-  margin: 20px auto auto 30px;
+  margin-top: 20px;
+  margin-left: 50px;
+  display: grid;
+  grid-template-rows: auto 5fr auto;
+  grid-template-areas: "header" "content" "footer";
+  gap: 10px;
+  height: 90%;
 
-  .category-type {
+  &__header {
+    grid-area: header;
     display: flex;
+    justify-content: space-between;
 
-    &__incomes {
-      border: 2px solid #4C4F53;
-      border-radius: 5px;
-      padding: 5px 10px;
-      cursor: pointer;
-
-      &--green {
-        color: #00FF00;
-      }
+    h1 {
+      text-transform: capitalize;
+      color: #4C4F53;
     }
 
-    &__expenses {
-      border: 2px solid #4C4F53;
-      border-radius: 5px;
-      padding: 5px 10px;
+    fa-icon {
+      font-size: 1.5rem;
+      color: #4C4F53;
+      margin-right: 15px;
       cursor: pointer;
+    }
+  }
 
-      &--red {
-        color: #FF0000;
+  form {
+    grid-area: content;
 
+    .category-type {
+      display: flex;
+      border: 1px solid #828282;
+      width: fit-content;
+      border-radius: 7px;
+      margin-bottom: 35px;
+
+      .selected {
+        border: 1px solid #2C2C2C;
+        padding: 5px 10px;
+        border-radius: 7px;
+      }
+
+      .notSelected {
+        border: none;
+        color: #828282;
+      }
+
+      &__incomes {
+        padding: 5px 10px;
+        cursor: pointer;
+        margin: 0;
+
+        &--green {
+          color: #28B820;
+        }
+      }
+
+      &__expenses {
+        padding: 5px 10px;
+        cursor: pointer;
+        margin: 0;
+
+        &--red {
+          color: #F44336;
+
+        }
       }
     }
   }
 
-  button {
-    color: #373737;
-  }
+  .btn-list {
+    grid-area: footer;
+    justify-self: end;
+    margin-right: 15px;
 
-  .save {
-    background-color: #B9E2E6;
+    button {
+      color: #373737;
+    }
+
+    .save {
+      background-color: #B9E2E6;
+    }
   }
 }

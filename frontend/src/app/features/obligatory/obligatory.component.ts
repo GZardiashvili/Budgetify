@@ -5,7 +5,7 @@ import { Obligatory } from './obligatory';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from '../../shared/common/common.service';
 
 @Component({
@@ -22,9 +22,12 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
   accountId = this.utilsService.accountId;
 
   obligateForm = this.fb.group({
-    title: [''],
-    description: [''],
-    amount: [''],
+    title: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    amount: ['', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')]],
+    dateOfPayment: ['', [Validators.required]],
+    firstDateOfPayment: [''],
+    lastDateOfPayment: [''],
   });
 
   constructor(

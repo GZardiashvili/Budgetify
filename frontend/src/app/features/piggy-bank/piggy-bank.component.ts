@@ -3,7 +3,7 @@ import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
 import { PiggyBankService } from './services/piggy-bank.service';
 import { PiggyBank } from './piggy-bank';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { UtilsService } from '../../shared/utils/utils.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
@@ -23,10 +23,10 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   piggyBanks$!: Observable<PiggyBank[]>;
   piggyBank!: PiggyBank | null;
   piggyBankForm = this.fb.group({
-    goal: [''],
-    goalAmount: [''],
-    description: [''],
-    savings: ['0'],
+    goal: ['', [Validators.required]],
+    goalAmount: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    savings: ['0', [Validators.required]],
     crashDate: [''],
   });
 

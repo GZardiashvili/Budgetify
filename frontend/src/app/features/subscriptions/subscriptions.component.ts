@@ -5,8 +5,10 @@ import { Subscriptions } from './subscriptions';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../shared/utils/utils.service';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../shared/common/common.service';
+import { Category } from '../categories/category';
+import { CategoryService } from '../categories/services/category.service';
 
 @Component({
   selector: 'app-subscriptions',
@@ -19,17 +21,22 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
 
   subscriptions$!: Observable<Subscriptions[]>;
   subscription!: Subscriptions | null;
+  categories$!: Observable<Category[]>;
   accountId = this.utilsService.accountId;
 
   subscriptionForm: FormGroup = this.fb.group({
-    title: [''],
-    category: [''],
-    description: [''],
-    amount: [''],
+    title: ['', [Validators.required]],
+    category: ['', [Validators.required]],
+    description: ['', [Validators.required]],
+    amount: ['', [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
+    dateOfPayment: ['', [Validators.required]],
+    firstDateOfPayment: [''],
+    lastDateOfPayment: [''],
   });
 
   constructor(
     private subscriptionService: SubscriptionService,
+    private categoryService: CategoryService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
     private fb: FormBuilder,
@@ -38,6 +45,7 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.categories$ = this.categoryService.getCategories('');
     this.subscriptions$ = combineLatest([
       this.route.paramMap,
       this.commonService.getSearchTerm().pipe(

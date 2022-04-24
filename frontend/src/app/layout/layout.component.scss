@@ -15,12 +15,12 @@
 }
 
 .layout {
-  width: 70%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 4fr 1fr;
-  grid-template-rows: 64px 1fr 64px;
+  grid-template-rows: 64px 1fr auto;
   grid-template-areas:
-    "header header right-sidebar"
+    "header header header"
     "sidebar content right-sidebar"
     "sidebar content right-sidebar";
   margin: 0 auto;
@@ -39,7 +39,7 @@
   &__outlet {
     grid-area: content;
     margin-top: 30px;
-    width: 90%;
+    width: 84%;
     justify-self: center;
 
   }
@@ -48,7 +48,7 @@
     grid-area: right-sidebar;
     align-self: flex-end;
     position: fixed;
-    right: 203px;
+    right: 20px;
     bottom: 40px;
   }
 

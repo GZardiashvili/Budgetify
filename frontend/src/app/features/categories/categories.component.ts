@@ -5,7 +5,7 @@ import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCircleArrowDown, faCircleArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { CommonService } from '../../shared/common/common.service';
 
@@ -21,10 +21,11 @@ export class CategoriesComponent implements OnInit {
   faXMark: IconProp = faXmark;
   faExpense = faCircleArrowUp;
   faIncome = faCircleArrowDown
-  categories$: Observable<Category[]> = this.categoryService.getCategories();
+  categories$!: Observable<Category[]> | null;
+  category!: Category | null;
   categoryForm = this.fb.group({
-    title: [''],
-    type: [''],
+    title: ['', [Validators.required]],
+    type: ['', [Validators.required]],
   })
 
   constructor(private categoryService: CategoryService,
@@ -48,16 +49,46 @@ export class CategoriesComponent implements OnInit {
     );
   }
 
-  getCategory(id: string) {
-    console.log(id)
+  chooseIncomes() {
+    this.categoryForm.get('type')?.setValue('incomes');
   }
 
-  updateCategory(id: string, category: Category) {
-    console.log(id, category);
+  chooseExpenses() {
+    this.categoryForm.get('type')?.setValue('expenses');
+  }
+
+  getCategory(id: string) {
+    return this.categoryService.getCategory(id).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+      (category: Category) => {
+        this.category = category;
+        this.categoryForm.patchValue(category);
+      }
+    );
+  }
+
+  addCategory() {
+    this.categoryService.createCategory(this.categoryForm.value).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+      () => {
+        this.reloadCategories$.next(true);
+      }
+    );
+  }
+
+  updateCategory(id: string) {
+    this.categoryService.updateCategory(id, this.categoryForm.value)
+      .pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+      () => {
+        this.reloadCategories$.next(true);
+      }
+    );
   }
 
   deleteCategory(id: string) {
-    console.log('id', id);
+    this.categoryService.deleteCategory(id).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+      () => {
+        this.reloadCategories$.next(true);
+      }
+    );
   }
 
 

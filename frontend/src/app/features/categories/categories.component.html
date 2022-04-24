@@ -1,11 +1,13 @@
 <div class="container">
+  <div type="button" (click)="sidenav.opened = true">Add Category</div>
   <ng-container *ngFor="let category of categories$ | async">
     <div
       [class]="category.type == 'incomes'?'category-list category-list--border-green':'category-list category-list--border-red'"
       type="button">
       <span class="category-list__title">{{category.title}}</span>
       <div class="category-list__icon">
-        <span class="category-list__icon-edit" (click)="sidenav.opened=true"><fa-icon [icon]="faEdit"></fa-icon> </span>
+        <span class="category-list__icon-edit" (click)="sidenav.opened=true; getCategory(category.id)"><fa-icon
+          [icon]="faEdit"></fa-icon> </span>
         <span class="category-list__icon-delete" (click)="deleteCategory(category.id)"><fa-icon
           [icon]="faXMark"></fa-icon></span>
       </div>
@@ -24,28 +26,38 @@
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="categories$">
-      <div class="content">
+    <div class="content">
+      <div class="content__header">
         <h1>Add category</h1>
-        <form [formGroup]="categoryForm">
-          <div class="category-type">
-            <div type="button" class="category-type__incomes">
-              <fa-icon class="category-type__incomes--green" [icon]="faIncome"></fa-icon>
-              Incomes
-            </div>
-            <div type="button" class="category-type__expenses">
-              <fa-icon class="category-type__expenses--red" [icon]="faExpense"></fa-icon>
-              Expenses
-            </div>
-          </div>
-          <mat-form-field>
-            <mat-label>Title</mat-label>
-            <input matInput name="type" formControlName="title">
-          </mat-form-field>
-        </form>
-        <button mat-button (click)="sidenav.opened=false">Cancel</button>
-        <button mat-raised-button class="save">Save</button>
+        <fa-icon [icon]="faXMark" (click)="sidenav.opened=false; category=null"></fa-icon>
+
       </div>
-    </ng-container>
+      <form [formGroup]="categoryForm">
+        <div class="category-type">
+          <div type="button"
+               [ngClass]="categoryForm.get('type')?.value == 'incomes' ? 'selected':'category-type__incomes notSelected'"
+               (click)="chooseIncomes()">
+            <fa-icon class="category-type__incomes--green" [icon]="faIncome"></fa-icon>
+            Incomes
+          </div>
+          <div type="button"
+               [ngClass]="categoryForm.get('type')?.value == 'expenses' ? 'selected':'category-type__expenses notSelected'"
+               (click)="chooseExpenses()">
+            <fa-icon class="category-type__expenses--red" [icon]="faExpense"></fa-icon>
+            Expenses
+          </div>
+        </div>
+        <mat-form-field>
+          <mat-label>Title</mat-label>
+          <input matInput name="type" formControlName="title">
+        </mat-form-field>
+      </form>
+      <div class="btn-list">
+        <button mat-button (click)="sidenav.opened=false; category=null">Cancel</button>
+        <button mat-raised-button class="save" (click)="category ? updateCategory(category.id) : addCategory();">
+          Save
+        </button>
+      </div>
+    </div>
   </mat-sidenav>
 </mat-sidenav-container>

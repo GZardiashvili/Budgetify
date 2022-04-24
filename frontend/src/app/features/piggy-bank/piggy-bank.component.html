@@ -44,7 +44,7 @@
                   [btnText]="'Crash'"
                   (save)="updatePiggyBank(piggyBank.id, piggyBank)"
                   (delete)="crashPiggyBank(piggyBank.id); piggyBank = null; piggyBankForm.reset(); sidenav.opened = false;"
-                  (close)="sidenav.opened = false; piggyBank = null">
+                  (close)="sidenav.opened = false; detailsView(); piggyBank = null">
       </ui-details>
     </ng-container>
   </mat-sidenav>

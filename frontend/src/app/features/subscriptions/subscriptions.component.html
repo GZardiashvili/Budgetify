@@ -4,6 +4,7 @@
     <div class="flex">
       <ui-details [title]="'Add Subscription'"
                   [currentView]="view"
+                  [categories]="categories$ | async"
                   [detailsForm]="subscriptionForm"
                   (save)="addSubscription(subscriptionForm.value); sidenav.opened = false"
                   (close)="sidenav.opened = false">
@@ -31,10 +32,11 @@
     <ng-container *ngIf="subscription; else create">
       <ui-details [title]="'Subscription'" [detailsInfo]="subscription"
                   [detailsForm]="subscriptionForm"
+                  [categories]="categories$ | async"
                   (save)="updateSubscription(subscription.id, subscription)"
                   (delete)="deleteSubscription(subscription.id); subscription = null; subscriptionForm.reset(); sidenav.opened = false"
                   [currentView]="view"
-                  (close)="sidenav.opened = false; subscription = null"></ui-details>
+                  (close)="detailsView(); sidenav.opened = false; subscription = null"></ui-details>
     </ng-container>
   </mat-sidenav>
 </mat-sidenav-container>

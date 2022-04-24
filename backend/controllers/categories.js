@@ -1,8 +1,9 @@
 const express = require('express');
 const Category = require('../models/category');
 const bindUser = require("../utils/bindUser");
-
+const predefinedCategories = require('../utils/predefinedCategories');
 const router = express.Router();
+
 
 router.get('/find/:search?', (req, res) => {
     Category.find({

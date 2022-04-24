@@ -13,7 +13,9 @@ import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { DetailsComponent } from './details/details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent],
@@ -28,6 +30,8 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatCardModule,
     FontAwesomeModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatSelectModule,
     MatSidenavModule,
   ],
   exports: [
