@@ -8,10 +8,10 @@ function translateForStatistic(transactions) {
 
     const calculateExp = expensesTr.reduce((acc, cur) => {
         cur.category.forEach((cat) => {
-            if (!acc[cat]) {
-                acc[cat] = 0;
+            if (!acc[cat.title]) {
+                acc[cat.title] = 0;
             }
-            acc[cat] += cur.amount;
+            acc[cat.title] += cur.amount;
         });
         return acc;
     }, {});
@@ -21,10 +21,10 @@ function translateForStatistic(transactions) {
 
     const calculateInc = incomesTr.reduce((acc, cur) => {
         cur.category.forEach((cat) => {
-            if (!acc[cat]) {
-                acc[cat] = 0;
+            if (!acc[cat.title]) {
+                acc[cat.title] = 0;
             }
-            acc[cat] += cur.amount;
+            acc[cat.title] += cur.amount;
         });
         return acc;
     }, {});

@@ -9,7 +9,7 @@ router.get('/:accountId', async (req, res) => {
     const transactions = await Transaction.find({
         user: bindUser(req, res).id,
         accountId: req.params.accountId,
-    });
+    }).populate('category');
 
     const {incomes, expenses, economy, incomesByCategory, expensesByCategory} = translateForStatistic(transactions);
     res.json({
