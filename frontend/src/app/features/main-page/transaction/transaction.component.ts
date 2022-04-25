@@ -5,11 +5,12 @@ import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { UtilsService } from '../../../shared/utils/utils.service';
-import { faCircleArrowDown, faCircleArrowUp } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowDown, faCircleArrowUp, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from '../../../shared/common/common.service';
 import { CategoryService } from '../../categories/services/category.service';
 import { Category } from '../../categories/category';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 
 @Component({
     selector: 'app-transaction',
@@ -25,6 +26,7 @@ export class TransactionComponent implements OnInit, OnDestroy {
     accountId = this.utilsService.accountId;
     faExpense = faCircleArrowUp;
     faIncome = faCircleArrowDown
+    faPlus: IconProp = faPlus;
 
     transactionForm = this.fb.group({
         type: ['', [Validators.required]],

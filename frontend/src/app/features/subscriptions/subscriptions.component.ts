@@ -9,6 +9,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { CommonService } from '../../shared/common/common.service';
 import { Category } from '../categories/category';
 import { CategoryService } from '../categories/services/category.service';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-subscriptions',
@@ -23,6 +25,8 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   subscription!: Subscriptions | null;
   categories$!: Observable<Category[]>;
   accountId = this.utilsService.accountId;
+  faPlus: IconProp = faPlus;
+
 
   subscriptionForm: FormGroup = this.fb.group({
     title: ['', [Validators.required]],

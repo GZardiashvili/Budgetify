@@ -7,6 +7,8 @@ import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/o
 import { UtilsService } from '../../shared/utils/utils.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { CommonService } from '../../shared/common/common.service';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-obligatory',
@@ -20,6 +22,8 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
   obligates$!: Observable<Obligatory[]>;
   obligate!: Obligatory | null;
   accountId = this.utilsService.accountId;
+  faPlus: IconProp = faPlus;
+
 
   obligateForm = this.fb.group({
     title: ['', [Validators.required]],

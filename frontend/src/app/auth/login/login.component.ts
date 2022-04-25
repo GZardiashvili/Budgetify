@@ -17,6 +17,10 @@ export class LoginComponent implements OnDestroy {
     emailControl: new FormControl('', [Validators.required, Validators.email]),
     passwordControl: new FormControl('', [Validators.required]),
   });
+  type = {
+    label: 'show',
+    type: 'password'
+  }
 
   constructor(
     private authService: AuthService,
@@ -43,6 +47,16 @@ export class LoginComponent implements OnDestroy {
             console.log(error);
           }
         );
+    }
+  }
+
+  showHide() {
+    if (this.type.type === 'password') {
+      this.type.label = 'hide';
+      this.type.type = 'text';
+    } else {
+      this.type.label = 'show';
+      this.type.type = 'password';
     }
   }
 

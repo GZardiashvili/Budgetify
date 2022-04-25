@@ -24,7 +24,7 @@
     "sidebar content right-sidebar"
     "sidebar content right-sidebar";
   margin: 0 auto;
-  column-gap: 10%;
+  column-gap: 5%;
   row-gap: 20px;
 
   &__header {
@@ -34,13 +34,14 @@
   &__sidebar {
     grid-area: sidebar;
     margin-top: 15px;
+    z-index: 1;
   }
 
   &__outlet {
     grid-area: content;
     margin-top: 30px;
-    width: 84%;
-    justify-self: center;
+    width: 75%;
+    justify-self: start;
 
   }
 

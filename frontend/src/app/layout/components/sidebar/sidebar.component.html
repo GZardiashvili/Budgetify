@@ -2,10 +2,11 @@
   <nav class="menu">
 
     <ul class="menu__list">
-      <li *ngFor="let menuItem of menu; let i = index; trackBy:trackBy" class="menu__list-item">
+      <li routerLinkActive="active" *ngFor="let menuItem of menu; let i = index; trackBy:trackBy"
+          class="menu__list-item">
         <a [routerLink]="menuItem.route">
           <span class="menu__list-icon"><fa-icon [icon]="menuItem.icon"></fa-icon></span>
-          <span>{{menuItem.title}}</span>
+          <span [ngClass]="currentRoute.includes(menuItem.route)?'selected':''">{{menuItem.title}}</span>
         </a>
       </li>
     </ul>

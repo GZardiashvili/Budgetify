@@ -27,7 +27,7 @@ export class AccountsComponent implements OnDestroy {
     title: [''],
     description: [''],
     currency: [''],
-    availableAmount: ['0'],
+    availableAmount: [''],
   });
 
   constructor(private accountService: AccountService,
@@ -90,9 +90,9 @@ export class AccountsComponent implements OnDestroy {
   addAccount(account: Account) {
     this.accountService.addAccount(account).pipe(takeUntil(this.componentIsDestroyed$))
       .subscribe((newAcc) => {
+        this.accountForm.get('availableAmount')?.setValue('0');
         this.accountSelect(newAcc);
         this.activeAccount.next(newAcc);
-        console.log(newAcc.id)
         this.reloadAccounts$.next(true);
       });
   }

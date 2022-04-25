@@ -54,7 +54,7 @@
       </div>
     </ng-container>
     <div class="details-sidebar__footer">
-      <button mat-flat-button color="warn" (click)="delete.emit()">{{btnText}}</button>
+      <button mat-flat-button color="warn" (click)="delete.emit(); openSnackBar();">{{btnText}}</button>
     </div>
   </div>
 </ng-container>
@@ -166,8 +166,7 @@
     </form>
     <div class="details-sidebar__footer">
       <button mat-raised-button color="primary" (click)="goToDetails()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="save.emit(); goToDetails();">Save</button>
+      <button mat-raised-button color="primary" (click)="save.emit(); openSnackBar(); goToDetails();">Save</button>
     </div>
   </div>
 </ng-template>
-

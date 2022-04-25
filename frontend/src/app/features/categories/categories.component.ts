@@ -4,7 +4,7 @@ import { Category } from './category';
 import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faCircleArrowDown, faCircleArrowUp, faXmark } from '@fortawesome/free-solid-svg-icons';
+import { faCircleArrowDown, faCircleArrowUp, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import { FormBuilder, Validators } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { CommonService } from '../../shared/common/common.service';
@@ -17,6 +17,7 @@ import { CommonService } from '../../shared/common/common.service';
 export class CategoriesComponent implements OnInit {
   private componentIsDestroyed$ = new Subject<boolean>();
   private readonly reloadCategories$ = new BehaviorSubject(true);
+  faPlus: IconProp = faPlus;
   faEdit: IconProp = faEdit;
   faXMark: IconProp = faXmark;
   faExpense = faCircleArrowUp;

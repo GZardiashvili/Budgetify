@@ -12,7 +12,7 @@ body {
 
 .details-sidenav {
   width: 500px;
-  height: 80%;
+  height: 85%;
   margin-right: 10px;
   background: rgba(205, 233, 244, 0.75);
   box-shadow: 0 8px 12px 0 rgba(31, 38, 135, 0.37);
@@ -32,5 +32,51 @@ body {
   fa-icon {
     color: #28B80F;
     font-size: 1.5rem;
+  }
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+
+  .add-btn {
+    align-self: flex-end;
+
+    h1 {
+      cursor: default;
+      display: flex;
+      background-color: #2F8B94;
+      align-items: center;
+      justify-content: space-evenly;
+      color: #fff;
+      width: 180px;
+      height: 40px;
+      font-size: 1rem;
+      border-radius: 15px 4px 15px 4px;
+
+      fa-icon {
+        transition-duration: 0.7s;
+      }
+
+      &:hover {
+        fa-icon {
+          transform: rotate(45deg);
+          transition-duration: 0.7s;
+
+        }
+
+        opacity: 0.93;
+      }
+    }
+  }
+}
+
+
+.snackbar-success {
+  background-color: #1AA103;
+  color: #fff;
+
+  .mat-simple-snackbar-action {
+    color: #fff;
   }
 }
