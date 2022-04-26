@@ -16,7 +16,7 @@ const transactionSchema = new mongoose.Schema({
             collation: {locale: 'en', strength: 2},
         },
     },
-    description: {type: String, required: true},
+    description: {type: String},
     payee: String,
     dateOfOperation: Date,
     category: [{
@@ -24,7 +24,6 @@ const transactionSchema = new mongoose.Schema({
         ref: 'Category',
         required: true
     }],
-    currency: String,
     amount: {type: Number, required: true},
     linkToFile: String,
     dateOfCreation: Date,

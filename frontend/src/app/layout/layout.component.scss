@@ -34,13 +34,13 @@
   &__sidebar {
     grid-area: sidebar;
     margin-top: 15px;
-    z-index: 1;
+    z-index: 2;
   }
 
   &__outlet {
     grid-area: content;
     margin-top: 30px;
-    width: 75%;
+    width: 90%;
     justify-self: start;
 
   }
@@ -51,6 +51,7 @@
     position: fixed;
     right: 20px;
     bottom: 40px;
+    z-index: 1;
   }
 
 }

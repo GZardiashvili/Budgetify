@@ -7,11 +7,62 @@
 </div>
 <ng-container *ngIf="currentView=='categoryStat'; else monthlyStat">
   <div class="flex">
+    <div class="btn-list" style="margin: 20px">
+      <button [ngClass]="categoryStatview=='incomes'?'selected':'notSelected'" (click)="showIncomesStats()">Incomes
+      </button>
+      <button [ngClass]="categoryStatview=='expenses'?'selected':'notSelected'" (click)="showExpensesStats()">Expenses
+      </button>
+    </div>
+    <ng-container  *ngIf="categoryStatview=='incomes';else expenses">
     <div [chart]="incomesCategoriesStatistics"></div>
-    <div [chart]="expensesCategoriesStatistics"></div>
+    </ng-container>
+    <ng-template #expenses>
+    <div [chart]="expensesCategoriesStatistics" ></div>
+    </ng-template>
   </div>
 </ng-container>
 
 <ng-template #monthlyStat>
+  <div class="btn-list" style="margin: 20px">
+    <button [ngClass]="monthlyStatView=='chart'?'selected':'notSelected'" (click)="showChart()">Chart
+    </button>
+    <button [ngClass]="monthlyStatView=='table'?'selected':'notSelected'" (click)="showTable()">
+      Table
+    </button>
+  </div>
+  <table mat-table [dataSource]="statistics.incomesExpenses" class="mat-elevation-z8" *ngIf="monthlyStatView==='table';else chart">
+    <ng-container matColumnDef="Month">
+      <th mat-header-cell *matHeaderCellDef> Month </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction.month}} </td>
+      <td mat-footer-cell *matFooterCellDef> Total </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Incomes">
+      <th mat-header-cell *matHeaderCellDef> Incomes </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction.incomes }} </td>
+      <td mat-footer-cell *matFooterCellDef> {{getTotalIncomes() }} </td>
+    </ng-container>
+    <ng-container matColumnDef="Expenses">
+      <th mat-header-cell *matHeaderCellDef> Expenses </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction.expenses }} </td>
+            <td mat-footer-cell *matFooterCellDef> {{getTotalExpenses() }} </td>
+    </ng-container>
+    <ng-container matColumnDef="Economy">
+      <th mat-header-cell *matHeaderCellDef> Economy </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction.economy }} </td>
+            <td mat-footer-cell *matFooterCellDef> {{getTotalEconomy() }} </td>
+    </ng-container>
+    <ng-container matColumnDef="% of Economy">
+      <th mat-header-cell *matHeaderCellDef> % of Economy </th>
+      <td mat-cell *matCellDef="let transaction"> {{transaction.percentOfEconomy}} </td>
+            <td mat-footer-cell *matFooterCellDef> {{getTotalpercentEconomy() }} </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns"></tr>
+  </table>
+
+  <ng-template #chart>
   <div [chart]="monthlyStatistics"></div>
+  </ng-template>
 </ng-template>

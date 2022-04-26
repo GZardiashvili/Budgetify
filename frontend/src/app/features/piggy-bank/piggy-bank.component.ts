@@ -1,13 +1,13 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { faPiggyBank } from '@fortawesome/free-solid-svg-icons';
-import { PiggyBankService } from './services/piggy-bank.service';
-import { PiggyBank } from './piggy-bank';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { FormBuilder, Validators } from '@angular/forms';
-import { UtilsService } from '../../shared/utils/utils.service';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { CommonService } from '../../shared/common/common.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {faPiggyBank} from '@fortawesome/free-solid-svg-icons';
+import {PiggyBankService} from './services/piggy-bank.service';
+import {PiggyBank} from './piggy-bank';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {UtilsService} from '../../shared/utils/utils.service';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {CommonService} from '../../shared/common/common.service';
 
 @Component({
   selector: 'app-piggy-bank',
@@ -25,8 +25,8 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   piggyBankForm = this.fb.group({
     goal: ['', [Validators.required]],
     goalAmount: ['', [Validators.required]],
-    description: ['', [Validators.required]],
-    savings: ['0', [Validators.required]],
+    description: [''],
+    savings: ['0'],
     crashDate: [''],
   });
 
@@ -39,14 +39,16 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.piggyBanks$ = combineLatest([
-      this.route.paramMap,
-      this.reloadPiggyBanks$,
-    ]).pipe(
-      switchMap(([params]) => {
-        return this.piggyBankService.getPiggyBanks(String(this.accountId));
-      })
-    );
+    if (this.accountId) {
+      this.piggyBanks$ = combineLatest([
+        this.route.paramMap,
+        this.reloadPiggyBanks$,
+      ]).pipe(
+        switchMap(([params]) => {
+          return this.piggyBankService.getPiggyBanks(String(this.accountId));
+        })
+      );
+    }
   }
 
   view: 'details' | 'edit' = 'details';
@@ -79,6 +81,8 @@ export class PiggyBankComponent implements OnInit, OnDestroy {
   }
 
   updatePiggyBank(id: string, piggyBank: PiggyBank) {
+
+    this.piggyBankForm.get('savings')?.setValue(Number(this.piggyBank?.savings) + Number(this.piggyBankForm.get('savings')?.value));
     piggyBank = this.piggyBankForm.value;
     this.piggyBank = piggyBank;
     this.piggyBankService.updatePiggyBank(id, piggyBank)

@@ -21,7 +21,8 @@
       padding: 5px;
       border-radius: 10px 0 0 10px;
       width: 154px;
-      background-color: rgba(186, 226, 230, 0.5);
+      //background-color: rgba(186, 226, 230, 0.5);
+      background-color: #C4B9E4;
 
       &__title {
         color: #0F1419;
@@ -36,7 +37,7 @@
       }
 
       &__currency {
-        font-size: 1.4rem;
+        font-size: 1rem;
         color: #28B820;
         background-color: var_1.$white;
         grid-area: currency;
@@ -53,8 +54,8 @@
     height: 82px;
     width: 3rem;
     border-radius: 0 10px 10px 0;
-    background-color: rgba(186, 226, 230, 0.5);
     cursor: pointer;
+    background-color: #C4B9E4;
 
     fa-icon {
       font-size: 1.3rem;
@@ -74,7 +75,7 @@
   }
 
   .account {
-    background-color: #DCF0F2 !important;
+    background-color: #C4B9E4 !important;
     border-radius: 0 !important;
     height: 105px;
     width: 215px;
@@ -128,3 +129,10 @@
 
 }
 
+.account__add--noAccID{
+  text-align: center;
+  background-color: #746B91;
+  color: #fff;
+  border-radius: 7px;
+  width: 120px;
+}

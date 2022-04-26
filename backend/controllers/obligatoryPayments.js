@@ -58,8 +58,8 @@ router.post('/:accountId', (req, res) => {
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
         dateOfTheLastPayment: body.dateOfTheLastPayment,
-        createdOn: body.createdOn,
-        updatedOn: body.updatedOn,
+        createdOn: new Date(),
+        updatedOn: new Date(),
     });
     obligatoryPayment.save().then((savedObligatoryPayment) => {
         res.json(savedObligatoryPayment);
@@ -84,16 +84,15 @@ router.put('/:id', (req, res) => {
 
     const obligatoryPayment = {
         user: body.user,
+        accountId: body.accountId,
         title: body.title,
         description: body.description,
         amount: body.amount,
-        currency: body.currency,
         dayOfPayment: body.dayOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
         dateOfTheLastPayment: body.dateOfTheLastPayment,
-        createdOn: body.createdOn,
-        updatedOn: body.updatedOn,
+        updatedOn: new Date(),
     };
     ObligatoryPayment.findOneAndUpdate({
         user: bindUser(req, res).id,

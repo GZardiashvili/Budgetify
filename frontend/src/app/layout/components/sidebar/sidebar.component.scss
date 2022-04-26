@@ -51,6 +51,11 @@
             color: var_1.$btn-menu;
           }
         }
+        &--disabled{
+          opacity: 0.3;
+          font-weight: normal;
+          cursor: default;
+        }
       }
     }
   }

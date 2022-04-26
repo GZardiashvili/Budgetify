@@ -1,11 +1,19 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormControl } from '@angular/forms';
-import { faCircleArrowDown, faCircleArrowUp, faPenToSquare, faXmark } from '@fortawesome/free-solid-svg-icons';
+import {
+  faCircleArrowDown,
+  faCircleArrowUp, faMinusCircle,
+  faPenToSquare,
+  faPlusCircle,
+  faXmark
+} from '@fortawesome/free-solid-svg-icons';
 import { Card } from '../card/card';
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Category } from '../../features/categories/category';
 import { CategoryService } from '../../features/categories/services/category.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {Currency} from "../../layout/components/sidebar/accounts/currency";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'ui-details',
@@ -37,10 +45,14 @@ export class DetailsComponent implements OnInit {
     goalAmount: [''],
     savings: [''],
     availableAmount: [''],
+    payee: ['']
   });
   faExpense = faCircleArrowUp;
-  faIncome = faCircleArrowDown
-
+  faIncome = faCircleArrowDown;
+  faPlus = faPlusCircle;
+  faMinus = faMinusCircle;
+  showHideSavings = false;
+  @Input() currency: Currency | null = null;
   @Input()
   get detailsInfo(): Card | null {
     return this._detailsInfo;
@@ -62,15 +74,42 @@ export class DetailsComponent implements OnInit {
 
   @Input() currentView: 'details' | 'edit' = 'details';
   @Input() categories!: Category[] | null;
+  @Input() currencies!: Currency[] | null;
 
   ngOnInit() {
     this.detailsForm.get('category')?.setValue(this.detailsInfo?.category);
+
+  }
+  showSavingsInput(){
+    this.showHideSavings = !this.showHideSavings;
+  }
+  openSnackBar(message:string, className:string = 'snackbar-success') {
+    this._snackBar.open(
+      message,
+      'Close', {
+      duration: 5000,
+      panelClass: [className]
+    });
+  }
+  openDialog() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialog);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.delete.emit();
+        this.openSnackBar(this.btnText+'d successfully')
+      }
+    });
   }
 
-  openSnackBar() {
-    this._snackBar.open(`The operation was completed successfully`, 'Close', {
-      duration: 5000,
-      panelClass: ['snackbar-success']
+  openDialogForPiggyBank() {
+    const dialogRef = this.dialog.open(DialogContentExampleDialogCrash);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result){
+        this.delete.emit();
+        this.openSnackBar(this.btnText+'d successfully')
+      }
     });
   }
 
@@ -90,8 +129,21 @@ export class DetailsComponent implements OnInit {
     this.currentView = 'details';
   }
 
-  constructor(private fb: FormBuilder, private categoryService: CategoryService, private _snackBar: MatSnackBar) {
+  constructor(private fb: FormBuilder, private categoryService: CategoryService, private _snackBar: MatSnackBar, private dialog: MatDialog) {
   }
 
 
 }
+
+
+@Component({
+  selector: 'dialog-content-example-dialog',
+  templateUrl: 'dialog-content-example-dialog.html',
+})
+export class DialogContentExampleDialog {}
+
+@Component({
+  selector: 'dialog-content-example-dialog-crash',
+  templateUrl: 'dialog-content-example-dialog-crash.html',
+})
+export class DialogContentExampleDialogCrash {}

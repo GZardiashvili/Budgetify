@@ -12,6 +12,14 @@
       margin: 7px 5px;
     }
 
+    .plus-icon {
+      color: #F70065;
+      font-size: 2rem;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
     fa-icon {
       margin: 7px 5px;
       cursor: pointer;
@@ -29,6 +37,7 @@
   .container {
     .flex {
       display: flex;
+      flex-wrap: wrap;
       row-gap: 1rem;
 
       &--row {
@@ -37,6 +46,7 @@
 
       &--col {
         flex-direction: column;
+        margin-top: 20px;
 
         p {
           width: 100%;
@@ -151,6 +161,19 @@
     justify-content: right;
     gap: 10px;
     margin-right: 50px;
+
+    button {
+      color: #373737;
+    }
+
+    .save {
+      background-color: #2C2647;
+      color: #fff;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 
 }

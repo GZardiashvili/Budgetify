@@ -27,6 +27,7 @@
     &__title {
       font-size: 1.2rem;
       cursor: default;
+      min-width: fit-content;
     }
 
     &__icon {
@@ -130,7 +131,11 @@
     }
 
     .save {
-      background-color: #B9E2E6;
+      background-color: #2C2647;
+      color: #fff;
+      &:hover{
+        opacity: 0.8;
+      }
     }
   }
 }

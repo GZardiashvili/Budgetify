@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { CategoryService } from './services/category.service';
-import { Category } from './category';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { faEdit } from '@fortawesome/free-regular-svg-icons';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faCircleArrowDown, faCircleArrowUp, faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
-import { FormBuilder, Validators } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
-import { CommonService } from '../../shared/common/common.service';
+import {Component, OnInit} from '@angular/core';
+import {CategoryService} from './services/category.service';
+import {Category} from './category';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
+import {faEdit} from '@fortawesome/free-regular-svg-icons';
+import {IconProp} from '@fortawesome/fontawesome-svg-core';
+import {faCircleArrowDown, faCircleArrowUp, faPlus, faXmark} from '@fortawesome/free-solid-svg-icons';
+import {FormBuilder, Validators} from '@angular/forms';
+import {debounceTime, distinctUntilChanged, switchMap, takeUntil} from 'rxjs/operators';
+import {CommonService} from '../../shared/common/common.service';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-categories',
@@ -31,7 +32,8 @@ export class CategoriesComponent implements OnInit {
 
   constructor(private categoryService: CategoryService,
               private fb: FormBuilder,
-              private commonService: CommonService) {
+              private commonService: CommonService,
+              private _snackBar: MatSnackBar) {
   }
 
 
@@ -68,30 +70,57 @@ export class CategoriesComponent implements OnInit {
   }
 
   addCategory() {
-    this.categoryService.createCategory(this.categoryForm.value).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
-      () => {
-        this.reloadCategories$.next(true);
-      }
-    );
+    if(this.categoryForm.valid) {
+      this.categoryService.createCategory(this.categoryForm.value).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+        () => {
+          this.reloadCategories$.next(true);
+        }
+      );
+      this.openSnackBar('saved successfully');
+      this.categoryForm.reset();
+    }else {
+      this.openSnackBar('form is not valid', 'snackbar-error');
+    }
   }
 
   updateCategory(id: string) {
-    this.categoryService.updateCategory(id, this.categoryForm.value)
-      .pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
-      () => {
-        this.reloadCategories$.next(true);
-      }
-    );
+    if(this.categoryForm.valid) {
+      this.categoryService.updateCategory(id, this.categoryForm.value)
+        .pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+        () => {
+          this.reloadCategories$.next(true);
+        }
+      );
+      this.openSnackBar('saved successfully');
+      this.categoryForm.reset();
+    }else {
+      this.openSnackBar('field should not be empty', 'snackbar-error');
+    }
   }
 
   deleteCategory(id: string) {
-    this.categoryService.deleteCategory(id).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
-      () => {
-        this.reloadCategories$.next(true);
-      }
-    );
+    if(id) {
+      this.categoryService.deleteCategory(id).pipe(takeUntil(this.componentIsDestroyed$)).subscribe(
+        () => {
+          this.reloadCategories$.next(true);
+        }
+      );
+      this.openSnackBar('deleted successfully');
+    }
+    else{
+      this.openSnackBar('cannot delete', 'snackbar-error');
+
+    }
   }
 
+  openSnackBar(message: string = '', className: string = 'snackbar-success') {
+    this._snackBar.open(
+      message,
+      'Close', {
+        duration: 5000,
+        panelClass: [className]
+      });
+  }
 
   ngOnDestroy() {
     this.componentIsDestroyed$.next(true);

@@ -27,7 +27,7 @@ export class ObligatoryComponent implements OnInit, OnDestroy {
 
   obligateForm = this.fb.group({
     title: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    description: ['', ],
     amount: ['', [Validators.required, Validators.min(1), Validators.pattern('^[0-9]*$')]],
     dateOfPayment: ['', [Validators.required]],
     firstDateOfPayment: [''],

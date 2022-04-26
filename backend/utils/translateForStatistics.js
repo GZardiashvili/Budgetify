@@ -112,14 +112,26 @@ function translateForStatistic(transactions) {
                 break;
         }
     }, 0);
+    statisticsArrOptions = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
     const economy = incomes.map((el, i) => el - expenses[i]);
+    const incomesExpenses = [];
+    incomes.map((el, i) => {
+        incomesExpenses.push({
+            month: statisticsArrOptions[i],
+            incomes: el,
+            expenses: expenses[i],
+            economy: economy[i],
+            percentOfEconomy: economy[i] / incomes[i] * 100
+        });
+    });
     return {
         incomes,
         expenses,
         economy,
         incomesByCategory,
         expensesByCategory,
+        incomesExpenses
     };
 }
 

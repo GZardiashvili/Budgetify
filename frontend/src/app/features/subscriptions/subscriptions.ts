@@ -9,7 +9,6 @@ export interface Subscriptions {
   lastDateOfPayment: Date;
   dateOfPayment: Date;
   category: Category[];
-  currency: string;
   amount: number;
   dateOfCreation: Date;
   dateOfUpdate: Date;

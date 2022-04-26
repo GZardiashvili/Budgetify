@@ -1,9 +1,9 @@
-<div class="container">
+<div class="container" *ngIf="accountId; else addAcc">
   <button mat-button [matMenuTriggerFor]="account">
     <div class="account" *ngIf="activeAccount | async as acc">
       <span class="account__title">{{acc.title}} </span>
       <span class="account__amount">{{acc.availableAmount}}</span>
-      <span class="account__currency">$</span>
+      <span class="account__currency">{{currency?.name}}</span>
     </div>
   </button>
   <div class="account__icon" (click)="detailsView(); sidenav.opened = true">
@@ -15,8 +15,8 @@
     <button mat-menu-item (click)="accountSelect(account)">
       <div class="account">
         <span class="account__title">{{account.title}} </span>
-        <span class="account__amount">{{account.availableAmount}}</span>
-        <span class="account__currency">$</span>
+        <span class="account__amount">{{account.availableAmount}} </span>
+        <span class="account__currency"> {{currency?.name}}</span>
       </div>
     </button>
   </ng-container>
@@ -35,14 +35,16 @@
     mode="over"
     class="details-sidenav"
     fixedInViewport="fixed"
-    fixedTopGap="110"
+    fixedTopGap="90"
     fixedBottomGap="155"
     position="end"
   >
     <ng-container *ngIf="mode !== 'create'; else create">
       <ng-container *ngIf="activeAccount | async as acc">
         <ui-details [title]="'Account'" [detailsInfo]="acc"
+                    [currency]="currency"
                     [detailsForm]="accountForm"
+                    [currencies]="currencies$ | async"
                     (save)="updateAccount(acc.id, acc)"
                     (delete)="deleteAccount(acc.id); sidenav.opened = false"
                     (close)="sidenav.opened = false"></ui-details>
@@ -57,9 +59,18 @@
     <ui-details [title]="'Add Account'"
                 [currentView]="view"
                 [detailsForm]="accountForm"
+                [currencies]="currencies$ | async"
                 (save)="addAccount(accountForm.value); sidenav.opened = false"
                 (close)="sidenav.opened = false">
     </ui-details>
   </div>
 </ng-template>
 
+<ng-template #addAcc>
+  <button mat-menu-item (click)="sidenav.opened = true; editView()">
+    <div class="account__add--noAccID" (click)="sidenav.opened = true; createMode(); editView()">
+      <fa-icon [icon]="faAdd"></fa-icon>
+      <span>Add account</span>
+    </div>
+  </button>
+</ng-template>

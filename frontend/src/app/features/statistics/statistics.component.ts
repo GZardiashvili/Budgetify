@@ -1,10 +1,10 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
-import { StatisticsService } from './services/statistics.service';
-import { UtilsService } from '../../shared/utils/utils.service';
-import { Chart } from 'angular-highcharts'
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {ActivatedRoute} from '@angular/router';
+import {StatisticsService} from './services/statistics.service';
+import {UtilsService} from '../../shared/utils/utils.service';
+import {Chart} from 'angular-highcharts'
 
 @Component({
   selector: 'app-statistics',
@@ -19,13 +19,17 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   expensesCategoriesStatistics!: Chart;
   report!: Chart;
   currentView: 'categoryStat' | 'monthlyStat' = 'categoryStat';
+  categoryStatview: 'incomes' | 'expenses' = 'incomes';
+  monthlyStatView: 'chart' | 'table' = 'chart';
   statistics!: any;
+  displayedColumns: string[] = ['Month', 'Incomes', 'Expenses', 'Economy', '% of Economy'];
 
   constructor(
     private statisticsService: StatisticsService,
     private route: ActivatedRoute,
     private utilsService: UtilsService,
   ) {
+
   }
 
   ngOnInit(): void {
@@ -37,6 +41,22 @@ export class StatisticsComponent implements OnInit, OnDestroy {
         this.createExpensesStatistics();
         this.createIncomesStatistics();
       });
+  }
+
+  getTotalIncomes() {
+    return this.statistics.incomesExpenses.map((t: any) => t.incomes).reduce((acc: any, value: any) => acc + value, 0);
+  }
+
+  getTotalExpenses() {
+    return this.statistics.incomesExpenses.map((t: any) => t.expenses).reduce((acc: any, value: any) => acc + value, 0);
+  }
+
+  getTotalEconomy() {
+    return this.statistics.incomesExpenses.map((t: any) => t.economy).reduce((acc: any, value: any) => acc + value, 0);
+  }
+
+  getTotalpercentEconomy() {
+    return this.statistics.incomesExpenses.map((t: any) => t.percentOfEconomy).reduce((acc: any, value: any) => acc + value, 0);
   }
 
   createMonthlyStatistics() {
@@ -282,6 +302,21 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.currentView = 'categoryStat';
   }
 
+  showChart() {
+    this.monthlyStatView = 'chart';
+  }
+
+  showTable() {
+    this.monthlyStatView = 'table';
+  }
+
+  showIncomesStats() {
+    this.categoryStatview = 'incomes';
+  }
+
+  showExpensesStats() {
+    this.categoryStatview = 'expenses';
+  }
   ngOnDestroy() {
     this.componentIsDestroyed$.next(true);
     this.componentIsDestroyed$.complete();

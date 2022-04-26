@@ -4,10 +4,9 @@ const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
+router.get('/', (req, res) => {
     Currency.find({
         user: bindUser(req, res).id,
-        accountId: req.params.accountId
     }, (err, currencies) => {
         if (err) {
             res.status(500).send(err);
@@ -19,10 +18,9 @@ router.get('/:accountId', (req, res) => {
     });
 });
 
-router.get('/:accountId/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     Currency.findOne({
         user: bindUser(req, res).id,
-        account: req.params.accountId,
         _id: req.params.id
     }, (err, currency) => {
         if (err) {

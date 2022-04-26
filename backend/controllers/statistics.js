@@ -11,13 +11,14 @@ router.get('/:accountId', async (req, res) => {
         accountId: req.params.accountId,
     }).populate('category');
 
-    const {incomes, expenses, economy, incomesByCategory, expensesByCategory} = translateForStatistic(transactions);
+    const {incomes, expenses, economy, incomesByCategory, expensesByCategory, incomesExpenses} = translateForStatistic(transactions);
     res.json({
         incomes,
         expenses,
         economy,
         incomesByCategory,
-        expensesByCategory
+        expensesByCategory,
+        incomesExpenses
     });
 });
 

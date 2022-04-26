@@ -1,4 +1,5 @@
 import { Category } from '../../features/categories/category';
+import {Currency} from "../../layout/components/sidebar/accounts/currency";
 
 export interface Card {
   id?: string;
@@ -23,4 +24,5 @@ export interface Card {
   goalAmount?: number;
   savings?: number;
   crashDate?: Date;
+  payee?: string;
 }

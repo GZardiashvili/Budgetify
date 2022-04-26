@@ -31,7 +31,7 @@ export class SubscriptionsComponent implements OnInit, OnDestroy {
   subscriptionForm: FormGroup = this.fb.group({
     title: ['', [Validators.required]],
     category: ['', [Validators.required]],
-    description: ['', [Validators.required]],
+    description: [''],
     amount: ['', [Validators.required, Validators.min(1), Validators.pattern(/^[0-9]*$/)]],
     dateOfPayment: ['', [Validators.required]],
     firstDateOfPayment: [''],

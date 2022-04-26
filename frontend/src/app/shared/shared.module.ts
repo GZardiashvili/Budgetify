@@ -11,15 +11,21 @@ import { NotFoundComponent } from '../not-found/not-found.component';
 import { CardComponent } from './card/card.component';
 import { MatCardModule } from '@angular/material/card';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { DetailsComponent } from './details/details.component';
+import {
+  DetailsComponent,
+  DialogContentExampleDialog,
+  DialogContentExampleDialogCrash
+} from './details/details.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
-  declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent],
+  declarations: [RegisterComponent, NotFoundComponent, CardComponent, DetailsComponent,DialogContentExampleDialog, DialogContentExampleDialogCrash],
   imports: [
     CommonModule,
     MatFormFieldModule,
@@ -35,6 +41,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSelectModule,
     MatSidenavModule,
     MatSnackBarModule,
+    MatDialogModule,
+    MatAutocompleteModule
   ],
   exports: [
     MatFormFieldModule,

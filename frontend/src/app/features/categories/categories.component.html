@@ -35,7 +35,7 @@
       <div class="content">
         <div class="content__header">
           <h1>Add Category</h1>
-          <fa-icon [icon]="faXMark" (click)="sidenav.opened=false; category=null"></fa-icon>
+          <fa-icon [icon]="faXMark" (click)="sidenav.opened=false;categoryForm.reset() ;category=null"></fa-icon>
 
         </div>
         <form [formGroup]="categoryForm">
@@ -59,8 +59,8 @@
           </mat-form-field>
         </form>
         <div class="btn-list">
-          <button mat-button (click)="sidenav.opened=false; category=null">Cancel</button>
-          <button mat-raised-button class="save" (click)="category ? updateCategory(category.id) : addCategory();">
+          <button mat-button (click)="sidenav.opened=false; categoryForm.reset();category=null">Cancel</button>
+          <button mat-raised-button class="save" (click)="category ? updateCategory(category.id) : addCategory()">
             Save
           </button>
         </div>

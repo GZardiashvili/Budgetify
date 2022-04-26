@@ -1,14 +1,16 @@
-import { Component, OnDestroy } from '@angular/core';
-import { faCirclePlus, faEllipsis } from '@fortawesome/free-solid-svg-icons';
-import { Account } from './account';
-import { AccountService } from './services/account.service';
-import { UtilsService } from '../../../../shared/utils/utils.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, combineLatest, Observable, Subject } from 'rxjs';
-import { FormBuilder } from '@angular/forms';
-import { switchMap, takeUntil } from 'rxjs/operators';
-import { TransactionService } from '../../../../features/main-page/transaction/services/transaction.service';
-import { CommonService } from '../../../../shared/common/common.service';
+import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
+import {faCirclePlus, faEllipsis} from '@fortawesome/free-solid-svg-icons';
+import {Account} from './account';
+import {AccountService} from './services/account.service';
+import {UtilsService} from '../../../../shared/utils/utils.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {BehaviorSubject, combineLatest, Observable, Subject} from 'rxjs';
+import {FormBuilder, Validators} from '@angular/forms';
+import {switchMap, takeUntil} from 'rxjs/operators';
+import {TransactionService} from '../../../../features/main-page/transaction/services/transaction.service';
+import {CommonService} from '../../../../shared/common/common.service';
+import {Currency} from "./currency";
+import {CurrencyService} from "./services/currency.service";
 
 @Component({
   selector: 'app-accounts',
@@ -18,47 +20,67 @@ import { CommonService } from '../../../../shared/common/common.service';
 export class AccountsComponent implements OnDestroy {
   private componentIsDestroyed$ = new Subject<boolean>();
   private readonly reloadAccounts$ = new BehaviorSubject(true);
+  @Output() enabled: EventEmitter<boolean> = new EventEmitter<boolean>(false);
 
   faDetails = faEllipsis;
   faAdd = faCirclePlus;
   accounts$!: Observable<Account[]>;
   activeAccount: Subject<Account | null> = new Subject<Account | null>();
   accountForm = this.fb.group({
-    title: [''],
+    title: ['', [Validators.required]],
     description: [''],
-    currency: [''],
+    currency: ['', [Validators.required]],
     availableAmount: [''],
   });
+  currencies$!: Observable<Currency[]>;
+  currency!: Currency;
 
   constructor(private accountService: AccountService,
+              private currencyService: CurrencyService,
               private transactionService: TransactionService,
               private commonService: CommonService,
               private utilsService: UtilsService,
               private route: ActivatedRoute,
               private router: Router,
               private fb: FormBuilder) {
+    this.currencies$ = this.currencyService.getCurrencies();
     this.accounts$ = combineLatest([
       this.reloadAccounts$,
       this.accountService.getAccounts()
     ]).pipe(switchMap(() => {
+      if (this.accountId) {
+        this.enabled.emit(true);
+      }
       return this.accountService.getAccounts();
     }));
+    if (this.accountId) {
+      this.accountService.getAccount(this.accountId)
+        .pipe(
+          takeUntil(this.componentIsDestroyed$)
+        ).subscribe(account => {
+        this.router.navigate([this.getBaseUrl() + '/' + account?.id], {skipLocationChange: true});
+        this.accountForm.patchValue(account);
+        this.activeAccount.next(account);
+        this.commonService.getUpdate().pipe(takeUntil(this.componentIsDestroyed$))
+          .subscribe((amt: number) => {
+            let newAmount;
+            if (account?.availableAmount !== null) {
+              newAmount = account?.availableAmount + amt;
 
-    this.accountService.getAccount(this.accountId)
-      .pipe(
-        takeUntil(this.componentIsDestroyed$)
-      ).subscribe(account => {
-      this.router.navigate([this.getBaseUrl() + '/' + account.id], {skipLocationChange: true});
-      this.accountForm.patchValue(account);
-      this.activeAccount.next(account);
-      this.commonService.getUpdate().pipe(takeUntil(this.componentIsDestroyed$))
-        .subscribe((amt: number) => {
-          let newAmount = account.availableAmount + amt;
-          account.availableAmount = newAmount;
-          let newAcc = {...account, availableAmount: newAmount};
-          this.updateAccount(String(this.accountId), newAcc);
-        });
-    });
+            } else {
+              newAmount = 0 + amt;
+
+            }
+            // account.availableAmount = newAmount;
+            let newAcc = {...account, availableAmount: newAmount};
+            this.updateAccount(String(this.accountId), newAcc);
+          });
+        this.currencyService.getCurrency(account.currency).pipe(takeUntil(this.componentIsDestroyed$))
+          .subscribe(currency => {
+            this.currency = currency;
+          });
+      });
+    }
   }
 
   get accountId(): string | null {
@@ -106,6 +128,11 @@ export class AccountsComponent implements OnDestroy {
     this.utilsService.setAccountId(account.id);
     this.accountForm.patchValue(account);
     this.activeAccount.next(account);
+    this.currencyService.getCurrency(account.currency).pipe(takeUntil(this.componentIsDestroyed$))
+      .subscribe(currency => {
+        this.currency = currency;
+      });
+
   }
 
   updateAccount(id: string, account: Account) {

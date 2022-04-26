@@ -1,9 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnDestroy} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginComponent implements OnDestroy {
     label: 'show',
     type: 'password'
   }
+  faExclamationCircle: IconProp = faExclamationCircle;
 
   constructor(
     private authService: AuthService,

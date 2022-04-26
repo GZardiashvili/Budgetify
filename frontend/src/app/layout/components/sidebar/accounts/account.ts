@@ -1,3 +1,5 @@
+import {Currency} from "./currency";
+
 export interface Account {
   id: string;
   user: string;

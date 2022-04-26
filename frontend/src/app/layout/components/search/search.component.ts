@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { CommonService } from '../../../shared/common/common.service';
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import {Component, OnInit} from '@angular/core';
+import {FormControl} from '@angular/forms';
+import {CommonService} from '../../../shared/common/common.service';
+import {IconProp} from '@fortawesome/fontawesome-svg-core';
+import {faSearch, faXmark} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-search',
@@ -11,6 +11,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 })
 export class SearchComponent implements OnInit {
   faSearch: IconProp = faSearch;
+  faXmark: IconProp = faXmark;
   searchControl: FormControl = new FormControl('');
 
   constructor(private commonService: CommonService) {
@@ -23,4 +24,8 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  clear() {
+    this.searchControl.setValue('');
+    this.commonService.sendSearchTerm('');
+  }
 }

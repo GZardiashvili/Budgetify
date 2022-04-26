@@ -5,9 +5,8 @@ const currencySchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
     },
-    accountId: String,
     name: {type: String, required: true},
-    sign: {type: String, required: true},
+    sign: {type: Number, required: true},
 });
 
 currencySchema.set('toJSON', {

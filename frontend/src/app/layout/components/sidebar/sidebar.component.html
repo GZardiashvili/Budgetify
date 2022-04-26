@@ -4,12 +4,12 @@
     <ul class="menu__list">
       <li routerLinkActive="active" *ngFor="let menuItem of menu; let i = index; trackBy:trackBy"
           class="menu__list-item">
-        <a [routerLink]="menuItem.route">
+        <a [ngClass]="!enableSidebar?'menu__list-item--disabled':''" [routerLink]="enableSidebar?menuItem.route : null" >
           <span class="menu__list-icon"><fa-icon [icon]="menuItem.icon"></fa-icon></span>
-          <span [ngClass]="currentRoute.includes(menuItem.route)?'selected':''">{{menuItem.title}}</span>
+          <span [ngClass]="enableSidebar && currentRoute.includes(menuItem.route)?'selected':''">{{menuItem.title}}</span>
         </a>
       </li>
     </ul>
   </nav>
-  <app-accounts></app-accounts>
+  <app-accounts (enabled)="isEnabled($event)" ></app-accounts>
 </div>

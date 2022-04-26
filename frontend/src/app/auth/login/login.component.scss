@@ -45,8 +45,11 @@
       grid-column: 2/3;
       width: 430px;
       height: 40px;
-      background-color: var_1.$btn-primary;
+      background-color: rgba(67, 60, 95, 0.93);
       color: #FFF;
+      &:hover {
+        opacity: 0.95;
+      }
     }
 
     .app-main__button-disabled {
@@ -79,11 +82,27 @@
       &--error {
         color: #DC1E29;
         font-size: 1rem;
+        &-email{
+          margin-top: 10px;
+          display: block;
+          font-size: 0.75rem;
+          fa-icon{
+            font-size: 1rem;
+          }
+        }
       }
 
       &-field {
         position: relative;
-
+        .not-empty{
+          font-size: 18px;
+          padding: 20px 25px;
+          max-width: 150px;
+          text-align: center;
+          background-color: #433C5F;
+          color: #fff;
+          border-radius: 4px;
+        }
         a {
           position: absolute;
           right: 70px;
@@ -109,7 +128,7 @@
           padding: 3px 15px;
           max-width: 150px;
           text-align: center;
-          background-color: #00AFF4;
+          background-color: #433C5F;
           color: #fff;
           border-radius: 4px;
         }
@@ -119,7 +138,7 @@
         }
 
         .mat-input-element {
-          border: 2px solid #00AFF4;
+          border: 2px solid #2C2647;
           border-radius: 5px;
           height: 40px;
           max-width: 400px;

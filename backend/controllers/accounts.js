@@ -7,7 +7,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     const accounts = await Account.find({
         user: bindUser(req, res).id,
-    }).populate('currency');
+    });
     res.status(200).send(accounts);
 });
 
@@ -15,10 +15,10 @@ router.get('/:accountId', async (req, res) => {
     const account = await Account.findOne({
         user: bindUser(req, res).id,
         _id: req.params.accountId
-    }).populate('currency');
+    });
     res.status(200).send(account);
 });
-router.post('/', (req, res) => {
+router.post('/', async (req, res) => {
     const body = req.body;
 
     const account = new Account({
@@ -30,14 +30,9 @@ router.post('/', (req, res) => {
         dateOfCreation: body.dateOfCreation,
         dateOfUpdate: body.dateOfUpdate,
     });
-    account
-        .save()
-        .then((savedAccount) => {
-            res.json(savedAccount);
-        })
-        .catch((error) => {
-            console.error('The Promise is rejected!', error);
-        });
+    const savedAccount = await account.save()
+    res.status(200).send(savedAccount);
+
 });
 
 router.delete('/:accountId', (req, res) => {

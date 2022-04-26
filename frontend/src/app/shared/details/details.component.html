@@ -19,7 +19,7 @@
             <span *ngIf="detailsInfo.currency"
                   [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'"
                   [ngClass]="detailsInfo.availableAmount ? 'amount-incomes': 'amount-expenses'"
-            >{{detailsInfo.currency}}
+            >{{currency?.name}}
             </span>
             <span *ngIf="detailsInfo.amount"
                   [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.amount}}
@@ -48,13 +48,14 @@
           <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
           <p *ngIf="detailsInfo.savings"><span>Saved Amount: </span>{{detailsInfo.savings}}</p>
           <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
+          <p *ngIf="detailsInfo.payee"><span>Payee: </span>{{detailsInfo.payee}}</p>
           <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
           <p *ngIf="detailsInfo.availableAmount"><span>Available Amount: </span>{{detailsInfo.availableAmount}}</p>
         </div>
       </div>
     </ng-container>
     <div class="details-sidebar__footer">
-      <button mat-flat-button color="warn" (click)="delete.emit(); openSnackBar();">{{btnText}}</button>
+      <button mat-flat-button color="warn" (click)="btnText == 'Delete'?openDialog():openDialogForPiggyBank()">{{btnText}}</button>
     </div>
   </div>
 </ng-container>
@@ -64,6 +65,7 @@
   <div class="details-sidebar">
     <div class="details-sidebar__header">
       <h1>{{title}}</h1>
+      <fa-icon (click)="showSavingsInput()" class="plus-icon" *ngIf="detailsInfo && detailsForm.get('savings')" [icon]="showHideSavings? faMinus:faPlus"></fa-icon>
       <fa-icon (click)="close.emit()" [icon]="faClose"></fa-icon>
     </div>
     <form class="details-sidebar__form"
@@ -102,6 +104,14 @@
                   cdkAutosizeMinRows="1"
                   cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>
+      <mat-form-field *ngIf="showHideSavings && detailsForm.get('savings')">
+        <mat-label>Amount to Save</mat-label>
+        <input matInput name="payee" formControlName="savings">
+      </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('payee')">
+        <mat-label>Payee</mat-label>
+        <input matInput name="payee" formControlName="payee">
+      </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('category')">
         <mat-select placeholder="Category" formControlName="category" multiple>
           <mat-option *ngFor="let category of categories" [value]="category.id">
@@ -109,9 +119,18 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('currency')">
-        <mat-label>Currency</mat-label>
-        <input matInput name="currency" formControlName="currency">
+      <mat-form-field *ngIf="detailsForm.get('currency')" class="example-full-width">
+          <mat-label>Currency</mat-label>
+          <input type="text"
+                 aria-label="Currency"
+                 matInput
+                 formControlName="currency"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+              {{currency.name}}
+            </mat-option>
+          </mat-autocomplete>
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('amount')">
         <mat-label>Amount</mat-label>
@@ -121,20 +140,16 @@
         <mat-label>Frequency</mat-label>
         <input matInput name="frequency" formControlName="frequency">
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('linkToFile')">
-        <mat-label>Link to file</mat-label>
-        <input matInput name="linkToFile" formControlName="linkToFile">
-      </mat-form-field>
+<!--      <mat-form-field *ngIf="detailsForm.get('linkToFile')">-->
+<!--        <mat-label>Link to file</mat-label>-->
+<!--        <input matInput name="linkToFile" formControlName="linkToFile">-->
+<!--      </mat-form-field>-->
       <mat-form-field *ngIf="detailsForm.get('dateOfOperation')">
         <mat-label>Date of operation</mat-label>
         <input matInput [matDatepicker]="picker" name="dateOfOperation" formControlName="dateOfOperation">
         <mat-hint>MM/DD/YYYY</mat-hint>
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
-      </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('dateOfCreation')">
-        <mat-label>Date of creation</mat-label>
-        <input matInput name="dateOfCreation" formControlName="dateOfCreation">
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('dateOfUpdate')">
         <mat-label>Date of update</mat-label>
@@ -165,8 +180,8 @@
       </mat-form-field>
     </form>
     <div class="details-sidebar__footer">
-      <button mat-raised-button color="primary" (click)="goToDetails()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="save.emit(); openSnackBar(); goToDetails();">Save</button>
+      <button mat-button (click)="close.emit()">Cancel</button>
+      <button mat-raised-button class="save" (click)="detailsForm.valid ? save.emit():null;detailsForm.valid ?  openSnackBar('Saved successfully'):null;detailsForm.valid ?  close.emit():openSnackBar('some fields are required please check and try again','snackbar-error');"> Save</button>
     </div>
   </div>
 </ng-template>
