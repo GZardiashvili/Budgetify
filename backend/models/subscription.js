@@ -1,13 +1,31 @@
 const mongoose = require('mongoose');
 
 const subscriptionSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     accountId: String,
-    title: {type: String, required: true, unique: true},
-    firstDateOfPayment: {type: Date, required: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
+    description: {
+        type: String,
+    },
+    firstDateOfPayment: {type: Date},
     lastDateOfPayment: Date,
     dateOfPayment: {type: Date, required: true},
-    category: [{type: String, required: true}],
-    currency: {type: String, required: true},
+    category: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
+    }],
     amount: {type: Number, required: true},
     dateOfCreation: Date,
     dateOfUpdate: Date,

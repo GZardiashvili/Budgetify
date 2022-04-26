@@ -1,61 +1,110 @@
 @use "../../../../shared/styles/palette.scss" as var_1;
 
-button {
+.container {
+  display: flex;
   border-radius: 10px;
-  padding: 0;
+  margin-left: 20px;
 
-  .account {
-    display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-template-areas: "currency title icon"
-                       "currency amount icon";
-    column-gap: 1rem;
-    align-items: center;
-    font-size: 1.1rem;
-    padding: 5px;
+  button {
     border-radius: 10px;
-    background-color: rgba(186, 226, 230, 0.5);
+    padding: 0;
 
-    &__icon {
-      grid-area: icon;
+    .account {
+      display: grid;
+      grid-template-columns: 1fr 2.5fr;
+      grid-template-rows: 1fr 1fr;
+      grid-template-areas: "currency title"
+                       "currency amount";
+      column-gap: 1rem;
+      align-items: center;
+      font-size: 1.1rem;
+      padding: 5px;
+      border-radius: 10px 0 0 10px;
+      width: 154px;
+      //background-color: rgba(186, 226, 230, 0.5);
+      background-color: #C4B9E4;
+
+      &__title {
+        color: #0F1419;
+        grid-area: title;
+        justify-self: start;
+      }
+
+      &__amount {
+        color: #64737F;
+        grid-area: amount;
+        justify-self: start;
+      }
+
+      &__currency {
+        font-size: 1rem;
+        color: #28B820;
+        background-color: var_1.$white;
+        grid-area: currency;
+        border-radius: 50%;
+        padding: 0.1rem 0;
+      }
     }
+  }
 
-    &__title {
-      color: #0F1419;
-      grid-area: title;
-    }
+  .account__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 82px;
+    width: 3rem;
+    border-radius: 0 10px 10px 0;
+    cursor: pointer;
+    background-color: #C4B9E4;
 
-    &__amount {
-      color: #64737F;
-      grid-area: amount;
-      justify-self: start;
-    }
-
-    &__currency {
-      font-size: 1.4rem;
-      color: #28B820;
-      background-color: var_1.$white;
-      grid-area: currency;
-      border-radius: 50%;
-      padding: 0.1rem 0;
+    fa-icon {
+      font-size: 1.3rem;
     }
   }
 }
 
 ::ng-deep.mat-menu-panel {
   border-radius: 10px;
-  width: 215px;
   padding: 0;
   margin: 0;
 
+  .mat-menu-content {
+    :hover {
+      background-color: #fff;
+    }
+  }
+
   .account {
-    background-color: var_1.$white !important;
+    background-color: #C4B9E4 !important;
     border-radius: 0 !important;
+    height: 105px;
+    width: 215px;
+    text-align: center;
+
+    &:hover {
+      background-color: #fff !important;
+    }
+
+    &__title {
+      color: #0F1419;
+      font-size: 1.2rem;
+      display: block;
+    }
+
+    &__amount {
+      color: #64737F;
+      font-weight: 500;
+    }
+
+    &__currency {
+      font-weight: 500;
+      color: #64737F;
+    }
+
   }
 
   button {
-    height: 105px;
+    height: fit-content;
     padding: 0;
     margin: 0;
     border-bottom: 1px solid #64737F;
@@ -77,5 +126,13 @@ button {
       }
     }
   }
+
 }
 
+.account__add--noAccID{
+  text-align: center;
+  background-color: #746B91;
+  color: #fff;
+  border-radius: 7px;
+  width: 120px;
+}

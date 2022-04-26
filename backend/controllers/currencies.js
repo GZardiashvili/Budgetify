@@ -1,37 +1,45 @@
 const express = require('express');
 const Currency = require('../models/currency');
+const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/:id?', (req, res) => {
-    if (req.params.id) {
-        Currency.findById(req.params.id)
-            .then((currency) => {
-                if (currency) {
-                    res.json(currency);
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    } else {
-        Currency.find().then((currencies) => {
-            if (currencies) {
-                res.json(currencies);
-            } else {
-                res.status(404).end();
-            }
-        });
-    }
+router.get('/', (req, res) => {
+    Currency.find({
+        user: bindUser(req, res).id,
+    }, (err, currencies) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(currencies);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
+});
+
+router.get('/:id', (req, res) => {
+    Currency.findOne({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    }, (err, currency) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(currency);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
     const body = req.body;
 
     const currency = new Currency({
-        name: body.name, sign: body.sign,
+        user: bindUser(req, res).id,
+        name: body.name,
+        sign: body.sign,
     });
     currency.save().then((savedCurrency) => {
         res.json(savedCurrency);
@@ -39,7 +47,10 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Currency.findByIdAndRemove(req.params.id)
+    Currency.findOneAndDelete({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    })
         .then(() => {
             res.status(204).end();
         })
@@ -54,7 +65,9 @@ router.put('/:id', (req, res) => {
     const currency = {
         name: body.name, sign: body.sign,
     };
-    Currency.findByIdAndUpdate(req.params.id, currency, {new: true})
+    Currency.findOneAndUpdate({
+        _id: req.params.id
+    }, currency, {new: true})
         .then((updatedCurrency) => {
             res.json(updatedCurrency);
         })

@@ -1,9 +1,11 @@
-import { Component, OnDestroy } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
-import { Router } from '@angular/router';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import {Component, OnDestroy} from '@angular/core';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthService} from '../services/auth.service';
+import {Router} from '@angular/router';
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
+import {faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import {IconProp} from "@fortawesome/fontawesome-svg-core";
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,11 @@ export class LoginComponent implements OnDestroy {
     emailControl: new FormControl('', [Validators.required, Validators.email]),
     passwordControl: new FormControl('', [Validators.required]),
   });
+  type = {
+    label: 'show',
+    type: 'password'
+  }
+  faExclamationCircle: IconProp = faExclamationCircle;
 
   constructor(
     private authService: AuthService,
@@ -43,6 +50,16 @@ export class LoginComponent implements OnDestroy {
             console.log(error);
           }
         );
+    }
+  }
+
+  showHide() {
+    if (this.type.type === 'password') {
+      this.type.label = 'hide';
+      this.type.type = 'text';
+    } else {
+      this.type.label = 'show';
+      this.type.type = 'password';
     }
   }
 

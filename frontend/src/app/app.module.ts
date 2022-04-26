@@ -10,6 +10,8 @@ import { AuthModule } from './auth/auth.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/interceptors/auth.interceptor';
 import { LoadingInterceptor } from './shared/loading/interceptors/loading.interceptor';
+import { ChartModule } from 'angular-highcharts';
+
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +23,7 @@ import { LoadingInterceptor } from './shared/loading/interceptors/loading.interc
     SharedModule,
     LayoutModule,
     MatIconModule,
+    ChartModule,
   ],
   providers: [
     {

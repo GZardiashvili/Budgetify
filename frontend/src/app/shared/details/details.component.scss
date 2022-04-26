@@ -12,6 +12,14 @@
       margin: 7px 5px;
     }
 
+    .plus-icon {
+      color: #F70065;
+      font-size: 2rem;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
     fa-icon {
       margin: 7px 5px;
       cursor: pointer;
@@ -29,6 +37,7 @@
   .container {
     .flex {
       display: flex;
+      flex-wrap: wrap;
       row-gap: 1rem;
 
       &--row {
@@ -37,6 +46,7 @@
 
       &--col {
         flex-direction: column;
+        margin-top: 20px;
 
         p {
           width: 100%;
@@ -65,6 +75,14 @@
         span {
           padding: 0 5px;
           font-size: 1.2rem;
+        }
+
+        .amount-incomes {
+          color: #1FC222;
+        }
+
+        .amount-expenses {
+          color: #EE3F19;
         }
       }
     }
@@ -96,6 +114,46 @@
     flex-direction: column;
     gap: 10px;
     margin-right: 50px;
+
+    .category-type {
+      display: flex;
+      border: 1px solid #828282;
+      width: fit-content;
+      border-radius: 7px;
+      margin-bottom: 35px;
+
+      .selected {
+        border: 1px solid #2C2C2C;
+        padding: 5px 10px;
+        border-radius: 7px;
+      }
+
+      .notSelected {
+        border: none;
+        color: #828282;
+      }
+
+      &__incomes {
+        padding: 5px 10px;
+        cursor: pointer;
+        margin: 0;
+
+        &--green {
+          color: #28B820;
+        }
+      }
+
+      &__expenses {
+        padding: 5px 10px;
+        cursor: pointer;
+        margin: 0;
+
+        &--red {
+          color: #F44336;
+
+        }
+      }
+    }
   }
 
   &__footer {
@@ -103,6 +161,19 @@
     justify-content: right;
     gap: 10px;
     margin-right: 50px;
+
+    button {
+      color: #373737;
+    }
+
+    .save {
+      background-color: #2C2647;
+      color: #fff;
+
+      &:hover {
+        opacity: 0.8;
+      }
+    }
   }
 
 }

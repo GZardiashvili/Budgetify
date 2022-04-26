@@ -1,10 +1,22 @@
 const express = require('express');
 const ObligatoryPayment = require('../models/obligatoryPayment');
+const bindUser = require("../utils/bindUser");
 
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
-    ObligatoryPayment.find({accountId: req.params.accountId}, (err, obligatoryPayments) => {
+router.get('/:accountId/find/:search?', (req, res) => {
+    ObligatoryPayment.find({
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
+                }
+            }
+        ]
+    }, (err, obligatoryPayments) => {
         if (err) {
             res.status(500).send(err);
         } else {
@@ -16,22 +28,28 @@ router.get('/:accountId', (req, res) => {
 });
 
 router.get('/:accountId/:id', (req, res) => {
-    ObligatoryPayment.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, obligatoryPayment) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(obligatoryPayment);
-        }
-    }).clone().catch((error) => {
+    ObligatoryPayment.findOne({
+            user: bindUser(req, res).id,
+            accountId: req.params.accountId,
+            _id: req.params.id,
+        },
+        (err, obligatoryPayment) => {
+            if (err) {
+                res.status(500).send(err);
+            } else {
+                res.status(200).send(obligatoryPayment);
+            }
+        }).clone().catch((error) => {
         console.error('The Promise is rejected!', error);
     });
 });
 
-router.post('/', (req, res) => {
+router.post('/:accountId', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = new ObligatoryPayment({
-        userId: body.userId,
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId,
         title: body.title,
         description: body.description,
         amount: body.amount,
@@ -39,9 +57,9 @@ router.post('/', (req, res) => {
         dateOfPayment: body.dateOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
-        dateOfTheLastPayment: body.dateOfThelastPayment,
-        createdOn: body.createdOn,
-        updatedOn: body.updatedOn,
+        dateOfTheLastPayment: body.dateOfTheLastPayment,
+        createdOn: new Date(),
+        updatedOn: new Date(),
     });
     obligatoryPayment.save().then((savedObligatoryPayment) => {
         res.json(savedObligatoryPayment);
@@ -49,7 +67,10 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    ObligatoryPayment.findByIdAndRemove(req.params.id)
+    ObligatoryPayment.findOneAndDelete({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    })
         .then(() => {
             res.status(204).end();
         })
@@ -62,23 +83,23 @@ router.put('/:id', (req, res) => {
     const body = req.body;
 
     const obligatoryPayment = {
-        userId: body.userId,
+        user: body.user,
+        accountId: body.accountId,
         title: body.title,
         description: body.description,
         amount: body.amount,
-        currency: body.currency,
         dayOfPayment: body.dayOfPayment,
         frequency: body.frequency,
         dateOfTheFirstPayment: body.dateOfTheFirstPayment,
-        dateOfThelastPayment: body.dateOfThelastPayment,
-        createdOn: body.createdOn,
-        updatedOn: body.updatedOn,
+        dateOfTheLastPayment: body.dateOfTheLastPayment,
+        updatedOn: new Date(),
     };
-    ObligatoryPayment.findByIdAndUpdate(req.params.id, obligatoryPayment, {
-        new: true,
-    })
-        .then((updatedUser) => {
-            res.json(updatedUser);
+    ObligatoryPayment.findOneAndUpdate({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    }, obligatoryPayment, {new: true})
+        .then((updatedObligatoryPayment) => {
+            res.json(updatedObligatoryPayment);
         })
         .catch((error) => {
             console.error('The Promise is rejected!', error);

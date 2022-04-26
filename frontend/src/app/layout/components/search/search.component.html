@@ -1,0 +1,5 @@
+<div class="container">
+  <fa-icon [icon]="faSearch"></fa-icon>
+  <input type="text" class="layout__search" [formControl]="searchControl">
+  <div type="button" class="layout__search--clear" *ngIf="searchControl.value!=='' || searchControl.value == null" (click)="clear()"><fa-icon [icon]="faXmark"></fa-icon></div>
+</div>

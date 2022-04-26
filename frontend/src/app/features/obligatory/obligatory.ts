@@ -4,7 +4,6 @@ export interface Obligatory {
   title: string;
   description: string;
   amount: number;
-  currency: string;
   frequency: string;
   dateOfPayment: Date;
   firstDateOfPayment: Date;

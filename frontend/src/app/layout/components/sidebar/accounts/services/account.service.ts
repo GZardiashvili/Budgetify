@@ -16,11 +16,23 @@ export class AccountService {
     return this.http.get<Account[]>(`${environment.apiUrl}accounts`);
   }
 
-  getAccountById(id: string | null) {
-    return this.http.get<Account>(`${environment.apiUrl}accounts/${id}`);
+  getAccount(accountId: string | null): Observable<Account> {
+    return this.http.get<Account>(`${environment.apiUrl}accounts/${accountId}`);
   }
 
   addAccount(account: Account): Observable<Account> {
     return this.http.post<Account>(`${environment.apiUrl}accounts`, account);
   }
+
+  updateAccount(id: string, account: Account): Observable<Account> {
+    return this.http.put<Account>(
+      `${environment.apiUrl}accounts/${id}`,
+      account
+    );
+  }
+
+  deleteAccount(id: string) {
+    return this.http.delete(`${environment.apiUrl}accounts/${id}`);
+  }
+
 }

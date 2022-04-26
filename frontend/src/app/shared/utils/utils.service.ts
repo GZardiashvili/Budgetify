@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Transaction } from '../../features/main-page/transaction/transaction';
 
 @Injectable({
   providedIn: 'root',
@@ -7,8 +8,8 @@ export class UtilsService {
   constructor() {
   }
 
-  setAccountId(id: string) {
-    localStorage.setItem('accountId', id);
+  setAccountId(id: string | null) {
+    localStorage.setItem('accountId', String(id));
   }
 
   get accountId(): string | null {

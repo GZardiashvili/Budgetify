@@ -1,0 +1,29 @@
+.btn-list {
+  border: 1px solid #e5e5e5;
+  width: fit-content;
+  border-radius: 7px;
+
+  button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 7px;
+  }
+
+  .selected {
+    border: 1px solid #2C2C2C;
+  }
+
+  .notSelected {
+    color: #828282;
+  }
+}
+
+.flex {
+  display: flex;
+  flex-direction: column;
+}
+.mat-elevation-z8{
+  min-width: 100%;
+}

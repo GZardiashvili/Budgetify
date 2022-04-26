@@ -1,12 +1,13 @@
 @use "../../../shared/styles/palette.scss" as var_1;
 
 .container {
-  height: 95vh;
+  height: 80vh;
   width: fit-content;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: space-between;
+  position: fixed;
 
 
   .menu {
@@ -15,25 +16,6 @@
     justify-content: flex-end;
     align-items: flex-start;
 
-    .logo {
-      padding: 9px 12px;
-      cursor: pointer;
-
-      a {
-        img {
-          width: 50px;
-          ratio: 1;
-
-
-          &:hover {
-            box-shadow: -7px -5px 10px 0px var_1.$logo-red, 7px -5px 10px 0px var_1.$logo-orange, 0px 8px 10px 0px var_1.$logo-green;
-            border-radius: 50%;
-
-          }
-        }
-      }
-
-    }
 
     &__list {
       display: flex;
@@ -42,6 +24,10 @@
 
       &-icon {
 
+      }
+
+      .selected {
+        font-weight: bold;
       }
 
       &-item {
@@ -55,15 +41,20 @@
           border-radius: 15px;
           padding: 1rem 1.5rem;
           width: fit-content;
+          text-transform: capitalize;
 
           &:hover {
             background-color: var_1.$btn-menu-hover;
-            //box-shadow: 0 5px 22px 0 rgba(31, 38, 135, 0.1);
           }
 
           &:active {
             color: var_1.$btn-menu;
           }
+        }
+        &--disabled{
+          opacity: 0.3;
+          font-weight: normal;
+          cursor: default;
         }
       }
     }

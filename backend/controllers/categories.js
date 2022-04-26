@@ -1,42 +1,54 @@
 const express = require('express');
 const Category = require('../models/category');
-
+const bindUser = require("../utils/bindUser");
+const predefinedCategories = require('../utils/predefinedCategories');
 const router = express.Router();
 
-router.get('/:id?', (req, res) => {
-    if (req.params.id) {
 
-        Category.findById(req.params.id)
-            .then((category) => {
-                if (category) {
-                    res.json(category);
-                } else {
-                    res.status(404).end();
+router.get('/find/:search?', (req, res) => {
+    Category.find({
+        user: bindUser(req, res).id,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
                 }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    } else {
-        Category.find()
-            .then((categories) => {
-                if (categories) {
-                    res.json(categories);
-                } else {
-                    res.status(404).end();
-                }
-            })
-            .catch((error) => {
-                console.error('The Promise is rejected!', error);
-            });
-    }
+            },
+        ]
+    }, (err, Categories) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(Categories);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
+});
+
+router.get('/:id', (req, res) => {
+    Category.findOne({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    }, (err, category) => {
+        if (err) {
+            res.status(500).send(err);
+        } else {
+            res.status(200).send(category);
+        }
+    }).clone().catch((error) => {
+        console.error('The Promise is rejected!', error);
+    });
 });
 
 router.post('/', (req, res) => {
     const body = req.body;
 
     const category = new Category({
-        title: body.title, type: body.type,
+        user: bindUser(req, res).id,
+        title: body.title,
+        type: body.type,
     });
     category
         .save()
@@ -49,7 +61,10 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Category.findByIdAndRemove(req.params.id)
+    Category.findOneAndDelete({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    })
         .then(() => {
             res.status(204).end();
         })
@@ -64,8 +79,11 @@ router.put('/:id', (req, res) => {
     const category = {
         title: body.title, type: body.type,
     };
-    category
-        .findByIdAndUpdate(req.params.id, category, {new: true})
+    Category
+        .findOneAndUpdate({
+            user: bindUser(req, res).id,
+            _id: req.params.id
+        }, category, {new: true})
         .then((updatedCategory) => {
             res.json(updatedCategory);
         })

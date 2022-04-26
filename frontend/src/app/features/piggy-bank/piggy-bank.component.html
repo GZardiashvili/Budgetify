@@ -1,14 +1,24 @@
-<div class="container">
+<div class="container" type="button" (click)="sidenav.opened = true; editView()">
   <fa-icon [icon]="faPiggyBank"></fa-icon>
   <p>Add Piggy Bank</p>
+  <ng-template #create>
+    <div class="flex">
+      <fa-icon [icon]="faPiggyBank"></fa-icon>
+      <ui-details [title]="'Add Piggy Bank'"
+                  [currentView]="view"
+                  [detailsForm]="piggyBankForm"
+                  (save)="addPiggyBank(piggyBankForm.value); sidenav.opened = false"
+                  (close)="sidenav.opened = false">
+      </ui-details>
+    </div>
+  </ng-template>
 </div>
-
 <div class="flex">
-  <ng-container *ngFor="let piggyBank of piggyBanks | async">
-    <div class="piggy-bank" type="button" (click)="sidenav.toggle()">
+  <ng-container *ngFor="let piggyBank of piggyBanks$ | async">
+    <div class="piggy-bank" type="button" (click)="getPiggyBank(piggyBank.id); detailsView(); sidenav.opened = true">
       <fa-icon [icon]="faPiggyBank"></fa-icon>
       <span>{{piggyBank.goal}}</span>
-      <span>{{piggyBank.savings}} / {{piggyBank.goal}}</span>
+      <span>{{piggyBank.savings}} / {{piggyBank.goalAmount}}</span>
       <mat-progress-bar mode="determinate"
                         [value]="piggyBank.savings / piggyBank.goalAmount * 100">
       </mat-progress-bar>
@@ -19,17 +29,24 @@
 <mat-sidenav-container>
   <mat-sidenav
     #sidenav
+    [opened]="false"
     mode="over"
     class="details-sidenav"
     fixedInViewport="fixed"
-    fixedTopGap="110"
+    fixedTopGap="90"
     fixedBottomGap="155"
     position="end"
   >
-    <ng-container *ngIf="piggyBank | async as piggyBank">
+    <ng-container *ngIf="piggyBank; else create">
       <ui-details [title]="'Piggy Bank'" [detailsInfo]="piggyBank"
                   [detailsForm]="piggyBankForm"
-                  (close)="sidenav.toggle()"></ui-details>
+                  [currentView]="view"
+                  [btnText]="'Crash'"
+                  (save)="updatePiggyBank(piggyBank.id, piggyBank)"
+                  (delete)="crashPiggyBank(piggyBank.id); piggyBank = null; piggyBankForm.reset(); sidenav.opened = false;"
+                  (close)="sidenav.opened = false; detailsView(); piggyBank = null">
+      </ui-details>
     </ng-container>
   </mat-sidenav>
 </mat-sidenav-container>
+

@@ -15,6 +15,10 @@
     background: rgba(243, 246, 251, 0.3);
   }
 
+  .category {
+    text-transform: capitalize;
+  }
+
   .mat-card-actions {
     grid-area: category;
     min-width: 150px;

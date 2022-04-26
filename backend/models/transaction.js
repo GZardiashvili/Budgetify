@@ -1,14 +1,29 @@
 const mongoose = require('mongoose');
 
 const transactionSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     accountId: String,
     type: String,
-    title: {type: String, required: true},
-    description: {type: String, required: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
+    description: {type: String},
     payee: String,
     dateOfOperation: Date,
-    category: [{type: String, required: true}],
-    currency: String,
+    category: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
+    }],
     amount: {type: Number, required: true},
     linkToFile: String,
     dateOfCreation: Date,

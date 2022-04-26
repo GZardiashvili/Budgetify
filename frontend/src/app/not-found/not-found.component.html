@@ -1,1 +1,16 @@
-<p>not-found works!</p>
+<div class="container">
+  <div class="container__content">
+    <h1>404</h1>
+    <h2>Ooops!</h2>
+    <h2>Page not found</h2>
+    <p>The page you are looking for does not exist or was removed!
+      <br>
+      We suggest you back to home</p>
+    <div class="btn-background">
+      <button [routerLink]="'/'">Back to Home</button>
+    </div>
+  </div>
+  <div class="container-error-image">
+    <img src="../../assets/404-robot.png" alt="404 Page Not Found">
+  </div>
+</div>

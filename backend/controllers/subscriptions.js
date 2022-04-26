@@ -1,38 +1,42 @@
 const express = require('express');
 const Subscription = require('../models/subscription');
+const bindUser = require('../utils/bindUser');
 
 const router = express.Router();
 
-router.get('/:accountId', (req, res) => {
-    Subscription.find({accountId: req.params.accountId}, (err, subscriptions) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(subscriptions);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+router.get('/:accountId/find/:search?', async (req, res) => {
+    const subscriptions = await Subscription.find({
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId,
+        $or: [
+            {
+                title: {
+                    $regex: req.query.search,
+                    $options: 'i'
+                }
+            }
+        ]
+    }).populate('category');
+    res.status(200).send(subscriptions);
 });
 
-router.get('/:accountId/:id', (req, res) => {
-    Subscription.findOne({_id: req.params.id, accountId: req.params.accountId}, (err, subscription) => {
-        if (err) {
-            res.status(500).send(err);
-        } else {
-            res.status(200).send(subscription);
-        }
-    }).clone().catch((error) => {
-        console.error('The Promise is rejected!', error);
-    });
+router.get('/:accountId/:id', async (req, res) => {
+    const subscription = await Subscription.findOne({
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId,
+        _id: req.params.id
+    }).populate('category');
+    res.status(200).send(subscription);
 });
 
-router.post('/', (req, res) => {
+router.post('/:accountId', (req, res) => {
     const body = req.body;
 
     const subscription = new Subscription({
-        accountId: body.accountId,
+        user: bindUser(req, res).id,
+        accountId: req.params.accountId,
         title: body.title,
+        description: body.description,
         firstDateOfPayment: body.firstDateOfPayment,
         lastDateOfPayment: body.lastDateOfPayment,
         dateOfPayment: body.dateOfPayment,
@@ -53,7 +57,10 @@ router.post('/', (req, res) => {
 });
 
 router.delete('/:id', (req, res) => {
-    Subscription.findByIdAndRemove(req.params.id).then(() => {
+    Subscription.findOneAndDelete({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    }).then(() => {
         res.status(204).end();
     });
 });
@@ -63,6 +70,8 @@ router.put('/:id', (req, res) => {
 
     const subscription = {
         accountId: body.accountId,
+        title: body.title,
+        description: body.description,
         firstDateOfPayment: body.firstDateOfPayment,
         lastDateOfPayment: body.lastDateOfPayment,
         dateOfPayment: body.dateOfPayment,
@@ -72,9 +81,10 @@ router.put('/:id', (req, res) => {
         dateOfCreation: body.dateOfCreation,
         dateOfUpdate: body.dateOfUpdate,
     };
-    Subscription.findByIdAndUpdate(req.params.id, subscription, {
-        new: true,
-    })
+    Subscription.findOneAndUpdate({
+        user: bindUser(req, res).id,
+        _id: req.params.id
+    }, subscription, {new: true})
         .then((updatedSubscription) => {
             res.json(updatedSubscription);
         })

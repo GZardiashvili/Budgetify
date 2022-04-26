@@ -15,15 +15,16 @@
 }
 
 .layout {
-  width: 80%;
+  width: 100%;
   display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 64px 1fr;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 64px 1fr auto;
   grid-template-areas:
-    "sidebar header header"
+    "header header header"
+    "sidebar content right-sidebar"
     "sidebar content right-sidebar";
   margin: 0 auto;
-  column-gap: 10%;
+  column-gap: 5%;
   row-gap: 20px;
 
   &__header {
@@ -32,14 +33,25 @@
 
   &__sidebar {
     grid-area: sidebar;
+    margin-top: 15px;
+    z-index: 2;
   }
 
   &__outlet {
     grid-area: content;
+    margin-top: 30px;
+    width: 90%;
+    justify-self: start;
+
   }
 
   &__piggy-bank {
     grid-area: right-sidebar;
     align-self: flex-end;
+    position: fixed;
+    right: 20px;
+    bottom: 40px;
+    z-index: 1;
   }
+
 }

@@ -1,12 +1,23 @@
 const mongoose = require('mongoose');
 
 const obligatoryPaymentSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     accountId: String,
-    title: {type: String, required: true},
+    title: {
+        type: String,
+        maxlength: 128,
+        required: true,
+        index: {
+            unique: true,
+            collation: {locale: 'en', strength: 2},
+        },
+    },
     description: String,
     amount: {type: Number, required: true},
-    currency: String,
-    dateOfPayment: Date,
+    dateOfPayment: {type: Date, required: true},
     frequency: String,
     firstDateOfPayment: Date,
     lastDateOfPayment: Date,

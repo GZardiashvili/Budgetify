@@ -1,7 +1,10 @@
 const mongoose = require('mongoose');
 
 const accountSchema = new mongoose.Schema({
-    userId: String,
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+    },
     title: {
         type: String,
         maxlength: 128,
@@ -12,9 +15,12 @@ const accountSchema = new mongoose.Schema({
         },
     },
     description: String,
-    category: [{type: String, required: true}],
-    currency: {type: String, required: true},
-    availableAmount: {type: Number, required: true},
+    currency: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Currency',
+        required: true
+    },
+    availableAmount: {type: Number},
     dateOfCreation: Date,
     dateOfUpdate: Date,
 });

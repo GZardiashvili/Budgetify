@@ -16,36 +16,46 @@
             <span *ngIf="detailsInfo.type">{{detailsInfo.type}}</span>
           </div>
           <div class="balance">
-            <span *ngIf="detailsInfo.currency">{{detailsInfo.currency}}</span>
-            <span *ngIf="detailsInfo.amount">{{detailsInfo.amount}}</span>
+            <span *ngIf="detailsInfo.currency"
+                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'"
+                  [ngClass]="detailsInfo.availableAmount ? 'amount-incomes': 'amount-expenses'"
+            >{{currency?.name}}
+            </span>
+            <span *ngIf="detailsInfo.amount"
+                  [ngClass]="detailsInfo.type==='incomes'? 'amount-incomes' : 'amount-expenses'">{{detailsInfo.amount}}
+            </span>
+            <span *ngIf="detailsInfo.availableAmount"
+                  class="amount-incomes">{{detailsInfo.availableAmount}}
+            </span>
           </div>
         </div>
         <h2 *ngIf="detailsInfo.title">{{detailsInfo.title}}</h2>
         <div class="flex flex--row">
           <ng-container *ngFor="let category of detailsInfo.category">
-            <p class="category" *ngIf="category">{{category}}</p>
+            <p class="category" *ngIf="category">{{category.title}}</p>
           </ng-container>
         </div>
         <div class="flex flex--col ">
           <p *ngIf="detailsInfo.dateOfPayment">
-            <span>Payment Date: </span>{{detailsInfo.dateOfPayment | date: 'mm/dd/yyyy'}}</p>
+            <span>Payment Date: </span>{{detailsInfo.dateOfPayment | date}}</p>
           <p *ngIf="detailsInfo.dateOfOperation">
-            <span>Payment Date: </span>{{detailsInfo.dateOfOperation | date: 'mm/dd/yyyy'}}</p>
+            <span>Payment Date: </span>{{detailsInfo.dateOfOperation | date}}</p>
           <p *ngIf="detailsInfo.firstDateOfPayment || detailsInfo.lastDateOfPayment">
-            <span>Payment Dates: </span>{{detailsInfo.firstDateOfPayment | date: 'mm/dd/yyyy'}}
-            - {{detailsInfo.lastDateOfPayment | date: 'mm/dd/yyyy'}}
+            <span>Payment Dates: </span>{{detailsInfo.firstDateOfPayment | date }}
+            - {{detailsInfo.lastDateOfPayment | date}}
           </p>
-          <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
-          <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
           <p *ngIf="detailsInfo.goal"><span>Goal: </span>{{detailsInfo.goal}}</p>
-          <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
+          <p *ngIf="detailsInfo.linkToFile">{{detailsInfo.linkToFile}}</p>
           <p *ngIf="detailsInfo.savings"><span>Saved Amount: </span>{{detailsInfo.savings}}</p>
+          <p *ngIf="detailsInfo.goalAmount"><span>Goal Amount: </span>{{detailsInfo.goalAmount}}</p>
+          <p *ngIf="detailsInfo.payee"><span>Payee: </span>{{detailsInfo.payee}}</p>
+          <p *ngIf="detailsInfo.description"><span>Description: </span>{{detailsInfo.description}}</p>
           <p *ngIf="detailsInfo.availableAmount"><span>Available Amount: </span>{{detailsInfo.availableAmount}}</p>
         </div>
       </div>
     </ng-container>
     <div class="details-sidebar__footer">
-      <button mat-raised-button color="primary" (click)="delete.emit()">Delete</button>
+      <button mat-flat-button color="warn" (click)="btnText == 'Delete'?openDialog():openDialogForPiggyBank()">{{btnText}}</button>
     </div>
   </div>
 </ng-container>
@@ -54,18 +64,37 @@
 <ng-template #edit>
   <div class="details-sidebar">
     <div class="details-sidebar__header">
-      <h1>Edit {{title}}</h1>
+      <h1>{{title}}</h1>
+      <fa-icon (click)="showSavingsInput()" class="plus-icon" *ngIf="detailsInfo && detailsForm.get('savings')" [icon]="showHideSavings? faMinus:faPlus"></fa-icon>
       <fa-icon (click)="close.emit()" [icon]="faClose"></fa-icon>
     </div>
     <form class="details-sidebar__form"
           [formGroup]="detailsForm">
-      <mat-form-field *ngIf="detailsForm.get('type')">
-        <mat-label>Type</mat-label>
-        <input matInput name="type" formControlName="type">
-      </mat-form-field>
+      <div class="category-type" *ngIf="detailsForm.get('type')">
+        <div type="button"
+             [ngClass]="detailsForm.get('type')?.value == 'incomes'
+             ? 'selected':'category-type__incomes notSelected'"
+             (click)="chooseIncomes()">
+          <fa-icon class="category-type__incomes--green" [icon]="faIncome"></fa-icon>
+          Incomes
+        </div>
+        <div type="button" [ngClass]="detailsForm.get('type')?.value == 'expenses'
+        ? 'selected':'category-type__expenses notSelected'" (click)="chooseExpenses()">
+          <fa-icon class="category-type__expenses--red" [icon]="faExpense"></fa-icon>
+          Expenses
+        </div>
+      </div>
       <mat-form-field *ngIf="detailsForm.get('title')">
         <mat-label>Title</mat-label>
         <input matInput name="title" formControlName="title">
+      </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('goal')">
+        <mat-label>Goal</mat-label>
+        <input matInput name="goal" formControlName="goal">
+      </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('goalAmount')">
+        <mat-label>Goal Amount</mat-label>
+        <input matInput name="goalAmount" formControlName="goalAmount">
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('description')">
         <mat-label>Description</mat-label>
@@ -75,13 +104,33 @@
                   cdkAutosizeMinRows="1"
                   cdkAutosizeMaxRows="5"></textarea>
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('category')">
-        <mat-label>Category</mat-label>
-        <input matInput name="category" formControlName="category">
+      <mat-form-field *ngIf="showHideSavings && detailsForm.get('savings')">
+        <mat-label>Amount to Save</mat-label>
+        <input matInput name="payee" formControlName="savings">
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('currency')">
-        <mat-label>Currency</mat-label>
-        <input matInput name="currency" formControlName="currency">
+      <mat-form-field *ngIf="detailsForm.get('payee')">
+        <mat-label>Payee</mat-label>
+        <input matInput name="payee" formControlName="payee">
+      </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('category')">
+        <mat-select placeholder="Category" formControlName="category" multiple>
+          <mat-option *ngFor="let category of categories" [value]="category.id">
+            {{category.title}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('currency')" class="example-full-width">
+          <mat-label>Currency</mat-label>
+          <input type="text"
+                 aria-label="Currency"
+                 matInput
+                 formControlName="currency"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let currency of currencies" [value]="currency.id">
+              {{currency.name}}
+            </mat-option>
+          </mat-autocomplete>
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('amount')">
         <mat-label>Amount</mat-label>
@@ -91,41 +140,48 @@
         <mat-label>Frequency</mat-label>
         <input matInput name="frequency" formControlName="frequency">
       </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('linkToFile')">
-        <mat-label>Link to file</mat-label>
-        <input matInput name="linkToFile" formControlName="linkToFile">
-      </mat-form-field>
+<!--      <mat-form-field *ngIf="detailsForm.get('linkToFile')">-->
+<!--        <mat-label>Link to file</mat-label>-->
+<!--        <input matInput name="linkToFile" formControlName="linkToFile">-->
+<!--      </mat-form-field>-->
       <mat-form-field *ngIf="detailsForm.get('dateOfOperation')">
         <mat-label>Date of operation</mat-label>
-        <input matInput name="dateOfOperation" formControlName="dateOfOperation">
-      </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('dateOfCreation')">
-        <mat-label>Date of creation</mat-label>
-        <input matInput name="dateOfCreation" formControlName="dateOfCreation">
+        <input matInput [matDatepicker]="picker" name="dateOfOperation" formControlName="dateOfOperation">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('dateOfUpdate')">
         <mat-label>Date of update</mat-label>
         <input matInput name="dateOfUpdate" formControlName="dateOfUpdate">
       </mat-form-field>
+      <mat-form-field *ngIf="detailsForm.get('dateOfPayment')">
+        <mat-label>Day of payment</mat-label>
+        <input matInput [matDatepicker]="picker" name="dateOfPayment" formControlName="dateOfPayment">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('firstDateOfPayment')">
         <mat-label>First day of payment</mat-label>
-        <input matInput name="firstDateOfPayment"
+        <input matInput [matDatepicker]="picker" name="firstDateOfPayment"
                formControlName="firstDateOfPayment">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
       <mat-form-field *ngIf="detailsForm.get('lastDateOfPayment')">
         <mat-label>Last day of payment</mat-label>
-        <input matInput name="lastDateOfPayment"
+        <input matInput [matDatepicker]="picker" name="lastDateOfPayment"
                formControlName="lastDateOfPayment">
-      </mat-form-field>
-      <mat-form-field *ngIf="detailsForm.get('dateOfPayment')">
-        <mat-label>Day of payment</mat-label>
-        <input matInput name="dateOfPayment" formControlName="dateOfPayment">
+        <mat-hint>MM/DD/YYYY</mat-hint>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
       </mat-form-field>
     </form>
     <div class="details-sidebar__footer">
-      <button mat-raised-button color="primary" (click)="goToDetails()">Cancel</button>
-      <button mat-raised-button color="primary" (click)="save.emit()">Save</button>
+      <button mat-button (click)="close.emit()">Cancel</button>
+      <button mat-raised-button class="save" (click)="detailsForm.valid ? save.emit():null;detailsForm.valid ?  openSnackBar('Saved successfully'):null;detailsForm.valid ?  close.emit():openSnackBar('some fields are required please check and try again','snackbar-error');"> Save</button>
     </div>
   </div>
 </ng-template>
-

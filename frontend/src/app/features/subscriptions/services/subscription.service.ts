@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../../environments/environment';
 import { Subscriptions } from '../subscriptions';
 import { Observable } from 'rxjs';
-import { Transaction } from '../../main-page/transaction/transaction';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +11,14 @@ export class SubscriptionService {
   constructor(private http: HttpClient) {
   }
 
-  getSubscriptions(accountId: string) {
+  addSubscription(accountId: string, subscription: Subscriptions): Observable<Subscriptions> {
+    return this.http.post<Subscriptions>(`${environment.apiUrl}subscriptions/${accountId}`, subscription);
+  }
+
+
+  getSubscriptions(accountId: string, search?: string): Observable<Subscriptions[]> {
     return this.http.get<Subscriptions[]>(
-      `${environment.apiUrl}subscriptions/${accountId}`
+      `${environment.apiUrl}subscriptions/${accountId}/find?search=${search}`
     );
   }
 
@@ -22,5 +26,16 @@ export class SubscriptionService {
     return this.http.get<Subscriptions>(
       `${environment.apiUrl}subscriptions/${accountId}/${id}`
     );
+  }
+
+  updateSubscription(id: string, transaction: Subscriptions): Observable<Subscriptions> {
+    return this.http.put<Subscriptions>(
+      `${environment.apiUrl}subscriptions/${id}`,
+      transaction
+    );
+  }
+
+  deleteSubscription(id: string) {
+    return this.http.delete(`${environment.apiUrl}subscriptions/${id}`);
   }
 }
